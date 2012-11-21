@@ -1,0 +1,163 @@
+@import "reset";
+
+@import "css/bootstrap.min.css";
+@import "css/font-awesome.css";
+
+@import "elements";
+@import "draw-icon";
+
+/* bootstrap & font awesome tweaks */
+
+[class^="icon-"], [class*=" icon-"] {
+	background-image: none;
+}
+
+.dropdown-menu li > a{
+	padding:7px 15px;
+}
+.btn-group + .btn-group{
+	margin-left:10px;
+}
+.btn{
+	i{ color:#666; }
+
+	&:focus{
+		outline:none;
+	}
+	[class^="icon-"], [class*=" icon-"] {
+		vertical-align: bottom;
+	}
+}
+
+/* App Stuffs */
+
+@back: #222;
+@active: #0056aa;
+
+@color-mode-height:70px;
+@palette-height:40px;
+@icon-pad: 13px;
+@nav-width: @icon-size + @icon-pad*2;
+
+html,body{
+	overflow:hidden; 
+	width:100%; 
+	height:100%;
+} 
+
+.canvas{
+	position: absolute; 
+	z-index:1;
+	left:@nav-width; right:0;
+	top:0; bottom:@palette-height;
+
+	& > svg{
+		width:100%; height:100%;
+	}
+}
+.left {
+	position: absolute; 
+	z-index:10;
+
+	top:0; left:0; 
+	bottom:@palette-height; 
+
+	& > * { 
+		float:left; height:100%;
+		position: relative; 
+	}
+
+	.nav{
+		width:@nav-width; overflow:hidden;
+		background: @back; 
+
+		ul{ margin:0 }
+		li:hover{ background:@back + #111; }
+		li:active{ background:@back + #222; }
+
+		.tools{
+			position: absolute; 
+			top:0; left:0; 
+			bottom:@color-mode-height - @palette-height; 
+			overflow:auto; width:200%; 
+
+			li{ padding:10px @icon-pad; cursor:pointer; }
+			li.on{ background:@active; }
+		} 
+	}
+}
+.palette{
+	position: absolute; 
+	z-index:11;
+
+	@over: 30px;
+
+	left:@nav-width; 
+	bottom:-@over; right:0; 
+	overflow: auto; 
+	background: @back;
+
+	li{ 
+		@width:30px;
+		@pad: (@palette-height - @icon-size) / 2;
+		@height:@palette-height + @over - @pad;
+
+		float:left; 
+		cursor: pointer; 
+		width:@width; height:@height; 
+		padding-top:@pad;
+		text-align:center;
+
+		span {
+			.opacity(0.5); 
+		}
+	}
+}
+.color-toggle{
+	position: absolute; 
+	z-index:12;
+
+	left:0; bottom:0; 
+	width:@nav-width; 
+	height:@color-mode-height;
+	background:@back;
+	cursor:pointer;
+
+	&:hover{ background:@back + #111; }
+	&:active{ background:@back + #222; }
+
+	.fill, .stroke{
+		position: absolute; 
+		width:@icon-size; 
+		height:@icon-size;
+		border:2px white solid;
+		.rounded(5px);
+
+		span{
+			.opacity(0.5);
+			background-color:black;
+		}
+	}
+
+	@pad: 7px;
+	.fill{ top:@pad; left:@pad; }
+	.stroke{ bottom:@pad; right:@pad; }
+}
+@toolbar-hpad:20px;
+@toolbar-vpad:7px;
+.toolbar-top{
+	position: absolute;
+	z-index:13;
+
+	right:@toolbar-hpad; top:@toolbar-vpad;
+	.btn{ padding:9px 15px; }
+}
+.toolbar-bottom{
+	position: absolute;
+	z-index:14;
+
+	right:@toolbar-hpad; bottom:@toolbar-vpad+@palette-height;
+	.btn{ padding:9px 15px; }
+}
+
+
