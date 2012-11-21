@@ -27,35 +27,18 @@ function canvasBinding(el,value,all,Draw){
 		no = function(e){
 			return (e.touches || [e]).length;
 		},
-		mouse = function(type,e){
+		trigger = function(type,e){
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
+
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
 				inCanvas = $(el).find(target).length>0;
 				if(!inCanvas) return;
 				start = pos;
 			}
-			var evt = {
-				position: pos,
-				start: start,
-				target:ko.dataFor(target),
-				metaKey:e.metaKey,
-				shiftKey:e.shiftKey,
-				button:e.button,
-				no:no(e.originalEvent)
-			};
-			if(type=='wheel')
-				evt.delta = (
-					e.originalEvent.wheelDelta/3500 ||
-					-e.originalEvent.detail/50
-				);
-			Draw.trigger(type,evt);
-		},
-		hammer = function(type,e){
 			if(!inCanvas) return;
 
-			pos = position(e.originalEvent) || pos;
 			var evt = {
 				target:ko.dataFor(target),
 				metaKey:e.originalEvent.metaKey,
@@ -80,6 +63,11 @@ function canvasBinding(el,value,all,Draw){
 					scale:e.scale,
 					rotation:e.rotation
 				});
+			if(type=='wheel')
+				evt.delta = (
+					e.originalEvent.wheelDelta/3500 ||
+					-e.originalEvent.detail/50
+				);
 			Draw.trigger(type,evt);
 		};
 
@@ -88,21 +76,21 @@ function canvasBinding(el,value,all,Draw){
 		drag_min_distance:15,
 		prevent_default:true
 	})).extend({
-		ontap:_(hammer).bind(null,'tap'),
-		ondoubletap:_(hammer).bind(null,'doubletap'),
-		ondragstart:_(hammer).bind(null,'dragstart'),
-		ondrag:_(hammer).bind(null,'drag'),
-		ontransformstart:_(hammer).bind(null,'transformstart'),
-		ontransform:_(hammer).bind(null,'transform'),
-		onrelease:_(hammer).bind(null,'release')
+		ontap:_(trigger).bind(null,'tap'),
+		ondoubletap:_(trigger).bind(null,'doubletap'),
+		ondragstart:_(trigger).bind(null,'dragstart'),
+		ondrag:_(trigger).bind(null,'drag'),
+		ontransformstart:_(trigger).bind(null,'transformstart'),
+		ontransform:_(trigger).bind(null,'transform'),
+		onrelease:_(trigger).bind(null,'release')
 	});
 
 	$(document.body)
-		.on('touchstart mousedown',_(mouse).bind(null,'touch'))
-		.on('touchmove mousemove',_(mouse).bind(null,'move'));
+		.on('touchstart mousedown',_(trigger).bind(null,'touch'))
+		.on('touchmove mousemove',_(trigger).bind(null,'move'));
 	$(el)
 		.on('mousewheel DOMMouseScroll',
-			_(mouse).chain().bind(null,'wheel').throttle(20).value());
+			_(trigger).chain().bind(null,'wheel').throttle(20).value());
 };
 ko.bindingHandlers.canvas = {
 	init:canvasBinding
