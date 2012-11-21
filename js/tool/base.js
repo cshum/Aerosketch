@@ -1,4 +1,5 @@
 define(['draw'],function(Draw){
+	var initScale;
 	function select(e){
 		if(e.target._shape)
 			Draw.selection([e.target]);
@@ -9,9 +10,10 @@ define(['draw'],function(Draw){
 	}
 	function transformstart(e){
 		Draw.origin(e.position);
+		initScale = Draw.zoom();
 	}
 	function transform(e){
-		Draw.zoom(Draw.zoom()*e.scale);
+		Draw.zoom(initScale*e.scale);
 	}
 	return {
 		tap:select,
