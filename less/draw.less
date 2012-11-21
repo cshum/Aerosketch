@@ -93,9 +93,15 @@ html,body{
 	@over: 30px;
 
 	left:@nav-width; 
-	bottom:-@over; right:0; 
-	overflow: auto; 
+	bottom:0; right:0; 
 	background: @back;
+	overflow:hidden;
+	height:@palette-height;
+
+	& > * { 
+		width:100%;
+		overflow:auto;
+	}
 
 	li{ 
 		@width:30px;

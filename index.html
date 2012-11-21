@@ -37,12 +37,14 @@
 	</div>
 </div>
 <div class="palette" >
+	<div>
 	<ul data-bind="foreach:palette,style:{width:(30*palette.length)+'px'}">
 		<li data-bind="style:{background:$data},
 		hammer:{tap:$root.color}, if:$data=='none'">
 			<span class="draw-icon-cross" ></span>
 		</li>
 	</ul>
+	</div>
 </div>
 <div class="color-toggle" 
 	data-bind="with:options, 

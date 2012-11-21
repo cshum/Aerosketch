@@ -85,13 +85,13 @@ function canvasBinding(el,value,all,Draw){
 		ontap:_(hammer).bind(null,'tap'),
 		ondoubletap:_(hammer).bind(null,'doubletap'),
 		ondragstart:_(hammer).bind(null,'dragstart'),
-		ondrag:_(hammer).bind(null,'drag'),
-		onrelease:_(hammer).bind(null,'release'),
+		ondrag:_(hammer).bind(null,'drag')
 	});
 
 	$(document.body)
 		.on('touchstart mousedown',_(mouse).bind(null,'touch'))
-		.on('touchmove mousemove',_(mouse).bind(null,'move'));
+		.on('touchmove mousemove',_(mouse).bind(null,'move'))
+		.on('touchend mouseup',_(mouse).bind(null,'release'));
 	$(el)
 		.on('mousewheel DOMMouseScroll',
 			_(mouse).chain().bind(null,'wheel').throttle(20).value());
