@@ -79,7 +79,8 @@ function canvasBinding(el,value,all,Draw){
 
 
 	_(new Hammer(document.body,{
-		drag_min_distance:15
+		drag_min_distance:15, 
+		prevent_default:true
 	})).extend({
 		ontap:_(hammer).bind(null,'tap'),
 		ondoubletap:_(hammer).bind(null,'doubletap'),
