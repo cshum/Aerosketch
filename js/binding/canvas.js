@@ -74,6 +74,11 @@ function canvasBinding(el,value,all,Draw){
 				if(type=='drag')
 					evt.angle = e.angle;
 			}
+			if(type=='transform')
+				_(evt).extend({
+					scale:e.scale,
+					rotation:e.rotation
+				});
 			Draw.trigger(type,evt);
 		};
 
@@ -86,6 +91,8 @@ function canvasBinding(el,value,all,Draw){
 		ondoubletap:_(hammer).bind(null,'doubletap'),
 		ondragstart:_(hammer).bind(null,'dragstart'),
 		ondrag:_(hammer).bind(null,'drag'),
+		ontransformstart:_(hammer).bind(null,'transformstart'),
+		ontransform:_(hammer).bind(null,'transform'),
 		onrelease:_(hammer).bind(null,'release')
 	});
 

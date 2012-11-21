@@ -44,21 +44,19 @@ define([
 		trigger = (function(){
 			var active, delay, timeout;
 			return function(type,e){
-				if(type.match(/touch|wheel/)){
-					if(!delay){
-						active = _(controls()).find(function(t){
-							return ('check' in t) && t.check(e.target);
-						}) || tool();
-						delay = true;
-					} 
-					if(type=='touch'){
+				if(type.match(/touch|wheel/) && !delay){
+					active = _(controls()).find(function(t){
+						return ('check' in t) && t.check(e.target);
+					}) || tool();
+					delay = true;
+				} 
+				if(type!='wheel'){
+					delay = false;
+				}else{
+					clearTimeout(timeout);
+					timeout = setTimeout(function(){
 						delay = false;
-					}else{
-						clearTimeout(timeout);
-						timeout = setTimeout(function(){
-							delay = false;
-						},250);
-					}
+					},250);
 				}
 
 				if(type.match(/start/)) pause(true);

@@ -7,8 +7,16 @@ define(['draw'],function(Draw){
 		Draw.origin(e.position);
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
+	function transformstart(e){
+		Draw.origin(e.position);
+	}
+	function transform(e){
+		Draw.zoom(Draw.zoom()*e.scale);
+	}
 	return {
 		tap:select,
-		wheel:wheel
+		wheel:wheel,
+		transformstart:transformstart,
+		transform:transform
 	}
 });
