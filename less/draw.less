@@ -46,20 +46,9 @@ html,body{
 	background:@back;
 } 
 
-.canvas{
-	position: absolute; 
-	z-index:1;
-	left:@nav-width; right:0;
-	top:0; bottom:@palette-height;
-
-	& > svg{
-		width:100%; height:100%;
-		.border-radius(0,0,10px,0);
-	}
-}
 .left {
 	position: absolute; 
-	z-index:10;
+	z-index:1;
 
 	top:0; left:0; 
 	bottom:@palette-height; 
@@ -90,11 +79,11 @@ html,body{
 }
 .palette{
 	position: absolute; 
-	z-index:10;
+	z-index:1;
 
 	@over: 30px;
 
-	left:@nav-width; 
+	left:@nav-width + 15px; 
 	bottom:0; right:0; 
 	background: @back;
 	overflow:hidden;
@@ -105,9 +94,6 @@ html,body{
 		overflow:auto;
 	}
 
-	ul{
-		padding-left:15px;
-	}
 	li{ 
 		@width:30px;
 		@pad: (@palette-height - @icon-size) / 2;
@@ -126,16 +112,13 @@ html,body{
 }
 .color-toggle{
 	position: absolute; 
-	z-index:11;
+	z-index:2;
 
 	left:0; bottom:0; 
-	width:@nav-width; 
+	width:@nav-width + 5px; 
 	height:@color-mode-height;
 	background:@back;
 	cursor:pointer;
-
-	&:hover{ background:@back + #111; }
-	&:active{ background:@back + #222; }
 
 	.fill, .stroke{
 		position: absolute; 
@@ -154,21 +137,32 @@ html,body{
 	.fill{ top:@pad; left:@pad; }
 	.stroke{ bottom:@pad; right:@pad; }
 }
+.canvas{
+	position: absolute; 
+	z-index:10;
+	left:@nav-width; right:0;
+	top:0; bottom:@palette-height;
+
+	& > svg{
+		width:100%; height:100%;
+		.border-radius(0,0,10px,0);
+	}
+}
 @toolbar-hpad:20px;
 @toolbar-vpad:7px;
-.toolbar-top{
-	position: absolute;
-	z-index:14;
-
-	right:@toolbar-hpad; top:@toolbar-vpad;
-	.btn{ padding:9px 15px; }
-}
 .toolbar-bottom{
 	position: absolute;
-	z-index:12;
+	z-index:11;
 
 	right:@toolbar-hpad; 
 	bottom:@toolbar-vpad+@palette-height;
+	.btn{ padding:9px 15px; }
+}
+.toolbar-top{
+	position: absolute;
+	z-index:12;
+
+	right:@toolbar-hpad; top:@toolbar-vpad;
 	.btn{ padding:9px 15px; }
 }
 

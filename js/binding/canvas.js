@@ -32,11 +32,10 @@ function canvasBinding(el,value,all,Draw){
 				e.originalEvent.touches[0].target;
 
 			pos = position(e.originalEvent) || pos;
-			if(type=='touch'){
-				inCanvas = $(el).find(target).length>0;
-				if(!inCanvas) return;
+			if(type=='touch') 
 				start = pos;
-			}
+			if(type.match(/touch|wheel/)) 
+				inCanvas = $(el).find(target).length>0;
 			if(!inCanvas) return;
 
 			var evt = {

@@ -42,23 +42,21 @@ define([
 		}),
 
 		trigger = (function(){
-			var active, delay, timeout;
+			var active, delay, 
+				timeout = _.debounce(function(){
+					delay = false;
+				},250);
 			return function(type,e){
 				if(type.match(/touch|wheel/) && !delay){
 					active = _(controls()).find(function(t){
-						return e.target && 
-							('check' in t) && t.check(e.target);
+						return ('check' in t) && t.check(e.target);
 					}) || tool();
 					delay = true;
 				} 
-				if(type!='wheel'){
+				if(type=='touch'){
 					delay = false;
-				}else{
-					clearTimeout(timeout);
-					timeout = setTimeout(function(){
-						delay = false;
-					},250);
-				}
+				}else if(type=='wheel')
+					timeout();
 
 				if(type.match(/start/)) pause(true);
 				if(type == 'release') pause(false);
