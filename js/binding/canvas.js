@@ -6,7 +6,8 @@ function canvasBinding(el,value,all,Draw){
 	var inCanvas, target, pos, start,
 		position = function(e){
 			var pos = e.touches || [e];
-			if(!pos[0].clientX) return null;
+			if(!pos[0] || !pos[0].clientX) 
+				return null;
 
 			var sum = _(pos).chain()
 				.map(function(p){
