@@ -16,11 +16,13 @@
 			<g data-bind="visible:visible,template:shapesTemplate" ></g>
 		</g>
 
+		<!-- ko if:selected -->
 		<g data-bind="foreach:selected" fill="transparent" 
 		stroke="blue" opacity="1" stroke-width="1" 
 		stroke-dasharray="5, 3" >
 			<rect data-bind="attr:$data" />
 		</g>
+		<!-- /ko -->
 
 		<g data-bind="template:toolTemplate" ></g>
 		<g data-bind="template:controlsTemplate" ></g>
