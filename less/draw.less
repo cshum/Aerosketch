@@ -35,7 +35,7 @@
 @active: #0056aa;
 
 @color-mode-height:70px;
-@palette-height:45px;
+@palette-height:40px;
 @icon-pad: 13px;
 @nav-width: @icon-size + @icon-pad*2;
 
@@ -88,7 +88,7 @@ html,body{
 }
 .palette{
 	position: absolute; 
-	z-index:11;
+	z-index:10;
 
 	@over: 30px;
 
@@ -104,7 +104,7 @@ html,body{
 	}
 
 	li{ 
-		@width:35px;
+		@width:30px;
 		@pad: (@palette-height - @icon-size) / 2;
 		@height:@palette-height + @over - @pad;
 
@@ -121,7 +121,7 @@ html,body{
 }
 .color-toggle{
 	position: absolute; 
-	z-index:12;
+	z-index:11;
 
 	left:0; bottom:0; 
 	width:@nav-width; 
@@ -153,14 +153,14 @@ html,body{
 @toolbar-vpad:7px;
 .toolbar-top{
 	position: absolute;
-	z-index:13;
+	z-index:14;
 
 	right:@toolbar-hpad; top:@toolbar-vpad;
 	.btn{ padding:9px 15px; }
 }
 .toolbar-bottom{
 	position: absolute;
-	z-index:14;
+	z-index:12;
 
 	right:@toolbar-hpad; bottom:@toolbar-vpad+@palette-height;
 	.btn{ padding:9px 15px; }

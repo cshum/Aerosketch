@@ -51,10 +51,14 @@ define([
 						}) || tool();
 						delay = true;
 					} 
-					clearTimeout(timeout);
-					timeout = setTimeout(function(){
+					if(type=='touch'){
 						delay = false;
-					},250);
+					}else{
+						clearTimeout(timeout);
+						timeout = setTimeout(function(){
+							delay = false;
+						},250);
+					}
 				}
 
 				if(type.match(/start/)) pause(true);
