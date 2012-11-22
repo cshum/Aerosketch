@@ -1,23 +1,23 @@
 define(['knockout','jquery','underscore'],function(ko,$,_){
 	ko.bindingHandlers.palette = {
 		init: function(el,val) {
-			var call = val(), touch = false;
+			var call = val(), drag = false;
 			$(el)
-				.on('touchstart mousedown',function(e){
-					touch = true;
+				.on('mousedown',function(e){
+					drag = true;
 					call(ko.dataFor(e.target));
-					e.preventDefault();
 				})
-				.on('touchmove mousemove',function(e){
-					if(touch)
+				.on('mousemove',function(e){
+					if(drag)
 						call(ko.dataFor(e.target));
-					e.preventDefault();
-				});
-			$(window)
-				.on('touchend mouseup',function(){
-					touch = false;
-					e.preventDefault();
-				});
+				}),
+			.on('touchstart touchmove',function(e){
+				call(ko.dataFor(e.target || 
+					e.originalEvent.touches[0].target));
+			});
+			$(window).on('mouseup',function(){
+				drag = false;
+			});
 			ko.utils.domNodeDisposal.addDisposeCallback(el,function(){
 				$(el).off();
 			});
