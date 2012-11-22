@@ -10,11 +10,11 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 				.on('mousemove',function(e){
 					if(drag)
 						call(ko.dataFor(e.target));
-				}),
-			.on('touchstart touchmove',function(e){
-				call(ko.dataFor(e.target || 
-					e.originalEvent.touches[0].target));
-			});
+				})
+				.on('touchstart touchmove',function(e){
+					call(ko.dataFor(e.target || 
+						e.originalEvent.touches[0].target));
+				});
 			$(window).on('mouseup',function(){
 				drag = false;
 			});
