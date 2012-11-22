@@ -5,21 +5,22 @@ define([
 	var pause = ko.observable(false),
 		focus = ko.observable(),
 		selection = ko.observableArray([]),
-		selected = ko.computed(function(){
-			if(!pause())
-				return _(selection()).map(function(shape){
-					var b = shape.bbox(),
-						r = shape.rotate(),
-						w = shape.stroke()!='none' ? 
-							shape.strokeWidth()*Draw.zoom():0,
-						o = Draw.toView(b,'_selected');
-					o.transform = 'rotate('+r+' '
-						+(o.x+o.width/2)+','+(o.y+o.height/2)+')';
-					o.x -= w/2 + 1; o.y -= w/2 + 1;
-					o.width += w + 2; o.height += w + 2;
-					return o;
-				});
-		}).extend({throttle:1}),
+		selectedBBox = function(shape){
+			if(pause()) return {
+				style:'display:none;'
+			};
+			var b = shape.bbox(),
+				r = shape.rotate(),
+				w = shape.stroke()!='none' ? 
+					shape.strokeWidth()*Draw.zoom():0,
+				o = Draw.toView(b,'_selected');
+			o.transform = 'rotate('+r+' '
+				+(o.x+o.width/2)+','+(o.y+o.height/2)+')';
+			o.style = null;
+			o.x -= w/2 + 1; o.y -= w/2 + 1;
+			o.width += w + 2; o.height += w + 2;
+			return o;
+		},
 		deselect = function(){
 			selection.removeAll();
 		},
@@ -99,7 +100,7 @@ define([
 		selection: selection,
 		deselect: deselect,
 		select: select,
-		selected: selected,
+		selectedBBox: selectedBBox,
 		trigger:trigger,
 
 		options:options,

@@ -3,9 +3,9 @@ function(_,Transform,Draw){
 	var angle, trans,
 
 		check = function(target){
-			if(!target._selected)
-				Draw.deselect();
-			return '_selected' in target;
+			var selected = _(Draw.selection()).contains(target);
+			if(!selected) Draw.deselect();
+			return selected;
 		},
 
 		dragstart = function(e){

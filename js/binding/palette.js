@@ -12,7 +12,6 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 						call(ko.dataFor(e.target));
 				})
 				.on('touchstart touchmove',function(e){
-					e.preventDefault();
 					call(ko.dataFor(
 						document.elementFromPoint(
 							e.originalEvent.touches[0].clientX, 
