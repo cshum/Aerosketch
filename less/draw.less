@@ -21,6 +21,8 @@
 .btn{
 	i{ color:#666; }
 
+	padding:7px 15px;
+
 	&:focus{
 		outline:none;
 	}
@@ -35,7 +37,7 @@
 @active: #0056aa;
 
 @color-mode-height:70px;
-@palette-height:45px;
+@palette-height:40px;
 @icon-pad: 13px;
 @nav-width: @icon-size + @icon-pad*2;
 
@@ -115,7 +117,7 @@ html,body{
 	z-index:2;
 
 	left:0; bottom:0; 
-	width:@nav-width + 5px; 
+	width:@nav-width; 
 	height:@color-mode-height;
 	background:@back;
 	cursor:pointer;
@@ -156,14 +158,12 @@ html,body{
 
 	right:@toolbar-hpad; 
 	bottom:@toolbar-vpad+@palette-height;
-	.btn{ padding:7px 15px; }
 }
 .toolbar-top{
 	position: absolute;
 	z-index:12;
 
 	right:@toolbar-hpad; top:@toolbar-vpad;
-	.btn{ padding:7px 15px; }
 }
 
 
