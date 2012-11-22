@@ -12,8 +12,12 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 						call(ko.dataFor(e.target));
 				})
 				.on('touchstart touchmove',function(e){
-					call(ko.dataFor(e.target || 
-						e.originalEvent.touches[0].target));
+					e.preventDefault();
+
+					call(ko.dataFor(e.target || (
+						e.originalEvent.touches[0] || 
+						e.originalEvent.changedTouches[0]
+					).target));
 				});
 			$(window).on('mouseup',function(){
 				drag = false;

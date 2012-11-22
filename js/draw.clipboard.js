@@ -21,20 +21,18 @@ define(['knockout','underscore','transform','draw','draw.edit'
 		paste = function(){
 			if(!clipboard()) return;
 
-			Transform.on(clipboard());
+			var shapes = _(clipboard()).map(function(shape){
+				return shape.clone();
+			})
+
+			Transform.on(shapes);
 			Transform.set({translate:{
 				x:30/Draw.zoom(),
 				y:30/Draw.zoom()
 			}});
 
-			Draw.add.apply(null,clipboard());
-			Draw.selection(clipboard());
-
-			clipboard(
-				_(clipboard()).map(function(shape){
-					return shape.clone();
-				})
-			);
+			Draw.add.apply(null,shapes);
+			Draw.selection(shapes);
 		};
 
 	_(Draw).extend({
