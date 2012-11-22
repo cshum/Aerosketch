@@ -13,7 +13,7 @@
 }
 
 .dropdown-menu li > a{
-	padding:7px 15px;
+	padding:6px 15px;
 }
 .btn-group + .btn-group{
 	margin-left:10px;
@@ -83,32 +83,23 @@ body > div{ position:absolute; }
 .palette{
 	z-index:1;
 
-	@over: 30px;
-
-	left:@nav-width + 15px; 
+	left:@nav-width + 5px; 
 	bottom:0; right:0; 
 	background: @back;
-	overflow:hidden;
 	height:@palette-height;
 
-	& > * { 
-		width:100%;
-		overflow:auto;
+	.nocolor{
+		.opacity(0.3);
+		width:@icon-size;
+		padding:(@palette-height - @icon-size)/2;
 	}
 
-	li{ 
-		@width:30px;
-		@pad: (@palette-height - @icon-size) / 2;
-		@height:@palette-height + @over - @pad;
-
-		float:left; 
-		cursor: pointer; 
-		width:@width; height:@height; 
-		padding-top:@pad;
-		text-align:center;
-
-		span {
-			.opacity(0.5); 
+	ul{
+		position:absolute;
+		left:45px; top:0; bottom:0; right:0;
+		li{ 
+			float:left; 
+			height:@palette-height; 
 		}
 	}
 }

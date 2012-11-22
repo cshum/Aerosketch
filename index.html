@@ -17,7 +17,7 @@
 		</g>
 
 		<!-- ko if:selection().length > 0 -->
-		<g data-bind="foreach:selected" fill="transparent" 
+		<g data-bind="foreach:selected" fill="black" fill-opacity="0" 
 		stroke="blue" opacity="1" stroke-width="1" 
 		stroke-dasharray="5, 3" >
 			<rect data-bind="attr:$data" />
@@ -39,14 +39,17 @@
 	</div>
 </div>
 <div class="palette" >
-	<div>
-	<ul data-bind="foreach:palette,style:{width:(30*palette.length)+'px'}">
-		<li data-bind="style:{background:$data},
-		hammer:{tap:$root.color}, if:$data=='none'">
-			<span class="draw-icon-cross" ></span>
+	<div class="nocolor" data-bind="hammer:{tap:noColor}">
+		<span class="draw-icon-cross"></span>
+	</div>
+	<ul data-bind="
+		foreach:palette, palette:color">
+		<li data-bind="style:{
+			background:$data,
+			width:(100/$root.palette.length)+'%'
+		}">
 		</li>
 	</ul>
-	</div>
 </div>
 <div class="color-toggle" 
 	data-bind="with:options, 
@@ -63,30 +66,30 @@
 	</div>
 </div>
 <div class="toolbar-top-left btn-toolbar">
-	<!-- ko if:selection().length > 0 -->
-		<div class="btn-group">
-			<button class="btn" data-bind="hammer:{tap:cut}">
-				<i class="icon-cut icon-large"></i>
-			</button>
-			<button class="btn" data-bind="hammer:{tap:copy}">
-				<i class="icon-copy icon-large"></i>
-			</button>
-		</div>
-		<div class="btn-group">
-			<button class="btn" data-bind="hammer:{tap:deselect}">
-				<i class="icon-remove-circle icon-large"></i>
-			</button>
-		</div>
-	<!-- /ko -->
 </div>
 <div class="toolbar-top-right btn-toolbar">
-	<!-- ko if:clipboard().length > 0 -->
-		<div class="btn-group">
-			<button class="btn" data-bind="hammer:{tap:paste}">
-				<i class="icon-paste icon-large"></i>
-			</button>
-		</div>
+	<!-- ko if:selection().length > 0 -->
+	<div class="btn-group">
+		<button class="btn" data-bind="hammer:{tap:deselect}">
+			<i class="icon-remove-circle icon-large"></i>
+		</button>
+	</div>
 	<!-- /ko -->
+	<div class="btn-group">
+		<!-- ko if:selection().length > 0 -->
+		<button class="btn" data-bind="hammer:{tap:cut}">
+			<i class="icon-cut icon-large"></i>
+		</button>
+		<button class="btn" data-bind="hammer:{tap:copy}">
+			<i class="icon-copy icon-large"></i>
+		</button>
+		<!-- /ko -->
+		<!-- ko if:clipboard().length > 0 -->
+		<button class="btn" data-bind="hammer:{tap:paste}">
+			<i class="icon-paste icon-large"></i>
+		</button>
+		<!-- /ko -->
+	</div>
 	<div class="btn-group">
 		<button class="btn">
 			<i class="icon-undo icon-large"></i>
@@ -123,7 +126,8 @@ require([
 	'draw.controls!strokesize,transform',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
-	'binding/canvas','binding/hammer','binding/bootstrap'
+	'binding/canvas','binding/hammer',
+	'binding/dropdown','binding/palette'
 ],function(ko,Draw){
 	ko.applyBindings(Draw,document.body);
 	window.Draw = Draw;

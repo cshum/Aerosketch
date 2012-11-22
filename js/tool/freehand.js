@@ -45,6 +45,7 @@ define(['shape/path','draw'],function(Path,Draw){
 
 			Draw.add(curr);
 			points = [e.position];
+			curr.moveTo(e.position);
 		},
 
 		move = function(e){
@@ -52,13 +53,14 @@ define(['shape/path','draw'],function(Path,Draw){
 				var pos = e.position;
 				if(distance(_.last(points),pos) > 5/Draw.zoom()){
 					dragged = true;
+					curr.lineTo(pos);
 					points.push(pos);
-					curr.path(catmullRom(points));
 				}
 			}
 		},
 		release = function(){
 			if(dragged){
+				curr.path(catmullRom(points));
 			}
 			curr = null;
 			touched = false;

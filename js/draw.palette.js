@@ -14,6 +14,7 @@ define([
 				return Draw.options[colorMode()](color);
 			}
 		}),
+		noColor = _(color).bind(null,'none'),
 		swapColor = function(){
 			var o = Draw.options,
 				fill = o.fill();
@@ -21,7 +22,7 @@ define([
 			o.stroke(fill);
 		},
 		palette = [
-			"none", "#000000", "#3f3f3f", "#7f7f7f", "#bfbfbf", 
+			"#000000", "#3f3f3f", "#7f7f7f", "#bfbfbf", 
 			"#ffffff", "#ff0000", "#ff7f00", "#ffff00", "#7fff00", 
 			"#00ff00", "#00ff7f", "#00ffff", "#007fff", "#0000ff", 
 			"#7f00ff", "#ff00ff", "#ff007f", "#7f0000", "#7f3f00", 
@@ -34,6 +35,7 @@ define([
 
 	_(Draw).extend({
 		color: color,
+		noColor: noColor,
 		colorMode: colorMode,
 		toggleColorMode: toggleColorMode,
 		swapColor: swapColor,

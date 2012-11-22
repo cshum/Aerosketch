@@ -22,7 +22,10 @@ define(['knockout','underscore','transform','draw','draw.edit'
 			if(!clipboard()) return;
 
 			Transform.on(clipboard());
-			Transform.set({translate:{x:20,y:20}});
+			Transform.set({translate:{
+				x:30/Draw.zoom(),
+				y:30/Draw.zoom()
+			}});
 
 			Draw.add.apply(null,clipboard());
 			Draw.selection(clipboard());
