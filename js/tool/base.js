@@ -2,7 +2,7 @@ define(['draw'],function(Draw){
 	var initScale;
 	function select(e){
 		if(e.target._shape)
-			Draw.selection([e.target]);
+			Draw.select(e.target);
 	}
 	function wheel(e){
 		Draw.origin(e.position);

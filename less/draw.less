@@ -19,9 +19,10 @@
 	margin-left:10px;
 }
 .btn{
-	i{ color:#666; }
+	i{ color:#555; }
+	&.btn-primary i { color:white }
 
-	padding:7px 15px;
+	padding:8px 15px;
 
 	&:focus{
 		outline:none;
@@ -47,9 +48,9 @@ html,body{
 	height:100%;
 	background:@back;
 } 
+body > div{ position:absolute; }
 
 .left {
-	position: absolute; 
 	z-index:1;
 
 	top:0; left:0; 
@@ -80,7 +81,6 @@ html,body{
 	}
 }
 .palette{
-	position: absolute; 
 	z-index:1;
 
 	@over: 30px;
@@ -113,7 +113,6 @@ html,body{
 	}
 }
 .color-toggle{
-	position: absolute; 
 	z-index:2;
 
 	left:0; bottom:0; 
@@ -140,7 +139,6 @@ html,body{
 	.stroke{ bottom:@pad; right:@pad; }
 }
 .canvas{
-	position: absolute; 
 	z-index:10;
 	left:@nav-width; right:0;
 	top:0; bottom:@palette-height;
@@ -150,20 +148,31 @@ html,body{
 		.border-radius(0,0,10px,0);
 	}
 }
-@toolbar-hpad:20px;
+@toolbar-hpad:25px;
 @toolbar-vpad:7px;
-.toolbar-bottom{
-	position: absolute;
+.toolbar-bottom-left{
+	z-index:11;
+
+	left:@toolbar-hpad + @nav-width; 
+	bottom:@toolbar-vpad + @palette-height;
+}
+.toolbar-bottom-right{
 	z-index:11;
 
 	right:@toolbar-hpad; 
-	bottom:@toolbar-vpad+@palette-height;
+	bottom:@toolbar-vpad + @palette-height;
 }
-.toolbar-top{
-	position: absolute;
+.toolbar-top-right{
 	z-index:12;
 
-	right:@toolbar-hpad; top:@toolbar-vpad;
+	right:@toolbar-hpad; 
+	top:@toolbar-vpad;
+}
+.toolbar-top-left{
+	z-index:12;
+
+	left:@toolbar-hpad + @nav-width; 
+	top:@toolbar-vpad;
 }
 
 

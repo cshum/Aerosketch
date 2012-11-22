@@ -1,4 +1,5 @@
-define(['underscore','draw','draw.edit'],function(_,Draw){
+define(['underscore','draw','draw.edit','draw.commit'
+],function(_,Draw){
 	return {
 		load: function(params, require, callback){
 			require(

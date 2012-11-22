@@ -4,7 +4,7 @@ function(_,Transform,Draw){
 
 		check = function(target){
 			if(!target._selected)
-				Draw.selection.removeAll();
+				Draw.deselect();
 			return '_selected' in target;
 		},
 

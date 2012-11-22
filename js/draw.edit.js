@@ -20,6 +20,12 @@ define([
 					return o;
 				});
 		}).extend({throttle:1}),
+		deselect = function(){
+			selection.removeAll();
+		},
+		select = function(){
+			selection(_(arguments).toArray());
+		},
 
 		options = {
 			fill: ko.observable('red'),
@@ -91,6 +97,8 @@ define([
 
 	_(Draw).extend({
 		selection: selection,
+		deselect: deselect,
+		select: select,
 		selected: selected,
 		trigger:trigger,
 
