@@ -9,6 +9,7 @@ define(['draw'],function(Draw){
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
 	function transformstart(e){
+		Draw.origin(e.start);
 		scale = Draw.zoom();
 		pos = Draw.position();
 	}
@@ -17,7 +18,6 @@ define(['draw'],function(Draw){
 			x:pos.x + e.distanceX,
 			y:pos.y + e.distanceY
 		});
-		Draw.origin(e.position);
 		Draw.zoom(scale*e.scale);
 	}
 	return {
