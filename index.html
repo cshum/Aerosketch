@@ -32,7 +32,10 @@
 		<ul data-bind="foreach:tools" class="tools">
 			<li data-bind="html:iconView, 
 			css:{on:$root.tool()==$data}, 
-			hammer:{tap: $root.tool}"></li>
+			event:{
+				mousedown:$root.tool,
+				touchstart:$root.tool
+			}"></li>
 		</ul>
 	</div>
 </div>
