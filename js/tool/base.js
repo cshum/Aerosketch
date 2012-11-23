@@ -17,7 +17,7 @@ define(['draw'],function(Draw){
 			x: pos.x - e.distanceX*Draw.zoom(),
 			y: pos.y - e.distanceY*Draw.zoom()
 		});
-		Draw.origin(e.start);
+		Draw.origin(e.position);
 		Draw.zoom(scale*e.scale);
 	}
 	return {
