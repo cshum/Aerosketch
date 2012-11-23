@@ -1,6 +1,6 @@
 define([
 	'knockout','shape/path','draw',
-	'text!view/tool/path.svg',
+	'text!view/path.svg',
 ],function(ko,Path,Draw,view){
 	var curr, c1, c2, touching, moved, focus,
 

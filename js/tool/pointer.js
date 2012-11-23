@@ -1,6 +1,6 @@
 define([
 	'knockout','underscore','draw',
-	'text!view/tool/pointer.svg'
+	'text!view/pointer.svg'
 ],function(ko,_,Draw,view){
 	var p1 = ko.observable(),
 		p2 = ko.observable(),

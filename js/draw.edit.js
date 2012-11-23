@@ -1,7 +1,8 @@
 define([
-	'knockout','underscore','draw',
-	'tool/base','lib/knockout/svgtemplate'
-],function(ko,_,Draw,baseTool,svgTemplate){
+	'knockout','underscore','draw','tool/base',
+	'lib/knockout/template',
+	'lib/knockout/svgtemplate'
+],function(ko,_,Draw,baseTool,template,svgTemplate){
 	var pause = ko.observable(false),
 		focus = ko.observable(),
 		selection = ko.observableArray([]),
@@ -37,15 +38,16 @@ define([
 
 		controls = ko.observableArray(),
 		controlsTemplate = svgTemplate(controls,function(control){
-			if(!(control && 'view' in control)) return '';
-			return control.view;
+			return (control && control.view) ? control.view:'';
 		}),
 
 		tool = ko.observable(),
 		tools = ko.observableArray(),
 		toolTemplate = svgTemplate(tool,function(tool){
-			if(!(tool && 'view' in tool)) return '';
-			return tool.view;
+			return (tool && tool.view) ? tool.view:'';
+		}),
+		toolbarTemplate = template(tool,function(tool){
+			return (tool && tool.toolbarView) ? tool.toolbarView: '';
 		}),
 
 		trigger = (function(){
@@ -107,6 +109,8 @@ define([
 		tools:tools,
 		tool: tool, 
 		toolTemplate:toolTemplate,
+
+		toolbarTemplate:toolbarTemplate,
 
 		controls:controls,
 		controlsTemplate:controlsTemplate

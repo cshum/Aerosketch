@@ -1,5 +1,6 @@
-define(['shape/rect','draw'],function(Rect,Draw){
-	var curr;
+define(['knockout','shape/rect','draw','text!view/ratio.html'
+],function(ko,Rect,Draw,toolbarView){
+	var curr, lockRatio = ko.observable(false);
 	function start(e){
 		if(curr) finish();
 		curr = new Rect(Draw.options);
@@ -8,7 +9,7 @@ define(['shape/rect','draw'],function(Rect,Draw){
 		Draw.add(curr);
 	}
 	function drag(e){
-		if(e.shiftKey || e.button==2){
+		if(lockRatio()){
 			var d = Math.max(
 				Math.abs(e.distanceX), 
 				Math.abs(e.distanceY)
@@ -31,19 +32,19 @@ define(['shape/rect','draw'],function(Rect,Draw){
 		}
 		curr = null;
 	}
-	function select(e){
-		if(e.target._shape)
-			Draw.selection([e.target]);
-	}
 	return {
 		name:'Rectangle',
 		iconView: '<span class="draw-icon-square"></span>',
+		toolbarView:toolbarView,
 
 		dragstart:start,
 		drag:drag,
 		release:finish,
 		close:finish,
 
-		tap:select
+		lockRatio:lockRatio,
+		toggleRatio: function(){
+			lockRatio(!lockRatio());
+		}
 	};
 });

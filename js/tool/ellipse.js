@@ -1,16 +1,18 @@
-define(['shape/ellipse','draw'],function(Ellipse,Draw){
-	var curr;
+define([
+	'knockout','shape/ellipse','shape/circle',
+	'draw','text!view/ratio.html'
+],function(ko,Ellipse,Circle,Draw,toolbarView){
+	var curr, lockRatio = ko.observable(false);
 	function start(e){
 		if(curr) finish();
-		curr = new Ellipse(Draw.options);
+		curr = new (lockRatio() ? Circle:Ellipse)(Draw.options);
 		curr.cx(e.start.x);
 		curr.cy(e.start.y);
 		Draw.add(curr);
 	}
 	function drag(e){
-		if(e.shiftKey || e.button==2){
-			curr.rx(e.distance/2);
-			curr.ry(e.distance/2);
+		if(lockRatio()){
+			curr.r(e.distance/2);
 			curr.cx((e.start.x + e.position.x)/2);
 			curr.cy((e.start.y + e.position.y)/2);
 		}else{
@@ -27,19 +29,19 @@ define(['shape/ellipse','draw'],function(Ellipse,Draw){
 		}
 		curr = null;
 	}
-	function select(e){
-		if(e.target._shape)
-			Draw.selection([e.target]);
-	}
 	return {
 		name:'Ellipse',
 		iconView: '<span class="draw-icon-circle"></span>',
+		toolbarView:toolbarView,
 
 		dragstart:start,
 		drag:drag,
 		release:finish,
 		close:finish,
 
-		tap:select
+		lockRatio:lockRatio,
+		toggleRatio: function(){
+			lockRatio(!lockRatio());
+		}
 	};
 });

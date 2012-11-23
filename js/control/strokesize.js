@@ -1,5 +1,5 @@
 define([
-	'knockout','draw','text!view/control/strokesize.svg'
+	'knockout','draw','text!view/strokesize.svg'
 ],function(ko,Draw,view){
 	var init, y, 
 		strokeWidth = Draw.options.strokeWidth, 
