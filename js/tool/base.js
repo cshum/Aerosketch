@@ -18,11 +18,12 @@ define(['draw'],function(Draw){
 		start = e.start;
 	}
 	function transform(e){
+		var dx = e.distanceX/Draw.zoom()*zoom,
+			dy = e.distanceY/Draw.zoom()*zoom,
+			delta = e.scale - 1;
 		Draw.position({
-			x:pos.x + ((e.scale - 1)*(start.x + e.distanceX)
-			- e.distanceX)*zoom,
-			y:pos.y + ((e.scale - 1)*(start.y + e.distanceY)
-			- e.distanceY)*zoom
+			x:pos.x + (delta*(start.x + dx) - dx)*zoom,
+			y:pos.y + (delta*(start.y + dy) - dy)*zoom
 		});
 		Draw.zoom(zoom*e.scale);
 	}
