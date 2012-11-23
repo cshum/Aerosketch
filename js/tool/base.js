@@ -11,16 +11,17 @@ define(['draw'],function(Draw){
 		});
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
-	var zoom, pos;
+	var zoom, pos, start;
 	function transformstart(e){
 		zoom = Draw.zoom();
 		pos = Draw.position();
+		start = e.start;
 	}
 	function transform(e){
 		Draw.position({
-			x:pos.x + ((e.scale - 1)*(e.start.x + e.distanceX)
+			x:pos.x + ((e.scale - 1)*(start.x + e.distanceX)
 			- e.distanceX)*zoom,
-			y:pos.y + ((e.scale - 1)*(e.start.y + e.distanceY)
+			y:pos.y + ((e.scale - 1)*(start.y + e.distanceY)
 			- e.distanceY)*zoom
 		});
 		Draw.zoom(zoom*e.scale);
