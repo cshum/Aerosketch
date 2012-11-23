@@ -43,7 +43,9 @@ function canvasBinding(el,value,all,Draw){
 
 				evt = {
 					target:ko.dataFor(target),
+					metaKey:e.originalEvent.metaKey,
 					shiftKey:e.originalEvent.shiftKey,
+					button:e.originalEvent.button,
 					no:no(e.originalEvent),
 					start: start,
 					position:pos,
@@ -52,8 +54,15 @@ function canvasBinding(el,value,all,Draw){
 					distance: Math.sqrt(dx*dx + dy*dy)
 				};
 
-			if(type=='drag')
-				evt.angle = e.angle;
+			if(type.match(/drag/)){
+				_(evt).extend({
+					distance:e.distance/Draw.zoom(),
+					distanceX:e.distanceX/Draw.zoom(),
+					distanceY:e.distanceY/Draw.zoom()
+				});
+				if(type=='drag')
+					evt.angle = e.angle;
+			}
 			if(type=='transform')
 				_(evt).extend({
 					scale:e.scale,
