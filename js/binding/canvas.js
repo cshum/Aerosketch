@@ -37,26 +37,23 @@ function canvasBinding(el,value,all,Draw){
 			if(type.match(/touch|wheel/)) 
 				inCanvas = $(el).find(target).length>0;
 			if(!inCanvas) return;
+			
+			var dx = pos.x - start.x,
+				dy = pos.y - start.y,
 
-			var evt = {
-				target:ko.dataFor(target),
-				metaKey:e.originalEvent.metaKey,
-				shiftKey:e.originalEvent.shiftKey,
-				button:e.originalEvent.button,
-				no:no(e.originalEvent),
-				start: start,
-				position:pos
-			};
+				evt = {
+					target:ko.dataFor(target),
+					shiftKey:e.originalEvent.shiftKey,
+					no:no(e.originalEvent),
+					start: start,
+					position:pos,
+					distanceX:dx,
+					distanceY:dy,
+					distance: Math.sqrt(dx*dx + dy*dy)
+				};
 
-			if(type.match(/drag/)){
-				_(evt).extend({
-					distance:e.distance/Draw.zoom(),
-					distanceX:e.distanceX/Draw.zoom(),
-					distanceY:e.distanceY/Draw.zoom()
-				});
-				if(type=='drag')
-					evt.angle = e.angle;
-			}
+			if(type=='drag')
+				evt.angle = e.angle;
 			if(type=='transform')
 				_(evt).extend({
 					scale:e.scale,
