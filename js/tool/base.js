@@ -13,12 +13,12 @@ define(['draw'],function(Draw){
 		pos = Draw.position();
 	}
 	function transform(e){
+		Draw.origin(e.position);
+		Draw.zoom(scale*e.scale);
 		Draw.position({
 			x:pos.x - e.distanceX*Draw.zoom(),
 			y:pos.y - e.distanceY*Draw.zoom()
 		});
-		Draw.origin(e.position);
-		Draw.zoom(scale*e.scale);
 	}
 	return {
 		tap:tap,
