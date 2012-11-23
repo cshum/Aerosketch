@@ -32,11 +32,7 @@ define(['shape/path','draw'],function(Path,Draw){
 			return Math.sqrt(dx*dx + dy*dy);
 		},
 
-		touch = function(e){
-			if(e.no>1) return;
-
-			touched = true;
-
+		start = function(e){
 			if(curr) release();
 			curr = new Path(Draw.options);
 			if(curr.stroke()=='none')
@@ -44,11 +40,11 @@ define(['shape/path','draw'],function(Path,Draw){
 			curr.fill('none');
 
 			Draw.add(curr);
-			points = [e.position];
-			curr.moveTo(e.position);
+			points = [e.start];
+			curr.moveTo(e.start);
 		},
 
-		move = function(e){
+		drag = function(e){
 			if(touched){
 				var pos = e.position;
 				if(distance(_.last(points),pos) > 5/Draw.zoom()){
@@ -75,8 +71,8 @@ define(['shape/path','draw'],function(Path,Draw){
 		name:'Freehand',
 		iconView: '<span class="draw-icon-freehand"></span>',
 
-		touch:touch,
-		move:move,
+		dragstart:start,
+		drag:drag,
 		release:release,
 		close:release,
 
