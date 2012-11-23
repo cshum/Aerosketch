@@ -1,6 +1,6 @@
 define(['draw'],function(Draw){
-	var initScale;
-	function select(e){
+	var scale,pos;
+	function tap(e){
 		if(e.target._shape)
 			Draw.select(e.target);
 	}
@@ -9,14 +9,19 @@ define(['draw'],function(Draw){
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
 	function transformstart(e){
-		Draw.origin(e.position);
-		initScale = Draw.zoom();
+		scale = Draw.zoom();
+		pos = Draw.position();
 	}
 	function transform(e){
-		Draw.zoom(initScale*e.scale);
+		Draw.origin(e.position);
+		Draw.zoom(scale*e.scale);
+		Draw.position({
+			x:pos.x + e.distanceX,
+			y:pos.y + e.distanceY
+		});
 	}
 	return {
-		tap:select,
+		tap:tap,
 		wheel:wheel,
 		transformstart:transformstart,
 		transform:transform

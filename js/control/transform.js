@@ -31,9 +31,13 @@ function(_,Transform,Draw){
 
 		transform = function(e){
 			Transform.set({
-				origin:e.start,
+				origin:e.position,
 				rotate:e.rotation,
-				scale:e.scale
+				scale:e.scale,
+				translate:{
+					x:e.distanceX,
+					y:e.distanceY
+				}
 			});
 		},
 
