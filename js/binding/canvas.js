@@ -2,8 +2,9 @@ define([
 'knockout','underscore','jquery','hammer'
 ],function(ko,_,$,Hammer){
 
-function canvasBinding(el,value,all,Draw){
-	var inCanvas, target, pos, start,
+function canvasBinding(el,value){
+	var drawTrigger = value(),
+		inCanvas, target, pos, start,
 		position = function(e){
 			var pos = e.touches || [e];
 			if(!pos[0] || !pos[0].clientX) 
@@ -19,10 +20,10 @@ function canvasBinding(el,value,all,Draw){
 				.value(),
 				len = pos.length;
 
-			return Draw.fromView({
+			return {
 				x: sum.x/len - $(el).offset().left,
 				y: sum.y/len - $(el).offset().top
-			});
+			};
 		},
 		no = function(e){
 			return (e.touches || [e]).length;
@@ -32,15 +33,14 @@ function canvasBinding(el,value,all,Draw){
 				e.originalEvent.touches[0].target;
 
 			pos = position(e.originalEvent) || pos;
-			if(type=='touch') 
+			if(type=='touch'){
 				start = pos;
-			if(type.match(/touch|wheel/)) 
 				inCanvas = $(el).find(target).length>0;
+			}
 			if(!inCanvas) return;
 			
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
-
 				evt = {
 					target:ko.dataFor(target),
 					metaKey:e.originalEvent.metaKey,
@@ -48,23 +48,14 @@ function canvasBinding(el,value,all,Draw){
 					button:e.originalEvent.button,
 					no:no(e.originalEvent),
 
-					start: start,
-					position:pos,
-					distanceX:dx,
+					start: start, position:pos,
+					distanceX:dx, 
 					distanceY:dy,
 					distance: Math.sqrt(dx*dx + dy*dy)
 				};
 
-			if(type.match(/drag/)){
-				//todo: why dx dy not work?
-				_(evt).extend({
-					distance:e.distance/Draw.zoom(),
-					distanceX:e.distanceX/Draw.zoom(),
-					distanceY:e.distanceY/Draw.zoom()
-				});
-				if(type=='drag')
-					evt.angle = e.angle;
-			}
+			if(type=='drag')
+				evt.angle = e.angle;
 			if(type=='transform')
 				_(evt).extend({
 					scale:e.scale,
@@ -75,7 +66,7 @@ function canvasBinding(el,value,all,Draw){
 					e.originalEvent.wheelDelta/3500 ||
 					-e.originalEvent.detail/50
 				);
-			Draw.trigger(type,evt);
+			drawTrigger(type,evt);
 		};
 
 

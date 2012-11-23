@@ -56,6 +56,12 @@ define([
 					delay = false;
 				},250);
 			return function(type,e){
+				e.start = Draw.fromView(e.start);
+				e.position = Draw.fromView(e.position);
+				e.distance /= Draw.zoom();
+				e.distanceX /= Draw.zoom();
+				e.distanceY /= Draw.zoom();
+
 				if(type.match(/touch|wheel/) && !delay){
 					active = _(controls()).find(function(t){
 						return ('check' in t) && t.check(e.target);
