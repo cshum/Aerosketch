@@ -47,6 +47,7 @@ function canvasBinding(el,value,all,Draw){
 					shiftKey:e.originalEvent.shiftKey,
 					button:e.originalEvent.button,
 					no:no(e.originalEvent),
+
 					start: start,
 					position:pos,
 					distanceX:dx,
@@ -55,6 +56,7 @@ function canvasBinding(el,value,all,Draw){
 				};
 
 			if(type.match(/drag/)){
+				//todo: why dx dy not work?
 				_(evt).extend({
 					distance:e.distance/Draw.zoom(),
 					distanceX:e.distanceX/Draw.zoom(),

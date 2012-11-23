@@ -1,5 +1,5 @@
 define(['draw'],function(Draw){
-	var scale;
+	var scale, pos;
 	function tap(e){
 		if(e.target._shape)
 			Draw.select(e.target);
@@ -9,10 +9,15 @@ define(['draw'],function(Draw){
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
 	function transformstart(e){
-		Draw.origin(e.start);
 		scale = Draw.zoom();
+		pos = Draw.position();
 	}
 	function transform(e){
+		Draw.position({
+			x: pos.x - e.distanceX*Draw.zoom(),
+			y: pos.y - e.distanceY*Draw.zoom()
+		});
+		Draw.origin(e.start);
 		Draw.zoom(scale*e.scale);
 	}
 	return {
