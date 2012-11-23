@@ -8,7 +8,7 @@ function(_,Transform,Draw){
 			return selected;
 		},
 
-		dragstart = function(e){
+		start = function(e){
 			Transform.on(Draw.selection());
 			trans = true;
 			angle = null;
@@ -28,25 +28,13 @@ function(_,Transform,Draw){
 					y:e.distanceY
 				}});
 		},
-		transformstart = function(e){
-			Transform.on(Draw.selection());
-			trans = true;
-			angle = null;
-		},
 
 		transform = function(e){
-			if(!angle) 
-				angle = e.angle;
-			if(e.shiftKey || e.button==2)
-				Transform.set({
-					origin:e.start,
-					rotate:e.angle - angle
-				});
-			else
-				Transform.set({translate:{
-					x:e.distanceX,
-					y:e.distanceY
-				}});
+			Transform.set({
+				origin:e.start,
+				rotate:e.angle,
+				scale:e.scale
+			});
 		},
 
 		finish = function(e){
@@ -61,9 +49,9 @@ function(_,Transform,Draw){
 
 	return {
 		check:check,
-		dragstart:dragstart,
+		dragstart:start,
+		transformstart:start,
 		drag:drag,
-		transformstart:transformstart,
 		transform:transform,
 		release:finish,
 		wheel:wheel
