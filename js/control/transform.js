@@ -31,8 +31,8 @@ function(_,Transform,Draw){
 
 		transform = function(e){
 			Transform.set({
-				origin:e.position,
-				rotate:e.angle,
+				origin:e.start,
+				rotate:e.rotation,
 				scale:e.scale
 			});
 		},
