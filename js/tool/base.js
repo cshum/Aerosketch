@@ -13,11 +13,11 @@ define(['draw'],function(Draw){
 		pos = Draw.position();
 	}
 	function transform(e){
-		Draw.origin(e.position);
 		Draw.zoom(scale*e.scale);
+		Draw.origin(e.position);
 		Draw.position({
-			x:pos.x - e.distanceX,
-			y:pos.y - e.distanceY
+			x:pos.x - e.distanceX*Draw.zoom(),
+			y:pos.y - e.distanceY*Draw.zoom()
 		});
 	}
 	return {
