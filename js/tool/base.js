@@ -5,7 +5,12 @@ define(['draw'],function(Draw){
 			Draw.select(e.target);
 	}
 	function wheel(e){
-		Draw.origin(e.position);
+		var p = Draw.position(),
+			o = e.position;
+		Draw.position({
+			x: p.x + e.delta*o.x*Draw.zoom(),
+			y: p.y + e.delta*o.y*Draw.zoom()
+		});
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
 	function transformstart(e){
@@ -13,12 +18,13 @@ define(['draw'],function(Draw){
 		pos = Draw.position();
 	}
 	function transform(e){
-		Draw.origin(e.position);
-		Draw.zoom(scale*e.scale);
 		Draw.position({
-			x:pos.x - e.distanceX*Draw.zoom(),
-			y:pos.y - e.distanceY*Draw.zoom()
+			x:pos.x + ((e.scale - 1)*e.position.x
+			- e.distanceX)*Draw.zoom(),
+			y:pos.y + ((e.scale - 1)*e.position.y
+			- e.distanceY)*Draw.zoom()
 		});
+		Draw.zoom(scale*e.scale);
 	}
 	return {
 		tap:tap,

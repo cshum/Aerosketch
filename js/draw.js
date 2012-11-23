@@ -31,28 +31,8 @@ define(['knockout','underscore','layer'],function(ko,_,Layer){
 		},
 
 		position = ko.observable({x:0,y:0}),
-		origin = ko.observable({x:0,y:0}),
-
-		zoom = (function(){
-			var zoom = ko.observable(1);
-			return ko.computed({
-				read: zoom,
-				write: function(val){
-					val = Math.max(val,0.01);
-					var scale = val - zoom(),
-						p = position(),
-						o = origin();
-					position({
-						x: p.x + scale*o.x,
-						y: p.y + scale*o.y
-					});
-					zoom(val);
-				}
-			});
-		})(),
-
+		zoom = ko.observable(1),
 		background = ko.observable('white'),
-
 		transform = ko.computed(function(){
 			var p = position(),
 				z = Math.round(zoom()*1000)/1000;
@@ -69,7 +49,6 @@ define(['knockout','underscore','layer'],function(ko,_,Layer){
 		toView:toView,
 
 		zoom:zoom, 
-		origin:origin, 
 		position:position,
 		transform:transform,
 
