@@ -18,9 +18,9 @@ define(['draw'],function(Draw){
 	}
 	function transform(e){
 		Draw.position({
-			x:pos.x + ((e.scale - 1)*e.position.x
+			x:pos.x + ((e.scale - 1)*(e.start.x + e.distanceX)
 			- e.distanceX)*zoom,
-			y:pos.y + ((e.scale - 1)*e.position.y
+			y:pos.y + ((e.scale - 1)*(e.start.y + e.distanceY)
 			- e.distanceY)*zoom
 		});
 		Draw.zoom(zoom*e.scale);
