@@ -16,8 +16,8 @@ define(['draw'],function(Draw){
 		Draw.origin(e.position);
 		Draw.zoom(scale*e.scale);
 		Draw.position({
-			x:pos.x - e.distanceX*Draw.zoom(),
-			y:pos.y - e.distanceY*Draw.zoom()
+			x:pos.x - e.distanceX,
+			y:pos.y - e.distanceY
 		});
 	}
 	return {
