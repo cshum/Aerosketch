@@ -5,8 +5,8 @@ define(['draw'],function(Draw){
 	}
 	function drag(e){
 		Draw.position({
-			x:p.x - e.distanceX*Draw.zoom(),
-			y: p.y - e.distanceY*Draw.zoom()
+			x:p.x - e.distanceX,
+			y: p.y - e.distanceY
 		});
 	}
 	return {

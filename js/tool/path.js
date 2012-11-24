@@ -28,8 +28,6 @@ define([
 		control2 = ko.observable(),
 
 		touch = function(e){
-			if(e.no>1) return;
-
 			focus = e.target;
 			touching = true;
 			moved = false;
@@ -37,7 +35,7 @@ define([
 			if(focus._begin) 
 				center(curr.getFirstPoint());
 			else if(!focus._center) 
-				center(e.position);
+				center(Draw.fromView(e.position));
 
 			if(!curr){
 				c1 = null;
@@ -71,7 +69,7 @@ define([
 					end();
 				}else{
 					curr.lineTo(center());
-					c1 = e.position;
+					c1 = Draw.fromView(e.position);
 				}
 			}
 		},
@@ -80,21 +78,21 @@ define([
 			moved = true;
 			if(curr){
 				if(c1){
-					var p = e.position,
+					var p = Draw.fromView(e.position),
 						c = center();
 					c2 = { x: 2*c.x-p.x, y: 2*c.y-p.y };
 					curr.back();
 					curr.curveTo(c1,c2,c);
 					control2(c2);
 				}
-				control1(e.position);
+				control1(Draw.fromView(e.position));
 			}
 		},
 
 		move = function(e){
 			if(curr && !touching && c1){
 				curr.back();
-				var p = e.position;
+				var p = Draw.fromView(e.position);
 				curr.curveTo(c1,p,p);
 			}
 		},

@@ -6,10 +6,10 @@ define([
 		p2 = ko.observable(),
 
 		start = function(e){
-			p1(e.start);
+			p1(Draw.fromView(e.start));
 		},
 		drag = function(e){
-			p2(e.position);
+			p2(Draw.fromView(e.position));
 		},
 		end = function(){
 			p1(null);
@@ -65,7 +65,7 @@ define([
 		},
 		tap = function(e){
 			if(e.target._shape)
-				Draw.selection([e.target]);
+				Draw.select(e.target);
 		};
 	return {
 		name:'Rectangle',

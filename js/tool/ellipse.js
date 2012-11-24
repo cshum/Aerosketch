@@ -2,26 +2,29 @@ define([
 	'knockout','shape/ellipse','shape/circle',
 	'draw','text!view/ratio.html'
 ],function(ko,Ellipse,Circle,Draw,toolbarView){
-	var curr, lockRatio = ko.observable(false);
+	var curr, lock = ko.observable(false);
 	function start(e){
 		if(curr) finish();
-		curr = new (lockRatio() ? Circle:Ellipse)(Draw.options);
-		curr.cx(e.start.x);
-		curr.cy(e.start.y);
+		var start = Draw.fromView(e.start);
+		curr = new (lock() ? Circle:Ellipse)(Draw.options);
+		curr.cx(start.x);
+		curr.cy(start.y);
 		Draw.add(curr);
 	}
 	function drag(e){
-		if(lockRatio()){
-			curr.r(e.distance/2);
-			curr.cx((e.start.x + e.position.x)/2);
-			curr.cy((e.start.y + e.position.y)/2);
+		var start = Draw.fromView(e.start),
+			pos = Draw.fromView(e.position);
+		if(lock()){
+			curr.r(e.distance/Draw.zoom()/2);
+			curr.cx((start.x + pos.x)/2);
+			curr.cy((start.y + pos.y)/2);
 		}else{
-			var hx = e.distanceX/2,
-				hy = e.distanceY/2;
+			var hx = e.distanceX/Draw.zoom()/2,
+				hy = e.distanceY/Draw.zoom()/2;
 			curr.rx(Math.abs(hx));
 			curr.ry(Math.abs(hy));
-			curr.cx(e.start.x + hx);
-			curr.cy(e.start.y + hy);
+			curr.cx(start.x + hx);
+			curr.cy(start.y + hy);
 		}
 	}
 	function finish(){
@@ -39,9 +42,9 @@ define([
 		release:finish,
 		close:finish,
 
-		lockRatio:lockRatio,
-		toggleRatio: function(){
-			lockRatio(!lockRatio());
+		lock:lock,
+		toggleLock: function(){
+			lock(!lock());
 		}
 	};
 });

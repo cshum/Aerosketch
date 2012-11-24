@@ -22,12 +22,13 @@ define([
 			if(e.no>1) return;
 
 			init = strokeSize();
-			y = e.position.y;
+			y = Draw.fromView(e.position).y;
 		},
 		move = function(e){
 			if(init)
 				strokeSize(
-					init + (e.position.y - y)* Draw.zoom()/20
+					init + (Draw.fromView(e.position).y - y)
+					 * Draw.zoom()/20
 				);
 		},
 		release = function(e){

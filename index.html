@@ -15,15 +15,8 @@
 		<g data-bind="attr:{transform:transform},foreach:layers" >
 			<g data-bind="visible:visible,template:shapesTemplate" ></g>
 		</g>
-
-		<g data-bind="foreach:selection" fill="black" fill-opacity="0" 
-		stroke="blue" opacity="1" stroke-width="1" 
-		stroke-dasharray="5, 3" >
-			<rect data-bind="attr:$root.selectedBBox($data)" />
-		</g>
-
-		<g data-bind="template:toolTemplate" ></g>
 		<g data-bind="template:controlsTemplate" ></g>
+		<g data-bind="template:toolTemplate" ></g>
 
 	</svg>
 </div>
@@ -121,10 +114,10 @@ data-bind="template:toolbarTemplate"></div>
 <script type="text/javascript" src="js/lib/require/require.js"></script>
 <script type="text/javascript">
 require([
-	'knockout','draw',
+	'knockout',
 
-	'draw.palette','draw.clipboard',
-	'draw.controls!strokesize,transform',
+	'draw','draw.palette','draw.clipboard',
+	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
 	'binding/canvas','binding/hammer',

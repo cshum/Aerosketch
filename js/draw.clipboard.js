@@ -1,4 +1,4 @@
-define(['knockout','underscore','transform','draw','draw.edit'
+define(['knockout','underscore','transform','draw'
 ],function(ko,_,Transform,Draw){
 	var clipboard = ko.observableArray([]),
 		hide = function(){

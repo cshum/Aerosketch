@@ -39,13 +39,14 @@ define(['shape/path','draw'],function(Path,Draw){
 				curr.stroke('black');
 			curr.fill('none');
 
+			var start = Draw.fromView(e.start);
 			Draw.add(curr);
-			points = [e.start];
-			curr.moveTo(e.start);
+			points = [start];
+			curr.moveTo(start);
 		},
 
 		drag = function(e){
-			var pos = e.position;
+			var pos = Draw.fromView(e.position);
 			if(distance(_.last(points),pos) > 5/Draw.zoom()){
 				dragged = true;
 				curr.lineTo(pos);
