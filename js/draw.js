@@ -81,8 +81,8 @@ define([
 					debounce(false);
 				},250);
 			return function(type,e){
-				if(type=='transformstart' && prevType=='drag'
-				&& active && _.isFunction(active[type]))
+				if(type.match(/transform/) && prevType.match(/drag/)
+				&& active && _.isFunction(active.release))
 					active.release();
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = _(controls()).find(function(t){
