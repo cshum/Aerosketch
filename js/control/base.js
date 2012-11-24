@@ -24,8 +24,8 @@ define(['draw'],function(Draw){
 			delta = e.scale - 1,
 			p = e.position;
 		Draw.position({
-			x: pos.x + delta*(pos.x - dx + p.x) - dx,
-			y: pos.y + delta*(pos.y - dy + p.y) - dy
+			x: pos.x - dx + delta*(pos.x - dx + p.x),
+			y: pos.y - dy + delta*(pos.y - dy + p.y)
 		});
 		Draw.zoom(zoom*e.scale);
 	}
