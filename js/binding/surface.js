@@ -2,7 +2,7 @@ define([
 'knockout','underscore','jquery','hammer'
 ],function(ko,_,$,Hammer){
 
-function canvasBinding(el,value){
+function binding(el,value){
 	var drawTrigger = value(),
 		inCanvas, target, pos, start,
 		position = function(e){
@@ -91,8 +91,8 @@ function canvasBinding(el,value){
 		.on('mousewheel DOMMouseScroll',
 			_(trigger).chain().bind(null,'wheel').throttle(20).value());
 };
-ko.bindingHandlers.canvas = {
-	init:canvasBinding
+ko.bindingHandlers.surface = {
+	init:binding
 };
 
 });
