@@ -1,0 +1,6 @@
+<g data-bind="foreach:$root.selection" fill="black" fill-opacity="0" 
+stroke="blue" opacity="1" stroke-width="1" 
+stroke-dasharray="5, 3" >
+	<rect data-bind="attr:$parent.selectedBBox($data)" />
+</g>
+
