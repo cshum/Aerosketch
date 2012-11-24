@@ -4,7 +4,7 @@ define([
 
 function binding(el,value){
 	var drawTrigger = value(),
-		inCanvas, target, pos, start, 
+		inCanvas, target, pos, start, dragging,
 		position = function(e){
 			var pos = e.touches || [e];
 			if(!pos[0] || !pos[0].clientX) 
@@ -26,8 +26,15 @@ function binding(el,value){
 			};
 		},
 		trigger = function(type,e){
-		//bug to fix:
-		// drag - > 3 touches -> 2 touch
+			if(type=='release'){
+				drawTrigger('release');
+				return;
+			}
+			if(type.match(/drag/)) dragging = true;
+			if(type=='release') dragging = false;
+			if(dragging && type.match(/transform/))
+				trigger('release');
+
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
 
