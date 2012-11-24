@@ -4,11 +4,11 @@ define(['draw'],function(Draw){
 			Draw.select(e.target);
 	}
 	function wheel(e){
-		var dp = Draw.position(),
-			p = Draw.fromView(e.position);
+		var pos = Draw.position(),
+			p = e.position;
 		Draw.position({
-			x: dp.x + e.delta*p.x*Draw.zoom(),
-			y: dp.y + e.delta*p.y*Draw.zoom()
+			x: pos.x + e.delta*(pos.x + p.x),
+			y: pos.y + e.delta*(pos.y + p.y)
 		});
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 	}
