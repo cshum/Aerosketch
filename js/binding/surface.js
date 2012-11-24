@@ -36,7 +36,7 @@ function binding(el,value){
 			}
 			if(!inCanvas) return;
 
-			if(type=='transformstart' && prevType=='drag')
+			if(type.match(/transform/) && prevType=='drag')
 				drawTrigger('release');
 			
 			var dx = pos.x - start.x,
