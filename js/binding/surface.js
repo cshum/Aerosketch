@@ -33,6 +33,7 @@ function binding(el,value){
 				dragging = false;
 				transforming = false;
 			}
+			//clear transform/drag when drag/transform
 			if((dragging && type.match(/transform/))
 			|| (transforming && type.match(/drag/)))
 				drawTrigger('release');
@@ -47,7 +48,9 @@ function binding(el,value){
 			}
 			if(!inCanvas) return;
 
-			var len = (e.originalEvent.touches || []).length;
+			var len = (e.originalEvent.touches || [167]).length;
+			if(len>1 && dragging) return;
+			if(len>2 && transforming) return;
 
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
