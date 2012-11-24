@@ -26,6 +26,8 @@ function binding(el,value){
 			};
 		},
 		trigger = function(type,e){
+		//bug to fix:
+		// drag - > 3 touches -> 2 touch
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
 
@@ -60,8 +62,7 @@ function binding(el,value){
 
 			if(type=='drag')
 				evt.angle = e.angle;
-			if(type=='transform' && 
-			_.isNumber(e.scale) && _.isNumber(e.rotation))
+			if(type=='transform')
 				_(evt).extend({
 					scale:e.scale,
 					rotation:e.rotation
