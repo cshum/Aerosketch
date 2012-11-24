@@ -81,7 +81,6 @@ define([
 					debounce(false);
 				},250);
 			return function(type,e){
-				if(type=='touch') console.log(ko.dataFor(e.target));
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = _(controls()).find(function(t){
 						return ('check' in t)
