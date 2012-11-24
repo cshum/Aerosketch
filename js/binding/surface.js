@@ -36,8 +36,10 @@ function binding(el,value){
 			}
 			if(!inCanvas) return;
 
-			if(type.match(/drag/) && (e.touches || [e]).length > 1)
+			if(type.match(/drag/) && (e.touches || [e]).length > 1){
+				drawTrigger('release');
 				return;
+			}
 
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
