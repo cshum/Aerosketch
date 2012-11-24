@@ -36,8 +36,9 @@ function binding(el,value){
 			}
 			if(!inCanvas) return;
 
-			if(type.match(/drag/) && 
-			(e.originalEvent.touches || []).length > 1){
+			var len = (e.originalEvent.touches || []).length;
+			if((type.match(/drag/) && len > 1)
+			|| (type.match(/transform/) && len > 2)){
 				drawTrigger('release');
 				return;
 			}
