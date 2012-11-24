@@ -76,11 +76,14 @@ define([
 
 		debounce = ko.observable(false),
 		trigger = (function(){
-			var active, 
+			var active, prevType,
 				timeout = _.debounce(function(){
 					debounce(false);
 				},250);
 			return function(type,e){
+				if(type=='transformstart' && prevType=='drag'
+				&& active && _.isFunction(active[type]))
+					active.release();
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = _(controls()).find(function(t){
 						return ('check' in t)
@@ -99,6 +102,7 @@ define([
 					active[type](e);
 				else if(baseControl() && _.isFunction(baseControl()[type]))
 					baseControl()[type](e);
+				prevType = type;
 			};
 		})();
 
