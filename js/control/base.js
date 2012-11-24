@@ -18,6 +18,7 @@ define(['draw'],function(Draw){
 		pos = Draw.position();
 	}
 	function transform(e){
+		if(!e.scale>0.0001 || !e.scale<1000) return;
 		//todo
 		var dx = e.distanceX,
 			dy = e.distanceY,
