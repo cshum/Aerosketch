@@ -1,7 +1,8 @@
-define(['draw'],function(Draw){
+define(['knockout','draw'],function(ko,Draw){
 	function tap(e){
-		if(e.target._shape)
-			Draw.select(e.target);
+		var vm = ko.dataFor(e.target);
+		if(vm && vm._shape)
+			Draw.select(vm);
 	}
 	function wheel(e){
 		var pos = Draw.position(),
