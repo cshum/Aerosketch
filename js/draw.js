@@ -35,7 +35,15 @@ define([
 		},
 
 		position = ko.observable({x:0,y:0}),
-		zoom = ko.observable(1),
+		zoom = function(){
+			var zoom = ko.observable(1);
+			return ko.computed({
+				read:zoom,
+				write:function(val){
+					if(val>0.0001 && val<10000) zoom(val);
+				}
+			});
+		}(),
 		background = ko.observable('white'),
 		transform = ko.computed(function(){
 			var p = position(),
