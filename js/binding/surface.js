@@ -4,7 +4,7 @@ define([
 
 function binding(el,value){
 	var drawTrigger = value(),
-		inCanvas, target, pos, start, prevType,
+		inCanvas, target, pos, start, mode,
 		position = function(e){
 			var pos = e.touches || [e];
 			if(!pos[0] || !pos[0].clientX) 
@@ -26,6 +26,18 @@ function binding(el,value){
 			};
 		},
 		trigger = function(type,e){
+			if(mode && type.match(/drag|transform/) 
+			&& !type.indexOf(mode)==-1)
+				type='release';
+			switch(type){
+				case 'dragstart': mode='drag'; break;
+				case 'transformstart': mode='transform'; break;
+				case 'release': 
+					drawTrigger('release');
+					mode = null; 
+					return;
+				break;
+			}
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
 
@@ -35,13 +47,6 @@ function binding(el,value){
 				inCanvas = $(el).find(target).length>0;
 			}
 			if(!inCanvas) return;
-
-			var len = (e.originalEvent.touches || []).length;
-			if((type.match(/drag/) && len > 1)
-			|| (type.match(/transform/) && len > 2)){
-				drawTrigger('release');
-				return;
-			}
 
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
@@ -70,7 +75,6 @@ function binding(el,value){
 					e.originalEvent.wheelDelta/3500 ||
 					-e.originalEvent.detail/50
 				);
-			prevType = type;
 			drawTrigger(type,evt);
 		};
 
