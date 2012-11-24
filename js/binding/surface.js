@@ -26,14 +26,10 @@ function binding(el,value){
 			};
 		},
 		trigger = function(type,e){
-			if(type=='release'){
-				drawTrigger('release');
-				return;
-			}
 			if(type.match(/drag/)) dragging = true;
 			if(type=='release') dragging = false;
 			if(dragging && type.match(/transform/))
-				trigger('release');
+				drawTrigger('release');
 
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
