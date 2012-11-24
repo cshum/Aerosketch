@@ -25,9 +25,6 @@ function canvasBinding(el,value){
 				y: sum.y/len - $(el).offset().top
 			};
 		},
-		no = function(e){
-			return (e.touches || [e]).length;
-		},
 		trigger = function(type,e){
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
@@ -38,6 +35,9 @@ function canvasBinding(el,value){
 				inCanvas = $(el).find(target).length>0;
 			}
 			if(!inCanvas) return;
+
+			if(type.match(/drag/) && (e.touches || [e]).length > 2)
+				return;
 			
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
@@ -46,7 +46,6 @@ function canvasBinding(el,value){
 					metaKey:e.originalEvent.metaKey,
 					shiftKey:e.originalEvent.shiftKey,
 					button:e.originalEvent.button,
-					no:no(e.originalEvent),
 
 					start: start, position:pos,
 					distanceX:dx, 
