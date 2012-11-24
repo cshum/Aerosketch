@@ -58,7 +58,8 @@ function binding(el,value){
 
 			if(type=='drag')
 				evt.angle = e.angle;
-			if(type=='transform')
+			if(type=='transform' && 
+			_.isNumber(e.scale) && _.isNumber(e.rotation))
 				_(evt).extend({
 					scale:e.scale,
 					rotation:e.rotation
