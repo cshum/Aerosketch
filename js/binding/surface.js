@@ -4,8 +4,7 @@ define([
 
 function binding(el,value){
 	var drawTrigger = value(),
-		inCanvas, target, pos, start,
-		transforming,
+		inCanvas, target, pos, start, prevType,
 		position = function(e){
 			var pos = e.touches || [e];
 			if(!pos[0] || !pos[0].clientX) 
@@ -37,15 +36,8 @@ function binding(el,value){
 			}
 			if(!inCanvas) return;
 
-			if(type.match(/drag/) && (e.touches || [e]).length > 2)
-				return;
-
-			if(type=='transformstart')
-				transforming = true;
-			if(type=='release')
-				transforming = false;
-			if(transforming && type.match(/drag/))
-				return;
+			if(type=='transformstart' && prevType=='drag')
+				drawTrigger('release');
 			
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
@@ -73,6 +65,7 @@ function binding(el,value){
 					e.originalEvent.wheelDelta/3500 ||
 					-e.originalEvent.detail/50
 				);
+			prevType = type;
 			drawTrigger(type,evt);
 		};
 
