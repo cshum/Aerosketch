@@ -5,6 +5,7 @@ define([
 function binding(el,value){
 	var drawTrigger = value(),
 		inCanvas, target, pos, start,
+		transforming,
 		position = function(e){
 			var pos = e.touches || [e];
 			if(!pos[0] || !pos[0].clientX) 
@@ -38,11 +39,18 @@ function binding(el,value){
 
 			if(type.match(/drag/) && (e.touches || [e]).length > 2)
 				return;
+
+			if(type=='transformstart')
+				transforming = true;
+			if(type=='release')
+				transforming = false;
+			if(transforming && type.match(/drag/))
+				return;
 			
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
 				evt = {
-					target:ko.dataFor(target),
+					target:target,
 					metaKey:e.originalEvent.metaKey,
 					shiftKey:e.originalEvent.shiftKey,
 					button:e.originalEvent.button,

@@ -60,10 +60,6 @@ define(['shape/path','draw'],function(Path,Draw){
 			curr = null;
 			touched = false;
 			dragged = false;
-		},
-		select = function(e){
-			if(e.target._shape)
-				Draw.selection([e.target]);
 		};
 
 	return {
@@ -74,7 +70,5 @@ define(['shape/path','draw'],function(Path,Draw){
 		drag:drag,
 		release:release,
 		close:release,
-
-		tap:select
 	};
 });

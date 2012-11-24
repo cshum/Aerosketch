@@ -83,7 +83,8 @@ define([
 			return function(type,e){
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = _(controls()).find(function(t){
-						return ('check' in t) && t.check(e.target);
+						return ('check' in t)
+							&& t.check(ko.dataFor(e.target));
 					}) || tool();
 					debounce(true);
 				} 

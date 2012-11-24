@@ -62,10 +62,6 @@ define([
 				Draw.selection(selected);
 			}
 			end();
-		},
-		tap = function(e){
-			if(e.target._shape)
-				Draw.select(e.target);
 		};
 	return {
 		name:'Rectangle',
@@ -85,8 +81,6 @@ define([
 		dragstart:start,
 		drag:drag,
 		release:finish,
-		close:end,
-
-		tap:tap
+		close:end
 	};
 });

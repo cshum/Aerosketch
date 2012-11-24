@@ -28,7 +28,7 @@ define([
 		control2 = ko.observable(),
 
 		touch = function(e){
-			focus = e.target;
+			focus = ko.dataFor(e.target);
 			touching = true;
 			moved = false;
 
