@@ -81,19 +81,20 @@ define([
 					debounce(false);
 				},250);
 			return function(type,e){
+				function check(t){
+					return ('check' in t)
+						&& t.check(ko.dataFor(e.target));
+				}
+
 				if(type.match(/touch|wheel/) && !debounce()){
-					active = _(controls()).find(function(t){
-						return ('check' in t)
-							&& t.check(ko.dataFor(e.target));
-					}) || tool();
+					active = check(tool()) ? tool() :
+					(_(controls()).find(check) || tool() );
 					debounce(true);
 				} 
-				if(type.match(/^touch|release$/)){
+				if(type.match(/^release$/)){
 					debounce(false);
 				}else if(type=='wheel')
 					timeout();
-				else if(type.match(/start/))
-					debounce(true);
 
 				if(active && _.isFunction(active[type]))
 					active[type](e);
