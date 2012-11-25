@@ -95,6 +95,8 @@ define([
 					debounce(false);
 				}else if(type=='wheel')
 					timeout();
+				else if(type.match(/start/))
+					debounce(true);
 
 				if(active && _.isFunction(active[type]))
 					active[type](e);
