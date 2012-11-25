@@ -30,6 +30,11 @@ function binding(el,value){
 			};
 		},
 		trigger = function(type,e){
+			//clear transform/drag when drag/transform
+			if((dragging && type.match(/transform/))
+			|| (transforming && type.match(/drag/)))
+				trigger('release');
+
 			if(type.match(/drag/)) dragging = true;
 			if(type.match(/transform/)) transforming = true;
 			if(type=='release'){
@@ -38,11 +43,6 @@ function binding(el,value){
 				drawTrigger('release');
 				return;
 			}
-			//clear transform/drag when drag/transform
-			if((dragging && type.match(/transform/))
-			|| (transforming && type.match(/drag/)))
-				trigger('release');
-
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
 
