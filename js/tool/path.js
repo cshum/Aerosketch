@@ -23,58 +23,57 @@ define([
 		}),
 
 		begin = ko.observable(),
+		/*
+		center: ko.computed(_(Draw.toView).bind(null,center,'_center')),
+	   */
 		center = ko.observable(),
 		control1 = ko.observable(),
 		control2 = ko.observable(),
 		check = function(vm){
+			focus = vm;
+			touching = true;
 			return vm._selector;
 		},
-
-		touch = function(e){
-			focus = ko.dataFor(e.target);
-			touching = true;
-		},
 		start = function(e){
-			if(focus == begin()) 
-				center(Draw.toView(curr.getFirstPoint()));
-			else if(focus != center()) 
-				center(e.start);
+			if(focus._begin) 
+				center(curr.getFirstPoint());
+			else if(!focus._center) 
+				center(Draw.fromView(e.start));
 
 			if(!curr){
 				c1 = null;
 				if(focus._selector){
 					curr = focus.shape;
-					center(Draw.toView(curr.getLastPoint()));
+					center(curr.getLastPoint());
 				}else{
 					curr = new Path(Draw.options);
-					curr.moveTo(Draw.fromView(center()));
+					curr.moveTo(center());
 					Draw.add(curr);
 				}
-				begin(Draw.toView(curr.getFirstPoint()));
+				begin(curr.getFirstPoint());
 			}
 		},
 		drag = function(e){
 			if(curr){
+				var p = Draw.fromView(e.position),
+					c = center();
 				if(c1){
-					var p = Draw.fromView(e.position),
-						c = Draw.fromView(center());
 					c2 = { x: 2*c.x-p.x, y: 2*c.y-p.y };
 					curr.back();
 					curr.curveTo(c1,c2,c);
 					control2(c2);
 				}
-				control1(e.position);
+				control1(p);
 			}
 		},
 		tap = function(e){
 			start(e);
 			if(curr){
 				if(c1){
-					var c = Draw.fromView(center());
 					curr.back();
-					curr.curveTo(c1,c,c);
+					curr.curveTo(c1,center(),center());
 				}
-				control1(e.position);
+				control1(Draw.fromView(e.position));
 				control2(null);
 			}
 		},
@@ -82,16 +81,16 @@ define([
 			touching = false;
 			Draw.deselect();
 			if(curr){
-				if(focus == center()){
+				if(focus._center){
 					//remove exceeded line
 					curr.back();
 					end();
-				}else if(focus == begin()){
+				}else if(focus._begin){
 					curr.close();
 					end();
 				}else{
-					curr.lineTo(Draw.fromView(center()));
-					c1 = Draw.fromView(control1());
+					curr.lineTo(center());
+					c1 = control1();
 				}
 			}
 		},
@@ -124,13 +123,18 @@ define([
 		_path: true,
 
 		check:check,
-		center: center,
-		begin: begin,
-		control1: control1,
-		control2: control2,
+
+		center: ko.computed(_(Draw.toView).bind(
+			null,center,'_center')),
+		begin: ko.computed(_(Draw.toView).bind(
+			null,begin,'_begin')),
+		control1: ko.computed(_(Draw.toView).bind(
+			null,control1,'_control1')),
+		control2: ko.computed(_(Draw.toView).bind(
+			null,control2,'_control2')),
+
 		selectors: selectors,
 
-		touch:touch,
 		dragstart:start,
 		drag:drag,
 		tap:tap,
