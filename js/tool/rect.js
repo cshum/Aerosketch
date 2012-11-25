@@ -2,8 +2,6 @@ define(['knockout','shape/rect','draw','text!view/ratio.html'
 ],function(ko,Rect,Draw,toolbarView){
 	var curr, lock = ko.observable(false);
 	function start(e){
-		if(curr) finish();
-
 		var start = Draw.fromView(e.start);
 		curr = new Rect(Draw.options);
 		curr.x(start.x);
@@ -27,7 +25,7 @@ define(['knockout','shape/rect','draw','text!view/ratio.html'
 			curr.height(Math.abs(dy));
 		}
 	}
-	function finish(){
+	function release(){
 		if(curr){
 		}
 		curr = null;
@@ -39,8 +37,8 @@ define(['knockout','shape/rect','draw','text!view/ratio.html'
 
 		dragstart:start,
 		drag:drag,
-		release:finish,
-		close:finish,
+		release:release,
+		off:release,
 
 		lock:lock,
 		toggleLock: function(){

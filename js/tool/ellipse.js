@@ -4,7 +4,6 @@ define([
 ],function(ko,Ellipse,Circle,Draw,toolbarView){
 	var curr, lock = ko.observable(false);
 	function start(e){
-		if(curr) finish();
 		var start = Draw.fromView(e.start);
 		curr = new (lock() ? Circle:Ellipse)(Draw.options);
 		curr.cx(start.x);
@@ -27,7 +26,7 @@ define([
 			curr.cy(start.y + hy);
 		}
 	}
-	function finish(){
+	function release(){
 		if(curr){
 		}
 		curr = null;
@@ -39,8 +38,8 @@ define([
 
 		dragstart:start,
 		drag:drag,
-		release:finish,
-		close:finish,
+		release:release,
+		off:release,
 
 		lock:lock,
 		toggleLock: function(){

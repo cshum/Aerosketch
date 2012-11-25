@@ -29,7 +29,6 @@ define(['shape/path','draw'],function(Path,Draw){
 		},
 
 		start = function(e){
-			if(curr) release();
 			curr = new Path(Draw.options);
 
 			if(curr.stroke()=='none')
@@ -70,6 +69,6 @@ define(['shape/path','draw'],function(Path,Draw){
 		drag:drag,
 		tap:tap,
 		release:release,
-		close:release,
+		off:release
 	};
 });
