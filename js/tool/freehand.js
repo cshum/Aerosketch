@@ -53,8 +53,14 @@ define(['shape/path','draw'],function(Path,Draw){
 				points.push(pos);
 			}
 		},
+		hold = function(e){
+			dragged = true;
+			var pos = Draw.fromView(e.position);
+			start(e);
+			curr.lineTo(pos);
+		},
 		release = function(){
-			if(dragged){
+			if(curr){
 				curr.path(catmullRom(points));
 			}
 			curr = null;
@@ -68,6 +74,7 @@ define(['shape/path','draw'],function(Path,Draw){
 
 		dragstart:start,
 		drag:drag,
+		hold:hold,
 		release:release,
 		close:release,
 	};

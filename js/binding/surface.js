@@ -6,6 +6,9 @@ function binding(el,value){
 	var drawTrigger = value(),
 		inCanvas, target, pos, start, 
 		dragging, transforming,
+		offset = _.throttle(function(){
+			return $(el).offset();
+		},500),
 		position = function(e){
 			var pos = e.touches || [e];
 			if(!pos[0] || !pos[0].clientX) 
@@ -22,8 +25,8 @@ function binding(el,value){
 				len = pos.length;
 
 			return {
-				x: sum.x/len - $(el).offset().left,
-				y: sum.y/len - $(el).offset().top
+				x: sum.x/len - offset().left,
+				y: sum.y/len - offset().top
 			};
 		},
 		trigger = function(type,e){
@@ -74,10 +77,10 @@ function binding(el,value){
 					rotation:e.rotation
 				});
 			if(type=='wheel')
-				evt.delta = (
+				evt.delta = Math.max(-0.2,Math.min(0.2,
 					e.originalEvent.wheelDelta/3500 ||
 					-e.originalEvent.detail/50
-				);
+				));
 			drawTrigger(type,evt);
 		};
 
@@ -89,6 +92,7 @@ function binding(el,value){
 		rotation_treshold:0
 	})).extend({
 		ontap:_(trigger).bind(null,'tap'),
+		onhold:_(trigger).bind(null,'hold'),
 		ondoubletap:_(trigger).bind(null,'doubletap'),
 		ondragstart:_(trigger).bind(null,'dragstart'),
 		ondrag:_(trigger).bind(null,'drag'),

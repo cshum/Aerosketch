@@ -1,5 +1,5 @@
 define(['knockout','draw'],function(ko,Draw){
-	function tap(e){
+	function select(e){
 		var vm = ko.dataFor(e.target);
 		if(vm && vm._shape)
 			Draw.select(vm);
@@ -32,7 +32,8 @@ define(['knockout','draw'],function(ko,Draw){
 		Draw.zoom(zoom*e.scale);
 	}
 	return {
-		tap:tap,
+		tap:select,
+		hold:select,
 		wheel:wheel,
 		transformstart:transformstart,
 		transform:transform
