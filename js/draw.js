@@ -88,7 +88,7 @@ define([
 
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = check(tool()) ? tool() :
-					(_(controls()).find(check) || tool() );
+					_(controls()).find(check) || tool();
 					debounce(true);
 				} 
 				if(type.match(/^release$/)){
