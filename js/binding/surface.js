@@ -86,7 +86,7 @@ function binding(el,value){
 
 
 	_(new Hammer(document.body,{
-		drag_min_distance:10,
+		drag_min_distance:5,
 		prevent_default:true,
 		scale_treshold:0,
 		rotation_treshold:0

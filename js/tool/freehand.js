@@ -1,5 +1,5 @@
 define(['shape/path','draw'],function(Path,Draw){
-	var points, curr, dragged,
+	var points, curr, 
 		catmullRom = function( ps ) {
 			var path = [ 
 				['M',[ps[0].x, ps[0].y] ]
@@ -12,14 +12,10 @@ define(['shape/path','draw'],function(Path,Draw){
 				];
 				// Catmull-Rom 2 Cubic Bezier
 				path.push(['C',
-					[
-						(-p[0].x + 6*p[1].x + p[2].x) / 6, 
-						(-p[0].y + 6*p[1].y + p[2].y) / 6
-					],
-					[
-						(p[1].x + 6*p[2].x - p[3].x) / 6,  
-						(p[1].y + 6*p[2].y - p[3].y) / 6 
-					],
+					[(-p[0].x + 6*p[1].x + p[2].x) / 6, 
+					 (-p[0].y + 6*p[1].y + p[2].y) / 6 ],
+					[(p[1].x + 6*p[2].x - p[3].x) / 6,  
+					 (p[1].y + 6*p[2].y - p[3].y) / 6 ],
 					[ p[2].x, p[2].y ]
 				]);
 			}
@@ -35,6 +31,7 @@ define(['shape/path','draw'],function(Path,Draw){
 		start = function(e){
 			if(curr) release();
 			curr = new Path(Draw.options);
+
 			if(curr.stroke()=='none')
 				curr.stroke('black');
 			curr.fill('none');
@@ -48,24 +45,21 @@ define(['shape/path','draw'],function(Path,Draw){
 		drag = function(e){
 			var pos = Draw.fromView(e.position);
 			if(distance(_.last(points),pos) > 5/Draw.zoom()){
-				dragged = true;
 				curr.lineTo(pos);
 				points.push(pos);
 			}
 		},
-		hold = function(e){
-			dragged = true;
-			var pos = Draw.fromView(e.position);
+
+		tap = function(e){
 			start(e);
-			curr.lineTo(pos);
+			points.push(Draw.fromView(e.position));
 		},
+
 		release = function(){
 			if(curr){
 				curr.path(catmullRom(points));
 			}
 			curr = null;
-			touched = false;
-			dragged = false;
 		};
 
 	return {
@@ -74,7 +68,7 @@ define(['shape/path','draw'],function(Path,Draw){
 
 		dragstart:start,
 		drag:drag,
-		hold:hold,
+		tap:tap,
 		release:release,
 		close:release,
 	};

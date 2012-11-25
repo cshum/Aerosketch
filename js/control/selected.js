@@ -1,9 +1,8 @@
 define(['knockout','underscore','transform','draw',
 'text!view/selected.svg'],
 function(ko,_,Transform,Draw,view){
-	var angle, trans,
 
-		selectedBBox = function(shape){
+	var selectedBBox = function(shape){
 			if(Draw.debounce()) return {
 				style:'display:none;'
 			};
@@ -11,7 +10,7 @@ function(ko,_,Transform,Draw,view){
 				r = shape.rotate(),
 				w = shape.stroke()!='none' ? 
 					shape.strokeWidth()*Draw.zoom():0,
-				o = Draw.toView(b,'_selected');
+				o = Draw.toView(b);
 			o.transform = 'rotate('+r+' '
 				+(o.x+o.width/2)+','+(o.y+o.height/2)+')';
 			o.style = null;
@@ -26,9 +25,9 @@ function(ko,_,Transform,Draw,view){
 			return selected;
 		},
 
+		angle, changed,
 		start = function(e){
 			Transform.on(Draw.selection());
-			trans = true;
 			angle = null;
 		},
 
@@ -45,6 +44,7 @@ function(ko,_,Transform,Draw,view){
 					x:e.distanceX/Draw.zoom(),
 					y:e.distanceY/Draw.zoom()
 				}});
+			changed = Draw.selection();
 		},
 
 		transform = function(e){
@@ -57,20 +57,25 @@ function(ko,_,Transform,Draw,view){
 					y:e.distanceY/Draw.zoom()
 				}
 			});
+			changed = Draw.selection();
 		},
 
-		finish = function(e){
-			if(trans){
-			}
-			trans = false;
-		},
 		wheel = function(e){
 			Transform.on(Draw.selection());
 			Transform.set({
 				origin:Draw.fromView(e.position),
 				scale:1+e.delta
 			});
+			changed = Draw.selection();
 		};
+
+	Draw.debounce.subscribe(function(debounce){
+		if(!debounce && changed){
+			console.log('boom');
+			Draw.commit(changed);
+			changed = null;
+		}
+	});
 
 	return {
 		check:check,
@@ -78,7 +83,6 @@ function(ko,_,Transform,Draw,view){
 		transformstart:start,
 		drag:drag,
 		transform:transform,
-		release:finish,
 		wheel:wheel,
 
 		view:view,
