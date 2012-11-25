@@ -77,6 +77,7 @@ define([
 				control2(null);
 			}
 		},
+
 		release = function(){
 			touching = false;
 			Draw.deselect();
@@ -105,7 +106,7 @@ define([
 
 		end = function(){
 			if(curr){
-				Draw.selection([curr]);
+				Draw.select(curr);
 			}
 			curr = null;
 			c1 = null;
