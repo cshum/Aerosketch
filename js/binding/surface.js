@@ -35,11 +35,13 @@ function binding(el,value){
 			if(type=='release'){
 				dragging = false;
 				transforming = false;
+				drawTrigger('release');
+				return;
 			}
 			//clear transform/drag when drag/transform
 			if((dragging && type.match(/transform/))
 			|| (transforming && type.match(/drag/)))
-				drawTrigger('release');
+				trigger('release');
 
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
