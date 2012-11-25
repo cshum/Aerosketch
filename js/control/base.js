@@ -19,7 +19,6 @@ define(['knockout','draw'],function(ko,Draw){
 		pos = Draw.position();
 	}
 	function transform(e){
-		if(!(e.scale>0.001 && e.scale<100)) return;
 		//todo
 		var dx = e.distanceX,
 			dy = e.distanceY,

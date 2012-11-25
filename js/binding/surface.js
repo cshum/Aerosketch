@@ -73,11 +73,13 @@ function binding(el,value){
 
 			if(type=='drag')
 				evt.angle = e.angle;
-			if(type=='transform')
+			if(type=='transform'){
+				if(!(e.scale>0.001 && e.scale<100)) return;
 				_(evt).extend({
 					scale:e.scale,
 					rotation:e.rotation
 				});
+			}
 			if(type=='wheel')
 				evt.delta = Math.max(-0.2,Math.min(0.2,
 					e.originalEvent.wheelDelta/3500 ||
