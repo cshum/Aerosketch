@@ -85,10 +85,10 @@ define([
 				if(focus._center){
 					//remove exceeded line
 					curr.back();
-					end();
+					finish(true);
 				}else if(focus._begin){
 					curr.close();
-					end();
+					finish(true);
 				}else{
 					curr.lineTo(center());
 					c1 = control1();
@@ -104,9 +104,12 @@ define([
 			}
 		},
 
-		end = function(){
-			if(curr){
+		finish = function(ok){
+			if(ok){
 				Draw.select(curr);
+			}else if(curr){
+				Draw.deselect();
+				curr.visible(false);
 			}
 			curr = null;
 			c1 = null;
@@ -141,6 +144,8 @@ define([
 		tap:tap,
 		hold:tap,
 		release:release,
-		move:move
+		move:move,
+
+		off: finish
 	};
 });
