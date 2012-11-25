@@ -141,8 +141,6 @@ define([
 		tap:tap,
 		hold:tap,
 		release:release,
-		move:move,
-
-		close:end
+		move:move
 	};
 });

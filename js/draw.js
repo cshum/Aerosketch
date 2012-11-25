@@ -65,7 +65,16 @@ define([
 		}),
 		baseControl = ko.observable(),
 
-		tool = ko.observable(),
+		tool = function(){
+			var tool = ko.observable();
+			return ko.computed({
+				read:tool, write: function(val){
+					if(tool() && tool().off) tool().off();
+					tool(val);
+					if(tool() && tool().on) tool().on();
+				}
+			});
+		}(),
 		tools = ko.observableArray(),
 		toolTemplate = svgTemplate(tool,function(tool){
 			return (tool && tool.view) ? tool.view:'';
