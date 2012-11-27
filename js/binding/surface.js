@@ -51,7 +51,7 @@ function binding(el,value){
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
-			if(!inCanvas) return;
+			if(type!='wheel' && !inCanvas) return;
 
 			var len = (e.originalEvent.touches || [167]).length;
 			if(len>1 && dragging) return;
