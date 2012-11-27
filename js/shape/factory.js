@@ -34,6 +34,10 @@ define(['knockout','underscore'],function(ko,_){
 			});
 		}
 
+		function getOptions(){
+			return ko.toJS(_(this).pick(optionKeys));
+		}
+
 		function clone(){
 			return new Shape(this);
 		}
@@ -59,8 +63,7 @@ define(['knockout','underscore'],function(ko,_){
 
 			var rotate = ko.observable(0);
 			self.rotate = ko.computed({
-				read:rotate, 
-				write: function(value){
+				read:rotate, write: function(value){
 					while(value < 0) value+=360;
 					rotate(value % 360);
 				}
@@ -86,6 +89,7 @@ define(['knockout','underscore'],function(ko,_){
 			setOptions.call(self, options || {});
 
 			self.setOptions = _(setOptions).bind(self);
+			self.getOptions = _(getOptions).bind(self);
 			self.clone = _(clone).bind(self);
 
 

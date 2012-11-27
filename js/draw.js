@@ -60,7 +60,9 @@ define([
 		},
 
 		controls = ko.observableArray(),
-		controlsTemplate = svgTemplate(controls,function(control){
+		controlsTemplate = svgTemplate(ko.computed(function(){
+			return controls.slice(0).reverse();
+		}),function(control){
 			return (control && control.view) ? control.view:'';
 		}),
 		baseControl = ko.observable(),
