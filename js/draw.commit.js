@@ -16,15 +16,15 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		},
 		undo = function(){
 			if(undos.length==0) return;
-			var action = undos.pop();
-			commit(action);
-			redos.push(inverse(action));
+			var actions = undos.pop();
+			commit(actions);
+			redos.push(_(actions).map(inverse));
 		},
 		redo = function(){
 			if(redos.length==0) return;
-			var action = redos.pop();
-			commit(action);
-			undos.push(inverse(action));
+			var actions = redos.pop();
+			commit(actions);
+			undos.push(_(actions).map(inverse));
 		}
 
 	_(Draw).extend({
