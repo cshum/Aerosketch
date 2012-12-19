@@ -20,10 +20,11 @@ define(['knockout','shape/factory'],function(ko,Shape){
 	return Shape('ellipse',function(){
 		this.cx = ko.observable(0);
 		this.cy = ko.observable(0);
-		this.rx = ko.observable();
-		this.ry = ko.observable();
+		this.rx = ko.observable(0);
+		this.ry = ko.observable(0);
 		this.bbox = ko.computed(bbox,this);
 	},{ 
-		attr:['cx','cy','rx','ry'] 
+		attr:['cx','cy','rx','ry'],
+		options:['cx','cy','rx','ry']
 	});
 });

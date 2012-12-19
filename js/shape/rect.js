@@ -25,6 +25,7 @@ define(['knockout','shape/factory'],function(ko,Shape){
 		this.ry = ko.observable();
 		this.bbox = ko.computed(bbox,this);
 	},{
-		attr:['x','y','width','height','rx','ry']
+		attr:['x','y','width','height','rx','ry'],
+		options:['x','y','width','height','rx','ry']
 	});
 });

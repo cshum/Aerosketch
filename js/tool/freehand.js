@@ -1,4 +1,4 @@
-define(['shape/path','draw'],function(Path,Draw){
+define(['shape/path','draw','record/shape'],function(Path,Draw,Record){
 	var points, curr, 
 		catmullRom = function( ps ) {
 			var path = [ 
@@ -57,6 +57,7 @@ define(['shape/path','draw'],function(Path,Draw){
 		release = function(){
 			if(curr){
 				curr.path(catmullRom(points));
+				Draw.commit(new Record(curr));
 			}
 			curr = null;
 		};

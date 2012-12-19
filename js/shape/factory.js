@@ -1,100 +1,93 @@
-define(['knockout','underscore'],function(ko,_){
-	function isKO (val){
-		return ko.isObservable(val) || ko.isComputed(val);
-	};
-	function transform(){
-		if(this.rotate() != 0){
-			var bbox = this.bbox();
-			return 'rotate('+this.rotate()+' '+
-				(bbox.x+bbox.width/2)+','+(bbox.y+bbox.height/2)+')';
-		}
-	}
+define(['knockout','underscore','hash'
+],function(ko,_,Hash){
+	return function(type, func, config){
+		var attrKeys = [
+				'fill','stroke','strokeWidth','strokeLinecap',
+				'transform'
+			].concat(config.attr),
 
-	function Factory(type, func, opt){
-		var attrKeys = _(opt.attr || opt.options).clone();
-		var optionKeys = _(opt.options || opt.attr).clone();
+			optionsKeys = [
+				'fill','stroke','strokeWidth','strokeLinecap',
+				'scaleX','scaleY','rotate','visible'
+			].concat(config.options),
+			
+			setOptions = function(options){
+				var self = this;
+				_(ko.toJS(options || {}))
+					.each(function(val,key){
+						if(key in self.options) 
+							self[key](val);
+					});
+			},
+			getOptions = function(){
+				return ko.toJS(this.options);
+			},
+			clone = function(){
+				return new Shape(this);
+			},
+			isKO = function(val){
+				return ko.isObservable(val) || ko.isComputed(val);
+			},
+			transform = function(){
+				if(this.rotate() != 0){
+					var bbox = this.bbox();
+					return 'rotate('+this.rotate()+' '+
+						(bbox.x+bbox.width/2)+','
+						+(bbox.y+bbox.height/2)+')';
+				}
+			},
+			Shape = function(options, hash){
+				var self = this;
 
-		if(!opt.noFill){
-			attrKeys.push('fill');
-			optionKeys.push('fill');
-		}
-		if(!opt.noStroke){
-			attrKeys.push('stroke','strokeWidth','strokeLinecap');
-			optionKeys.push('stroke','strokeWidth','strokeLinecap');
-		}
-
-		attrKeys.push('transform');
-		optionKeys.push('scaleX','scaleY','rotate','visible');
-
-		function setOptions(options){
-			var self = this;
-			options = ko.toJS(options || {});
-			_(optionKeys).each(function(key){
-				if(key in options) self[key](options[key]);
-			});
-		}
-
-		function getOptions(){
-			return ko.toJS(_(this).pick(optionKeys));
-		}
-
-		function clone(){
-			return new Shape(this);
-		}
-
-		function Shape(options){
-			var self = this;
-
-			if(_.isFunction(func)) 
 				func.call(self);
 
-			if(!opt.noFill){
 				self.fill = ko.observable();
-			}
-			if(!opt.noStroke){
 				self.stroke = ko.observable();
 				self.strokeWidth = ko.observable();
 				self.strokeLinecap = ko.observable();
-			}
+				self.scaleX = ko.observable(1);
+				self.scaleY = ko.observable(1);
 
-			//transform stuffs
-			self.scaleX = ko.observable(1);
-			self.scaleY = ko.observable(1);
+				var rotate = ko.observable(0);
+				self.rotate = ko.computed({
+					read:rotate, write: function(value){
+						while(value < 0) value+=360;
+						rotate(value % 360);
+					}
+				});
+				self.transform = ko.computed(transform,self);
+				self.visible = ko.observable(true);
 
-			var rotate = ko.observable(0);
-			self.rotate = ko.computed({
-				read:rotate, write: function(value){
-					while(value < 0) value+=360;
-					rotate(value % 360);
+
+				self._shape = true;
+
+				self.getType = function(){
+					return type;
 				}
-			});
 
-			self.transform = ko.computed(transform,self);
-			self.visible = ko.observable(true);
+				//Hash stuffs
+				if(!hash) hash = Hash.generate();
+				self.getHash = function(){
+					return hash;
+				}
 
-			self._shape = true;
+				//set up attr
+				self.attr = {};
+				_(attrKeys).each(function(key){
+					self.attr[_(key).dasherize()] = self[key];
+				});
+				self.options = {};
+				_(optionsKeys).each(function(key){
+					self.options[key] = self[key];
+				});
 
-			self.getType = function(){
-				return type;
-			}
-
-			//set up attr
-			self.attr = _(attrKeys)
-				.chain()
-				.map(function(key){
-					return [_(key).dasherize(),self[key]];
-				})
-				.object().value();
-
-			setOptions.call(self, options || {});
-
-			self.setOptions = _(setOptions).bind(self);
-			self.getOptions = _(getOptions).bind(self);
-			self.clone = _(clone).bind(self);
-
-
-		}
+				setOptions.call(self, options || {});
+			};
+		_(Shape.prototype).extend({
+			setOptions:setOptions,
+			getOptions:getOptions,
+			clone:clone
+		});
 		return Shape;
 	}
-	return Factory;
 });

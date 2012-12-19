@@ -1,7 +1,7 @@
 define([
 	'knockout','shape/ellipse','shape/circle',
-	'draw','text!view/ratio.html'
-],function(ko,Ellipse,Circle,Draw,toolbarView){
+	'draw','text!view/ratio.html','record/shape'
+],function(ko,Ellipse,Circle,Draw,toolbarView,Record){
 	var curr, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);
@@ -28,6 +28,7 @@ define([
 	}
 	function release(){
 		if(curr){
+			Draw.commit(new Record(curr));
 		}
 		curr = null;
 	}

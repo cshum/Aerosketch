@@ -1,5 +1,5 @@
-define(['knockout','shape/rect','draw','text!view/ratio.html'
-],function(ko,Rect,Draw,toolbarView){
+define(['knockout','shape/rect','draw','text!view/ratio.html','record/shape'
+],function(ko,Rect,Draw,toolbarView,Record){
 	var curr, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);
@@ -27,6 +27,7 @@ define(['knockout','shape/rect','draw','text!view/ratio.html'
 	}
 	function release(){
 		if(curr){
+			Draw.commit(new Record(curr));
 		}
 		curr = null;
 	}

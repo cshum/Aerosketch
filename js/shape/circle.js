@@ -22,6 +22,7 @@ define(['knockout','underscore','shape/factory'],function(ko,_,Shape){
 		this.r = ko.observable(0);
 		this.bbox = ko.computed(bbox,this);
 	},{ 
-		attr:['cx','cy','r'] 
+		attr:['cx','cy','r'],
+		options:['cx','cy','r'] 
 	});
 });
