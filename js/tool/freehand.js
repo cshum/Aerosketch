@@ -56,7 +56,7 @@ define(['shape/path','draw'],function(Path,Draw){
 
 		release = function(){
 			if(curr){
-				curr.path(catmullRom(points));
+				//curr.path(catmullRom(points)); disable for now
 			}
 			curr = null;
 		};

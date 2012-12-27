@@ -106,8 +106,8 @@ function binding(el,value){
 	});
 
 	$(document.body)
-		.on('touchstart mousedown',_(trigger).bind(null,'touch'))
-		.on('touchmove mousemove',_(trigger).bind(null,'move'));
+		.on('touchstart mousedown MSPointerDown',_(trigger).bind(null,'touch'))
+		.on('touchmove mousemove MSPointerMove',_(trigger).bind(null,'move'));
 	$(el)
 		.on('mousewheel DOMMouseScroll',
 			_(trigger).chain().bind(null,'wheel').throttle(20).value());
