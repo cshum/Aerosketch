@@ -1,7 +1,7 @@
 define([
 	'knockout','shape/path','draw',
-	'text!view/path.svg',
-],function(ko,Path,Draw,view){
+	'text!view/path.svg','record/shape'
+],function(ko,Path,Draw,view,Record){
 	var curr, c1, c2, touching, focus,
 
 		selectors = ko.computed(function(){
@@ -90,6 +90,7 @@ define([
 					curr.close();
 					finish(true);
 				}else{
+					if(c1) Draw.commit(new Record(curr));
 					curr.lineTo(center());
 					c1 = control1();
 				}
@@ -107,6 +108,7 @@ define([
 		finish = function(ok){
 			if(ok){
 				Draw.select(curr);
+				Draw.commit(new Record(curr));
 			}else if(curr){
 				Draw.deselect();
 				curr.visible(false);

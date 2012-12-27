@@ -1,6 +1,6 @@
-define(['knockout','underscore','transform','draw',
+define(['knockout','underscore','transform','draw','record/shape',
 'text!view/selected.svg'],
-function(ko,_,Transform,Draw,view){
+function(ko,_,Transform,Draw,Record,view){
 
 	var selectedBBox = function(shape){
 			if(Draw.debounce()) return {
@@ -71,8 +71,9 @@ function(ko,_,Transform,Draw,view){
 
 	Draw.debounce.subscribe(function(debounce){
 		if(!debounce && changed){
-			console.log('boom');
-			Draw.commit(changed);
+			Draw.commit.apply(null,_(changed).map(function(shape){
+				return new Record(shape);
+			}));
 			changed = null;
 		}
 	});

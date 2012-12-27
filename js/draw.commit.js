@@ -1,35 +1,36 @@
 define(['knockout','underscore','draw'],function(ko,_,Draw){
 	var map = {},
-		sessionId = 167,
 		undos = [], 
 		redos = [],
 
-		track = function(){
-			_(arguments).map(function(obj){
-				return obj.getOptions();
-			});
+		save = function(records){
 		},
 		commit = function(){
-		},
-
-		inverse = function(action){
+			var records = _(arguments).toArray();
+			undos.push(records);
+			redos = [];
+			save(records);
 		},
 		undo = function(){
 			if(undos.length==0) return;
-			var action = undos.pop();
-			commit(action);
-			redos.push(inverse(action));
+			var records = _(undos.pop()).map(function(record){
+				return record.revert();
+			});
+			redos.push(records);
+			save(records);
 		},
 		redo = function(){
 			if(redos.length==0) return;
-			var action = redos.pop();
-			commit(action);
-			undos.push(inverse(action));
-		}
+			var records = _(redos.pop()).map(function(record){
+				return record.revert();
+			});
+			undos.push(records);
+			save(records);
+		};
 
 	_(Draw).extend({
-		track:track,
 		commit:commit,
+		save:save,
 		undo:undo,
 		redo:redo
 	});

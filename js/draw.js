@@ -87,16 +87,12 @@ define([
 
 		debounce = ko.observable(false),
 		trigger = (function(){
-			var active, prevType,
-				timeout = _.debounce(function(){
-					debounce(false);
-				},250);
+			var active, timeout;
 			return function(type,e){
 				function check(t){
 					return ('check' in t)
-						&& t.check(ko.dataFor(e.target));
+					&& t.check(ko.dataFor(e.target));
 				}
-
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = check(tool()) ? tool() :
 					_(controls()).find(check) || tool();
@@ -104,16 +100,18 @@ define([
 				} 
 				if(type.match(/^release$/)){
 					debounce(false);
-				}else if(type=='wheel')
-					timeout();
-				else if(type.match(/start/))
+				}else if(type=='wheel'){
+					clearTimeout(timeout);
+					timeout = setTimeout(debounce,250,false);
+				}else if(type.match(/start/)){
 					debounce(true);
+					clearTimeout(timeout);
+				}
 
 				if(active && _.isFunction(active[type]))
 					active[type](e);
 				else if(baseControl() && _.isFunction(baseControl()[type]))
 					baseControl()[type](e);
-				prevType = type;
 			};
 		})();
 
