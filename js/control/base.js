@@ -36,5 +36,5 @@ define(['knockout','draw'],function(ko,Draw){
 		wheel:wheel,
 		transformstart:transformstart,
 		transform:transform
-	}
+	};
 });

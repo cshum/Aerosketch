@@ -6,7 +6,7 @@ define(['knockout','shape/factory'],function(ko,Shape){
 				y: this.y(),
 				width: this.width(),
 				height: this.height()
-			}
+			};
 		},
 		write: function(e){
 			_(e).defaults(this.bbox());
@@ -14,7 +14,7 @@ define(['knockout','shape/factory'],function(ko,Shape){
 			this.y(e.y);
 			this.width(e.width);
 			this.height(e.height);
-		},
+		}
 	};
 	return Shape('rect',function(){
 		this.x = ko.observable();

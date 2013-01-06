@@ -13,8 +13,8 @@ define(['knockout','underscore','hash'
 			
 			setOptions = function(options){
 				var self = this;
-				_(ko.toJS(options || {}))
-					.each(function(val,key){
+				_(ko.toJS(options || {})).
+					each(function(val,key){
 						if(key in self.options) 
 							self[key](val);
 					});
@@ -29,11 +29,11 @@ define(['knockout','underscore','hash'
 				return ko.isObservable(val) || ko.isComputed(val);
 			},
 			transform = function(){
-				if(this.rotate() != 0){
+				if(this.rotate() !== 0){
 					var bbox = this.bbox();
 					return 'rotate('+this.rotate()+' '+
-						(bbox.x+bbox.width/2)+','
-						+(bbox.y+bbox.height/2)+')';
+						(bbox.x+bbox.width/2)+','+
+						(bbox.y+bbox.height/2)+')';
 				}
 			},
 			Shape = function(options, hash){
@@ -63,13 +63,13 @@ define(['knockout','underscore','hash'
 
 				self.getType = function(){
 					return type;
-				}
+				};
 
 				//Hash stuffs
 				if(!hash) hash = Hash.generate();
 				self.getHash = function(){
 					return hash;
-				}
+				};
 
 				//set up attr
 				self.attr = {};
@@ -89,5 +89,5 @@ define(['knockout','underscore','hash'
 			clone:clone
 		});
 		return Shape;
-	}
+	};
 });

@@ -12,13 +12,13 @@ define(['knockout','underscore','shape/factory'],function(ko,_,Shape){
 						]);
 					return getPointAt(newPs,t);
 				}
-			}
+			};
 			return function(ps,count){
 				var curve = [];
 				for(var i=0;i<=count;i++)
 					curve.push(getPointAt(ps,i/count));
 				return curve;
-			}
+			};
 		})(),
 		minMax = function(prev,point){
 			var x = point[0], 
@@ -55,11 +55,10 @@ define(['knockout','underscore','shape/factory'],function(ko,_,Shape){
 						break;
 						case 'C': case 'Q':
 						_(approxBezier( 
-							[bound.point].concat(_(path[i]).tail()),20
-						)).each(function(p){
-							bound = minMax(bound,p);
-						});
+							[bound.point].concat(_(path[i]).tail()), 20)).
+							each(function(p){ bound = minMax(bound,p); });
 						break;
+						default:break;
 					}
 					bounds.push(bound);
 				}
@@ -79,8 +78,8 @@ define(['knockout','underscore','shape/factory'],function(ko,_,Shape){
 				if(this.path().length > 0){
 					var b = this.bbox();
 					_(e).defaults(b);
-					var rx = b.width!=0 ? e.width/b.width:1,
-						ry = b.height!=0 ? e.height/b.height:1,
+					var rx = b.width !== 0 ? e.width/b.width:1,
+						ry = b.height !== 0 ? e.height/b.height:1,
 						dx = e.x - b.x,
 						dy = e.y - b.y;
 					_(this.path()).each(function(curr){
@@ -105,8 +104,7 @@ define(['knockout','underscore','shape/factory'],function(ko,_,Shape){
 			this.path.push(
 				_(arguments).map(function(val){
 					return _.isObject(val) ? [val.x, val.y] : val; 
-				})
-			);
+				}));
 		},
 		back = function(){
 			if(this.path().length > 0){

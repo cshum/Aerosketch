@@ -9,7 +9,9 @@ define([
 				case 'ellipse': return Ellipse; break;
 				case 'circle': return Circle; break;
 				case 'path': return Path; break;
+				default:break;
 			}
+			return null;
 		},
 		revert = function(){
 			return new Record(this);
@@ -41,8 +43,7 @@ define([
 					Draw.add(shapeMap[hash]);
 				}
 			}
-			optionsMap[hash] = optionsMap[hash]
-				|| {visible:false};
+			optionsMap[hash] = optionsMap[hash] || {visible:false};
 			original = {};
 			_(options).each(function(val,key){
 				if(optionsMap[hash][key] != val){

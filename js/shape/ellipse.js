@@ -6,7 +6,7 @@ define(['knockout','shape/factory'],function(ko,Shape){
 				y: this.cy() - this.ry(),
 				width: this.rx() * 2,
 				height: this.ry() * 2
-			}
+			};
 		},
 		write: function(e){
 			_(e).defaults(this.bbox());

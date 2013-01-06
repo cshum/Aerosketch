@@ -1,7 +1,6 @@
 define(['knockout','underscore','transform','draw','record/shape',
 'text!view/selected.svg'],
 function(ko,_,Transform,Draw,Record,view){
-
 	var selectedBBox = function(shape){
 			if(Draw.debounce()) return {
 				style:'display:none;'
@@ -11,8 +10,7 @@ function(ko,_,Transform,Draw,Record,view){
 				w = shape.stroke()!='none' ? 
 					shape.strokeWidth()*Draw.zoom():0,
 				o = Draw.toView(b);
-			o.transform = 'rotate('+r+' '
-				+(o.x+o.width/2)+','+(o.y+o.height/2)+')';
+			o.transform = 'rotate('+r+' '+(o.x+o.width/2)+','+(o.y+o.height/2)+')';
 			o.style = null;
 			o.x -= w/2 + 1; o.y -= w/2 + 1;
 			o.width += w + 2; o.height += w + 2;

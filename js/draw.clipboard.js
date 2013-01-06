@@ -8,11 +8,9 @@ define(['knockout','underscore','transform','draw'
 			Draw.selection.removeAll();
 		},
 		copy = function(){
-			clipboard(
-				_(Draw.selection()).map(function(shape){
-					return shape.clone();
-				})
-			);
+			clipboard( _(Draw.selection()).map(function(shape){
+				return shape.clone();
+			}) );
 		},
 		cut = function(){
 			copy();
@@ -23,7 +21,7 @@ define(['knockout','underscore','transform','draw'
 
 			var shapes = _(clipboard()).map(function(shape){
 				return shape.clone();
-			})
+			});
 
 			Transform.on(shapes);
 			Transform.set({translate:{

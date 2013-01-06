@@ -12,7 +12,7 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 			save(records);
 		},
 		undo = function(){
-			if(undos.length==0) return;
+			if(undos.length===0) return;
 			var records = _(undos.pop()).map(function(record){
 				return record.revert();
 			});
@@ -20,7 +20,7 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 			save(records);
 		},
 		redo = function(){
-			if(redos.length==0) return;
+			if(redos.length===0) return;
 			var records = _(redos.pop()).map(function(record){
 				return record.revert();
 			});

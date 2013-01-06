@@ -9,9 +9,7 @@ define([
 				return Math.min(30,strokeWidth()*Draw.zoom()/2);
 			},
 			write: function(size){
-				strokeWidth(
-					Math.min(30,Math.max(0.5,size))/Draw.zoom()*2
-				);
+				strokeWidth(Math.min(30,Math.max(0.5,size))/Draw.zoom()*2);
 			}
 		}),
 
@@ -27,18 +25,14 @@ define([
 		move = function(e){
 			if(init)
 				strokeSize(
-					init + (Draw.fromView(e.position).y - y)
-					 * Draw.zoom()/20
-				);
+					init + (Draw.fromView(e.position).y - y)* Draw.zoom()/20);
 		},
 		release = function(e){
 			init = null;
 		},
 		
 		wheel = function(e){
-			strokeSize(
-				strokeSize() + e.delta*10
-			);
+			strokeSize(strokeSize() + e.delta*10);
 		};
 	return {
 		_strokeSize:true,
@@ -52,5 +46,5 @@ define([
 		release:release,
 
 		wheel:wheel
-	}
+	};
 });

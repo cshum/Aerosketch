@@ -41,7 +41,7 @@ define([
 			var p = position(),
 				z = Math.round(zoom()*1000)/1000;
 			return 'translate('+(-p.x)+' '+(-p.y)+') scale('+z+')';
-		}).extend({throttle: 1});
+		}).extend({throttle: 1}),
 
 
 		selection = ko.observableArray([]),
@@ -90,8 +90,8 @@ define([
 			var active, timeout;
 			return function(type,e){
 				function check(t){
-					return ('check' in t)
-					&& t.check(ko.dataFor(e.target));
+					return ('check' in t) && 
+						t.check(ko.dataFor(e.target));
 				}
 				if(type.match(/touch|wheel/) && !debounce()){
 					active = check(tool()) ? tool() :
@@ -167,5 +167,5 @@ define([
 		controls:controls,
 		baseControl:baseControl,
 		controlsTemplate:controlsTemplate
-	}
+	};
 });

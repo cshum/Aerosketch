@@ -52,10 +52,8 @@ define([
 				_(Draw.layers()).each(function(layer){
 					if(layer.visible() && !layer.locked())
 						_(layer.shapes()).each(function(shape){
-							if(
-								_(points(shape)).all(test) &&
-								shape.visible()
-							)
+							if( _( points(shape) ).all(test) &&
+							shape.visible() )
 								selected.push(shape);
 						});
 				});
