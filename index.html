@@ -62,28 +62,23 @@
 <div class="toolbar-top-left btn-toolbar" 
 data-bind="template:toolbarTemplate"></div>
 <div class="toolbar-top-right btn-toolbar">
-	<!-- ko if:selection().length > 0 -->
+	<!-- ko if:selection().length > 0 || clipboard().length > 0  -->
 	<div class="btn-group">
-		<button class="btn" data-bind="hammer:{tap:deselect}">
-			<i class="icon-remove-circle icon-large"></i>
+		<button class="btn dropdown-toggle" data-toggle="dropdown" 
+			data-bind="dropdown:true">
+			<i class="icon-edit icon-large"></i>
 		</button>
+		<ul class="dropdown-menu pull-right" >
+			<!-- ko if:selection().length > 0 -->
+			<li><a data-bind="hammer:{tap:cut}" href="#">Cut</a></li>
+			<li><a data-bind="hammer:{tap:copy}" href="#">Copy</a></li>
+			<!-- /ko -->
+			<!-- ko if:clipboard().length > 0 -->
+			<li><a data-bind="hammer:{tap:paste}" href="#">Paste</a></li>
+			<!-- /ko -->
+		</ul>
 	</div>
 	<!-- /ko -->
-	<div class="btn-group">
-		<!-- ko if:selection().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:cut}">
-			<i class="icon-cut icon-large"></i>
-		</button>
-		<button class="btn" data-bind="hammer:{tap:copy}">
-			<i class="icon-copy icon-large"></i>
-		</button>
-		<!-- /ko -->
-		<!-- ko if:clipboard().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:paste}">
-			<i class="icon-paste icon-large"></i>
-		</button>
-		<!-- /ko -->
-	</div>
 	<div class="btn-group">
 		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
 			<i class="icon-undo icon-large"></i>
