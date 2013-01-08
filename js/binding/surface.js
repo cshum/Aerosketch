@@ -86,7 +86,6 @@ function binding(el,value){
 					-e.originalEvent.detail/50
 				));
 			drawTrigger(type,evt);
-			return false;
 		};
 
 

@@ -85,10 +85,10 @@ data-bind="template:toolbarTemplate"></div>
 		<!-- /ko -->
 	</div>
 	<div class="btn-group">
-		<button class="btn" data-bind="hammer:{tap:undo}">
+		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
 			<i class="icon-undo icon-large"></i>
 		</button>
-		<button class="btn" data-bind="hammer:{tap:redo}">
+		<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{tap_double:false}">
 			<i class="icon-repeat icon-large"></i>
 		</button>
 	</div>
