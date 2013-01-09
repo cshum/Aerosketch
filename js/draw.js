@@ -12,8 +12,8 @@ define([
 			var p = position(), z = zoom(), o = {};
 			if('x' in b) o.x = (b.x*z - p.x); 
 			if('y' in b) o.y = (b.y*z - p.y);
-			if('width' in b) o.width = Math.round(b.width*z);
-			if('height' in b) o.height = Math.round(b.height*z);
+			if('width' in b) o.width = b.width*z;
+			if('height' in b) o.height = b.height*z;
 			if(label) o[label] = true;
 			return o;
 		},
@@ -39,7 +39,7 @@ define([
 		background = ko.observable('white'),
 		transform = ko.computed(function(){
 			var p = position(),
-				z = Math.round(zoom()*1000)/1000;
+				z = zoom();
 			return 'translate('+(-p.x)+' '+(-p.y)+') scale('+z+')';
 		}).extend({throttle: 1}),
 
