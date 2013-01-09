@@ -1,5 +1,23 @@
 Fixes:
-- Fix Mobile Selection
+- Separate Mouse/Touch
+- Fix Palette touchmove
 - Fix Color Palettes Width
 
 Features:
+✓ zooming
+✓ transform tool
+✓ SelectBound
+✓ Shape Factory
+✓ Path Shape
+✓ Path Tool
+✓ Edit after select
+✓ zoom & rotate
+✓ Freehand
+✓ Palette
+✓ Control Structure
+✓ Pointer Tool
+✓ Clipboard 
+✓ History
+✓ Commits
+- Zoom Bookmarks
+- Layers & locked

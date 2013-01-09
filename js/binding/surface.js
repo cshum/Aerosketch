@@ -90,7 +90,7 @@ function binding(el,value){
 
 
 	_(new Hammer(document.body,{
-		drag_min_distance:20,
+		drag_min_distance:10,
 		prevent_default:true,
 		scale_treshold:0,
 		rotation_treshold:0
@@ -106,9 +106,9 @@ function binding(el,value){
 	});
 
 	$(document.body)
-		.on('touchstart mousedown MSPointerDown',
+		.on('touchstart ',
 			_(trigger).bind(null,'touch'))
-		.on('touchmove mousemove MSPointerMove',
+		.on('touchmove ',
 			_(trigger).bind(null,'move'));
 	$(el)
 		.on('mousewheel DOMMouseScroll',
