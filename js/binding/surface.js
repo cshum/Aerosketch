@@ -5,7 +5,7 @@ define([
 function binding(el,value){
 	var drawTrigger = value(),
 		inCanvas, target, pos, start, 
-		dragging, transforming,
+		dragging, transforming, touching,
 		offset = _.throttle(function(){
 			return $(el).offset();
 		},500),
@@ -39,6 +39,7 @@ function binding(el,value){
 			if(type.match(/transform/)) transforming = true;
 			if(type=='release'){
 				dragging = false;
+				touching = false;
 				transforming = false;
 				drawTrigger('release');
 				return;
@@ -48,6 +49,8 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
+				if(touching) return; //ignore mousedown on touchstart
+				touching = true;
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
