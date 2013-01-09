@@ -1,5 +1,5 @@
 Fixes:
-- Mousedown/Touchstart Confict
+✓ Ghost events
 - Fix Palette touchmove
 - Fix Color Palettes Width
 
