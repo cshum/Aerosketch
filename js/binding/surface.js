@@ -48,7 +48,7 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
-				if(start.x==pos.x && start.y==pos.y) 
+				if(start && _.isEqual(start,pos)) 
 					return; //prevent ghost click
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
