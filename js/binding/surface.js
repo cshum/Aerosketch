@@ -5,7 +5,7 @@ define([
 function binding(el,value){
 	var drawTrigger = value(),
 		inCanvas, target, pos, start, 
-		dragging, transforming, timeout, delay,
+		dragging, transforming, 
 		offset = _.throttle(function(){
 			return $(el).offset();
 		},500),
@@ -39,6 +39,7 @@ function binding(el,value){
 			if(type.match(/transform/)) transforming = true;
 			if(type=='release'){
 				dragging = false;
+				touching = false;
 				transforming = false;
 				drawTrigger('release');
 				return;
@@ -48,11 +49,6 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
-				if(delay) return;
-				delay = true;
-				clearTimeout(timeout);
-				timeout = setTimeout(function(){ delay = false; },301);
-
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
@@ -111,7 +107,8 @@ function binding(el,value){
 	});
 
 	$(document.body)
-		.on('touchstart mousedown MSPointerDown',
+		//.on('touchstart mousedown MSPointerDown',
+		.on('touchstart',
 			_(trigger).bind(null,'touch'))
 		.on('touchmove mousemove MSPointerMove',
 			_(trigger).bind(null,'move'));
