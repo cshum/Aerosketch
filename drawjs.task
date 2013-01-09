@@ -1,5 +1,5 @@
 Fixes:
-✓ Mousedown/Touchstart Confict
+- Mousedown/Touchstart Confict
 - Fix Palette touchmove
 - Fix Color Palettes Width
 

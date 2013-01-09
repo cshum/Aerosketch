@@ -50,7 +50,9 @@ function binding(el,value){
 			if(type=='touch'){
 				if(delay) return;
 				delay = true;
-				setTimeout(function(){ delay = false; },301);
+				clearTimeout(timeout);
+				timeout = setTimeout(function(){ delay = false; },301);
+
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
