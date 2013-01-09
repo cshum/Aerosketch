@@ -39,7 +39,6 @@ function binding(el,value){
 			if(type.match(/transform/)) transforming = true;
 			if(type=='release'){
 				dragging = false;
-				touching = false;
 				transforming = false;
 				drawTrigger('release');
 				return;
@@ -87,6 +86,8 @@ function binding(el,value){
 					-e.originalEvent.detail/50
 				));
 			drawTrigger(type,evt);
+			e.stopPropagation();
+			e.preventDefault();
 		};
 
 
@@ -107,8 +108,7 @@ function binding(el,value){
 	});
 
 	$(document.body)
-		//.on('touchstart mousedown MSPointerDown',
-		.on('touchstart',
+		.on('touchstart mousedown MSPointerDown',
 			_(trigger).bind(null,'touch'))
 		.on('touchmove mousemove MSPointerMove',
 			_(trigger).bind(null,'move'));
