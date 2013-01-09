@@ -46,10 +46,11 @@ function binding(el,value){
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
 
-			pos = position(e.originalEvent) || pos;
+			var p = position(e.originalEvent) || pos;
+			if(type=='move' && _.isEqual(p,pos)) return;
+			pos = p;
 			if(type=='touch'){
-				if(start && _.isEqual(start,pos)) 
-					return; //prevent ghost click
+				if(_.isEqual(start,pos)) return; 
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
