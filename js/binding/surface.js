@@ -48,6 +48,8 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
+				if(start.x==pos.x && start.y==pos.y) 
+					return; //prevent ghost click
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
@@ -86,10 +88,6 @@ function binding(el,value){
 					-e.originalEvent.detail/50
 				));
 			drawTrigger(type,evt);
-			if ('preventDefault' in e) {
-				e.stopPropagation();
-				e.preventDefault();
-			}
 		};
 
 
