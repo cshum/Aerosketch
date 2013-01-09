@@ -49,8 +49,8 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
-				if(touching) return; //ignore mousedown on touchstart
-				touching = true;
+				//if(touching) return; //ignore mousedown on touchstart
+				//touching = true;
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
