@@ -86,8 +86,10 @@ function binding(el,value){
 					-e.originalEvent.detail/50
 				));
 			drawTrigger(type,evt);
-			e.stopPropagation();
-			e.preventDefault();
+			if ('preventDefault' in e) {
+				e.stopPropagation();
+				e.preventDefault();
+			}
 		};
 
 
