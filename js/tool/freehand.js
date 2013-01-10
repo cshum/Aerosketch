@@ -1,27 +1,8 @@
-define(['shape/path','draw','record/shape'],function(Path,Draw,Record){
+define([
+   'shape/path','draw','record/shape',
+   'util/catmullrom','util/polysimplify'
+],function(Path,Draw,Record,catmullRom,polySimplify){
 	var points, curr, 
-		catmullRom = function( ps ) {
-			var path = [ 
-				['M',[ps[0].x, ps[0].y] ]
-			];
-			for (var i=0, l=ps.length; i<l-1; i++) {
-				var p = [
-					ps[Math.max(i-1,0)], 
-					ps[i], ps[i+1], 
-					ps[Math.min(i+2,l-1)] 
-				];
-				// Catmull-Rom 2 Cubic Bezier
-				path.push(['C',
-					[(-p[0].x + 6*p[1].x + p[2].x) / 6, 
-					 (-p[0].y + 6*p[1].y + p[2].y) / 6 ],
-					[(p[1].x + 6*p[2].x - p[3].x) / 6,  
-					 (p[1].y + 6*p[2].y - p[3].y) / 6 ],
-					[ p[2].x, p[2].y ]
-				]);
-			}
-			return path;
-		},
-
 		distance = function(p1,p2){
 			var dx = p1.x - p2.x,
 				dy = p1.y - p2.y;
@@ -37,26 +18,25 @@ define(['shape/path','draw','record/shape'],function(Path,Draw,Record){
 
 			var start = Draw.fromView(e.start);
 			Draw.add(curr);
-			points = [start];
+			points = [[start.x, start.y]];
 			curr.moveTo(start);
 		},
 
 		drag = function(e){
 			var pos = Draw.fromView(e.position);
-			if(distance(_.last(points),pos) > 5/Draw.zoom()){
-				curr.lineTo(pos);
-				points.push(pos);
-			}
+			curr.lineTo(pos);
+			points.push([pos.x,pos.y]);
 		},
 
 		tap = function(e){
 			start(e);
-			points.push(Draw.fromView(e.position));
+			var pos = Draw.fromView(e.position);
+			points.push([pos.x,pos.y]);
 		},
 
 		release = function(){
 			if(curr){
-				curr.path(catmullRom(points));
+				curr.path(catmullRom(polySimplify(points,5)));
 				Draw.commit(new Record(curr));
 			}
 			curr = null;

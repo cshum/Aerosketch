@@ -1,4 +1,4 @@
-define(['knockout','draw'],function(ko,Draw){
+define(['knockout','draw','util/points'],function(ko,Draw,points){
 	function select(e){
 		var vm = ko.dataFor(e.target);
 		if(vm && vm._shape)

@@ -1,11 +1,14 @@
-Fixes:
+Todo:
 ✓ Ghost events
-- Selection Bound
-- Path tap bug
-- Path smoothing
-- Palette touchmove
-- Color Palettes Width
-- Color Palette History
+- Path 
+	- tap bug
+	- simpification
+- Git Submodules
+- Color Palettes 
+	- Width
+	- Commits
+- Selection hittest ignore
+	- Get surface dimension
 
 Features:
 ✓ zooming
