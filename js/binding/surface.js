@@ -46,9 +46,7 @@ function binding(el,value){
 			target = e.originalEvent.target ||
 				e.originalEvent.touches[0].target;
 
-			var p = position(e.originalEvent) || pos;
-			if(type=='move' && _.isEqual(p,pos)) return;
-			pos = p;
+			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
 				if(_.isEqual(start,pos)) return; 
 				start = pos;
