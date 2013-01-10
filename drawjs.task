@@ -1,7 +1,10 @@
 Fixes:
 ✓ Ghost events
-- Fix Palette touchmove
-- Fix Color Palettes Width
+- Selection Bound
+- Path tap bug
+- Path smoothing
+- Palette touchmove
+- Color Palettes Width
 
 Features:
 ✓ zooming

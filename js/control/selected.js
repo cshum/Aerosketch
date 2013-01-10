@@ -2,7 +2,7 @@ define(['knockout','underscore','transform','draw','record/shape',
 'text!view/selected.svg'],
 function(ko,_,Transform,Draw,Record,view){
 	var selectedBBox = function(shape){
-			if(Draw.debounce()) return {
+			if(Draw.debounce() || !shape.visible()) return {
 				style:'display:none;'
 			};
 			var b = shape.bbox(),
