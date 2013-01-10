@@ -93,12 +93,13 @@ function binding(el,value){
 	_(new Hammer(document.body,{
 		drag_min_distance:10,
 		prevent_default:true,
+		tap_double:false,
 		scale_treshold:0,
 		rotation_treshold:0
 	})).extend({
 		ontap:_(trigger).bind(null,'tap'),
 		onhold:_(trigger).bind(null,'hold'),
-		ondoubletap:_(trigger).bind(null,'doubletap'),
+		//ondoubletap:_(trigger).bind(null,'doubletap'),
 		ondragstart:_(trigger).bind(null,'dragstart'),
 		ondrag:_(trigger).bind(null,'drag'),
 		ontransformstart:_(trigger).bind(null,'transformstart'),
