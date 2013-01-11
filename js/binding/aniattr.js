@@ -41,12 +41,13 @@ define([
 	ko.bindingHandlers['aniattr'] = {
 		'init': function(element, valueAccessor){
 			ko.computed(function(){
-				_(valueAccessor()).each(function(val){
+				var value = valueAccessor();
+				_(value).each(function(val){
 					ko.utils.unwrapObservable(val);
 				});
 				if(!$(element).data('queue')){
 					$(element).data('queue',true);
-					requestAnimationFrame(_(update).bind(null,element,valueAccessor));
+					requestAnimationFrame(_(update).bind(null,element,value));
 				}
 			});
 		}
