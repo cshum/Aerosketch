@@ -35,19 +35,19 @@ define([
 			var s = Draw.fromView(e.start);
 			Draw.add(curr);
 			points = [[s.x, s.y]];
+			curr.moveTo(s);
 		},
 
 		drag = function(e){
 			var pos = Draw.fromView(e.position);
+			curr.lineTo(pos);
 			points.push([pos.x,pos.y]);
-			curr.path(smoothen(points));
 		},
 
 		tap = function(e){
 			start(e);
 			var pos = Draw.fromView(e.position);
 			points.push([pos.x,pos.y]);
-			curr.path(smoothen(points));
 		},
 
 		release = function(){
