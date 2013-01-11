@@ -4,16 +4,20 @@ define([
 	'util/catmullrom','util/polysimplify'
 ],function(_,Path,Draw,Record,catmullRom,polySimplify){
 	var points, curr, interval,
-		drawPoints = function(shape,points) {
-			if (points.length < 6) return;
-		   	shape.clear();
-			shape.moveTo(points[0][0], points[0][1]);
-			for (i = 1; i < points.length - 2; i++) {
-				var c = (points[i][0] + points[i + 1][0]) / 2,
-					d = (points[i][1] + points[i + 1][1]) / 2;
-				shape.qCurveTo(points[i][0], points[i][1], c, d);
+		smoothen = function(points) {
+			var ps = [];
+			ps.push(['M',points[0]]);
+			if (points.length < 3)
+				ps.push(['L',points[1]]);
+			else{
+				for (i = 1; i < points.length - 2; i++) {
+					var c = (points[i][0] + points[i + 1][0]) / 2,
+						d = (points[i][1] + points[i + 1][1]) / 2;
+					ps.push(['Q',points[i], [c, d]]);
+				}
+				ps.push(['Q',points[i], points[i + 1]]);
 			}
-			shape.qCurveTo(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1]);
+			return ps;
 		},
 		distance = function(p1,p2){
 			var dx = p1.x - p2.x,
@@ -31,25 +35,24 @@ define([
 			var s = Draw.fromView(e.start);
 			Draw.add(curr);
 			points = [[s.x, s.y]];
-			curr.moveTo(s);
-			interval = setInterval()
 		},
 
 		drag = function(e){
 			var pos = Draw.fromView(e.position);
-			curr.lineTo(pos);
 			points.push([pos.x,pos.y]);
+			curr.path(smoothen(points));
 		},
 
 		tap = function(e){
 			start(e);
 			var pos = Draw.fromView(e.position);
 			points.push([pos.x,pos.y]);
+			curr.path(smoothen(points));
 		},
 
 		release = function(){
 			if(curr){
-				drawPoints(curr,polySimplify(points,1/Draw.zoom()));
+				curr.path(smoothen(polySimplify(points,1/Draw.zoom())));
 				//curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
 				Draw.commit(new Record(curr));
 			}
