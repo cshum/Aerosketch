@@ -52,7 +52,8 @@ define([
 
 		release = function(){
 			if(curr){
-				curr.path(smoothen(polySimplify(points,1/Draw.zoom())));
+				curr.path(smoothen(polySimplify(points,0.3/Draw.zoom())));
+				console.log(points.length,polySimplify(points,0.3/Draw.zoom()).length );
 				//curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
 				Draw.commit(new Record(curr));
 			}
