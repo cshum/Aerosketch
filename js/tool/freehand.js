@@ -1,8 +1,8 @@
 define([
 	'underscore',
 	'shape/path','draw','record/shape',
-	'util/aniframe','util/polysimplify'
-],function(_,Path,Draw,Record,aniFrame,polySimplify){
+	'util/requestanimationframe','util/polysimplify'
+],function(_,Path,Draw,Record,requestAnimationFrame,polySimplify){
 	var points, curr, interval, point, cursor, following,
 		smoothen = function(points) {
 			var ps = [];
@@ -38,7 +38,7 @@ define([
 			point = s;
 			curr.moveTo(s);
 			following = true;
-			aniFrame(follow);
+			requestAnimationFrame(follow);
 		},
 
 		drag = function(e){
@@ -52,7 +52,7 @@ define([
 			};
 			if(curr) curr.lineTo(point);
 			points.push([point.x,point.y]);
-			if(following) aniFrame(follow);
+			if(following) requestAnimationFrame(follow);
 		},
 
 		release = function(){
