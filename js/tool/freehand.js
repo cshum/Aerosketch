@@ -4,6 +4,17 @@ define([
 	'util/catmullrom','util/polysimplify'
 ],function(_,Path,Draw,Record,catmullRom,polySimplify){
 	var points, curr, interval,
+		drawPoints = function(shape,points) {
+			if (points.length < 6) return;
+		   	shape.clear();
+			shape.moveTo(points[0][0], points[0][1]);
+			for (i = 1; i < points.length - 2; i++) {
+				var c = (points[i][0] + points[i + 1][0]) / 2,
+					d = (points[i][1] + points[i + 1][1]) / 2;
+				shape.qCurveTo(points[i][0], points[i][1], c, d);
+			}
+			shape.qCurveTo(points[i][0], points[i][1], points[i + 1][0], points[i + 1][1]);
+		},
 		distance = function(p1,p2){
 			var dx = p1.x - p2.x,
 				dy = p1.y - p2.y;
@@ -38,14 +49,8 @@ define([
 
 		release = function(){
 			if(curr){
-				/*
-				var ps = polySimplify(points,1);
-				console.log(points.length,ps.length);
-				curr.path(_(ps).map(function (p,i) {
-					return [(i==0 ? 'M':'L'),p];
-				}));
-				*/
-				curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
+				drawPoints(curr,polySimplify(points,1/Draw.zoom()));
+				//curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
 				Draw.commit(new Record(curr));
 			}
 			curr = null;
