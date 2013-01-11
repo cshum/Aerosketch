@@ -60,7 +60,6 @@ define([
 			if(curr){
 				curr.path(smoothen(polySimplify(points,0.3/Draw.zoom())));
 				//curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
-				console.log(points.length, polySimplify(points,0.3/Draw.zoom()).length);
 				Draw.commit(new Record(curr));
 			}
 			curr = null;
