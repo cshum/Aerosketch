@@ -1,9 +1,9 @@
 define([
 	'underscore',
 	'shape/path','draw','record/shape',
-	'util/catmullrom','util/polysimplify'
-],function(_,Path,Draw,Record,catmullRom,polySimplify){
-	var points, curr, interval, point, cursor,
+	'util/aniframe','util/polysimplify'
+],function(_,Path,Draw,Record,aniFrame,polySimplify){
+	var points, curr, interval, point, cursor, following,
 		smoothen = function(points) {
 			var ps = [];
 			ps.push(['M',points[0]]);
@@ -37,34 +37,30 @@ define([
 			points = [[s.x, s.y]];
 			point = s;
 			curr.moveTo(s);
-
-			interval = setInterval(follow,30);
+			following = true;
+			aniFrame(follow);
 		},
 
 		drag = function(e){
 			cursor = Draw.fromView(e.position);
 		},
-		follow = function(e){
-			var d = 1/10;
+		follow = function(){
+			var d = 1.5/10;
 			point = {
 				x: point.x*(1-d) + cursor.x*d,
 				y: point.y*(1-d) + cursor.y*d
 			};
-			curr.lineTo(point);
+			if(curr) curr.lineTo(point);
 			points.push([point.x,point.y]);
-		},
-
-		tap = function(e){
-			start(e);
-			var pos = Draw.fromView(e.position);
-			points.push([pos.x,pos.y]);
+			if(following) aniFrame(follow);
 		},
 
 		release = function(){
-			clearInterval(drag);
+			following = false;
 			if(curr){
 				curr.path(smoothen(polySimplify(points,0.3/Draw.zoom())));
 				//curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
+				console.log(points.length, polySimplify(points,0.3/Draw.zoom()).length);
 				Draw.commit(new Record(curr));
 			}
 			curr = null;
@@ -76,7 +72,6 @@ define([
 
 		dragstart:start,
 		drag:drag,
-		tap:tap,
 		release:release,
 		off:release
 	};
