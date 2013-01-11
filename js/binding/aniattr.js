@@ -2,9 +2,8 @@ define([
    'knockout','underscore','jquery',
    'util/requestAnimationFrame'
 ],function(ko,_,$,requestAnimationFrame){
-	var attrHtmlToJavascriptMap = {'class': 'className','for': 'htmlFor'},
-	update = function (element, valueAccessor, allBindingsAccessor) {
-		var value = ko.utils.unwrapObservable(valueAccessor()) || {};
+	var attrHtmlToJavascriptMap = {'class': 'className','for': 'htmlFor'};
+	function aniattr(element, value) {
 		for (var attrName in value) {
 			if (typeof attrName == "string") {
 				var attrValue = ko.utils.unwrapObservable(value[attrName]);
@@ -37,17 +36,17 @@ define([
 			}
 		}
 		$(element).data('queue',false);
-	};
+	}
 	ko.bindingHandlers['aniattr'] = {
 		'init': function(element, valueAccessor){
+			var value = valueAccessor(),
+				update = _(aniattr).bind(null,element,value);
+				console.log(aniattr);
 			ko.computed(function(){
-				var value = valueAccessor();
-				_(value).each(function(val){
-					ko.utils.unwrapObservable(val);
-				});
+				_(value).each(ko.utils.unwrapObservable);
 				if(!$(element).data('queue')){
 					$(element).data('queue',true);
-					requestAnimationFrame(_(update).bind(null,element,value));
+					requestAnimationFrame(update);
 				}
 			});
 		}
