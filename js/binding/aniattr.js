@@ -39,14 +39,14 @@ define([
 	}
 	ko.bindingHandlers['aniattr'] = {
 		'init': function(element, valueAccessor){
-			var value = valueAccessor(),
-				update = _(aniattr).bind(null,element,value);
-				console.log(aniattr);
+			var value = valueAccessor();
 			ko.computed(function(){
 				_(value).each(ko.utils.unwrapObservable);
 				if(!$(element).data('queue')){
 					$(element).data('queue',true);
-					requestAnimationFrame(update);
+					requestAnimationFrame(function(){
+						aniattr.call(null,element,value);
+					});
 				}
 			});
 		}
