@@ -45,7 +45,7 @@ define([
 			cursor = Draw.fromView(e.position);
 		},
 		follow = function(){
-			var d = 2/10;
+			var d = 2.5/10;
 			point = {
 				x: point.x*(1-d) + cursor.x*d,
 				y: point.y*(1-d) + cursor.y*d
