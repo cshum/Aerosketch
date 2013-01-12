@@ -45,7 +45,7 @@ define([
 			cursor = Draw.fromView(e.position);
 		},
 		follow = function(){
-			var d = 2.5/10;
+			var d = 3/10;
 			point = {
 				x: point.x*(1-d) + cursor.x*d,
 				y: point.y*(1-d) + cursor.y*d
@@ -58,8 +58,7 @@ define([
 		release = function(){
 			following = false;
 			if(curr){
-				curr.path(smoothen(polySimplify(points,0.3/Draw.zoom())));
-				//curr.path(catmullRom(polySimplify(points,1/Draw.zoom())));
+				curr.path(smoothen(polySimplify(points,0.05/Draw.zoom())));
 				Draw.commit(new Record(curr));
 			}
 			curr = null;
