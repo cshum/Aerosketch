@@ -35,7 +35,7 @@ define([
 			return vm._selector;
 		},
 		start = function(e){
-			if(focus._begin) 
+			if(focus._begin && curr) 
 				center(curr.getFirstPoint());
 			else if(!focus._center) 
 				center(Draw.fromView(e.start));

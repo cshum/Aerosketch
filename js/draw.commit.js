@@ -3,13 +3,13 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		undos = [], 
 		redos = [],
 
-		save = function(records){
+		push = function(records){
 		},
 		commit = function(){
 			var records = _(arguments).toArray();
 			undos.push(records);
 			redos = [];
-			save(records);
+			push(records);
 		},
 		undo = function(){
 			if(undos.length===0) return;
@@ -17,7 +17,7 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 				return record.revert();
 			});
 			redos.push(records);
-			save(records);
+			push(records);
 		},
 		redo = function(){
 			if(redos.length===0) return;
@@ -25,12 +25,12 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 				return record.revert();
 			});
 			undos.push(records);
-			save(records);
+			push(records);
 		};
 
 	_(Draw).extend({
 		commit:commit,
-		save:save,
+		push:push,
 		undo:undo,
 		redo:redo
 	});

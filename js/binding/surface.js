@@ -48,7 +48,9 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
-				if(_.isEqual(start,pos)) return; 
+				if(_.isEqual(start,pos) && 
+			   'ontouchstart' in document.documentElement) 
+					return; 
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
@@ -99,7 +101,6 @@ function binding(el,value){
 	})).extend({
 		ontap:_(trigger).bind(null,'tap'),
 		onhold:_(trigger).bind(null,'hold'),
-		//ondoubletap:_(trigger).bind(null,'doubletap'),
 		ondragstart:_(trigger).bind(null,'dragstart'),
 		ondrag:_(trigger).bind(null,'drag'),
 		ontransformstart:_(trigger).bind(null,'transformstart'),

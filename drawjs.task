@@ -1,12 +1,13 @@
 Todo:
 ✓ Ghost events
+- Freehand tap
 - Path 
 	- tap bug
-	- simpification
+	✓ simpification
 - Git Submodules
 - Color Palettes 
-	- Width
 	- Commits
+	- Width
 - Selection hittest ignore
 	- Get surface dimension
 
