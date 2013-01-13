@@ -4,7 +4,7 @@ define([
 
 function binding(el,value){
 	var drawTrigger = value(),
-		inCanvas, target, pos, start, 
+		inCanvas, target, pos, start, touchFlag,
 		dragging, transforming, 
 		offset = _.throttle(function(){
 			return $(el).offset();
@@ -29,7 +29,7 @@ function binding(el,value){
 				y: sum.y/len - offset().top
 			};
 		},
-		trigger = function(type,e){
+		trigger = function(type,isTouch,e){
 			//clear transform/drag when drag/transform
 			if((dragging && type.match(/transform/))
 			|| (transforming && type.match(/drag/)))
@@ -48,9 +48,8 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
-				if(_.isEqual(start,pos) && 
-			   'ontouchstart' in document.documentElement) 
-					return; 
+				if(_.isEqual(start,pos) && isTouch != touchFlag) return; 
+				touchFlag = isTouch;
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
 			}
@@ -99,23 +98,23 @@ function binding(el,value){
 		scale_treshold:0,
 		rotation_treshold:0
 	})).extend({
-		ontap:_(trigger).bind(null,'tap'),
-		onhold:_(trigger).bind(null,'hold'),
-		ondragstart:_(trigger).bind(null,'dragstart'),
-		ondrag:_(trigger).bind(null,'drag'),
-		ontransformstart:_(trigger).bind(null,'transformstart'),
-		ontransform:_(trigger).bind(null,'transform'),
-		onrelease:_(trigger).bind(null,'release')
+		ontap:_(trigger).bind(null,'tap',true),
+		onhold:_(trigger).bind(null,'hold',true),
+		ondragstart:_(trigger).bind(null,'dragstart',true),
+		ondrag:_(trigger).bind(null,'drag',true),
+		ontransformstart:_(trigger).bind(null,'transformstart',true),
+		ontransform:_(trigger).bind(null,'transform',true),
+		onrelease:_(trigger).bind(null,'release',true)
 	});
 
 	$(document.body)
-		.on('touchstart mousedown MSPointerDown',
-			_(trigger).bind(null,'touch'))
-		.on('touchmove mousemove MSPointerMove',
-			_(trigger).bind(null,'move'));
+		.on('mousedown',_(trigger).bind(null,'touch',false))
+		.on('mousemove',_(trigger).bind(null,'move',false))
+		.on('touchstart MSPointerDown',_(trigger).bind(null,'touch',true))
+		.on('touchmove MSPointerMove',_(trigger).bind(null,'move',true));
 	$(el)
 		.on('mousewheel DOMMouseScroll',
-			_(trigger).chain().bind(null,'wheel').throttle(20).value());
+			_(trigger).chain().bind(null,'wheel','mouse').throttle(20).value());
 };
 ko.bindingHandlers.surface = {
 	init:binding
