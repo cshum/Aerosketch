@@ -26,7 +26,6 @@ require.config({
 		'domready': 'lib/require/domready'
 	},
 	waitSeconds: 90,
-	baseUrl: 'js/',
 	urlArgs:(new Date()).getTime()
 });
 
