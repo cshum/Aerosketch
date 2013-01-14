@@ -56,11 +56,24 @@ define([
 			points.push([point.x,point.y]);
 			if(following) requestAnimationFrame(follow);
 		},
+		tap = function(e){
+			curr = new Path(Draw.options);
+			if(curr.stroke()=='none')
+				curr.stroke('black');
+			curr.fill('none');
+			var s = Draw.fromView(e.start);
+			curr.moveTo(s);
+			curr.lineTo(s);
+			Draw.add(curr);
+			points = null;
+		},
 
 		release = function(){
 			following = false;
 			if(curr){
-				curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
+				if(points)
+					curr.path(smoothen(polySimplify(
+						points,0.1/Draw.zoom())));
 				Draw.commit(new Record(curr));
 			}
 			curr = null;
@@ -73,6 +86,7 @@ define([
 		dragstart:start,
 		drag:drag,
 		release:release,
+		tap:tap,
 		off:release
 	};
 });
