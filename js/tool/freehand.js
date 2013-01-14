@@ -11,8 +11,10 @@ define([
 				ps.push(['L',points[1]]);
 			else{
 				for (i = 1; i < points.length - 2; i++) {
-					var c = (points[i][0] + points[i + 1][0]) / 2,
-						d = (points[i][1] + points[i + 1][1]) / 2;
+					var c = Draw.round((
+							points[i][0] + points[i + 1][0]) / 2),
+						d = Draw.round(
+							(points[i][1] + points[i + 1][1]) / 2);
 					ps.push(['Q',points[i], [c, d]]);
 				}
 				ps.push(['Q',points[i], points[i + 1]]);
@@ -47,8 +49,8 @@ define([
 		follow = function(){
 			var d = 3/10;
 			point = {
-				x: point.x*(1-d) + cursor.x*d,
-				y: point.y*(1-d) + cursor.y*d
+				x: Draw.round(point.x*(1-d) + cursor.x*d),
+				y: Draw.round(point.y*(1-d) + cursor.y*d)
 			};
 			if(curr) curr.lineTo(point);
 			points.push([point.x,point.y]);
@@ -58,8 +60,7 @@ define([
 		release = function(){
 			following = false;
 			if(curr){
-				curr.path(smoothen(polySimplify(points,0.05/Draw.zoom())));
-				//console.log(points.length, polySimplify(points,0.05/Draw.zoom()).length);
+				curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
 				Draw.commit(new Record(curr));
 			}
 			curr = null;

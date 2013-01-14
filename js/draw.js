@@ -6,6 +6,10 @@ define([
 	var layers = ko.observableArray([new Layer()]),
 		layer = ko.observable(),
 
+		round = function(num){
+			var pow = Math.ceil(Math.log(zoom()) / Math.LN10);
+			return parseFloat(num.toFixed(Math.max(1,pow)));
+		},
 		toView = function(b,label){
 			b = ko.utils.unwrapObservable(b); 
 			if(!b) return;
@@ -21,14 +25,13 @@ define([
 			b = ko.utils.unwrapObservable(b);
 			if(!b) return;
 			var p = position(), z = zoom(), o = {};
-			if('x' in b) o.x = (p.x + b.x)/z; 
-			if('y' in b) o.y = (p.y + b.y)/z;
-			if('width' in b) o.width = b.width/z;
-			if('height' in b) o.height = b.height/z;
+			if('x' in b) o.x = round((p.x + b.x)/z); 
+			if('y' in b) o.y = round((p.y + b.y)/z);
+			if('width' in b) o.width = round(b.width/z);
+			if('height' in b) o.height = round(b.height/z);
 			if(label) o[label] = true;
 			return o;
 		},
-
 		add = function(){
 			layer().shapes.push.apply(
 				layer().shapes,arguments);
@@ -141,6 +144,7 @@ define([
 		layers: layers,
 		layer: layer,
 
+		round:round,
 		fromView:fromView,
 		toView:toView,
 

@@ -1,9 +1,8 @@
 Todo:
-✓ Ghost events
 - Freehand tap
-- Path 
-	✓ tap bug
-	✓ simpification
+✓ Draw.round
+- rounded corner
+- Commit & Load
 - Git Submodules
 - Color Palettes 
 	- Commits
