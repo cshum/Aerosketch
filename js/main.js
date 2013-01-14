@@ -1,4 +1,4 @@
-var requirejs = {
+require.config({
 	shim: {
 		'underscore': {
 			exports: '_',
@@ -27,6 +27,20 @@ var requirejs = {
 	},
 	waitSeconds: 90,
 	baseUrl: 'js/',
-	urlArgs:new Date()
-};
+	urlArgs:(new Date()).getTime()
+});
 
+
+require([
+	'knockout',
+
+	'draw','draw.palette','draw.clipboard',
+	'draw.controls!base|strokesize,selected',
+	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
+
+	'binding/surface','binding/hammer',
+	'binding/dropdown','binding/palette'
+],function(ko,Draw){
+	ko.applyBindings(Draw,document.body);
+	window.Draw = Draw;
+});

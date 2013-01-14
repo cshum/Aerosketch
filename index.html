@@ -105,23 +105,7 @@ data-bind="template:toolbarTemplate"></div>
 		<button class="btn btn-primary">Done</button>
 	</div>
 </div>
-<script type="text/javascript" src="config.js"></script>
-<script type="text/javascript" src="js/lib/require/require.js"></script>
-<script type="text/javascript">
-require([
-	'knockout',
-
-	'draw','draw.palette','draw.clipboard',
-	'draw.controls!base|strokesize,selected',
-	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
-
-	'binding/surface','binding/hammer',
-	'binding/dropdown','binding/palette'
-],function(ko,Draw){
-	ko.applyBindings(Draw,document.body);
-	window.Draw = Draw;
-});
-</script>
+<script type="text/javascript" data-main="js/main" src="js/lib/require/require.js"></script>
 </body>
 </html>
 
