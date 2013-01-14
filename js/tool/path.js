@@ -32,6 +32,8 @@ define([
 		check = function(vm){
 			focus = vm;
 			touching = true;
+			if(focus._center)
+				curr.back(); //finish. remove exceeded line
 			return vm._selector;
 		},
 		start = function(e){
@@ -54,7 +56,7 @@ define([
 			}
 		},
 		drag = function(e){
-			if(curr){
+			if(curr && !focus._center){
 				var p = Draw.fromView(e.position),
 					c = center();
 				if(c1){
@@ -68,7 +70,7 @@ define([
 		},
 		tap = function(e){
 			start(e);
-			if(curr){
+			if(curr && !focus._center){
 				if(c1){
 					curr.back();
 					curr.curveTo(c1,center(),center());
@@ -83,8 +85,7 @@ define([
 			Draw.deselect();
 			if(curr){
 				if(focus._center){
-					//remove exceeded line
-					curr.back();
+					//curr.back(); //finish. remove exceeded line
 					finish(true);
 				}else if(focus._begin){
 					curr.close();

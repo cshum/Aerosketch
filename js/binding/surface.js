@@ -114,7 +114,7 @@ function binding(el,value){
 		.on('touchmove MSPointerMove',_(trigger).bind(null,'move',true));
 	$(el)
 		.on('mousewheel DOMMouseScroll',
-			_(trigger).chain().bind(null,'wheel','mouse').throttle(20).value());
+			_(trigger).chain().bind(null,'wheel',false).throttle(20).value());
 };
 ko.bindingHandlers.surface = {
 	init:binding
