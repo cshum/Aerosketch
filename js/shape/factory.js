@@ -8,7 +8,7 @@ define(['knockout','underscore','hash'
 
 			optionsKeys = [
 				'fill','stroke','strokeWidth','strokeLinecap',
-				'scaleX','scaleY','rotate','visible'
+				'scale','translate','rotate','visible'
 			].concat(config.options),
 			
 			setOptions = function(options){
@@ -29,12 +29,30 @@ define(['knockout','underscore','hash'
 				return ko.isObservable(val) || ko.isComputed(val);
 			},
 			transform = function(){
-				if(this.rotate() !== 0){
-					var bbox = this.bbox();
-					return 'rotate('+this.rotate()+' '+
-						(bbox.x+bbox.width/2)+','+
-						(bbox.y+bbox.height/2)+')';
+				var str = '', b = this.bbox();
+
+				if(this.scale()){
+					var x = b.x, y = b.y;
+					if(this.translate()){
+						x += this.translate().x;
+						y += this.translate().y;
+					}
+					str += 'translate('+ x +'  '+ y +') '+
+					'scale('+this.scale().x+' '+this.scale().y+') '+
+					'translate('+ (-x) +'  '+ (-y) +')';
 				}
+
+				if(this.translate())
+					str += 'translate('+this.translate().x+
+					'  '+this.translate().y+') ';
+
+
+				if(this.rotate() !== 0)
+					str +='rotate('+this.rotate()+' '+
+					(b.x+b.width/2)+','+
+					(b.y+b.height/2)+')';
+
+				return str!=='' ? str:null;
 			},
 			Shape = function(options, hash){
 				var self = this;
@@ -45,8 +63,8 @@ define(['knockout','underscore','hash'
 				self.stroke = ko.observable();
 				self.strokeWidth = ko.observable();
 				self.strokeLinecap = ko.observable();
-				self.scaleX = ko.observable(1);
-				self.scaleY = ko.observable(1);
+				self.translate = ko.observable(null);
+				self.scale = ko.observable(null);
 
 				var rotate = ko.observable(0);
 				self.rotate = ko.computed({
@@ -57,7 +75,6 @@ define(['knockout','underscore','hash'
 				});
 				self.transform = ko.computed(transform,self);
 				self.visible = ko.observable(true);
-
 
 				self._shape = true;
 

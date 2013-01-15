@@ -23,11 +23,12 @@ define(['knockout','underscore','transform','draw'
 				return shape.clone();
 			});
 
-			Transform.on(shapes);
-			Transform.set({translate:{
+			var transform = new Transform(shapes);
+			transform.set({translate:{
 				x:30/Draw.zoom(),
 				y:30/Draw.zoom()
 			}});
+			transform.done();
 
 			Draw.add.apply(null,shapes);
 			Draw.selection(shapes);

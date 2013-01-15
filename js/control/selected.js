@@ -23,9 +23,9 @@ function(ko,_,Transform,Draw,Record,view){
 			return selected;
 		},
 
-		angle, changed,
+		angle, changed, transform,
 		start = function(e){
-			Transform.on(Draw.selection());
+			transform = new Transform(Draw.selection());
 			angle = null;
 		},
 
@@ -33,12 +33,12 @@ function(ko,_,Transform,Draw,Record,view){
 			if(!angle) 
 				angle = e.angle;
 			if(e.shiftKey || e.button==2)
-				Transform.set({
+				transform.set({
 					origin:Draw.fromView(e.start),
 					rotate:e.angle - angle
 				});
 			else
-				Transform.set({translate:{
+				transform.set({translate:{
 					x:e.distanceX/Draw.zoom(),
 					y:e.distanceY/Draw.zoom()
 				}});
@@ -46,7 +46,7 @@ function(ko,_,Transform,Draw,Record,view){
 		},
 
 		transform = function(e){
-			Transform.set({
+			transform.set({
 				origin:Draw.fromView(e.position),
 				rotate:e.rotation,
 				scale:e.scale,
@@ -58,17 +58,23 @@ function(ko,_,Transform,Draw,Record,view){
 			changed = Draw.selection();
 		},
 
+		scale = 1,
 		wheel = function(e){
-			Transform.on(Draw.selection());
-			Transform.set({
+			if(!changed){
+				transform = new Transform(Draw.selection());
+				scale = 1;
+			}
+			scale *= 1 +e.delta;
+			transform.set({
 				origin:Draw.fromView(e.position),
-				scale:1+e.delta
+				scale:scale
 			});
 			changed = Draw.selection();
 		};
 
 	Draw.debounce.subscribe(function(debounce){
 		if(!debounce && changed){
+			transform.done();
 			Draw.commit.apply(null,_(changed).map(function(shape){
 				return new Record(shape);
 			}));

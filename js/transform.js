@@ -1,28 +1,25 @@
 define(['underscore'],function(_){
-	var shapes, properties;
-
-		on = function(s,o){
-			shapes = s;
-
-			properties = _(shapes).map(function(shape){
-				var rad = shape.rotate() * Math.PI/180;
-				return {
-					box: shape.bbox(),
-					rotate:shape.rotate(),
-					shape:shape
-				};
-			});
-
-		},
-
-		transform = function(e){
+	function Transform(s){
+		this.shapes = s;
+		this.result = null;
+		this.properties = _(this.shapes).map(function(shape){
+			var rad = shape.rotate() * Math.PI/180;
+			return {
+				box: shape.bbox(),
+				rotate:shape.rotate(),
+				shape:shape
+			};
+		});
+	}
+	_(Transform.prototype).extend({
+		set: function(e){
 			var sin,cos,rad;
 			if('rotate' in e){
 				rad = e.rotate * Math.PI/180;
 				sin = Math.sin(rad);
 				cos = Math.cos(rad);
 			}
-			_(properties).each(function(p){
+			this.result = _(this.properties).map(function(p){
 				var b = _(p.box).clone(),
 					r = p.rotate;
 				if('translate' in e){
@@ -57,14 +54,30 @@ define(['underscore'],function(_){
 
 					r += e.rotate;
 				}
-				p.shape.bbox(b);
 				p.shape.rotate(r % 360);
+				p.shape.translate({
+					x:b.x - p.box.x,
+					y:b.y - p.box.y
+				});
+				if(e.scale)
+					p.shape.scale({
+						x:b.width/p.box.width,
+						y:b.height/p.box.height
+					});
+				return { box:b, scale:e.scale, rotate:r, shape:p.shape };
+				//p.shape.bbox(b);
 			});
-		};
-
-	return {
-		on:on,
-		set:transform
-	};
+		},
+		done: function(){
+			_(this.result).each(function(p){
+				p.shape.translate(null);
+				p.shape.scale(null);
+				p.shape.bbox(p.box);
+				p.shape.rotate(p.rotate % 360);
+				if(p.scale) p.shape.strokeWidth(p.shape.strokeWidth()*p.scale);
+			})
+		}
+	});
+	return Transform;
 });
 
