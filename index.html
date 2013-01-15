@@ -35,30 +35,29 @@
 		</ul>
 	</div>
 </div>
-<div class="palette" >
+<div class="bottom" >
 	<div class="nocolor" data-bind="hammer:{tap:noColor}">
 		<span class="draw-icon-cross"></span>
 	</div>
-	<ul data-bind="
-		foreach:palette, palette:color">
-		<li data-bind="style:{
-			background:$data,
-			width:(100/$root.palette.length).toFixed(3)+'%'
-		}">
-		</li>
-	</ul>
+	<div class="palette">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" 
+			data-bind="attr:{viewBox:'0 0 '+palette.length+' 1'},
+			foreach:palette, palette:color" >
+			<rect width="1" height="1" y="0" data-bind="attr:{x:$index,fill:$data}" />
+		</svg>
+	</div>
 </div>
 <div class="color-toggle" 
 	data-bind="with:options, 
 	hammer:{tap:toggleColorMode,hold:swapColor},
 	hammerOptions:{tap_double:false}">
 	<div class="fill" data-bind="
-	style:{background:fill,zIndex:$root.colorMode()=='fill'? 2:1},
-	if:fill()=='none'">
+		style:{background:fill,zIndex:$root.colorMode()=='fill'? 2:1},
+		if:fill()=='none'">
 		<span class="draw-icon-cross" ></span>
 	</div>
 	<div class="stroke" data-bind="if:stroke()=='none',
-	style:{background:stroke,zIndex:$root.colorMode()=='stroke'? 2:1}">
+		style:{background:stroke,zIndex:$root.colorMode()=='stroke'? 2:1}">
 		<span class="draw-icon-cross" ></span>
 	</div>
 </div>
