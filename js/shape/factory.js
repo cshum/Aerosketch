@@ -7,8 +7,7 @@ define(['knockout','underscore','hash'
 			].concat(config.attr),
 
 			optionsKeys = [
-				'fill','stroke','strokeWidth','strokeLinecap',
-				'scaleX','scaleY','translateX','translateY','rotate','visible'
+				'fill','stroke','strokeWidth','strokeLinecap','rotate','visible'
 			].concat(config.options),
 			
 			setOptions = function(options){
