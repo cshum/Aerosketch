@@ -1,4 +1,4 @@
-define(['underscore','Draw'],function(_,Draw){
+define(['underscore','draw'],function(_,Draw){
 	function Transform(s){
 		this.shapes = s;
 		this.result = null;
