@@ -5,8 +5,8 @@ define(['draw'],function(Draw){
 	}
 	function drag(e){
 		Draw.position({
-			x:p.x - e.distanceX,
-			y: p.y - e.distanceY
+			x: Draw.round(p.x - e.distanceX),
+			y: Draw.round(p.y - e.distanceY)
 		});
 	}
 	return {

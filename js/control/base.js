@@ -7,11 +7,11 @@ define(['knockout','draw','util/points'],function(ko,Draw,points){
 	function wheel(e){
 		var pos = Draw.position(),
 			p = e.position;
-		Draw.position({
-			x: pos.x + e.delta*(pos.x + p.x),
-			y: pos.y + e.delta*(pos.y + p.y)
-		});
 		Draw.zoom(Draw.zoom()*(1+e.delta));
+		Draw.position({
+			x: Draw.round(pos.x + e.delta*(pos.x + p.x)),
+			y: Draw.round(pos.y + e.delta*(pos.y + p.y))
+		});
 	}
 	var zoom, pos;
 	function transformstart(e){
@@ -24,11 +24,11 @@ define(['knockout','draw','util/points'],function(ko,Draw,points){
 			dy = e.distanceY,
 			delta = e.scale - 1,
 			p = e.position;
-		Draw.position({
-			x: pos.x - dx + delta*(pos.x - dx + p.x),
-			y: pos.y - dy + delta*(pos.y - dy + p.y)
-		});
 		Draw.zoom(zoom*e.scale);
+		Draw.position({
+			x: Draw.round(pos.x - dx + delta*(pos.x - dx + p.x)),
+			y: Draw.round(pos.y - dy + delta*(pos.y - dy + p.y))
+		});
 	}
 	return {
 		tap:select,
