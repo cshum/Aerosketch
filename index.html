@@ -16,7 +16,10 @@
 			<rect width="10" height="10" x="100%" y="100%" transform="translate(-10 -10)" />
 		</g>
 
-		<g data-bind="attr:{transform:transform},foreach:layers" >
+		<g data-bind="attr:{transform:transform},foreach:layers"
+		color-rendering="optimizeSpeed"
+		image-rendering="optimizeSpeed"
+		shape-rendering="optimizeSpeed">
 			<g data-bind="visible:visible,template:shapesTemplate" ></g>
 		</g>
 		<g data-bind="template:controlsTemplate" ></g>
