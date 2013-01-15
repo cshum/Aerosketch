@@ -76,8 +76,8 @@ define(['underscore','draw'],function(_,Draw){
 		},
 		done: function(){
 			_(this.result).each(function(p){
-				p.shape.translate(null);
-				p.shape.scale(null);
+				p.shape.translate(false);
+				p.shape.scale(false);
 				p.shape.bbox(p.box);
 				p.shape.rotate(p.rotate % 360);
 				if(p.scale) 
