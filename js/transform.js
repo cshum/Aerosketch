@@ -61,23 +61,21 @@ define(['underscore','draw'],function(_,Draw){
 				b.height = Draw.round(b.height);
 
 				p.shape.rotate(r % 360);
-				p.shape.translate({
-					x:Draw.round(b.x - p.box.x),
-					y:Draw.round(b.y - p.box.y)
-				});
+				p.shape.translateX(Draw.round(b.x - p.box.x));
+				p.shape.translateY(Draw.round(b.y - p.box.y));
 				if(e.scale)
-					p.shape.scale({
-						x:Math.round(b.width/p.box.width*100)/100,
-						y:Math.round(b.height/p.box.height*100)/100
-					});
+					p.shape.scaleX(Math.round(b.width/p.box.width*100)/100);
+					p.shape.scaleY(Math.round(b.height/p.box.height*100)/100);
 				return { box:b, scale:e.scale, rotate:r, shape:p.shape };
 				//p.shape.bbox(b);
 			});
 		},
 		done: function(){
 			_(this.result).each(function(p){
-				p.shape.translate(false);
-				p.shape.scale(false);
+				p.shape.translateX(0);
+				p.shape.translateY(0);
+				p.shape.scaleX(1);
+				p.shape.scaleY(1);
 				p.shape.bbox(p.box);
 				p.shape.rotate(p.rotate % 360);
 				if(p.scale) 
