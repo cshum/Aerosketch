@@ -43,7 +43,7 @@
 		foreach:palette, palette:color">
 		<li data-bind="style:{
 			background:$data,
-			width:(100/$root.palette.length)+'%'
+			width:(100/$root.palette.length).toFixed(3)+'%'
 		}">
 		</li>
 	</ul>

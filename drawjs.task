@@ -6,7 +6,8 @@ Todo:
 - Git Submodules
 - Color Palettes 
 	- Commits
-	- Width
+	✓ Width
+- Transform optimization
 - Selection hittest ignore
 	- Get surface dimension
 
