@@ -52,8 +52,17 @@ html,body{
 } 
 body > div{ position:absolute; }
 
-.left {
+.canvas{
 	z-index:1;
+	left:@nav-width; right:0;
+	top:0; bottom:@palette-height;
+
+	& > svg{
+		width:100%; height:100%;
+	}
+}
+.left {
+	z-index:2;
 
 	top:0; left:0; 
 	bottom:@palette-height; 
@@ -83,7 +92,7 @@ body > div{ position:absolute; }
 	}
 }
 .palette{
-	z-index:1;
+	z-index:3;
 
 	left:@nav-width + 5px; 
 	bottom:0; right:0; 
@@ -106,12 +115,11 @@ body > div{ position:absolute; }
 	}
 }
 .color-toggle{
-	z-index:2;
+	z-index:4;
 
 	left:0; bottom:0; 
 	width:@nav-width + 5px; 
 	height:@color-mode-height;
-	background:@back;
 	cursor:pointer;
 
 	.fill, .stroke{
@@ -130,15 +138,6 @@ body > div{ position:absolute; }
 	@pad: 7px;
 	.fill{ top:@pad; left:@pad; }
 	.stroke{ bottom:@pad; right:@pad; }
-}
-.canvas{
-	z-index:10;
-	left:@nav-width; right:0;
-	top:0; bottom:@palette-height;
-
-	& > svg{
-		width:100%; height:100%;
-	}
 }
 @toolbar-hpad:25px;
 @toolbar-vpad:7px;
