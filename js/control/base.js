@@ -9,8 +9,8 @@ define(['knockout','draw','util/points'],function(ko,Draw,points){
 			p = e.position;
 		Draw.zoom(Draw.zoom()*(1+e.delta));
 		Draw.position({
-			x: Draw.round(pos.x + e.delta*(pos.x + p.x)),
-			y: Draw.round(pos.y + e.delta*(pos.y + p.y))
+			x: pos.x + e.delta*(pos.x + p.x),
+			y: pos.y + e.delta*(pos.y + p.y)
 		});
 	}
 	var zoom, pos;
@@ -26,8 +26,8 @@ define(['knockout','draw','util/points'],function(ko,Draw,points){
 			p = e.position;
 		Draw.zoom(zoom*e.scale);
 		Draw.position({
-			x: Draw.round(pos.x - dx + delta*(pos.x - dx + p.x)),
-			y: Draw.round(pos.y - dy + delta*(pos.y - dy + p.y))
+			x: pos.x - dx + delta*(pos.x - dx + p.x),
+			y: pos.y - dy + delta*(pos.y - dy + p.y)
 		});
 	}
 	return {
