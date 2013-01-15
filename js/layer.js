@@ -11,7 +11,7 @@ function(ko,_,svgTemplate){
 			//console.log(shape.visible());
 			//return !shape.visible() ? '':
 			return shape.view || 
-				'<'+shape.getType()+' shape-rendering="optimizeSpeed" data-bind="visible:visible,attr:attr" />';
+				'<'+shape.getType()+' data-bind="visible:visible,attr:attr" />';
 		});
 	}
 });
