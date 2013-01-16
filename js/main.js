@@ -16,7 +16,7 @@ require.config({
 		'jquery.scrollto': 'lib/jquery/jquery.scrollTo.min',
 		'underscore': 'lib/underscore/underscore-min',
 		'underscore.string': 'lib/underscore/underscore.string.min',
-		'knockout':'lib/knockout/knockout-2.2.0',
+		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer',
 
