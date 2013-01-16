@@ -48,7 +48,7 @@ function binding(el,value){
 
 			pos = position(e.originalEvent) || pos;
 			if(type=='touch'){
-				if(_.isEqual(start,pos) && isTouch) return; 
+				if(_.isEqual(start,pos)) return; 
 				touchFlag = isTouch;
 				start = pos;
 				inCanvas = $(el).find(target).length>0;
