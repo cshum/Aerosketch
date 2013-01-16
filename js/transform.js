@@ -63,9 +63,11 @@ define(['underscore','draw'],function(_,Draw){
 				p.shape.rotate(r % 360);
 				p.shape.translateX(Draw.round(b.x - p.box.x));
 				p.shape.translateY(Draw.round(b.y - p.box.y));
-				if(e.scale)
-					p.shape.scaleX(Math.round(b.width/p.box.width*100)/100);
-					p.shape.scaleY(Math.round(b.height/p.box.height*100)/100);
+				if(e.scale){
+					e.scale = Math.round(e.scale*100)/100;
+					p.shape.scaleX(e.scale);
+					p.shape.scaleY(e.scale);
+				}
 				return { box:b, scale:e.scale, rotate:r, shape:p.shape };
 				//p.shape.bbox(b);
 			});

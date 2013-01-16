@@ -63,13 +63,13 @@ function(ko,_,Transform,Draw,Record,view){
 			if(!changed){
 				trans= new Transform(Draw.selection());
 				scale = 1;
+				changed = Draw.selection();
 			}
 			scale *= 1 +e.delta;
 			trans.set({
 				origin:Draw.fromView(e.position),
 				scale:scale
 			});
-			changed = Draw.selection();
 		};
 
 	Draw.debounce.subscribe(function(debounce){
