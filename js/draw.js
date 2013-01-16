@@ -101,7 +101,7 @@ define([
 					_(controls()).find(check) || tool();
 					debounce(true);
 				} 
-				if(type=='release')){
+				if(type=='release'){
 					debounce(false);
 				}else if(type=='wheel'){
 					clearTimeout(timeout);
