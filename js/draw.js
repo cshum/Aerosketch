@@ -92,7 +92,6 @@ define([
 		trigger = (function(){
 			var active, timeout;
 			return function(type,e){
-				if(type!='move') console.log(type);
 				function check(t){
 					return ('check' in t) && 
 						t.check(ko.dataFor(e.target));
