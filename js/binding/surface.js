@@ -96,10 +96,10 @@ function binding(el,value){
 		prevent_default:true,
 		tap_double:false,
 		scale_treshold:0,
-		rotation_treshold:0
+		rotation_treshold:0,
+		hold:false
 	})).extend({
 		ontap:_(trigger).bind(null,'tap',true),
-		onhold:_(trigger).bind(null,'hold',true),
 		ondragstart:_(trigger).bind(null,'dragstart',true),
 		ondrag:_(trigger).bind(null,'drag',true),
 		ontransformstart:_(trigger).bind(null,'transformstart',true),
