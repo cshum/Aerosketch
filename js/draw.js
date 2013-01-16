@@ -101,13 +101,12 @@ define([
 					_(controls()).find(check) || tool();
 					debounce(true);
 				} 
-				if(type.match(/^release$/)){
+				if(type=='release')){
 					debounce(false);
 				}else if(type=='wheel'){
 					clearTimeout(timeout);
 					timeout = setTimeout(debounce,250,false);
 				}else if(type.match(/start/)){
-					debounce(true);
 					clearTimeout(timeout);
 				}
 
