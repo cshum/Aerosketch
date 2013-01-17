@@ -9,12 +9,8 @@
 <body data-bind="event:{contextmenu:function(){}}">
 <div class="canvas" data-bind="surface:trigger" style="cursor:default">
 	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
-		<g data-bind="attr:{fill:background}">
-			<rect width="100%" height="100%" rx="10" ry="10"/>
-			<rect width="10" height="10" />
-			<rect width="10" height="10" x="100%" transform="translate(-10 0)" />
-			<rect width="10" height="10" x="100%" y="100%" transform="translate(-10 -10)" />
-		</g>
+		<rect width="100%" height="100%" 
+		data-bind="attr:{fill:background}"/>
 
 		<g data-bind="attr:{transform:transform},foreach:layers">
 			<g data-bind="visible:visible,template:shapesTemplate" ></g>
@@ -83,20 +79,6 @@ data-bind="template:toolbarTemplate"></div>
 			<i class="icon-repeat icon-large"></i>
 		</button>
 	</div>
-	<!--
-	<div class="btn-group">
-		<button class="btn dropdown-toggle" data-toggle="dropdown" 
-			data-bind="dropdown:true">
-			<i class="icon-reorder icon-large"></i>
-		</button>
-		<ul class="dropdown-menu pull-right" >
-			<li><a data-bind="hammer:{}" href="#">Layers</a></li>
-			<li><a data-bind="hammer:{}" href="#">Properties</a></li>
-			<li class="divider"></li>
-			<li><a data-bind="hammer:{}" href="#">Reset Canvas</a></li>
-		</ul>
-	</div>
-	-->
 </div>
 <div class="toolbar-bottom-right btn-toolbar">
 	<div class="btn-group">

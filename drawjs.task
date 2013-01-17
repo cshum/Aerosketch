@@ -4,10 +4,10 @@ Todo:
 ✓ rounded corner
 - Commit & Load
 - Git Submodules
-- Color Palettes 
-	- Commits
+✓ Color Palettes 
+	✓ Commits
 	✓ Width
-- Transform optimization
+✓ Transform optimization
 - Selection hittest ignore
 	- Get surface dimension
 
