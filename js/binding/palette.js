@@ -5,6 +5,7 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 				baseX = $(el).offset().left;
 			$(el)
 				.on('mousedown',function(e){
+					Draw.debounce(true);
 					drag = true;
 					var data = ko.dataFor(e.target);
 					if(data) call(data);
@@ -21,8 +22,12 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 					if(r>=0 && r<=1) 
 						call(Draw.palette[Math.floor(
 							r*Draw.palette.length)]);
+				})
+				.on('touchend',function(e){
+					Draw.debounce(false);
 				});
-			$(window).on('mouseup',function(){
+			$(window).mouseup(function(){
+				Draw.debounce(false);
 				drag = false;
 			});
 			ko.utils.domNodeDisposal.addDisposeCallback(el,function(){
