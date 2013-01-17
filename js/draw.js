@@ -1,8 +1,8 @@
 define([
-	'knockout','underscore','layer','record/shape',
+	'knockout','underscore','layer',
 	'lib/knockout/template',
 	'lib/knockout/svgtemplate'
-],function(ko,_,Layer,Record,template,svgTemplate){
+],function(ko,_,Layer,template,svgTemplate){
 	var layers = ko.observableArray([new Layer()]),
 		layer = ko.observable(),
 
@@ -46,20 +46,12 @@ define([
 			return 'translate('+(-p.x)+' '+(-p.y)+') scale('+z+')';
 		}).extend({throttle: 1}),
 
-
 		selection = ko.observableArray([]),
 		deselect = function(){
 			selection.removeAll();
 		},
 		select = function(){
 			selection(_(arguments).toArray());
-		},
-
-		options = {
-			fill: ko.observable('red'),
-			stroke: ko.observable('black'),
-			strokeWidth: ko.observable(2),
-			strokeLinecap: ko.observable('round')
 		},
 
 		controls = ko.observableArray(),
@@ -117,40 +109,6 @@ define([
 			};
 		})();
 
-	selection.subscribe(function(shapes){
-		//capture selection options
-		if(shapes.length == 1){
-			var shape = shapes[0];
-			_(options).each(function(option, key){
-				if(key in shape && shape[key]()!='none')
-					option(shape[key]());
-			});
-		}
-	});
-
-	(function(){
-		var changed = false;
-		_(options).each(function(option,key){
-			option.subscribe(function(val){
-				//on option change apply to selection
-				_(selection()).each(function(shape){
-					changed = true;
-					if(key in shape) shape[key](val);
-				});
-			});
-		});
-		debounce.subscribe(function(val){
-			if (!val && changed) {
-				Draw.commit.apply(null,
-					_(selection()).map(function(shape){
-						return new Record(shape);
-					}
-				));
-				changed = false;
-			}
-		});
-	})();
-
 	layer(layers()[0]);
 
 	return {
@@ -174,7 +132,6 @@ define([
 		trigger:trigger,
 		debounce:debounce,
 
-		options:options,
 		tools:tools,
 		tool: tool, 
 		toolTemplate:toolTemplate,
