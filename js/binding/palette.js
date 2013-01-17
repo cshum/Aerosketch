@@ -15,6 +15,7 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 					if(drag && data) call(data);
 				})
 				.on('touchstart touchmove',function(e){
+					Draw.debounce(true);
 					var touch = e.originalEvent.touches[0],
 						x = touch.clientX - baseX,
 						r = x/$(el).width();
