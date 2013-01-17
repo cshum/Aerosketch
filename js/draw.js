@@ -1,8 +1,8 @@
 define([
-	'knockout','underscore','layer',
+	'knockout','underscore','layer','record/shape',
 	'lib/knockout/template',
 	'lib/knockout/svgtemplate'
-],function(ko,_,Layer,template,svgTemplate){
+],function(ko,_,Layer,Record,template,svgTemplate){
 	var layers = ko.observableArray([new Layer()]),
 		layer = ko.observable(),
 
@@ -128,14 +128,28 @@ define([
 		}
 	});
 
-	_(options).each(function(option,key){
-		option.subscribe(function(val){
-			//on option change apply to selection
-			_(selection()).each(function(shape){
-				if(key in shape) shape[key](val);
+	(function(){
+		var changed = false;
+		_(options).each(function(option,key){
+			option.subscribe(function(val){
+				//on option change apply to selection
+				_(selection()).each(function(shape){
+					changed = true;
+					if(key in shape) shape[key](val);
+				});
 			});
 		});
-	});
+		debounce.subscribe(function(val){
+			if (!val && changed) {
+				Draw.commit.apply(null,
+					_(selection()).map(function(shape){
+						return new Record(shape);
+					}
+				));
+				changed = false;
+			}
+		});
+	})();
 
 	layer(layers()[0]);
 
