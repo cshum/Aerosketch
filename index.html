@@ -39,13 +39,9 @@
 	<div class="nocolor" data-bind="hammer:{tap:noColor}">
 		<span class="draw-icon-cross"></span>
 	</div>
-	<div class="palette">
-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" 
-			data-bind="attr:{viewBox:'0 0 '+palette.length+' 1'}, palette:color,foreach:palette" >
-			<rect height="1" width="2" y="0" 
-				data-bind="attr:{x:$index,fill:$data}" />
-		</svg>
-	</div>
+	<ul class="palette" data-bind="palette:color,foreach:palette">
+		<li data-bind="style:{left:(100*$index()/$root.palette.length)+'%',background:$data}"></li>
+	</ul>
 </div>
 <div class="color-toggle" 
 	data-bind="with:options, 
