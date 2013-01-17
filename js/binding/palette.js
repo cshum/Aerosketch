@@ -1,7 +1,8 @@
 define(['knockout','jquery','underscore'],function(ko,$,_){
 	ko.bindingHandlers.palette = {
-		init: function(el,val) {
-			var call = val(), drag = false;
+		init: function(el,val,all,Draw) {
+			var call = val(), drag = false,
+				baseX = $(el).offset().left;
 			$(el)
 				.on('mousedown',function(e){
 					drag = true;
@@ -13,11 +14,13 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 					if(drag && data) call(data);
 				})
 				.on('touchstart touchmove',function(e){
-					var data = ko.dataFor(document.elementFromPoint(
-						e.originalEvent.touches[0].clientX, 
-						e.originalEvent.touches[0].clientY
-					));
-					if(data) call(data);
+					var touch = e.originalEvent.touches[0],
+						x = touch.clientX - baseX,
+						r = x/$(el).width();
+
+					if(r>=0 && r<=1) 
+						call(Draw.palette[Math.floor(
+							r*Draw.palette.length)]);
 				});
 			$(window).on('mouseup',function(){
 				drag = false;
