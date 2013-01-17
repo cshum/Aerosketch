@@ -11,12 +11,18 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 				return Draw.options[colorMode()](color);
 			}
 		}),
-		noColor = _(color).bind(null,'none'),
+		noColor = function(){
+			Draw.debounce(true);
+			color("none");
+			Draw.debounce(false);
+		},
 		swapColor = function(){
+			Draw.debounce(true);
 			var o = Draw.options,
 				fill = o.fill();
 			o.fill(o.stroke());
 			o.stroke(fill);
+			Draw.debounce(false);
 		},
 		palette = [
 			"#000000", "#3f3f3f", "#7f7f7f", "#bfbfbf", 
