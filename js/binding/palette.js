@@ -1,8 +1,7 @@
 define(['knockout','jquery','underscore'],function(ko,$,_){
 	ko.bindingHandlers.palette = {
 		init: function(el,val) {
-			var call = val(), drag = false,
-				y = $(el).offset().top+5;
+			var call = val(), drag = false;
 			$(el)
 				.on('mousedown',function(e){
 					drag = true;
@@ -15,7 +14,8 @@ define(['knockout','jquery','underscore'],function(ko,$,_){
 				})
 				.on('touchstart touchmove',function(e){
 					var data = ko.dataFor(document.elementFromPoint(
-						e.originalEvent.touches[0].clientX, y
+						e.originalEvent.touches[0].clientX, 
+						e.originalEvent.touches[0].clientY
 					));
 					if(data) call(data);
 				});
