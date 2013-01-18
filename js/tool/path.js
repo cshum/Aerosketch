@@ -17,7 +17,6 @@ define([
 						var p = Draw.toView(shape.getLastPoint());
 						p._selector = true;
 						p.shape = shape;
-						p.hide = !Draw.debounce();
 						return p;
 					})
 					.value();
