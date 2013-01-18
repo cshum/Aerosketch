@@ -3,7 +3,7 @@ define([
 	'shape/path','draw','record/shape',
 	'util/requestanimationframe','util/polysimplify'
 ],function(_,Path,Draw,Record,requestAnimationFrame,polySimplify){
-	var points, interval, point, cursor, following, options,
+	var points, curr, interval, point, cursor, following,
 		smoothen = function(points) {
 			var ps = [];
 			ps.push(['M',points[0]]);
@@ -21,56 +21,61 @@ define([
 			}
 			return ps;
 		},
+		distance = function(p1,p2){
+			var dx = p1.x - p2.x,
+				dy = p1.y - p2.y;
+			return Math.sqrt(dx*dx + dy*dy);
+		},
+
 		start = function(e){
-			var s = Draw.fromView(e.start), 
-				ctx = Draw.bufferContext;
+			curr = new Path(Draw.options);
+
+			if(curr.stroke()=='none')
+				curr.stroke('black');
+			curr.fill('none');
+
+			var s = Draw.fromView(e.start);
+			Draw.add(curr);
 			points = [[s.x, s.y]];
 			point = s;
-
-			if (Draw.options.stroke()=='none')
-				Draw.options.stroke('black');
-
+			curr.moveTo(s);
 			following = true;
 			requestAnimationFrame(follow);
-			if(Draw.bufferContext){
-				ctx.lineWidth = Draw.options.strokeWidth() * Draw.zoom();
-				ctx.lineCap='round';
-				ctx.strokeSytle = Draw.options.stroke();
-			}
 		},
+
 		drag = function(e){
 			cursor = Draw.fromView(e.position);
 		},
 		follow = function(){
-			var d = 3/10, p, ctx = Draw.bufferContext;
-			if(ctx){
-				p = Draw.toView(point);
-				ctx.beginPath();
-				ctx.moveTo(p.x,p.y);
-			}
+			var d = 3/10;
 			point = {
 				x: Draw.round(point.x*(1-d) + cursor.x*d),
 				y: Draw.round(point.y*(1-d) + cursor.y*d)
 			};
-			if(ctx){
-				p = Draw.toView(point);
-				ctx.lineTo(p.x,p.y);
-				ctx.stroke();
-			}
+			if(curr) curr.lineTo(point);
 			points.push([point.x,point.y]);
 			if(following) requestAnimationFrame(follow);
 		},
 		tap = function(e){
+			curr = new Path(Draw.options);
+			if(curr.stroke()=='none')
+				curr.stroke('black');
+			curr.fill('none');
 			var s = Draw.fromView(e.start);
-			points = [[s.x, s.y],[s.x, s.y]];
+			curr.moveTo(s);
+			curr.lineTo(s);
+			Draw.add(curr);
+			points = null;
 		},
+
 		release = function(){
 			following = false;
-			var curr = new Path(Draw.options);
-			curr.fill('none');
-			curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
-			Draw.add(curr);
-			Draw.commit(new Record(curr));
+			if(curr){
+				if(points)
+					curr.path(smoothen(polySimplify(
+						points,0.1/Draw.zoom())));
+				Draw.commit(new Record(curr));
+			}
 			curr = null;
 		};
 
