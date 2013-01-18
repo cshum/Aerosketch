@@ -19,6 +19,16 @@ define([
 			});
 		});
 	});
+	function capture(){
+		var shapes = Draw.selection();
+		if(shapes.length==1){
+			var shape = shapes[0];
+			_(options).each(function(option, key){
+				if(key in shape && shape[key]()!='none')
+					option(shape[key]());
+			});
+		}
+	}
 	Draw.debounce.subscribe(function(val){
 		if (!val && changed) {
 			Draw.commit.apply(null,
@@ -28,19 +38,10 @@ define([
 			));
 			changed = false;
 		}
-		_.defer(Draw.selection.valueHasMutated); 
-		//trigger selection
+		if(!val) _.defer(capture);
 	});
-	Draw.selection.subscribe(function(shapes){
-		//capture selection options
-		if(shapes.length == 1){
-			var shape = shapes[0];
-			_(options).each(function(option, key){
-				if(key in shape && shape[key]()!='none')
-					option(shape[key]());
-			});
-		}
-	});
+	Draw.selection.subscribe(capture);
+
 	_(Draw).extend({
 		options:options
 	});

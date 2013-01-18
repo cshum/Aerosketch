@@ -29,9 +29,11 @@
 	<circle data-bind="attr:{cx:x,cy:y}" r="6" />
 	<circle data-bind="attr:{cx:x,cy:y}" opacity="0" r="25" />
 	<!-- /ko -->
+	<g data-bind="attr:{opacity:$root.debounce() ? 0 :1}">
 	<!-- ko foreach:selectors-->
 	<circle data-bind="attr:{cx:x,cy:y}" r="6" />
 	<circle data-bind="attr:{cx:x,cy:y}" opacity="0" r="25" />
 	<!-- /ko -->
+	</g>
 </g>
 
