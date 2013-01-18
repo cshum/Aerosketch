@@ -5,7 +5,7 @@ define([
 	var curr, c1, c2, touching, focus,
 
 		selectors = ko.computed(function(){
-			if(Draw.tool() && Draw.tool()._path &&!Draw.debounce())
+			if(Draw.tool() && Draw.tool()._path)
 				return _(Draw.selection())
 					.chain()
 					.filter(function(shape){
@@ -17,6 +17,7 @@ define([
 						var p = Draw.toView(shape.getLastPoint());
 						p._selector = true;
 						p.shape = shape;
+						p.visible = !Draw.debounce();
 						return p;
 					})
 					.value();
