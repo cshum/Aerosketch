@@ -91,6 +91,7 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view){
 		check:check,
 		dragstart:start,
 		transformstart:start,
+		transform:transform,
 		drag:drag,
 		buffer:ko.computed(function(){
 			var str = '', e = buffer();
