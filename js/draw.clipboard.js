@@ -25,12 +25,10 @@ define([
 				return shape.clone();
 			});
 
-			var transform = new Transform(shapes);
-			transform.set({translate:{
+			Transform(shapes,{translate:{
 				x:30/Draw.zoom(),
 				y:30/Draw.zoom()
 			}});
-			transform.done();
 
 			Draw.add.apply(null,shapes);
 			Draw.commit.apply(null,_(shapes).map(function(shape){

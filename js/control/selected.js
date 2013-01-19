@@ -23,15 +23,20 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view){
 			return selected;
 		},
 
-		angle, trans, scale, changed = false,
-		transforming = ko.observable(false);
-		buffer = ko.observable({});
+		angle, scale, changed = false,
+		transforming = ko.observable(false),
+		buffer = ko.observable({}),
+		visibles,
 
 		start = function(){
-			trans= new Transform(Draw.selection());
 			scale = 1;
 			angle = null;
 			transforming(true);
+			visibles = _(Draw.selection()).map(function(shape){
+				var v = shape.visible();
+				shape.visible(false);
+				return v;
+			});
 		},
 
 		drag = function(e){
@@ -77,10 +82,10 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view){
 	Draw.debounce.subscribe(function(debounce){
 		if(!debounce) transforming(false);
 		if(!debounce && changed){
-			trans.set(buffer());
-			trans.done();
+			Transform(Draw.selection(),buffer());
 			buffer({});
-			Draw.commit.apply(null,_(Draw.selection()).map(function(shape){
+			Draw.commit.apply(null,_(Draw.selection()).map(function(shape,i){
+				shape.visible(visibles[i]);
 				return new Record(shape);
 			}));
 			changed = false;
