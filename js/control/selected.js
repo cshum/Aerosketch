@@ -5,9 +5,6 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view){
 			return shape.view || '<'+shape.getType()+' data-bind="attr:attr" />';
 		}),
 		selectedBBox = function(shape){
-			if(Draw.debounce() || !shape.visible()) return {
-				style:'display:none;'
-			};
 			var b = shape.bbox(),
 				r = shape.rotate(),
 				w = shape.stroke()!='none' ? 
