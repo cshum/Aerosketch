@@ -1,7 +1,10 @@
 define(['knockout','underscore','transform','draw','record/shape',
-'text!view/selected.svg'],
-function(ko,_,Transform,Draw,Record,view){
-	var selectedBBox = function(shape){
+'lib/knockout/svgtemplate', 'text!view/selected.svg'],
+function(ko,_,Transform,Draw,Record,svgTemplate, view){
+	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
+			return shape.view || '<'+shape.getType()+' data-bind="attr:attr" />';
+		}),
+		selectedBBox = function(shape){
 			if(Draw.debounce() || !shape.visible()) return {
 				style:'display:none;'
 			};
@@ -23,30 +26,36 @@ function(ko,_,Transform,Draw,Record,view){
 			return selected;
 		},
 
-		angle, changed, trans,
-		start = function(e){
+		angle, trans, scale, changed = false,
+		transforming = ko.observable(false);
+		buffer = ko.observable({});
+
+		start = function(){
 			trans= new Transform(Draw.selection());
+			scale = 1;
 			angle = null;
+			transforming(true);
 		},
 
 		drag = function(e){
 			if(!angle) 
 				angle = e.angle;
-			if(e.shiftKey || e.button==2)
-				trans.set({
-					origin:Draw.fromView(e.start),
-					rotate:e.angle - angle
+			if(e.shiftKey || e.button==2){
+				buffer({
+					rotate:e.angle - angle,
+					origin:Draw.fromView(e.start)
 				});
-			else
-				trans.set({translate:{
+			}else{
+				buffer({translate:{
 					x:e.distanceX/Draw.zoom(),
 					y:e.distanceY/Draw.zoom()
 				}});
-			changed = Draw.selection();
+			}
+			changed = true;
 		},
 
 		transform = function(e){
-			trans.set({
+			buffer({
 				origin:Draw.fromView(e.position),
 				rotate:e.rotation,
 				scale:e.scale,
@@ -55,30 +64,29 @@ function(ko,_,Transform,Draw,Record,view){
 					y:e.distanceY/Draw.zoom()
 				}
 			});
-			changed = Draw.selection();
+			changed = true;
 		},
 
-		scale = 1,
 		wheel = function(e){
-			if(!changed){
-				trans= new Transform(Draw.selection());
-				scale = 1;
-				changed = Draw.selection();
-			}
+			if(!changed) start();
 			scale *= 1 +e.delta;
-			trans.set({
+			buffer({
 				origin:Draw.fromView(e.position),
 				scale:scale
 			});
+			changed = true;
 		};
 
 	Draw.debounce.subscribe(function(debounce){
+		if(!debounce) transforming(false);
 		if(!debounce && changed){
+			trans.set(buffer());
 			trans.done();
-			Draw.commit.apply(null,_(changed).map(function(shape){
+			buffer({});
+			Draw.commit.apply(null,_(Draw.selection()).map(function(shape){
 				return new Record(shape);
 			}));
-			changed = null;
+			changed = false;
 		}
 	});
 
@@ -87,10 +95,23 @@ function(ko,_,Transform,Draw,Record,view){
 		dragstart:start,
 		transformstart:start,
 		drag:drag,
-		transform:transform,
+		buffer:ko.computed(function(){
+			var str = '', e = buffer();
+			if(e.origin) 
+				str += 'translate('+e.origin.x+','+e.origin.y+') ';
+			if(e.rotate) str += 'rotate('+e.rotate+')';
+			if(e.scale) str += 'scale('+e.scale+')';
+			if(e.origin) 
+				str += 'translate('+(-e.origin.x)+','+(-e.origin.y)+') ';
+			if(e.translate) 
+				str += 'translate('+e.translate.x+','+e.translate.y+') ';
+			return str;
+		}),
 		wheel:wheel,
 
 		view:view,
-		selectedBBox:selectedBBox
+		selectedBBox:selectedBBox,
+		selectedTemplate:selectedTemplate,
+		transforming:transforming
 	}
 });

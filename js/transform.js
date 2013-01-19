@@ -7,6 +7,7 @@ define(['underscore','draw'],function(_,Draw){
 			return {
 				box: shape.bbox(),
 				rotate:shape.rotate(),
+				visible:shape.visible(),
 				shape:shape
 			};
 		});
@@ -60,15 +61,21 @@ define(['underscore','draw'],function(_,Draw){
 				b.width = Draw.round(b.width);
 				b.height = Draw.round(b.height);
 
+				
+				p.shape.visible(false);
+				/*
 				p.shape.rotate(r % 360);
 				p.shape.translateX(Draw.round(b.x - p.box.x));
 				p.shape.translateY(Draw.round(b.y - p.box.y));
+				*/
 				if(e.scale){
 					e.scale = Math.round(e.scale*100)/100;
+					/*
 					p.shape.scaleX(e.scale);
 					p.shape.scaleY(e.scale);
+					*/
 				}
-				return { box:b, scale:e.scale, rotate:r, shape:p.shape };
+				return { box:b, scale:e.scale, rotate:r, shape:p.shape, visible:p.visible};
 				//p.shape.bbox(b);
 			});
 		},
@@ -79,6 +86,8 @@ define(['underscore','draw'],function(_,Draw){
 				p.shape.scaleX(1);
 				p.shape.scaleY(1);
 				p.shape.bbox(p.box);
+				p.shape.visible(p.visible);
+				console.log(p.visible);
 				p.shape.rotate(p.rotate % 360);
 				if(p.scale) 
 					p.shape.strokeWidth(
