@@ -1,9 +1,10 @@
 define([
-	'underscore',
+	'underscore','knockout',
 	'shape/path','draw','record/shape',
-	'util/requestanimationframe','util/polysimplify'
-],function(_,Path,Draw,Record,requestAnimationFrame,polySimplify){
-	var points, curr, interval, point, cursor, following,
+	'util/requestanimationframe','util/polysimplify','text!view/freehand.svg'
+],function(_,ko,Path,Draw,Record,requestAnimationFrame,polySimplify,view){
+	var points = ko.observableArray([]), 
+		interval, point, cursor, following,
 		smoothen = function(points) {
 			var ps = [];
 			ps.push(['M',points[0]]);
@@ -30,14 +31,10 @@ define([
 		start = function(e){
 			if(Draw.options.stroke()=='none')
 				Draw.options.stroke('black');
-			curr = new Path(Draw.options);
-			curr.fill('none');
 
 			var s = Draw.fromView(e.start);
-			Draw.add(curr);
-			points = [[s.x, s.y]];
+			points([[s.x, s.y]]);
 			point = s;
-			curr.moveTo(s);
 			following = true;
 			requestAnimationFrame(follow);
 		},
@@ -51,37 +48,29 @@ define([
 				x: Draw.round(point.x*(1-d) + cursor.x*d),
 				y: Draw.round(point.y*(1-d) + cursor.y*d)
 			};
-			if(curr) curr.lineTo(point);
 			points.push([point.x,point.y]);
 			if(following) requestAnimationFrame(follow);
 		},
 		tap = function(e){
-			curr = new Path(Draw.options);
-			if(curr.stroke()=='none')
-				curr.stroke('black');
-			curr.fill('none');
 			var s = Draw.fromView(e.start);
-			curr.moveTo(s);
-			curr.lineTo(s);
-			Draw.add(curr);
-			points = null;
+			points([[s.x, s.y],[s.x,s.y]]);
 		},
-
 		release = function(){
 			following = false;
-			if(curr){
-				if(points)
-					curr.path(smoothen(polySimplify(
-						points,0.1/Draw.zoom())));
-				Draw.commit(new Record(curr));
-			}
-			curr = null;
+			var curr = new Path(Draw.options);
+			curr.fill('none');
+			curr.path(smoothen(polySimplify(points(),0.1/Draw.zoom())));
+			Draw.add(curr);
+			Draw.commit(new Record(curr));
+			points.removeAll();
 		};
 
 	return {
 		name:'Freehand',
 		iconView: '<span class="draw-icon-freehand"></span>',
+		view:view,
 
+		points: ko.computed(function(){ return _.flatten(points()).join(' '); }),
 		dragstart:start,
 		drag:drag,
 		release:release,
