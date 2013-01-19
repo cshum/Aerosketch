@@ -3,7 +3,7 @@ define([
 	'shape/path','draw','record/shape',
 	'util/requestanimationframe','util/polysimplify','text!view/freehand.svg'
 ],function(_,ko,Path,Draw,Record,requestAnimationFrame,polySimplify,view){
-	var points = ko.observableArray([]), 
+	var points = ko.observableArray([]), changed = false,
 		interval, point, cursor, following,
 		smoothen = function(points) {
 			var ps = [];
@@ -41,6 +41,7 @@ define([
 
 		drag = function(e){
 			cursor = Draw.fromView(e.position);
+			changed = true;
 		},
 		follow = function(){
 			var d = 3/10;
@@ -54,8 +55,10 @@ define([
 		tap = function(e){
 			var s = Draw.fromView(e.start);
 			points([[s.x, s.y],[s.x,s.y]]);
+			changed = true;
 		},
 		release = function(){
+			if(!changed) return;
 			following = false;
 			var curr = new Path(Draw.options);
 			curr.fill('none');
@@ -63,6 +66,7 @@ define([
 			Draw.add(curr);
 			Draw.commit(new Record(curr));
 			points.removeAll();
+			changed = false;
 		};
 
 	return {
