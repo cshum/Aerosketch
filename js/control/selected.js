@@ -1,5 +1,5 @@
 define(['knockout','underscore','transform','draw','record/shape',
-'lib/knockout/svgtemplate', 'text!view/selected.svg'],
+'lib/knockout/svgtemplate', 'text!view/selected.svg','util/requestanimationframe'],
 function(ko,_,Transform,Draw,Record,svgTemplate, view){
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
 			return shape.view || '<'+shape.getType()+' data-bind="attr:attr" />';
@@ -80,7 +80,8 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view){
 		};
 
 	Draw.debounce.subscribe(function(debounce){
-		if(!debounce) transforming(false);
+		if(!debounce) 
+			requestAnimationFrame(_(transforming).bind(null,false));
 		if(!debounce && changed){
 			Transform(Draw.selection(),buffer());
 			buffer({});
