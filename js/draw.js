@@ -44,7 +44,7 @@ define([
 			var p = position(),
 				z = zoom();
 			return 'translate('+(-p.x)+' '+(-p.y)+') scale('+z+')';
-		}).extend({throttle: 1}),
+		}),
 
 		selection = ko.observableArray([]),
 		deselect = function(){
@@ -107,7 +107,12 @@ define([
 				else if(baseControl() && _.isFunction(baseControl()[type]))
 					baseControl()[type](e);
 			};
-		})();
+		})(),
+
+		load = function(){
+		},
+		serialize = function(){
+		};
 
 	layer(layers()[0]);
 
@@ -135,6 +140,9 @@ define([
 		tools:tools,
 		tool: tool, 
 		toolTemplate:toolTemplate,
+
+		load:load,
+		serialize:serialize,
 
 		toolbarTemplate:toolbarTemplate,
 
