@@ -74,7 +74,6 @@ define([
 		dragstart:start,
 		drag:drag,
 		release:release,
-		tap:tap,
-		off:release
+		tap:tap
 	};
 });
