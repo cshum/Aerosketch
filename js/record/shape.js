@@ -25,10 +25,6 @@ define([
 				hash = data.getHash();
 				type = data.getType();
 				options = data.getOptions();
-
-				if(!shapeMap[hash]){
-					//new shape
-				}
 				shapeMap[hash] = data;
 			}else{
 				hash = data.hash;
