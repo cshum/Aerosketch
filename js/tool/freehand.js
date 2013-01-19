@@ -28,10 +28,9 @@ define([
 		},
 
 		start = function(e){
+			if(Draw.options.stroke()=='none')
+				Draw.options.stroke('black');
 			curr = new Path(Draw.options);
-
-			if(curr.stroke()=='none')
-				curr.stroke('black');
 			curr.fill('none');
 
 			var s = Draw.fromView(e.start);
