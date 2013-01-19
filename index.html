@@ -58,15 +58,15 @@ data-bind="template:toolbarTemplate"></div>
 <div class="toolbar-top-right btn-toolbar">
 	<div class="btn-group">
 		<!-- ko if:selection().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:cut}">
+		<button class="btn" data-bind="hammer:{tap:cut},hammerOptions:{tap_double:false}">
 			<i class="icon-cut icon-large"></i>
 		</button>
-		<button class="btn" data-bind="hammer:{tap:copy}">
+		<button class="btn" data-bind="hammer:{tap:copy},hammerOptions:{tap_double:false}">
 			<i class="icon-copy icon-large"></i>
 		</button>
 		<!-- /ko -->
 		<!-- ko if:clipboard().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:paste}">
+		<button class="btn" data-bind="hammer:{tap:paste},hammerOptions:{tap_double:false}">
 			<i class="icon-paste icon-large"></i>
 		</button>
 		<!-- /ko -->
