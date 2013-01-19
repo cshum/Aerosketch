@@ -85,10 +85,12 @@ define([
 			Draw.deselect();
 			if(curr){
 				if(focus._center){
-					//curr.back(); //finish. remove exceeded line
+					Draw.select(curr);
 					finish(true);
 				}else if(focus._begin){
 					curr.close();
+					Draw.commit(new Record(curr));
+					Draw.select(curr);
 					finish(true);
 				}else{
 					if(c1) Draw.commit(new Record(curr));
@@ -107,10 +109,7 @@ define([
 		},
 
 		finish = function(ok){
-			if(ok){
-				Draw.select(curr);
-				Draw.commit(new Record(curr));
-			}else if(curr){
+			if(!ok && curr){
 				Draw.deselect();
 				curr.visible(false);
 			}

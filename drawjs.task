@@ -8,6 +8,8 @@ Todo:
 	✓ Commits
 	✓ Width
 ✓ Transform optimization
+- MSGesture
+- Save and Load
 - Selection hittest ignore
 	- Get surface dimension
 

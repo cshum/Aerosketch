@@ -1,5 +1,5 @@
-define(['knockout','underscore','transform','draw'
-],function(ko,_,Transform,Draw){
+define(['knockout','underscore','transform','record/shape','draw.commit'
+],function(ko,_,Transform,Draw,Record){
 	var clipboard = ko.observableArray([]),
 		hide = function(){
 			_(Draw.selection()).each(function(shape){
@@ -31,6 +31,9 @@ define(['knockout','underscore','transform','draw'
 			transform.done();
 
 			Draw.add.apply(null,shapes);
+			Draw.commit.apply(null,_(shapes).map(function(shape){
+				return new Record(shape);
+			}));
 			Draw.selection(shapes);
 		};
 
