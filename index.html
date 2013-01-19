@@ -13,7 +13,7 @@
 		data-bind="attr:{fill:background}"/>
 
 		<g stroke-linecap="round">
-			<g data-bind="attr:{transform:transform},foreach:layers">
+			<g data-bind="aniattr:{transform:transform},foreach:layers">
 				<g data-bind="visible:visible,template:shapesTemplate" ></g>
 			</g>
 			<g data-bind="template:controlsTemplate" ></g>

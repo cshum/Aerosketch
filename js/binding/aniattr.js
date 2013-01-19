@@ -19,8 +19,9 @@ define([
 					changed = {};
 				};
 			_(attr).each(function(value,key){
-				changed[key] = value();
-				value.subscribe(_(trigger).bind(null,key));
+				changed[key] = ko.utils.unwrapObservable(value);
+				if(ko.isObservable(value) || ko.isComputed(value))
+					value.subscribe(_(trigger).bind(null,key));
 			});
 			update();
 		}
