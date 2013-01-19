@@ -6,8 +6,7 @@ define([
 		options = {
 			fill: ko.observable('red'),
 			stroke: ko.observable('black'),
-			strokeWidth: ko.observable(2),
-			strokeLinecap: ko.observable('round')
+			strokeWidth: ko.observable(2)
 		};
 
 	_(options).each(function(option,key){

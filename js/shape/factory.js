@@ -2,12 +2,11 @@ define(['knockout','underscore','hash'
 ],function(ko,_,Hash){
 	return function(type, func, config){
 		var attrKeys = [
-				'fill','stroke','strokeWidth','strokeLinecap',
-				'transform'
+				'fill','stroke','strokeWidth','transform'
 			].concat(config.attr),
 
 			optionsKeys = [
-				'fill','stroke','strokeWidth','strokeLinecap','rotate','visible'
+				'fill','stroke','strokeWidth','rotate','visible'
 			].concat(config.options),
 			
 			setOptions = function(options){
@@ -28,32 +27,12 @@ define(['knockout','underscore','hash'
 				return ko.isObservable(val) || ko.isComputed(val);
 			},
 			transform = function(){
-				var str = '', b = this.bbox(),
-					hasT = this.translateX()!==0 || this.translateY()!==0,
-					hasS = this.scaleX()!==1 || this.scaleY()!==1,
-					hasR = this.rotate() !== 0;
-
-				if(hasS){
-					var x = b.x, y = b.y;
-					if(hasT){
-						x += this.translateX();
-						y += this.translateY();
-					}
-					str += 'translate('+ x +'  '+ y +') '+
-					'scale('+this.scaleX()+' '+this.scaleY()+') '+
-					'translate('+ (-x) +'  '+ (-y) +')';
+				if(this.rotate() !== 0){
+					var bbox = this.bbox();
+					return 'rotate('+this.rotate()+' '+
+						(bbox.x+bbox.width/2)+','+
+						(bbox.y+bbox.height/2)+')';
 				}
-
-				if(hasT)
-					str += 'translate('+this.translateX()+
-					'  '+this.translateY()+') ';
-
-				if(hasR)
-					str +='rotate('+this.rotate()+' '+
-					(b.x+b.width/2)+','+
-					(b.y+b.height/2)+')';
-
-				return str;
 			},
 			Shape = function(options, hash){
 				var self = this;
@@ -63,11 +42,6 @@ define(['knockout','underscore','hash'
 				self.fill = ko.observable();
 				self.stroke = ko.observable();
 				self.strokeWidth = ko.observable();
-				self.strokeLinecap = ko.observable();
-				self.translateX = ko.observable(0);
-				self.translateY = ko.observable(0);
-				self.scaleX = ko.observable(1);
-				self.scaleY = ko.observable(1);
 
 				var rotate = ko.observable(0);
 				self.rotate = ko.computed({
