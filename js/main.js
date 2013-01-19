@@ -38,7 +38,7 @@ require([
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
 	'binding/surface','binding/hammer',
-	'binding/palette','binding/aniattr'
+	'binding/palette','binding/attr'
 ],function(ko,Draw){
 	ko.applyBindings(Draw,document.body);
 	window.Draw = Draw;
