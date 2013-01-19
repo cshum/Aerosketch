@@ -1,8 +1,10 @@
 <g data-bind="if:transforming, attr:{transform:$root.transform}" >
 	<g data-bind="template:selectedTemplate,attr:{transform:buffer}"></g>
 </g>
-<g data-bind="foreach:$root.selection,visible:!$root.debounce()" fill="black" fill-opacity="0" 
+<!-- ko if:!$root.debounce() -->
+<g data-bind="foreach:$root.selection" fill="black" fill-opacity="0" 
 stroke="blue" opacity="1" stroke-width="1" 
 stroke-dasharray="5, 3" >
 	<rect data-bind="attr:$parent.selectedBBox($data),visible:visible" />
 </g>
+<!-- /ko -->
