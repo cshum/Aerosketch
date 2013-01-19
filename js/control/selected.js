@@ -85,10 +85,14 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view){
 		if(!debounce && changed){
 			Transform(Draw.selection(),buffer());
 			buffer({});
-			Draw.commit.apply(null,_(Draw.selection()).map(function(shape,i){
-				shape.visible(visibles[i]);
+			Draw.commit.apply(null,_(Draw.selection()).map(function(shape){
 				return new Record(shape);
 			}));
+			requestAnimationFrame(_(function(shapes){
+				_(shapes).each(function(shape,i){
+					shape.visible(visibles[i]);
+				});
+			}).bind(null,Draw.selection()));
 			changed = false;
 		}
 	});
