@@ -20,9 +20,8 @@ define([
 				};
 			_(attr).each(function(value,key){
 				changed[key] = ko.utils.unwrapObservable(value);
-				ko.computed(function(){
-					trigger(key,ko.utils.unwrapObservable(value));
-				});
+				if(ko.isObservable(value) || ko.isComputed(value))
+					value.subscribe(_(trigger).bind(null,key));
 			});
 			update();
 		}
