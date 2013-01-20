@@ -45,7 +45,6 @@ define([
 				z = zoom();
 			return 'translate('+(-p.x)+' '+(-p.y)+') scale('+z+')';
 		}),
-		buffer = ko.observable(),
 
 		selection = ko.observableArray([]),
 		deselect = function(){
@@ -128,7 +127,6 @@ define([
 		zoom:zoom, 
 		position:position,
 		transform:transform,
-		buffer:buffer,
 
 		background:background,
 		add:add,

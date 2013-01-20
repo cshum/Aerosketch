@@ -1,5 +1,15 @@
 define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points){
 	var zoom, position, scale, changed = false;
+	function Transform(e){
+		e = _(e).defaults({
+			translate:{x:0,y:0},scale:1,origin:{x:0,y:0}
+		});
+		Draw.zoom(zoom*e.scale);
+		Draw.position({
+			x: Draw.round(position.x - e.translate.x + (e.origin.x + position.x)*(e.scale -1)),
+			y: Draw.round(position.y - e.translate.y + (e.origin.y + position.y)*(e.scale -1))
+		});
+	}
 	function select(e){
 		var vm = ko.dataFor(e.target);
 		if(vm && vm._shape)
@@ -13,14 +23,14 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 	function wheel(e){
 		if(!changed) start();			
 		scale *= 1 +e.delta;
-		Draw.buffer({
+		Transform({
 			origin:e.position,
 			scale:scale
 		});
 		changed = true;
 	}
 	function transform(e){
-		Draw.buffer({
+		Transform({
 			origin:e.position,
 			scale:e.scale,
 			translate:{
@@ -30,18 +40,7 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 		});
 		changed = true;
 	}
-	Draw.debounce.subscribe(function(val){
-		if(!val && changed){
-			var e = _(Draw.buffer()).defaults({
-				translate:{x:0,y:0},scale:1,origin:{x:0,y:0}
-			});
-			Draw.zoom(zoom*e.scale);
-			Draw.position({
-				x: Draw.round(position.x - e.translate.x + (e.origin.x + position.x)*(e.scale -1)),
-				y: Draw.round(position.y - e.translate.y + (e.origin.y + position.y)*(e.scale -1))
-			});
-			Draw.buffer({scale:1, translate:{x:0,y:0},origin:{x:0,y:0}});
-		}
+	Draw.debounce.subscribe(function(){
 		changed = false;
 	});
 
