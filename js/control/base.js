@@ -40,7 +40,7 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 				x: Draw.round(position.x - e.translate.x + (e.origin.x + position.x)*(e.scale -1)),
 				y: Draw.round(position.y - e.translate.y + (e.origin.y + position.y)*(e.scale -1))
 			});
-			Draw.buffer({scale:1, translate:{x:0,y:0}});
+			Draw.buffer({scale:1, translate:{x:0,y:0},origin:{x:0,y:0}});
 		}
 		changed = false;
 	});
