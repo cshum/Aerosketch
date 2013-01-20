@@ -6,8 +6,10 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 		});
 		Draw.zoom(zoom*e.scale);
 		Draw.position({
-			x: Draw.round(position.x - e.translate.x + (e.origin.x + position.x)*(e.scale -1)),
-			y: Draw.round(position.y - e.translate.y + (e.origin.y + position.y)*(e.scale -1))
+			x: Draw.round(position.x - e.translate.x + 
+			  (e.origin.x - e.translate.x + position.x)*(e.scale -1)),
+			y: Draw.round(position.y - e.translate.y + 
+			  (e.origin.y - e.translate.y + position.y)*(e.scale -1))
 		});
 	}
 	function select(e){
