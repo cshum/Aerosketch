@@ -44,7 +44,7 @@ define([
 			changed = true;
 		},
 		follow = function(){
-			var d = 0.5;
+			var d = 0.9;
 			point = {
 				x: Draw.round(point.x*(1-d) + cursor.x*d),
 				y: Draw.round(point.y*(1-d) + cursor.y*d)
