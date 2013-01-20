@@ -1,40 +1,55 @@
-define(['knockout','draw','util/points'],function(ko,Draw,points){
+define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points){
+	var zoom, position, scale, changed = false;
 	function select(e){
 		var vm = ko.dataFor(e.target);
 		if(vm && vm._shape)
 			Draw.select(vm);
 	}
-	function wheel(e){
-		var pos = Draw.position(),
-			p = e.position;
-		Draw.zoom(Draw.zoom()*(1+e.delta));
-		Draw.position({
-			x: Draw.round(pos.x + e.delta*(pos.x + p.x)),
-			y: Draw.round(pos.y + e.delta*(pos.y + p.y))
-		});
-	}
-	var zoom, pos;
-	function transformstart(e){
+	function start (){
+		scale = 1;
 		zoom = Draw.zoom();
-		pos = Draw.position();
+		position = Draw.position();
+	}
+	function wheel(e){
+		if(!changed) start();			
+		scale *= 1 +e.delta;
+		Draw.buffer({
+			origin:e.position,
+			scale:scale
+		});
+		changed = true;
 	}
 	function transform(e){
-		//todo
-		var dx = e.distanceX,
-			dy = e.distanceY,
-			delta = e.scale - 1,
-			p = e.position;
-		Draw.zoom(zoom*e.scale);
-		Draw.position({
-			x: Draw.round(pos.x - dx + delta*(pos.x - dx + p.x)),
-			y: Draw.round(pos.y - dy + delta*(pos.y - dy + p.y))
+		Draw.buffer({
+			origin:e.position,
+			scale:e.scale,
+			translate:{
+				x:e.distanceX,
+				y:e.distanceY
+			}
 		});
+		changed = true;
 	}
+	Draw.debounce.subscribe(function(val){
+		if(!val && changed){
+			var e = _(Draw.buffer()).defaults({
+				translate:{x:0,y:0},scale:1,origin:{x:0,y:0}
+			});
+			Draw.zoom(zoom*e.scale);
+			Draw.position({
+				x: Draw.round(position.x - e.translate.x + (e.origin.x + position.x)*(e.scale -1)),
+				y: Draw.round(position.y - e.translate.y + (e.origin.y + position.y)*(e.scale -1))
+			});
+			Draw.buffer({scale:1, translate:{x:0,y:0}});
+		}
+		changed = false;
+	});
+
 	return {
 		tap:select,
 		hold:select,
 		wheel:wheel,
-		transformstart:transformstart,
+		transformstart:start,
 		transform:transform
 	};
 });

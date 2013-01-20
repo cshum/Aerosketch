@@ -9,7 +9,8 @@ require.config({
 		},
 		'hammer': {exports: 'Hammer'},
 		'jquery.scrollto': ['jquery'],
-		'bootstrap':['jquery']
+		'bootstrap':['jquery'],
+		'sprite3d': {exports:'Sprite3D'}
 	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-1.8.2.min',
@@ -19,6 +20,7 @@ require.config({
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer',
+		'sprite3d':'lib/sprite3D/Sprite3D',
 
 		'bootstrap':'lib/bootstrap/bootstrap.min',
 
@@ -37,7 +39,7 @@ require([
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
-	'binding/surface','binding/hammer',
+	'binding/surface','binding/hammer','binding/sprite3d',
 	'binding/palette','binding/aniattr'
 ],function(ko,Draw){
 	ko.applyBindings(Draw,document.body);

@@ -7,11 +7,8 @@
 <script src="js/lib/less/less.min.js" type="text/javascript"></script>
 </head>
 <body data-bind="event:{contextmenu:function(){}}">
-<div class="canvas" data-bind="surface:trigger" style="cursor:default">
-	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
-		<rect width="100%" height="100%" 
-		data-bind="attr:{fill:background}"/>
-
+<div class="canvas" data-bind="surface:trigger,style:{background:background}" style="cursor:default">
+	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" data-bind="sprite3d:buffer" >
 		<g stroke-linecap="round">
 			<g data-bind="aniattr:{transform:transform},foreach:layers">
 				<g data-bind="visible:visible,template:shapesTemplate" ></g>
