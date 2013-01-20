@@ -27,4 +27,5 @@ define([
 			update();
 		}
 	};
+	ko.bindingHandlers.aniattr = ko.bindingHandlers.attr;
 });
