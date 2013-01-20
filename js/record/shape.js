@@ -49,12 +49,22 @@ define([
 			});
 			_(optionsMap[hash]).extend(options);
 			
-			this.revert = _(revert).bind({
-				type:type, options:original, hash:hash
-			});
-			this.get = _(get).bind({
-				type:type, options:options, hash:hash
-			});
+			this.revert = function(){
+				return new Record({
+					type:type, options:original, hash:hash
+				});
+			};
+			this.get = function(){
+				return {
+					type:type, options:options, hash:hash
+				};
+			};
+			this.destroy = function(){
+				if(!shapeMap[hash].visible()){
+					shapeMap[hash]._destroy(true);
+					delete shapeMap[hash];
+				}
+			};
 		};
 
 	return Record;

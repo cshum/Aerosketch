@@ -8,6 +8,9 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		commit = function(){
 			var records = _(arguments).toArray();
 			undos.push(records);
+			_(redos).each(function(records){
+				_(records).invoke('destroy');
+			});
 			redos = [];
 			push(records);
 		},

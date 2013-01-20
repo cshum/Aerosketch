@@ -42,6 +42,7 @@ define(['knockout','underscore','hash'
 				self.fill = ko.observable();
 				self.stroke = ko.observable();
 				self.strokeWidth = ko.observable();
+				self._destroy = ko.observable(false);
 
 				var rotate = ko.observable(0);
 				self.rotate = ko.computed({

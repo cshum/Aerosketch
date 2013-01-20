@@ -8,9 +8,9 @@ function(ko,_,svgTemplate){
 
 		self.shapes = ko.observableArray();
 		self.shapesTemplate = svgTemplate(self.shapes,function(shape){
-			return shape.visible() ?
-			(shape.view || '<'+shape.getType()+' data-bind="aniattr:attr" />') :
-			'<!-- -->';
+			if(shape.visible())
+			return (shape.view || '<'+shape.getType()+' data-bind="aniattr:attr" />');
+			else return '<!-- -->';
 		});
 	}
 });

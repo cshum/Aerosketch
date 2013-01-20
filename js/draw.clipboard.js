@@ -4,9 +4,10 @@ define([
 ],function(ko,_,Transform,Record,Draw){
 	var clipboard = ko.observableArray([]),
 		hide = function(){
-			_(Draw.selection()).each(function(shape){
+			Draw.commit.apply(null,_(Draw.selection()).map(function(shape){
 				shape.visible(false);
-			});
+				return new Record(shape);
+			}));
 			Draw.selection.removeAll();
 		},
 		copy = function(){

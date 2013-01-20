@@ -1,6 +1,6 @@
 define(function(){
 	var count = 0,
-		prefix = 'diu',
+		prefix = '',
 		setPrefix = function(val){
 			prefix = val;
 		},
