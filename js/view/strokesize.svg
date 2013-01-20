@@ -1,5 +1,5 @@
 <g transform="translate(-60,0)" style="cursor:row-resize" stroke="none" >
 	<circle cx="100%" cy="50%" r="32" fill="#ddd" opacity="0.9" />
-	<circle cx="100%" cy="50%" data-bind="aniattr:{r:strokeSize, fill:stroke}"/>
+	<circle cx="100%" cy="50%" data-bind="attr:{r:strokeSize, fill:stroke}"/>
 </g>
 
