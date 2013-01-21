@@ -29,7 +29,7 @@ define([
 					selected = [];
 
 				_(Draw.layers()).each(function(layer){
-					if(layer.visible() && !layer.locked())
+					if(layer.visible())
 						_(layer.shapes()).each(function(shape){
 							if( _( points(shape) ).all(test) &&
 							shape.visible() )

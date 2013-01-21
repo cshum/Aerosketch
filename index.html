@@ -57,15 +57,15 @@ data-bind="template:toolbarTemplate"></div>
 <div class="toolbar-top-right btn-toolbar">
 	<div class="btn-group">
 		<!-- ko if:selection().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:cut},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="hammer:{tap:cut}">
 			<i class="icon-cut icon-large"></i>
 		</button>
-		<button class="btn" data-bind="hammer:{tap:copy},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="hammer:{tap:copy}">
 			<i class="icon-copy icon-large"></i>
 		</button>
 		<!-- /ko -->
 		<!-- ko if:clipboard().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:paste},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="hammer:{tap:paste}">
 			<i class="icon-paste icon-large"></i>
 		</button>
 		<!-- /ko -->
@@ -80,8 +80,8 @@ data-bind="template:toolbarTemplate"></div>
 	</div>
 </div>
 <div class="toolbar-bottom-right btn-toolbar">
-	<div class="btn-group">
-		<button class="btn btn-primary">Done</button>
+	<div class="btn-group" data-bind="hammer:{tap:save}">
+		<button class="btn btn-primary">Save</button>
 	</div>
 </div>
 <script type="text/javascript" data-main="js/main" src="js/lib/require/require.js"></script>

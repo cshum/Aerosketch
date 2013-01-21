@@ -1,4 +1,4 @@
-define(['knockout','underscore','shape/factory'],function(ko,_,Shape){
+define(['knockout','underscore','shape/template'],function(ko,_,Shape){
 	var bbox = {
 			read: function(){
 				return {

@@ -1,18 +1,7 @@
 define([
-	'underscore','draw',
-	'shape/rect','shape/ellipse','shape/circle','shape/path'
-],function(_,Draw,Rect, Ellipse, Circle, Path){
+	'underscore','draw','shape/factory'
+],function(_,Draw,Factory){
 	var shapeMap = {}, optionsMap = {},
-		Shape = function(type){
-			switch(type){
-				case 'rect': return Rect; break;
-				case 'ellipse': return Ellipse; break;
-				case 'circle': return Circle; break;
-				case 'path': return Path; break;
-				default:break;
-			}
-			return null;
-		},
 		Record = function(data){
 			var hash, type, options, original;
 			if(data._shape){
@@ -27,7 +16,8 @@ define([
 				if(hash in shapeMap)
 					shapeMap[hash].setOptions(options);
 				else{
-					shapeMap[hash] = new Shape(type)(options,hash);
+					var Shape = Factory(type);
+					shapeMap[hash] = new Shape(options,hash);
 					//todo: specific layer
 					Draw.add(shapeMap[hash]);
 				}
