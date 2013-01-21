@@ -60,7 +60,7 @@ define([
 				};
 			};
 			this.destroy = function(){
-				if(!shapeMap[hash].visible()){
+				if(shapeMap[hash] && !shapeMap[hash].visible()){
 					shapeMap[hash]._destroy(true);
 					delete shapeMap[hash];
 				}
