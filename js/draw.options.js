@@ -1,6 +1,6 @@
 define([
    'underscore','knockout','record/shape',
-   'draw','draw.commit'
+   'draw','draw.history'
 ],function(_,ko,Record,Draw){
 	var changed = false,
 		options = {
@@ -30,7 +30,7 @@ define([
 	}
 	Draw.debounce.subscribe(function(val){
 		if (!val && changed) {
-			Draw.commit.apply(null,
+			Draw.log.apply(null,
 				_(Draw.selection()).map(function(shape){
 					return new Record(shape);
 				}

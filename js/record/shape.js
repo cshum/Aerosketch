@@ -13,26 +13,19 @@ define([
 			}
 			return null;
 		},
-		revert = function(){
-			return new Record(this);
-		},
-		get = function(){
-			return this;
-		},
 		Record = function(data){
 			var hash, type, options, original;
 			if(data._shape){
 				hash = data.getHash();
 				type = data.getType();
-				options = data.serialize();
+				options = data.getOptions();
 				shapeMap[hash] = data;
 			}else{
 				hash = data.hash;
 				type = data.type;
 				options = data.options;
-				//create/modify shape
 				if(hash in shapeMap)
-					shapeMap[hash].set(options);
+					shapeMap[hash].setOptions(options);
 				else{
 					shapeMap[hash] = new Shape(type)(options,hash);
 					//todo: specific layer

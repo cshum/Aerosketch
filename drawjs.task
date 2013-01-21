@@ -10,6 +10,7 @@ Todo:
 ✓ Transform optimization
 ✓ Selection Optimize
 ✓ Freehand optimize
+- buttontap
 - MSGesture
 - Save and Load
 - Selection hittest ignore

@@ -26,9 +26,8 @@ define(['knockout','shape/rect','draw','text!view/ratio.html','record/shape'
 		}
 	}
 	function release(){
-		if(curr){
-			Draw.commit(new Record(curr));
-		}
+		if(curr)
+			Draw.log(new Record(curr));
 		curr = null;
 	}
 	return {

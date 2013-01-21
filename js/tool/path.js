@@ -89,11 +89,11 @@ define([
 					finish(true);
 				}else if(focus._begin){
 					curr.close();
-					Draw.commit(new Record(curr));
+					Draw.log(new Record(curr));
 					Draw.select(curr);
 					finish(true);
 				}else{
-					if(c1) Draw.commit(new Record(curr));
+					if(c1) Draw.log(new Record(curr));
 					curr.lineTo(center());
 					c1 = control1();
 				}

@@ -3,9 +3,9 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		undos = [], 
 		redos = [],
 
-		push = function(records){
+		push = function(){
 		},
-		commit = function(){
+		log = function(){
 			var records = _(arguments).toArray();
 			undos.push(records);
 			_(redos).each(function(records){
@@ -32,8 +32,7 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		};
 
 	_(Draw).extend({
-		commit:commit,
-		push:push,
+		log:log,
 		undo:undo,
 		redo:redo
 	});

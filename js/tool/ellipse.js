@@ -28,7 +28,7 @@ define([
 	}
 	function release(){
 		if(curr){
-			Draw.commit(new Record(curr));
+			Draw.log(new Record(curr));
 		}
 		curr = null;
 	}

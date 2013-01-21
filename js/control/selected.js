@@ -86,7 +86,7 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 			var shapes = Draw.selection();
 			Transform(shapes,buffer());
 			buffer({});
-			Draw.commit.apply(null,_(shapes).map(function(shape,i){
+			Draw.log.apply(null,_(shapes).map(function(shape,i){
 				shape.visible(visibles[i]);
 				return new Record(shape);
 			}));

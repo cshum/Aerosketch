@@ -64,7 +64,7 @@ define([
 			curr.fill('none');
 			curr.path(smoothen(polySimplify(points(),0.1/Draw.zoom())));
 			Draw.add(curr);
-			Draw.commit(new Record(curr));
+			Draw.log(new Record(curr));
 			points.removeAll();
 			changed = false;
 		};
