@@ -39,7 +39,7 @@ require([
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
-	'binding/surface','binding/hammer',
+	'binding/surface','binding/hammer','binding/click',
 	'binding/palette','binding/aniattr'
 ],function(ko,Draw){
 	ko.applyBindings(Draw,document.body);

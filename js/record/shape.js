@@ -47,7 +47,7 @@ define([
 					type:type, options:original, hash:hash
 				});
 			};
-			this.get = function(){
+			this.serialize = function(){
 				return {
 					type:type, options:options, hash:hash
 				};

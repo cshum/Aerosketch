@@ -31,7 +31,7 @@
 	</div>
 </div>
 <div class="bottom" >
-	<div class="nocolor" data-bind="hammer:{tap:noColor}">
+	<div class="nocolor" data-bind="click:noColor">
 		<span class="draw-icon-cross"></span>
 	</div>
 	<ul class="palette" data-bind="palette:color,foreach:palette">
@@ -57,24 +57,24 @@ data-bind="template:toolbarTemplate"></div>
 <div class="toolbar-top-right btn-toolbar">
 	<div class="btn-group">
 		<!-- ko if:selection().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:cut},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="click:cut">
 			<i class="icon-cut icon-large"></i>
 		</button>
-		<button class="btn" data-bind="hammer:{tap:copy},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="click:copy">
 			<i class="icon-copy icon-large"></i>
 		</button>
 		<!-- /ko -->
 		<!-- ko if:clipboard().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:paste},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="click:paste">
 			<i class="icon-paste icon-large"></i>
 		</button>
 		<!-- /ko -->
 	</div>
 	<div class="btn-group">
-		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="click:undo">
 			<i class="icon-undo icon-large"></i>
 		</button>
-		<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="click:redo">
 			<i class="icon-repeat icon-large"></i>
 		</button>
 	</div>
