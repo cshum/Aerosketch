@@ -27,7 +27,8 @@ require.config({
 		'text': 'lib/require/text',
 		'domready': 'lib/require/domready'
 	},
-	waitSeconds: 900
+	waitSeconds: 900,
+	urlArgs: location.hostname=='localhost' ? "bust=" +  (new Date()).getTime():''
 });
 
 

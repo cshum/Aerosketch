@@ -24,7 +24,7 @@ define([
 			if(data._shape){
 				hash = data.getHash();
 				type = data.getType();
-				options = data.getOptions();
+				options = data.serialize();
 				shapeMap[hash] = data;
 			}else{
 				hash = data.hash;
@@ -32,7 +32,7 @@ define([
 				options = data.options;
 				//create/modify shape
 				if(hash in shapeMap)
-					shapeMap[hash].setOptions(options);
+					shapeMap[hash].set(options);
 				else{
 					shapeMap[hash] = new Shape(type)(options,hash);
 					//todo: specific layer

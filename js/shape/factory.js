@@ -9,7 +9,7 @@ define(['knockout','underscore','hash'
 				'fill','stroke','strokeWidth','rotate','visible'
 			].concat(config.options),
 			
-			setOptions = function(options){
+			set = function(options){
 				var self = this;
 				_(ko.toJS(options || {})).
 					each(function(val,key){
@@ -17,7 +17,7 @@ define(['knockout','underscore','hash'
 							self[key](val);
 					});
 			},
-			getOptions = function(){
+			serialize = function(){
 				return ko.toJS(this.options);
 			},
 			clone = function(){
@@ -76,11 +76,11 @@ define(['knockout','underscore','hash'
 					self.options[key] = self[key];
 				});
 
-				setOptions.call(self, options || {});
+				set.call(self, options || {});
 			};
 		_(Shape.prototype).extend({
-			setOptions:setOptions,
-			getOptions:getOptions,
+			set:set,
+			serialize:serialize,
 			clone:clone
 		});
 		return Shape;
