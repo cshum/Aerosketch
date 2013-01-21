@@ -28,7 +28,7 @@ require.config({
 		'domready': 'lib/require/domready'
 	},
 	waitSeconds: 900,
-	urlArgs: "bust=" +  (new Date()).getTime()
+	urlArgs:0
 });
 
 
