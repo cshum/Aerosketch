@@ -1,13 +1,18 @@
 define(['knockout','jquery'],function(ko,$){
 	ko.bindingHandlers.click = {
 		init: function(el,valueAccessor,all,vm) {
-			var func = valueAccessor(), touched = false;
+			var func = valueAccessor(), 
+				moused, touched;
 			$(el)
-				.on('mousedown touchstart',function(e){
-					touched = true;
+				.on('mousedown',function(e){
+					if(!touched) moused = true;
+				})
+				.on('touchstart',function(e){
+					if(!moused) touched = true;
 				})
 				.on('mouseup touchend',function(e){
-					if(touched) func.call(null,vm,e);
+					if(moused || touched) func.call(null,vm,e);
+					moused = false;
 					touched = false;
 				});
 			ko.utils.domNodeDisposal.addDisposeCallback(el, function(){
