@@ -27,8 +27,7 @@ require.config({
 		'text': 'lib/require/text',
 		'domready': 'lib/require/domready'
 	},
-	waitSeconds: 90,
-	urlArgs:(new Date()).getTime()
+	waitSeconds: 900
 });
 
 
