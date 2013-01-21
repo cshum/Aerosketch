@@ -28,7 +28,8 @@ require.config({
 		'domready': 'lib/require/domready'
 	},
 	waitSeconds: 900,
-	urlArgs:0
+	urlArgs: location.hostname == 'localhost' ?
+		"bust=" +  (new Date()).getTime() : 0
 });
 
 
