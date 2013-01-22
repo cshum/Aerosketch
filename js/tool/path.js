@@ -89,11 +89,9 @@ define([
 					finish(true);
 				}else if(focus._begin){
 					curr.close();
-					Draw.log(new Record(curr));
 					Draw.select(curr);
 					finish(true);
 				}else{
-					if(c1) Draw.log(new Record(curr));
 					curr.lineTo(center());
 					c1 = control1();
 				}
@@ -113,6 +111,7 @@ define([
 				Draw.deselect();
 				curr.visible(false);
 			}
+			if(ok && curr) Draw.log(new Record(curr));
 			curr = null;
 			c1 = null;
 			control1(null);
