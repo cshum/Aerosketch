@@ -1,17 +1,5 @@
-<g fill="none" stroke="blue" stroke-width="1" stroke-dasharray="5, 3" >
-	<!-- ko if: control1 -->
-	<line data-bind="attr:{
-		x1:control1().x, y1:control1().y,
-		x2:center().x, y2:center().y
-	}" />
-	<!-- /ko -->
-	<!-- ko if: control2 -->
-	<line data-bind="attr:{
-		x1:control2().x, y1:control2().y,
-		x2:center().x, y2:center().y
-	}" />
-	<!-- /ko -->
-</g>
+<polyline fill="none" stroke="blue" stroke-width="1" stroke-dasharray="5, 3" 
+	data-bind="aniattr:{points:cpoints}" />
 <g fill="white" stroke="blue" stroke-width="1" >
 	<!-- ko with:control2 -->
 	<circle data-bind="attr:{cx:x,cy:y}" r="3" />

@@ -118,7 +118,17 @@ define([
 			control2(null);
 			center(null);
 			begin(null);
-		};
+		},
+		cpoints = ko.computed(function(){
+			var ps = [], 
+				c1 = Draw.toView(control1()),
+				c2 = Draw.toView(control2()),
+				c = Draw.toView(center());
+			if(c1) ps.push(c1.x,c1.y);
+			if(c) ps.push(c.x, c.y);
+			if(c2) ps.push(c2.x,c2.y);
+			return ps.join(' ');
+		});
 		
 	return {
 		name:'Path Tool',
@@ -137,6 +147,7 @@ define([
 			null,control1,'_control1')),
 		control2: ko.computed(_(Draw.toView).bind(
 			null,control2,'_control2')),
+		cpoints:cpoints,
 
 		selectors: selectors,
 
