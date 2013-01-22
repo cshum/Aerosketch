@@ -11,7 +11,9 @@ Todo:
 ✓ Selection Optimize
 ✓ Freehand optimize
 - MSGesture
-- Save and Load
+✓ Save and Load
+	- Save options
+	✓ fix first time history
 - Selection hittest ignore
 	- Get surface dimension
 

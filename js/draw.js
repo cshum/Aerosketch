@@ -1,8 +1,8 @@
 define([
-	'knockout','underscore','layer',
+	'knockout','underscore',
 	'lib/knockout/template',
-	'lib/knockout/svgtemplate','util/lzw'
-],function(ko,_,Layer,template,svgTemplate,lzw){
+	'lib/knockout/svgtemplate',
+],function(ko,_,template,svgTemplate){
 	var layers = ko.observableArray(),
 		layer = ko.observable(),
 
@@ -107,45 +107,7 @@ define([
 				else if(baseControl() && _.isFunction(baseControl()[type]))
 					baseControl()[type](e);
 			};
-		})(),
-
-		serialize = function(){
-			var string = JSON.stringify({
-					layers: _(layers()).invoke('serialize'),
-					zoom: zoom(),
-					position: position(),
-					background: background()
-				}),
-				zipped = lzw.encode(string);
-			console.log(string.length, zipped.length);
-			return zipped;
-		},
-		load = function(data){
-			if(!data) return;
-			data = JSON.parse(lzw.decode(data));
-
-			zoom(data.zoom);
-			position(data.position);
-			background(data.background);
-			layers(_(data.layers).map(function(e){
-				return new Layer(e);
-			}));
-			layer(_.last(layers()));
-		},
-		save = function(){
-			if('localStorage' in window){
-				localStorage['draw'] = serialize();
-				alert('Saved');
-			}
-		};
-
-	var l = new Layer();
-	layers([l]);
-	layer(l);
-	if('localStorage' in window){
-		var data = localStorage['draw'];
-		if(data) load(data);
-	}
+		})();
 
 	return {
 		layers: layers,
@@ -171,10 +133,6 @@ define([
 		tools:tools,
 		tool: tool, 
 		toolTemplate:toolTemplate,
-
-		load:load,
-		save:save,
-		serialize:serialize,
 
 		toolbarTemplate:toolbarTemplate,
 

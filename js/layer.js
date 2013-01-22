@@ -1,5 +1,5 @@
 define([
-   'knockout','underscore','lib/knockout/svgtemplate','shape/factory'
+   'knockout','underscore','lib/knockout/svgtemplate',
 ],function(ko,_,svgTemplate,Factory){
 	return function(data){
 		data = _(data || {}).defaults({
@@ -11,12 +11,7 @@ define([
 		var self = this;
 		self.name = ko.observable(data.name);
 		self.visible = ko.observable(data.visible);
-		self.shapes = ko.observableArray(
-			_(data.shapes).map(function(e){
-				var Shape = Factory(e.type);
-				return new Shape(e.options);
-			})
-		);
+		self.shapes = ko.observableArray(data.shapes);
 
 		self.shapesTemplate = svgTemplate(self.shapes,function(shape){
 			if(shape.visible())

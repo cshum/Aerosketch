@@ -29,14 +29,14 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 1
+		"bust=" +  (new Date()).getTime() : 2
 });
 
 
 require([
 	'knockout',
 
-	'draw','draw.palette','draw.clipboard',
+	'draw','draw.palette','draw.clipboard','draw.save',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
