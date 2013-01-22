@@ -2,10 +2,10 @@
 	data-bind="aniattr:{points:cpoints}" />
 <g fill="white" stroke="blue" stroke-width="1" >
 	<!-- ko with:control2 -->
-	<circle data-bind="attr:{cx:x,cy:y}" r="3" />
+	<circle data-bind="aniattr:{cx:x,cy:y}" r="3" />
 	<!-- /ko -->
 	<!-- ko with:control1 -->
-	<circle data-bind="attr:{cx:x,cy:y}" r="3" />
+	<circle data-bind="aniattr:{cx:x,cy:y}" r="3" />
 	<!-- /ko -->
 </g>
 <g fill="white" stroke="black" stroke-width="1" >
