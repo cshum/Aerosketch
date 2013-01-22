@@ -47,6 +47,7 @@ function binding(el,value){
 				e.originalEvent.touches[0].target;
 
 			pos = position(e.originalEvent) || pos;
+			start = start || pos;
 			if(type=='touch'){
 				if(_.isEqual(start,pos) && isTouch != touchFlag) return; 
 				touchFlag = isTouch;
