@@ -45,7 +45,7 @@ define([
 		save = function(){
 			if('localStorage' in window){
 				var data = {
-					layers: _(layers()).invoke('serialize'),
+					layers: _(Draw.layers()).invoke('serialize'),
 					zoom: Draw.zoom(),
 					position: Draw.position(),
 					background: Draw.background(),
