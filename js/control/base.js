@@ -22,11 +22,15 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 		zoom = Draw.zoom();
 		position = Draw.position();
 	}
+	var startPos;
 	function wheel(e){
-		if(!changed) start();			
+		if(!changed){
+			start();			
+			startPos = e.position;
+		}
 		scale *= 1 +e.delta;
 		Transform({
-			origin:e.position,
+			origin:startPos,
 			scale:scale
 		});
 		changed = true;

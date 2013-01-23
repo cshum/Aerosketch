@@ -14,7 +14,6 @@ define([
 					}
 				},
 				update = function(){
-					console.log(changed);
 					$(el).attr(changed);
 					triggered = false;
 					changed = {};
