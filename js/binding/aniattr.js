@@ -7,7 +7,7 @@ define([
 				changed = {},
 				triggered = false,
 				trigger = function(key,val){
-					changed[key] = val;
+					changed[key] = val || '';
 					if(!triggered){
 						requestAnimationFrame(update);
 						triggered = true;

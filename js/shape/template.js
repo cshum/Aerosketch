@@ -40,7 +40,6 @@ define(['knockout','underscore','hash'
 						(bbox.x+bbox.width/2)+','+
 						(bbox.y+bbox.height/2)+')';
 				}
-				return '';
 			},
 			Shape = function(options, hash){
 				var self = this;
