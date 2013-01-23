@@ -2,17 +2,13 @@ define([
    'knockout','underscore','jquery','util/requestanimationframe'
 ],function(ko,_,$,requestAnimationFrame){
 	ko.bindingHandlers.aniattr = {
-		init: function(el,valueAccessor) {
+		init: function(el,valueAccessor,all) {
+			console.log(all());
 			var attr = valueAccessor(),
 				changed = {},
 				triggered = false,
 				trigger = function(key,value){
-					if(key){
-						changed[key] = ko.utils.unwrapObservable(value) || '';
-					}else{
-						//trigger all
-						changed = ko.utils.unwrapObservable(attr);
-					}
+					changed[key] = ko.utils.unwrapObservable(value) || '';
 					if(!triggered){
 						requestAnimationFrame(update);
 						triggered = true;
@@ -23,13 +19,9 @@ define([
 					triggered = false;
 					changed = {};
 				};
-			if(ko.isObservable(attr) || ko.isComputed(attr)){
-				ko.computed(trigger);
-			}else{
-				_(attr).each(function(value,key){
-					ko.computed(_(trigger).bind(null,key,value));
-				});
-			}
+			_(attr).each(function(value,key){
+				ko.computed(_(trigger).bind(null,key,value));
+			});
 			update();
 		}
 	};
