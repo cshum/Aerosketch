@@ -11,7 +11,7 @@ define([
 						changed[key] = ko.utils.unwrapObservable(value) || '';
 					}else{
 						//trigger all
-						changed = ko.toJS(attr);
+						changed = ko.utils.unwrapObservable(attr);
 					}
 					if(!triggered){
 						requestAnimationFrame(update);
@@ -27,7 +27,7 @@ define([
 				ko.computed(trigger);
 			}else{
 				_(attr).each(function(value,key){
-					ko.computed(_(trigger).bind(key,value));
+					ko.computed(_(trigger).bind(null,key,value));
 				});
 			}
 			update();
