@@ -11,7 +11,7 @@ define([
 						changed[key] = ko.utils.unwrapObservable(value) || '';
 					}else{
 						//trigger all
-						changed = ko.utils.unwrapObservable(valueAccessor());
+						changed = ko.unwrapObservable(attr);
 					}
 					if(!triggered){
 						requestAnimationFrame(update);
@@ -23,10 +23,14 @@ define([
 					triggered = false;
 					changed = {};
 				};
-			ko.computed(trigger);
-			_(ko.utils.unwrapObservable(attr)).each(function(value,key){
-				ko.computed(_(trigger).bind(key,value));
-			});
+			if(ko.isObservable(attr) || ko.isComputed(attr)){
+				ko.computed(trigger);
+			}else{
+				_(attr).each(function(value,key){
+					changed[key] = ko.utils.unwrapObservable(value);
+					ko.computed(_(trigger).bind(key,value));
+				});
+			}
 			update();
 		}
 	};
