@@ -12,8 +12,11 @@ Todo:
 ✓ Freehand optimize
 - MSGesture
 ✓ Save and Load
-	- Save options
+	✓ Save options
 	✓ fix first time history
+- Layer
+- Pictures
+- Tagging
 - Selection hittest ignore
 	- Get surface dimension
 
