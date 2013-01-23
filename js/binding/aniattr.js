@@ -3,7 +3,6 @@ define([
 ],function(ko,_,$,requestAnimationFrame){
 	ko.bindingHandlers.aniattr = {
 		init: function(el,valueAccessor,all) {
-			console.log(all());
 			var attr = valueAccessor(),
 				changed = {},
 				triggered = false,
