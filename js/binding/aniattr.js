@@ -6,8 +6,13 @@ define([
 			var attr = valueAccessor(),
 				changed = {},
 				triggered = false,
-				trigger = function(key,val){
-					changed[key] = val || '';
+				trigger = function(key,value){
+					if(key){
+						changed[key] = ko.utils.unwrapObservable(value) || '';
+					}else{
+						//trigger all
+						changed = ko.utils.unwrapObservable(valueAccessor());
+					}
 					if(!triggered){
 						requestAnimationFrame(update);
 						triggered = true;
@@ -18,11 +23,9 @@ define([
 					triggered = false;
 					changed = {};
 				};
-			_(attr).each(function(value,key){
-				changed[key] = ko.utils.unwrapObservable(value);
-				ko.computed(function(){
-					trigger(key,ko.utils.unwrapObservable(value));
-				});
+			ko.computed(trigger);
+			_(ko.utils.unwrapObservable(attr)).each(function(value,key){
+				ko.computed(_(trigger).bind(key,value));
 			});
 			update();
 		}
