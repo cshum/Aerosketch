@@ -83,13 +83,14 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 		if(!debounce) 
 			requestAnimationFrame(_(transforming).bind(null,false));
 		if(!debounce && changed){
-			var shapes = Draw.selection();
-			Transform(shapes,buffer());
-			buffer({});
-			Draw.log.apply(null,_(shapes).map(function(shape,i){
-				shape.visible(visibles[i]);
-				return new Record(shape);
-			}));
+			requestAnimationFrame(_(function(shapes){
+				Transform(shapes,buffer());
+				buffer({});
+				Draw.log.apply(null,_(shapes).map(function(shape,i){
+					shape.visible(visibles[i]);
+					return new Record(shape);
+				}));
+			}).bind(null,Draw.selection()));
 			changed = false;
 		}
 	});
