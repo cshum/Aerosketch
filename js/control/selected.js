@@ -42,17 +42,16 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 		drag = function(e){
 			if(!angle) 
 				angle = e.angle;
-			if(e.shiftKey || e.button==2){
+			if(e.shiftKey || e.button==2)
 				buffer({
 					rotate:e.angle - angle,
 					origin:Draw.fromView(e.start)
 				});
-			}else{
+			else
 				buffer({translate:{
 					x:e.distanceX/Draw.zoom(),
 					y:e.distanceY/Draw.zoom()
 				}});
-			}
 			changed = true;
 		},
 
@@ -75,28 +74,30 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 				startPos = Draw.fromView(e.position);
 				start();
 			}
+			changed = true;
 			scale *= 1 +e.delta;
 			buffer({
 				origin:startPos,
 				scale:scale
 			});
-			changed = true;
 		};
 
 	Draw.debounce.subscribe(function(debounce){
-		if(!debounce) 
-			requestAnimationFrame(_(transforming).bind(null,false));
-		if(!debounce && changed){
-			requestAnimationFrame(_(function(shapes){
-				Transform(shapes,buffer());
-				buffer({});
-				Draw.log.apply(null,_(shapes).map(function(shape,i){
-					shape.visible(visibles[i]);
-					return new Record(shape);
-				}));
-			}).bind(null,Draw.selection()));
-			changed = false;
-		}
+		var shapes = Draw.selection();
+		if(!debounce)
+			requestAnimationFrame(function(){
+				transforming(false);
+				if(changed){
+					Transform(shapes,buffer());
+					buffer({});
+					Draw.log.apply(null,_(shapes).map(function(shape,i){
+						shape.visible(visibles[i]);
+						return new Record(shape);
+					}));
+					changed = false;
+				}
+			});
+
 	});
 
 	return {
