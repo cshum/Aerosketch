@@ -69,11 +69,15 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 			changed = true;
 		},
 
+		startPos,
 		wheel = function(e){
-			if(!changed) start();
+			if(!changed){
+				startPos = Draw.fromView(e.position);
+				start();
+			}
 			scale *= 1 +e.delta;
 			buffer({
-				origin:Draw.fromView(e.position),
+				origin:startPos,
 				scale:scale
 			});
 			changed = true;
