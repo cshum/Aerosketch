@@ -54,11 +54,13 @@ define([
 		},
 		tap = function(e){
 			var s = Draw.fromView(e.start);
-			points([[s.x, s.y],[s.x,s.y]]);
+			cursor = s;
+			points([[s.x, s.y]]);
 			changed = true;
 		},
 		release = function(){
 			if(!changed) return;
+			points.push([cursor.x,cursor.y]);
 			following = false;
 			var curr = new Path(Draw.options);
 			curr.fill('none');
