@@ -52,12 +52,6 @@ define([
 			points.push([point.x,point.y]);
 			if(following) requestAnimationFrame(follow);
 		},
-		tap = function(e){
-			var s = Draw.fromView(e.start);
-			cursor = s;
-			points([[s.x, s.y]]);
-			changed = true;
-		},
 		release = function(){
 			if(!changed) return;
 			points.push([cursor.x,cursor.y]);
@@ -79,7 +73,6 @@ define([
 		points: ko.computed(function(){ return _.flatten(points()).join(' '); }),
 		dragstart:start,
 		drag:drag,
-		release:release,
-		tap:tap
+		release:release
 	};
 });
