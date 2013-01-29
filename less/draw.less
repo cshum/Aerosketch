@@ -38,7 +38,7 @@
 @active: #0056aa;
 
 @color-mode-height:70px;
-@palette-height:45px;
+@palette-height:42px;
 @icon-pad: 12px;
 @nav-width: @icon-size + @icon-pad*2;
 
@@ -145,10 +145,8 @@ body > div{ position:absolute; }
 }
 @toolbar-hpad:25px;
 @toolbar-vpad:7px;
-.debounce{
-	[class^="toolbar-top-"]{
-		display:none;
-	}
+.transforming .overlay{
+	display:none;
 }
 .toolbar-bottom-left{
 	z-index:11;
