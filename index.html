@@ -43,12 +43,15 @@
 	hammer:{tap:toggleColorMode,hold:swapColor},
 	hammerOptions:{tap_double:false}">
 	<div class="fill" data-bind="
-		style:{background:fill,zIndex:$root.colorMode()=='fill'? 2:1},
+		style:{background:fill()=='none'?'':fill(),
+		zIndex:$root.colorMode()=='fill'? 2:1},
 		if:fill()=='none'">
 		<span class="draw-icon-cross" ></span>
 	</div>
-	<div class="stroke" data-bind="if:stroke()=='none',
-		style:{background:stroke,zIndex:$root.colorMode()=='stroke'? 2:1}">
+	<div class="stroke" data-bind="
+		if:stroke()=='none',
+		style:{background:stroke()=='none'?'':stroke(),
+		zIndex:$root.colorMode()=='stroke'? 2:1}">
 		<span class="draw-icon-cross" ></span>
 	</div>
 </div>

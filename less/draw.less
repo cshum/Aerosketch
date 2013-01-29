@@ -129,18 +129,15 @@ body > div{ position:absolute; }
 
 	.fill, .stroke{
 		position: absolute; 
-		width:@icon-size + 5; 
-		height:@icon-size + 5;
+		width:@icon-size; 
+		height:@icon-size;
+		padding:3px;
 		border:2px white solid;
 		.rounded(5px);
-
-		span{
-			.opacity(0.5);
-			background-color:black;
-		}
+		background-color:black;
 	}
 
-	@pad: 7px;
+	@pad: 5px;
 	.fill{ top:@pad; left:@pad; }
 	.stroke{ bottom:@pad; right:@pad; }
 }
