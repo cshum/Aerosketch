@@ -21,6 +21,7 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 		scale = 1;
 		zoom = Draw.zoom();
 		position = Draw.position();
+		Draw.transforming(true);
 	}
 	var startPos;
 	function wheel(e){
@@ -47,6 +48,7 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 		changed = true;
 	}
 	Draw.debounce.subscribe(function(){
+		if(changed) Draw.transforming(false);
 		changed = false;
 	});
 

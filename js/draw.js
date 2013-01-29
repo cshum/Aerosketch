@@ -81,6 +81,7 @@ define([
 		}),
 
 		debounce = ko.observable(false),
+		transforming = ko.observable(false),
 		trigger = (function(){
 			var active, timeout;
 			return function(type,e){
@@ -129,6 +130,7 @@ define([
 		deselect: deselect,
 		trigger:trigger,
 		debounce:debounce,
+		transforming:transforming,
 
 		tools:tools,
 		tool: tool, 

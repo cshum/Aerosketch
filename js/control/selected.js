@@ -24,14 +24,13 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 		},
 
 		angle, scale, changed = false,
-		transforming = ko.observable(false),
 		buffer = ko.observable({}),
 		visibles,
 
 		start = function(){
 			scale = 1;
 			angle = null;
-			transforming(true);
+			Draw.transforming(true);
 			visibles = _(Draw.selection()).map(function(shape){
 				var v = shape.visible();
 				shape.visible(false);
@@ -86,7 +85,7 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 		var shapes = Draw.selection();
 		if(!debounce)
 			requestAnimationFrame(function(){
-				transforming(false);
+				Draw.transforming(false);
 				if(changed){
 					Transform(shapes,buffer());
 					buffer({});
@@ -123,6 +122,5 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 		view:view,
 		selectedBBox:selectedBBox,
 		selectedTemplate:selectedTemplate,
-		transforming:transforming
 	}
 });
