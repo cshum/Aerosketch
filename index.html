@@ -6,7 +6,7 @@
 <link rel="stylesheet/less" type="text/css" href="less/draw.less">
 <script src="js/lib/less/less.min.js" type="text/javascript"></script>
 </head>
-<body data-bind="event:{contextmenu:function(){}}">
+<body data-bind="event:{contextmenu:function(){}},css:{debounce:debounce}">
 <div class="surface" data-bind="surface:trigger,style:{background:background}" style="cursor:default">
 	<svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
 		<g stroke-linecap="round">
