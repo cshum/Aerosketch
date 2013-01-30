@@ -75,6 +75,7 @@ define([
 		points: ko.computed(function(){ return _.flatten(points()).join(' '); }),
 		dragstart:start,
 		drag:drag,
+		tap:function(){},
 		release:release
 	};
 });
