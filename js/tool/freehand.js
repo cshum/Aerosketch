@@ -22,7 +22,7 @@ define([
 			}
 			return ps;
 		},
-		distance = function(p1,p2){
+		dist = function(p1,p2){
 			var dx = p1.x - p2.x,
 				dy = p1.y - p2.y;
 			return Math.sqrt(dx*dx + dy*dy);
@@ -45,11 +45,13 @@ define([
 		},
 		follow = function(){
 			var d = 0.5;
-			point = {
-				x: Draw.round(point.x*(1-d) + cursor.x*d),
-				y: Draw.round(point.y*(1-d) + cursor.y*d)
-			};
-			points.push([point.x,point.y]);
+			if(dist(cursor,point) >= 5/Draw.zoom()){
+				point = {
+					x: Draw.round(point.x*(1-d) + cursor.x*d),
+					y: Draw.round(point.y*(1-d) + cursor.y*d)
+				};
+				points.push([point.x,point.y]);
+			}
 			if(following) requestAnimationFrame(follow);
 		},
 		release = function(){
