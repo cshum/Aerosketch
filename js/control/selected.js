@@ -2,7 +2,7 @@ define(['knockout','underscore','transform','draw','record/shape',
 'lib/knockout/svgtemplate', 'text!view/selected.svg','util/requestanimationframe'],
 function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
-			return shape.view || '<'+shape.getType()+' data-bind="attr:attr" />';
+			return shape.view || '<'+shape.getType()+' data-bind="aniattr:attr" />';
 		}),
 		selectedBBox = function(shape){
 			var b = shape.bbox(),
@@ -83,20 +83,18 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 
 	Draw.debounce.subscribe(function(debounce){
 		var shapes = Draw.selection();
-		if(!debounce)
+		if(!debounce && changed){
+			Transform(shapes,buffer());
 			requestAnimationFrame(function(){
 				Draw.transforming(false);
-				if(changed){
-					Transform(shapes,buffer());
-					buffer({});
-					Draw.log.apply(null,_(shapes).map(function(shape,i){
-						shape.visible(visibles[i]);
-						return new Record(shape);
-					}));
-					changed = false;
-				}
+				Draw.log.apply(null,_(shapes).map(function(shape,i){
+					shape.visible(visibles[i]);
+					return new Record(shape);
+				}));
+				changed = false;
+				buffer({});
 			});
-
+		}
 	});
 
 	return {
