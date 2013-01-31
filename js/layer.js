@@ -14,9 +14,7 @@ define([
 		self.shapes = ko.observableArray(data.shapes);
 
 		self.shapesTemplate = svgTemplate(self.shapes,function(shape){
-			if(shape.visible())
-			return '<'+shape.getType()+' data-bind="aniattr:attr" />';
-			else return '<!-- -->';
+			return '<'+shape.getType()+' data-bind="visible:visible,aniattr:attr" />';
 		});
 		self.serialize = function(){
 			return {
