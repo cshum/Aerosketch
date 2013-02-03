@@ -28,6 +28,7 @@ function(ko,_,Transform,Draw,Record,svgTemplate, view, requestAnimationFrame){
 		visibles,
 
 		start = function(){
+			if(changed) return;
 			scale = 1;
 			angle = null;
 			Draw.transforming(true);
