@@ -4,6 +4,7 @@ define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points)
 		e = _(e).defaults({
 			translate:{x:0,y:0},scale:1,origin:{x:0,y:0}
 		});
+		e.scale = Math.max(0.1,e.scale);
 		Draw.zoom(zoom*e.scale);
 		Draw.position({
 			x: Draw.round(position.x - e.translate.x + 
