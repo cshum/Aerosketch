@@ -4,7 +4,7 @@ define([
 	'util/requestanimationframe','util/polysimplify','text!view/freehand.svg'
 ],function(_,ko,Path,Draw,Record,requestAnimationFrame,polySimplify,view){
 	var points = ko.observableArray([]), changed = false,
-		interval, point, cursor, following,
+		interval, point, cursor, 
 		smoothen = function(points) {
 			var ps = [];
 			ps.push(['M',points[0]]);
@@ -35,8 +35,8 @@ define([
 			var s = Draw.fromView(e.start);
 			points([[s.x, s.y]]);
 			point = s;
-			following = true;
 			requestAnimationFrame(follow);
+			Draw.transforming(true);
 		},
 
 		drag = function(e){
@@ -52,12 +52,12 @@ define([
 				};
 				points.push([point.x,point.y]);
 			}
-			if(following) requestAnimationFrame(follow);
+			if(Draw.transforming()) requestAnimationFrame(follow);
 		},
 		release = function(){
 			if(!changed) return;
 			points.push([cursor.x,cursor.y]);
-			following = false;
+			Draw.transforming(false);
 			var curr = new Path(Draw.options);
 			curr.fill('none');
 			curr.path(smoothen(polySimplify(points(),0.1/Draw.zoom())));
