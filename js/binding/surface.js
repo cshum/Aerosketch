@@ -49,33 +49,31 @@ function binding(el,value){
 			var org = e.srcEvent;
 			target = e.target;
 
-		   pos = position(e.touches);
+		    //pos = position(e.touches);
+			pos = {
+				x:e.center.pageX - offset().left,
+				y:e.center.pageY - offset().top
+			};
 			if(type=='touch') start = pos;
 
 			var len = e.touches.length;
 			if(len>1 && dragging) return;
 			if(len>2 && transforming) return;
 
-			var dx = pos.x - start.x,
-				dy = pos.y - start.y,
-				evt = {
+			var evt = {
 					target:target,
 					metaKey:org.metaKey,
 					shiftKey:org.shiftKey,
 					button:org.button,
 
 					start: start, position:pos,
-					distanceX:dx, 
-					distanceY:dy,
-					distance: Math.sqrt(dx*dx + dy*dy)
+					distanceX:e.deltaX, 
+					distanceY:e.deltaY,
+					distance: e.distance,
+					scale:e.scale,
+					rotation:e.rotation,
+					angle:e.angle
 				};
-
-			if(type=='drag')
-				evt.angle = e.angle;
-			_(evt).extend({
-				scale:e.scale,
-				rotation:e.rotation
-			});
 			/*
 			if(type=='wheel')
 				evt.delta = Math.max(-0.2,Math.min(0.2,
