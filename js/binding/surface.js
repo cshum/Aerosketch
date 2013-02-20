@@ -47,9 +47,8 @@ function binding(el,value){
 				return;
 			}
 			var org = e.srcEvent;
-			target = e.target;
 
-		    //pos = position(e.touches);
+		    pos = position(org.touches || [org]);
 			pos = {
 				x:e.center.pageX - offset().left,
 				y:e.center.pageY - offset().top
@@ -61,7 +60,7 @@ function binding(el,value){
 			if(len>2 && transforming) return;
 
 			var evt = {
-					target:target,
+					target:e.target,
 					metaKey:org.metaKey,
 					shiftKey:org.shiftKey,
 					button:org.button,
