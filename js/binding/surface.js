@@ -63,7 +63,7 @@ function binding(el,value){
 
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
-				pos = {
+				evt = {
 					distanceX:dx, 
 					distanceY:dy,
 					distance: Math.sqrt(dx*dx + dy*dy),
