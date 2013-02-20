@@ -56,13 +56,26 @@
 		<span class="draw-icon-cross" ></span>
 	</div>
 </div>
+<div class="toolbar-bottom-left">
+	<!--<span data-bind="visible:selection().length>0" class="">Pinch selection to transform</span>-->
+</div>
 <div class="toolbar-top-left btn-toolbar" 
 data-bind="template:toolbarTemplate"></div>
 <div class="toolbar-top-right btn-toolbar">
 	<div class="btn-group">
+		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
+			<i class="icon-undo icon-large"></i>
+		</button>
+		<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{tap_double:false}">
+			<i class="icon-repeat icon-large"></i>
+		</button>
+	</div>
+</div>
+<div class="toolbar-bottom-right btn-toolbar">
+	<div class="btn-group">
 		<!-- ko if:selection().length > 0 -->
-		<button class="btn" data-bind="hammer:{tap:cut}">
-			<i class="icon-cut icon-large"></i>
+		<button class="btn" data-bind="hammer:{tap:hide}">
+			<i class="icon-remove-sign icon-large"></i>
 		</button>
 		<button class="btn" data-bind="hammer:{tap:copy}">
 			<i class="icon-copy icon-large"></i>
@@ -74,19 +87,11 @@ data-bind="template:toolbarTemplate"></div>
 		</button>
 		<!-- /ko -->
 	</div>
-	<div class="btn-group">
-		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
-			<i class="icon-undo icon-large"></i>
-		</button>
-		<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{tap_double:false}">
-			<i class="icon-repeat icon-large"></i>
-		</button>
-	</div>
-</div>
-<div class="toolbar-bottom-right btn-toolbar">
+	<!--
 	<div class="btn-group" data-bind="hammer:{tap:save}">
 		<button class="btn btn-primary">Save</button>
 	</div>
+	-->
 </div>
 <script type="text/javascript" data-main="js/main" src="js/lib/require/require.js"></script>
 </body>
