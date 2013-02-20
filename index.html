@@ -63,6 +63,16 @@
 data-bind="template:toolbarTemplate"></div>
 <div class="toolbar-top-right btn-toolbar">
 	<div class="btn-group">
+		<button class="btn" data-bind="">
+			<i class="icon-reorder icon-large"></i>
+		</button>
+		<button class="btn" data-bind="">
+			<i class="icon-comments-alt icon-large"></i>
+		</button>
+	</div>
+</div>
+<div class="toolbar-bottom-right btn-toolbar">
+	<div class="btn-group">
 		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
 			<i class="icon-undo icon-large"></i>
 		</button>
@@ -71,7 +81,7 @@ data-bind="template:toolbarTemplate"></div>
 		</button>
 	</div>
 </div>
-<div class="toolbar-bottom-right btn-toolbar">
+<div class="toolbar-bottom-left btn-toolbar">
 	<div class="btn-group">
 		<!-- ko if:selection().length > 0 -->
 		<button class="btn" data-bind="hammer:{tap:hide}">

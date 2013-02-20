@@ -9,11 +9,30 @@ function binding(el,value){
 		offset = _.throttle(function(){
 			return $(el).offset();
 		},500),
+		position = function(pos){
+			if(!pos[0] || !pos[0].pageX) 
+				return null;
+
+			var sum = _(pos).chain()
+				.map(function(p){
+					return {x:p.pageX, y:p.pageY};
+				})
+				.reduce(function(a,b){
+					return {x:a.x+b.x, y:a.y+b.y};
+				},{x:0,y:0})
+				.value(),
+				len = pos.length;
+
+			return {
+				x: sum.x/len - offset().left,
+				y: sum.y/len - offset().top
+			};
+		},
 		trigger = function(e){
 			var type=e.type;
 			e = e.gesture;
 			//clear transform/drag when drag/transform
-			
+			//
 			if((dragging && type=='transform')
 			|| (transforming && type=='drag'))
 				trigger('release');
@@ -27,14 +46,10 @@ function binding(el,value){
 				drawTrigger('release');
 				return;
 			}
-			var org =e.srcEvent;
-			//target = org.target || org.touches[0].target;
+			var org = e.srcEvent;
 			target = e.target;
 
-			pos = {
-				x:e.center.pageX - offset().left,
-				y:e.center.pageY - offset().top
-			};
+		   pos = position(e.touches);
 			if(type=='touch') start = pos;
 
 			var len = e.touches.length;

@@ -16,13 +16,11 @@ define([
 		check = function(target){
 			return target._strokeSize;
 		},
-		touch = function(e){
-			if(e.no>1) return;
-
+		dragstart = function(e){
 			init = strokeSize();
 			y = Draw.fromView(e.position).y;
 		},
-		move = function(e){
+		drag = function(e){
 			if(init)
 				strokeSize(
 					init + (Draw.fromView(e.position).y - y)* Draw.zoom()/20);
@@ -41,8 +39,8 @@ define([
 		stroke:stroke,
 
 		check:check,
-		touch:touch,
-		move:move,
+		dragstart:dragstart,
+		drag:drag,
 		release:release,
 
 		wheel:wheel
