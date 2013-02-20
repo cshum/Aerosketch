@@ -7,7 +7,7 @@ require.config({
 				_.mixin(_s.exports());
 			}
 		},
-		'hammer': {exports: 'Hammer'},
+		//'hammer': {exports: 'Hammer'},
 		'jquery.scrollto': ['jquery'],
 		'bootstrap':['jquery'],
 		'sprite3d': {exports:'Sprite3D'}
@@ -19,7 +19,7 @@ require.config({
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
-		'hammer':'lib/hammer/hammer',
+		'hammer':'lib/hammer/hammer-latest',
 		//'sprite3d':'lib/sprite3D/Sprite3D',
 
 		'bootstrap':'lib/bootstrap/bootstrap.min',
@@ -29,7 +29,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 31
+		"bust=" +  (new Date()).getTime() : 32
 });
 
 
