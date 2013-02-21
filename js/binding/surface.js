@@ -48,25 +48,25 @@ function binding(el,value){
 			}
 			var org = e.srcEvent;
 
-		    pos = position(org.touches || [org]);
-			/*
+		    //pos = position(org.touches || [org]);
 			pos = {
 				x:e.center.pageX - offset().left,
 				y:e.center.pageY - offset().top
 			};
-			*/
 			if(type=='touch') start = pos;
 
 			var len = e.touches.length;
 			if(len>1 && dragging) return;
 			if(len>2 && transforming) return;
 
+			/*
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
-				evt = {
-					distanceX:dx, 
-					distanceY:dy,
-					distance: Math.sqrt(dx*dx + dy*dy),
+			*/
+			var	evt = {
+					distanceX:e.deltaX, 
+					distanceY:e.deltaY,
+					distance: e.distance,
 
 					target:e.target,
 					metaKey:org.metaKey,
