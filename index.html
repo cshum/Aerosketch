@@ -42,7 +42,7 @@
 <div class="color-toggle" 
 	data-bind="with:options, 
 	hammer:{tap:toggleColorMode,hold:swapColor},
-	hammerOptions:{tap_double:false}">
+	hammerOptions:{doubletap_interval:0}">
 	<div class="fill" data-bind="
 		style:{background:fill()=='none'?'':fill(),
 		zIndex:$root.colorMode()=='fill'? 2:1},
@@ -73,10 +73,10 @@ data-bind="template:toolbarTemplate"></div>
 </div>
 <div class="toolbar-bottom-right btn-toolbar">
 	<div class="btn-group">
-		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{doubletap_interval:0}">
 			<i class="icon-undo icon-large"></i>
 		</button>
-		<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{tap_double:false}">
+		<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{doubletap_interval:0}">
 			<i class="icon-repeat icon-large"></i>
 		</button>
 	</div>

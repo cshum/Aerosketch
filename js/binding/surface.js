@@ -95,6 +95,7 @@ function binding(el,value){
 		drag_min_distance:10,
 		prevent_default:true,
 		doubletap_interval:0,
+		transform_min_scale: 0,
 		hold:false
 	}).on('touch tap dragstart drag transformstart transform release',trigger);
 
