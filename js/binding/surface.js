@@ -9,66 +9,26 @@ function binding(el,value){
 		offset = _.throttle(function(){
 			return $(el).offset();
 		},500),
-		position = function(pos){
-			if(!pos[0] || !pos[0].pageX) 
-				return null;
-
-			var sum = _(pos).chain()
-				.map(function(p){
-					return {x:p.pageX, y:p.pageY};
-				})
-				.reduce(function(a,b){
-					return {x:a.x+b.x, y:a.y+b.y};
-				},{x:0,y:0})
-				.value(),
-				len = pos.length;
-
-			return {
-				x: sum.x/len - offset().left,
-				y: sum.y/len - offset().top
-			};
-		},
 		trigger = function(e){
 			var type=e.type;
 			e = e.gesture;
-			//clear transform/drag when drag/transform
-			//
-			/*
-			if((dragging && type=='transform')
-			|| (transforming && type=='drag'))
-				trigger('release');
-
-			if(type.match(/drag/)) dragging = true;
-			if(type.match(/transform/)) transforming = true;
-			*/
 
 			if(type=='release'){
-				//dragging = false;
-				//transforming = false;
 				drawTrigger('release');
 				return;
 			}
 			var org = e.srcEvent;
 
-		    //pos = position(org.touches || [org]);
 			pos = {
 				x:e.center.pageX - offset().left,
 				y:e.center.pageY - offset().top
 			};
-			if(type=='touch' || type=='transformstart') start = pos;
+			if(type=='touch') start = pos;
 
-			/*
-			var len = e.touches.length;
-			if(len>1 && dragging) return;
-			if(len>2 && transforming) return;
-
-			*/
-			var dx = pos.x - start.x,
-				dy = pos.y - start.y,
-				evt = {
-					distanceX:dx, 
-					distanceY:dy,
-					distance: Math.sqrt(dx*dx + dy*dy),
+			var evt = {
+					distanceX:e.deltaX, 
+					distanceY:e.deltaY,
+					distance: e.distance,
 
 					target:e.target,
 					metaKey:org.metaKey,
