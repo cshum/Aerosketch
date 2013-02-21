@@ -10,35 +10,36 @@ function binding(el,value){
 			return $(el).offset();
 		},500),
 		trigger = function(e){
-			var type=e.type;
-			e = e.gesture;
+			var type=e.type, g = e.gesture;
 
 			if(type=='release'){
 				drawTrigger('release');
 				return;
 			}
-			var org = e.srcEvent;
-
 			pos = {
-				x:e.center.pageX - offset().left,
-				y:e.center.pageY - offset().top
+				x:g.center.pageX - offset().left,
+				y:g.center.pageY - offset().top
 			};
-			if(type=='touch') start = pos;
+			if(type=='touch' || type=='transformstart') start = pos;
 
-			var evt = {
-					distanceX:e.deltaX, 
-					distanceY:e.deltaY,
-					distance: e.distance,
+			var dx = pos.x - start.x,
+				dy = pos.y - start.y,
+				org = g.srcEvent,
+				evt = {
+					distanceX:dx, 
+					distanceY:dy,
+					distance: Math.sqrt(dx*dx + dy*dy),
 
-					target:e.target,
+					target:g.target,
 					metaKey:org.metaKey,
 					shiftKey:org.shiftKey,
 					button:org.button,
 
-					start: start, position:pos,
-					scale:e.scale,
-					rotation:e.rotation,
-					angle:e.angle
+					start: start, 
+					position:pos,
+					scale:g.scale,
+					rotation:g.rotation,
+					angle:g.angle
 				};
 			/*
 			if(type=='wheel')
