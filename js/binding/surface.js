@@ -10,7 +10,7 @@ function binding(el,value){
 			return $(el).offset();
 		},500),
 		trigger = function(e){
-			var type=e.type, g = e.gesture;
+			var type = e.type, g = e.gesture;
 
 			if(type=='release'){
 				drawTrigger('release');
@@ -24,22 +24,22 @@ function binding(el,value){
 
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
-				org = g.srcEvent,
-				evt = {
-					distanceX:dx, 
-					distanceY:dy,
-					distance: Math.sqrt(dx*dx + dy*dy),
+				org = g.srcEvent;
 
-					target:g.target,
-					shiftKey:org.shiftKey,
+			drawTrigger(type,{
+				distanceX:dx, 
+				distanceY:dy,
+				distance: Math.sqrt(dx*dx + dy*dy),
 
-					start: start, 
-					position:pos,
-					scale:g.scale,
-					rotation:g.rotation,
-					angle:g.angle
-				};
-			drawTrigger(type,evt);
+				target:g.target,
+				shiftKey:org.shiftKey,
+
+				start: start, 
+				position:pos,
+				scale:g.scale,
+				rotation:g.rotation,
+				angle:g.angle
+			});
 		},
 		wheelTrigger = function(e, delta){
 			var org = e.originalEvent;
