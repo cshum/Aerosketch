@@ -4,7 +4,7 @@ define([
 
 function binding(el,value){
 	var drawTrigger = value(),
-		inCanvas, target, pos, start, touchFlag,
+		inCanvas, target, pos, start, 
 		dragging, transforming, 
 		offset = _.throttle(function(){
 			return $(el).offset();
@@ -33,16 +33,18 @@ function binding(el,value){
 			e = e.gesture;
 			//clear transform/drag when drag/transform
 			//
+			/*
 			if((dragging && type=='transform')
 			|| (transforming && type=='drag'))
 				trigger('release');
 
 			if(type.match(/drag/)) dragging = true;
 			if(type.match(/transform/)) transforming = true;
+			*/
 
 			if(type=='release'){
-				dragging = false;
-				transforming = false;
+				//dragging = false;
+				//transforming = false;
 				drawTrigger('release');
 				return;
 			}
@@ -53,20 +55,20 @@ function binding(el,value){
 				x:e.center.pageX - offset().left,
 				y:e.center.pageY - offset().top
 			};
-			if(type=='touch') start = pos;
+			if(type=='touch' || type=='transformstart') start = pos;
 
+			/*
 			var len = e.touches.length;
 			if(len>1 && dragging) return;
 			if(len>2 && transforming) return;
 
-			/*
+			*/
 			var dx = pos.x - start.x,
 				dy = pos.y - start.y,
-			*/
-			var	evt = {
-					distanceX:e.deltaX, 
-					distanceY:e.deltaY,
-					distance: e.distance,
+				evt = {
+					distanceX:dx, 
+					distanceY:dy,
+					distance: Math.sqrt(dx*dx + dy*dy),
 
 					target:e.target,
 					metaKey:org.metaKey,
