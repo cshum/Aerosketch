@@ -39,14 +39,22 @@ function binding(el,value){
 					rotation:g.rotation,
 					angle:g.angle
 				};
-			/*
-			if(type=='wheel')
-				evt.delta = Math.max(-0.2,Math.min(0.2,
+			drawTrigger(type,evt);
+		},
+		wheelTrigger = function(e, delta){
+			var org = e.originalEvent;
+			drawTrigger('wheel',{
+				delta: Math.max(-0.2,Math.min(0.2,
 					org.wheelDelta/3500 ||
 					-org.detail/50
-				));
-				*/
-			drawTrigger(type,evt);
+				)),
+				position: {
+					x:org.pageX - offset().left,
+					y:org.pageY - offset().top
+				},
+				shiftKey:org.shiftKey,
+				target: e.target
+			});
 		};
 
 
@@ -58,16 +66,7 @@ function binding(el,value){
 		hold:false
 	}).on('touch tap dragstart drag transformstart transform release',trigger);
 
-	/*
-	$(document.body)
-		.on('mousedown',_(trigger).bind(null,'touch',false))
-		.on('mousemove',_(trigger).bind(null,'move',false))
-		.on('touchstart',_(trigger).bind(null,'touch',true))
-		.on('touchmove',_(trigger).bind(null,'move',true));
-	$(el)
-		.on('mousewheel DOMMouseScroll',
-			_(trigger).chain().bind(null,'wheel',false).throttle(20).value());
-		*/
+	$(el).on('mousewheel DOMMouseScroll',_.throttle(wheelTrigger,20));
 };
 ko.bindingHandlers.surface = {
 	init:binding
