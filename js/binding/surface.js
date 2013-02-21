@@ -31,9 +31,7 @@ function binding(el,value){
 					distance: Math.sqrt(dx*dx + dy*dy),
 
 					target:g.target,
-					metaKey:org.metaKey,
 					shiftKey:org.shiftKey,
-					button:org.button,
 
 					start: start, 
 					position:pos,
