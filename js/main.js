@@ -44,4 +44,8 @@ require([
 	'binding/palette','binding/aniattr'
 ],function(ko,Draw){
 	ko.applyBindings(Draw,document.body);
+
+	var prevent = function(e) { e.preventDefault(); };
+	document.ontouchstart = prevent;
+	document.ontouchmove = prevent;
 });
