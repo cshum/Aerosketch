@@ -98,14 +98,6 @@ define([
 			}
 		},
 
-		move = function(e){
-			if(curr && !touching && c1){
-				curr.back();
-				var p = Draw.fromView(e.position);
-				curr.curveTo(c1,p,p);
-			}
-		},
-
 		finish = function(ok){
 			if(!ok && curr){
 				Draw.deselect();
@@ -156,7 +148,6 @@ define([
 		tap:tap,
 		hold:tap,
 		release:release,
-		move:move,
 
 		off: finish
 	};
