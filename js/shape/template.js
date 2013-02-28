@@ -51,7 +51,7 @@ define(['knockout','underscore'],function(ko,_){
 				var self = this;
 				_(ko.toJS(options || {})).
 					each(function(val,key){
-						if(key in self.options) 
+						if(key in self.options && !_.isEqual(self[key](),val)) 
 							self[key](val);
 					});
 			},
