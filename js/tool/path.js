@@ -9,7 +9,7 @@ define([
 				return _(Draw.selection())
 					.chain()
 					.filter(function(shape){
-						return shape.getType()=='path'
+						return shape.type=='path'
 							&& shape.getLastPoint()
 							&& shape.rotate()==0;
 					})
@@ -51,7 +51,6 @@ define([
 					curr = Draw.layer().newShape('path');
 					curr.set(Draw.options);
 					curr.moveTo(center());
-					Draw.layer().shapes.push(curr);
 				}
 				begin(curr.getFirstPoint());
 			}
