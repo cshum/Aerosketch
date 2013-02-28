@@ -33,7 +33,7 @@ define([
 
 			var s = Draw.fromView(e.start);
 			curr = Draw.layer().newShape('path');
-			curr.update(Draw.options);
+			curr.set(Draw.options);
 			curr.fill('none');
 			curr.moveTo(s);
 
@@ -62,7 +62,7 @@ define([
 		release = function(){
 			points.push([cursor.x,cursor.y]);
 			curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
-			Draw.commit(curr);
+			Draw.save(curr);
 			points = [];
 			following = false;
 		};

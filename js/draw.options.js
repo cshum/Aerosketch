@@ -1,6 +1,6 @@
 define([
    'underscore','knockout',
-   'draw','draw.history'
+   'draw','draw.momento'
 ],function(_,ko,Draw){
 	var changed = false,
 		options = {
@@ -30,7 +30,7 @@ define([
 	}
 	Draw.debounce.subscribe(function(val){
 		if (!val && changed) {
-			Draw.commit.apply(null,Draw.selection());
+			Draw.save.apply(null,Draw.selection());
 			changed = false;
 		}
 		if(!val) _.defer(capture);

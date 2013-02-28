@@ -1,11 +1,11 @@
 define([
    'knockout','underscore','transform',
-   'draw','draw.history'
+   'draw','draw.momento'
 ],function(ko,_,Transform,Draw){
 	var clipboard = ko.observableArray([]),
 		hide = function(){
 			var shapes = Draw.selection();
-			Draw.commit.apply(null,shapes);
+			Draw.save.apply(null,shapes);
 			_(shapes).invoke('visible',false);
 			Draw.selection.removeAll();
 		},
@@ -31,9 +31,11 @@ define([
 			}});
 
 			Draw.add.apply(null,shapes);
-			Draw.commit.apply(null,shapes);
+			Draw.save.apply(null,shapes);
 			Draw.selection(shapes);
 		};
+
+		//todo fixxxxxxxx it
 
 	_(Draw).extend({
 		clipboard:clipboard,

@@ -91,7 +91,7 @@ function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
 				_(shapes).each(function(shape,i){
 					shape.visible(visibles[i]);
 				});
-				Draw.commit.apply(null,shapes);
+				Draw.save.apply(null,shapes);
 				changed = false;
 				buffer({});
 			});

@@ -1,9 +1,9 @@
 define(['knockout','underscore','draw'],function(ko,_,Draw){
 	var undos = [], 
 		redos = [],
-		commit = function(){
+		save = function(){
 			var record = _(arguments).toArray();
-			_(record).invoke('commit');
+			_(record).invoke('save');
 			undos.push(record);
 			/*
 			_(redos).each(function(record){
@@ -26,7 +26,7 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		};
 
 	_(Draw).extend({
-		commit:commit,
+		save:save,
 		undo:undo,
 		redo:redo
 	});

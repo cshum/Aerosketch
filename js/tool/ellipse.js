@@ -5,7 +5,7 @@ define([
 	function start(e){
 		var start = Draw.fromView(e.start);
 		curr = Draw.layer().newShape(lock() ? 'circle':'ellipse');
-		curr.update(Draw.options);
+		curr.set(Draw.options);
 		curr.cx(start.x);
 		curr.cy(start.y);
 	}
@@ -27,7 +27,7 @@ define([
 	}
 	function release(){
 		if(curr){
-			Draw.commit(curr);
+			Draw.save(curr);
 		}
 		curr = null;
 	}

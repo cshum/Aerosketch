@@ -4,7 +4,7 @@ define(['knockout','draw','text!view/ratio.html'
 	function start(e){
 		var start = Draw.fromView(e.start);
 		curr = Draw.layer().newShape('rect');
-		curr.update(Draw.options);
+		curr.set(Draw.options);
 		curr.x(start.x);
 		curr.y(start.y);
 		Draw.layer().shapes.push(curr);
@@ -28,7 +28,7 @@ define(['knockout','draw','text!view/ratio.html'
 	}
 	function release(){
 		if(curr)
-			Draw.commit(curr);
+			Draw.save(curr);
 		curr = null;
 	}
 	return {
