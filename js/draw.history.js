@@ -1,38 +1,32 @@
 define(['knockout','underscore','draw'],function(ko,_,Draw){
-	var map = {},
-		undos = [], 
+	var undos = [], 
 		redos = [],
-
-		push = function(){
-		},
-		log = function(){
-			var records = _(arguments).toArray();
-			undos.push(records);
-			_(redos).each(function(records){
-				_(records).invoke('destroy');
+		commit = function(){
+			var record = _(arguments).toArray();
+			_(record).invoke('commit');
+			undos.push(record);
+			/*
+			_(redos).each(function(record){
+				_(record).invoke('_destroy',true);
 			});
+			*/
 			redos = [];
-			push(records);
 		},
 		undo = function(){
 			if(undos.length===0) return;
-			var records = _(undos.pop()).map(function(record){
-				return record.revert();
-			});
-			redos.push(records);
-			push(records);
+			var record = undos.pop();
+			_(record).invoke('undo');
+			redos.push(record);
 		},
 		redo = function(){
 			if(redos.length===0) return;
-			var records = _(redos.pop()).map(function(record){
-				return record.revert();
-			});
-			undos.push(records);
-			push(records);
+			var record = redos.pop();
+			_(record).invoke('redo');
+			undos.push(record);
 		};
 
 	_(Draw).extend({
-		log:log,
+		commit:commit,
 		undo:undo,
 		redo:redo
 	});

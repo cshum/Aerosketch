@@ -1,8 +1,8 @@
 define([
    'underscore','util/lzw',
-   'layer','shape/factory','record/shape',
+   'layer','shape/factory',
    'draw','draw.history','draw.options'
-],function(_,lzw,Layer,Factory,ShapeRecord,Draw){
+],function(_,lzw,Layer,Factory,Draw){
 	var load = function(){
 			if(!window.localStorage) return;
 			var data = localStorage['draw'];
@@ -34,13 +34,11 @@ define([
 				e.shapes = _(e.shapes).map(function(e){
 					var Shape = Factory(e.type),
 						shape = new Shape(e.options);
-						records.push(new ShapeRecord(shape));
 					return shape;
-				})
+				});
 				return new Layer(e);
 			}));
 			Draw.layer(_.last(Draw.layers()));
-			Draw.log.apply(null,records);
 		},
 		save = function(){
 			if('localStorage' in window){

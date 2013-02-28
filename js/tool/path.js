@@ -1,7 +1,7 @@
 define([
 	'knockout','shape/path','draw',
-	'text!view/path.svg','record/shape'
-],function(ko,Path,Draw,view,Record){
+	'text!view/path.svg'
+],function(ko,Path,Draw,view){
 	var curr, c1, c2, touching, focus,
 
 		selectors = ko.computed(function(){
@@ -50,7 +50,7 @@ define([
 				}else{
 					curr = new Path(Draw.options);
 					curr.moveTo(center());
-					Draw.add(curr);
+					Draw.layer().shapes.push(curr);
 				}
 				begin(curr.getFirstPoint());
 			}
@@ -103,7 +103,7 @@ define([
 				Draw.deselect();
 				curr.visible(false);
 			}
-			if(ok && curr) Draw.log(new Record(curr));
+			if(ok && curr) Draw.commit(curr);
 			curr = null;
 			c1 = null;
 			control1(null);

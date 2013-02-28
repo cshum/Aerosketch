@@ -10,7 +10,8 @@ require.config({
 		//'hammer': {exports: 'Hammer'},
 		'jquery.scrollto': ['jquery'],
 		'bootstrap':['jquery'],
-		'sprite3d': {exports:'Sprite3D'}
+		'sprite3d': {exports:'Sprite3D'},
+		'firebase': {exports:'Firebase'}
 	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-1.9.0',
@@ -20,29 +21,30 @@ require.config({
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer-latest',
-		//'sprite3d':'lib/sprite3D/Sprite3D',
 
 		'bootstrap':'lib/bootstrap/bootstrap.min',
 
 		'text': 'lib/require/text',
-		'domready': 'lib/require/domready'
+		'domready': 'lib/require/domready',
+
+		'firebase':'http://static.firebase.com/v0/firebase'
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 47
+		"bust=" +  (new Date()).getTime() : 49
 });
 
 
 require([
-	'knockout',
+	'knockout','firebase',
 
-	'draw','draw.palette','draw.clipboard','draw.save',
+	'draw','draw.palette','draw.clipboard',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
-],function(ko,Draw){
+],function(ko,Firebase,Draw){
 	ko.applyBindings(Draw,document.body);
 
 	var prevent = function(e) { e.preventDefault(); };

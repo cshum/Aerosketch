@@ -1,21 +1,20 @@
 define([
    'knockout','underscore','lib/knockout/svgtemplate',
 ],function(ko,_,svgTemplate,Factory){
-	return function(data){
-		data = _(data || {}).defaults({
+	function Layer(options){
+		options = _(options || {}).defaults({
 			name:'',
 			visible:true,
 			shapes:[]
 		});
+		this.name = ko.observable(options.name);
+		this.visible = ko.observable(options.visible);
+		this.shapes = ko.observableArray(options.shapes);
 
-		var self = this;
-		self.name = ko.observable(data.name);
-		self.visible = ko.observable(data.visible);
-		self.shapes = ko.observableArray(data.shapes);
-
-		self.shapesTemplate = svgTemplate(self.shapes,function(shape){
-			return '<'+shape.getType()+' data-bind="visible:visible,aniattr:attr" />';
+		this.shapesTemplate = svgTemplate(this.shapes,function(shape){
+			return '<'+shape.type+' data-bind="visible:visible,aniattr:attr" />';
 		});
+		/*
 		self.serialize = function(){
 			return {
 				name: self.name(),
@@ -25,5 +24,12 @@ define([
 					.invoke('serialize').value()
 			};
 		}
+		*/
 	}
+	_(Layer.prototype).extend({
+		post:function(shape){
+
+		}
+	});
+	return Layer;
 });

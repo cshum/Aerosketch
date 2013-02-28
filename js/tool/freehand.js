@@ -1,10 +1,10 @@
 define([
 	'underscore','knockout',
-	'shape/path','draw','record/shape',
-	'util/requestanimationframe','util/polysimplify','text!view/freehand.svg'
-],function(_,ko,Path,Draw,Record,requestAnimationFrame,polySimplify,view){
-	var points = ko.observableArray([]), changed = false, following = false,
-		interval, point, cursor, 
+	'shape/path','draw',
+	'util/requestanimationframe','util/polysimplify'
+],function(_,ko,Path,Draw,requestAnimationFrame,polySimplify){
+	var points = [], changed = false, following = false,
+		interval, point, cursor, curr,
 		smoothen = function(points) {
 			var ps = [];
 			ps.push(['M',points[0]]);
@@ -33,7 +33,13 @@ define([
 				Draw.options.stroke('black');
 
 			var s = Draw.fromView(e.start);
-			points([[s.x, s.y]]);
+			curr = new Path();
+			curr.update(Draw.options);
+			curr.fill('none');
+			curr.moveTo(s);
+			Draw.layer().shapes.push(curr);
+
+			points = [[s.x, s.y]];
 			point = s;
 			requestAnimationFrame(follow);
 			following = true;
@@ -51,6 +57,7 @@ define([
 					y: Draw.round(point.y*(1-d) + cursor.y*d)
 				};
 				points.push([point.x,point.y]);
+				curr.lineTo(point);
 			}
 			if(following) requestAnimationFrame(follow);
 		},
@@ -58,21 +65,16 @@ define([
 			if(!changed) return;
 			points.push([cursor.x,cursor.y]);
 			following = false;
-			var curr = new Path(Draw.options);
-			curr.fill('none');
-			curr.path(smoothen(polySimplify(points(),0.1/Draw.zoom())));
-			Draw.add(curr);
-			Draw.log(new Record(curr));
-			points.removeAll();
+			curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
+			Draw.commit(curr);
+			curr = null;
+			points = [];
 			changed = false;
 		};
 
 	return {
 		name:'Freehand',
 		iconView: '<span class="draw-icon-freehand"></span>',
-		view:view,
-
-		points: ko.computed(function(){ return _.flatten(points()).join(' '); }),
 		dragstart:start,
 		drag:drag,
 		tap:function(){},

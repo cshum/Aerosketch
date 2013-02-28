@@ -1,4 +1,0 @@
-<g data-bind="attr:{transform:$root.transform}">
-	<polyline fill="none" stroke-linecap="round" data-bind="attr:{stroke:$root.options.stroke, 
-	'stroke-width':$root.options.strokeWidth, points:points}" />
-</g>

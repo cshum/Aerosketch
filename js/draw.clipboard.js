@@ -1,13 +1,12 @@
 define([
    'knockout','underscore','transform',
-   'record/shape','draw','draw.history'
-],function(ko,_,Transform,Record,Draw){
+   'draw','draw.history'
+],function(ko,_,Transform,Draw){
 	var clipboard = ko.observableArray([]),
 		hide = function(){
-			Draw.log.apply(null,_(Draw.selection()).map(function(shape){
-				shape.visible(false);
-				return new Record(shape);
-			}));
+			var shapes = Draw.selection();
+			Draw.commit.apply(null,shapes);
+			_(shapes).invoke('visible',false);
 			Draw.selection.removeAll();
 		},
 		copy = function(){
@@ -32,9 +31,7 @@ define([
 			}});
 
 			Draw.add.apply(null,shapes);
-			Draw.log.apply(null,_(shapes).map(function(shape){
-				return new Record(shape);
-			}));
+			Draw.commit.apply(null,shapes);
 			Draw.selection(shapes);
 		};
 

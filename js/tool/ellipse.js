@@ -1,14 +1,15 @@
 define([
 	'knockout','shape/ellipse','shape/circle',
-	'draw','text!view/ratio.html','record/shape'
-],function(ko,Ellipse,Circle,Draw,toolbarView,Record){
+	'draw','text!view/ratio.html'
+],function(ko,Ellipse,Circle,Draw,toolbarView){
 	var curr, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);
-		curr = new (lock() ? Circle:Ellipse)(Draw.options);
+		curr = new (lock() ? Circle:Ellipse)();
+		curr.update(Draw.options);
 		curr.cx(start.x);
 		curr.cy(start.y);
-		Draw.add(curr);
+		Draw.layer().shapes.push(curr);
 	}
 	function drag(e){
 		var start = Draw.fromView(e.start),
@@ -28,7 +29,7 @@ define([
 	}
 	function release(){
 		if(curr){
-			Draw.log(new Record(curr));
+			Draw.commit(curr);
 		}
 		curr = null;
 	}

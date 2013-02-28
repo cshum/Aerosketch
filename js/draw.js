@@ -1,8 +1,8 @@
 define([
 	'knockout','underscore',
 	'lib/knockout/template',
-	'lib/knockout/svgtemplate',
-],function(ko,_,template,svgTemplate){
+	'lib/knockout/svgtemplate','layer'
+],function(ko,_,template,svgTemplate,Layer){
 	var layers = ko.observableArray(),
 		layer = ko.observable(),
 
@@ -31,10 +31,6 @@ define([
 			if('height' in b) o.height = round(b.height/z);
 			if(label) o[label] = true;
 			return o;
-		},
-		add = function(){
-			layer().shapes.push.apply(
-				layer().shapes,arguments);
 		},
 
 		position = ko.observable({x:0,y:0}),
@@ -110,6 +106,10 @@ define([
 			};
 		})();
 
+		var l = new Layer();
+		layers([l]);
+		layer(l);
+
 	return {
 		layers: layers,
 		layer: layer,
@@ -123,7 +123,6 @@ define([
 		transform:transform,
 
 		background:background,
-		add:add,
 
 		selection: selection,
 		select: select,

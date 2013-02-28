@@ -1,12 +1,13 @@
-define(['knockout','shape/rect','draw','text!view/ratio.html','record/shape'
-],function(ko,Rect,Draw,toolbarView,Record){
+define(['knockout','shape/rect','draw','text!view/ratio.html'
+],function(ko,Rect,Draw,toolbarView){
 	var curr, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);
-		curr = new Rect(Draw.options);
+		curr = new Rect();
+		curr.update(Draw.options);
 		curr.x(start.x);
 		curr.y(start.y);
-		Draw.add(curr);
+		Draw.layer().shapes.push(curr);
 	}
 	function drag(e){
 		var dx = e.distanceX/Draw.zoom(),
@@ -27,7 +28,7 @@ define(['knockout','shape/rect','draw','text!view/ratio.html','record/shape'
 	}
 	function release(){
 		if(curr)
-			Draw.log(new Record(curr));
+			Draw.commit(curr);
 		curr = null;
 	}
 	return {
