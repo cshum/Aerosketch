@@ -31,20 +31,21 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 55
+		"bust=" +  (new Date()).getTime() : 56
 });
 
 
 require([
-	'knockout','firebase','layer',
+	'knockout','layer',
 
 	'draw','draw.palette','draw.clipboard',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
+	'draw.firebase!sfasdfdsads',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
-],function(ko,Firebase,Layer,Draw){
+],function(ko,Layer,Draw){
 	var l = new Layer();
 	Draw.layers([l]);
 	Draw.layer(l);
