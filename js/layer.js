@@ -1,5 +1,6 @@
 define([
    'knockout','underscore','lib/knockout/svgtemplate',
+   'shape/factory'
 ],function(ko,_,svgTemplate,Factory){
 	function Layer(options){
 		options = _(options || {}).defaults({
@@ -27,8 +28,11 @@ define([
 		*/
 	}
 	_(Layer.prototype).extend({
-		post:function(shape){
-
+		newShape:function(type){
+			var Shape = Factory(type),
+				shape = new Shape();
+			this.shapes.push(shape);
+			return shape;
 		}
 	});
 	return Layer;

@@ -106,10 +106,6 @@ define([
 			};
 		})();
 
-		var l = new Layer();
-		layers([l]);
-		layer(l);
-
 	return {
 		layers: layers,
 		layer: layer,

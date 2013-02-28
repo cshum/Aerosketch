@@ -99,6 +99,7 @@ define(['knockout','underscore','shape/template'],function(ko,_,Shape){
 		d = function(){
 			if(this.path().length>0)
 				return _(this.path()).flatten().join(' ');
+			return 'M 0 0';
 		},
 		add = function(){
 			this.path.push(

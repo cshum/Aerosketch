@@ -40,7 +40,8 @@ define(['knockout','underscore'],function(ko,_){
 					self.options[key] = self[key];
 				});
 
-				self.record = ko.observable(options || {visible:false});
+				self.record = options || {visible:false};
+				self.delta = ko.observable({});
 				self.redos = [];
 				self.undos = [];
 
@@ -76,32 +77,34 @@ define(['knockout','underscore'],function(ko,_){
 			commit = function(){
 				var self = this, 
 					original = {}, 
-					record = self.record();
+					record = self.record,
+					delta = {};
 				_(self.options).each(function(value,key){
 					var val = value();
 					if(record[key] != val){
 						if(key in record)
 							original[key] = record[key];
+						delta[key] = val;
+						record[key] = val;
 					}
 				});
-				self.record(ko.toJS(self.options));
+				self.delta(delta);
 				self.undos.push(original);
 				self.redos = [];
 			},
-			change = function(s1,s2){
+			history = function(s1,s2){
 				if(s1.length===0) return;
-				var o = s1.pop(), 
-					record = this.record();
-				s2.push(_(record).pick(_(o).keys()));
-				this.update(o);
-				_(record).extend(o);
-				this.record.valueHasMutated();
+				var delta = s1.pop();
+				s2.push(_(this.record).pick(_(delta).keys()));
+				this.update(delta);
+				this.delta(delta);
+				_(this.record).extend(delta);
 			},
 			undo = function(){
-				change.call(this,this.undos,this.redos);
+				history.call(this,this.undos,this.redos);
 			},
 			redo = function(){
-				change.call(this,this.redos,this.undos);
+				history.call(this,this.redos,this.undos);
 			};
 
 		_(Shape.prototype).extend({

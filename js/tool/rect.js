@@ -1,9 +1,9 @@
-define(['knockout','shape/rect','draw','text!view/ratio.html'
-],function(ko,Rect,Draw,toolbarView){
+define(['knockout','draw','text!view/ratio.html'
+],function(ko,Draw,toolbarView){
 	var curr, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);
-		curr = new Rect();
+		curr = Draw.layer().newShape('rect');
 		curr.update(Draw.options);
 		curr.x(start.x);
 		curr.y(start.y);

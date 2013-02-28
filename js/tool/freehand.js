@@ -1,9 +1,8 @@
 define([
-	'underscore','knockout',
-	'shape/path','draw',
+	'underscore','knockout','draw',
 	'util/requestanimationframe','util/polysimplify'
-],function(_,ko,Path,Draw,requestAnimationFrame,polySimplify){
-	var points = [], changed = false, following = false,
+],function(_,ko,Draw,requestAnimationFrame,polySimplify){
+	var points = [], following = false,
 		interval, point, cursor, curr,
 		smoothen = function(points) {
 			var ps = [];
@@ -33,11 +32,10 @@ define([
 				Draw.options.stroke('black');
 
 			var s = Draw.fromView(e.start);
-			curr = new Path();
+			curr = Draw.layer().newShape('path');
 			curr.update(Draw.options);
 			curr.fill('none');
 			curr.moveTo(s);
-			Draw.layer().shapes.push(curr);
 
 			points = [[s.x, s.y]];
 			point = s;
@@ -47,7 +45,6 @@ define([
 
 		drag = function(e){
 			cursor = Draw.fromView(e.position);
-			changed = true;
 		},
 		follow = function(){
 			var d = 0.5;
@@ -60,16 +57,14 @@ define([
 				curr.lineTo(point);
 			}
 			if(following) requestAnimationFrame(follow);
+			else curr = null;
 		},
 		release = function(){
-			if(!changed) return;
 			points.push([cursor.x,cursor.y]);
-			following = false;
 			curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
 			Draw.commit(curr);
-			curr = null;
 			points = [];
-			changed = false;
+			following = false;
 		};
 
 	return {

@@ -31,12 +31,12 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 49
+		"bust=" +  (new Date()).getTime() : 51
 });
 
 
 require([
-	'knockout','firebase',
+	'knockout','firebase','layer',
 
 	'draw','draw.palette','draw.clipboard',
 	'draw.controls!base|strokesize,selected',
@@ -44,7 +44,11 @@ require([
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
-],function(ko,Firebase,Draw){
+],function(ko,Firebase,Layer,Draw){
+	var l = new Layer();
+	Draw.layers([l]);
+	Draw.layer(l);
+
 	ko.applyBindings(Draw,document.body);
 
 	var prevent = function(e) { e.preventDefault(); };
