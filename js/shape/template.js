@@ -45,7 +45,7 @@ define(['knockout','underscore'],function(ko,_){
 				self.redos = [];
 				self.undos = [];
 
-				set.call(self, options || {});
+				self.set(options || {});
 			},
 			set = function(options){
 				var self = this;
@@ -72,22 +72,21 @@ define(['knockout','underscore'],function(ko,_){
 				}
 			},
 			save = function(){
-				var self = this, 
-					original = {}, 
-					record = self.record,
+				var original = {}, 
+					record = this.record,
 					delta = {};
-				_(self.options).each(function(value,key){
-					var val = value();
-					if(record[key] != val){
+				_(this.options).each(function(value,key){
+					var val = ko.toJS(value());
+					if(!_.isEqual(record[key],val)){
 						if(key in record)
 							original[key] = record[key];
 						delta[key] = val;
 						record[key] = val;
 					}
 				});
-				self.delta(delta);
-				self.undos.push(original);
-				self.redos = [];
+				this.delta(delta);
+				this.undos.push(original);
+				this.redos = [];
 			},
 			undoredo = function(s1,s2){
 				if(s1.length===0) return;
