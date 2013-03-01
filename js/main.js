@@ -31,25 +31,21 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 56
+		"bust=" +  (new Date()).getTime() : 57
 });
 
 
 require([
-	'knockout','layer',
+	'knockout',
 
 	'draw','draw.palette','draw.clipboard',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
-	//'draw.firebase!sfasdfdsads',
+	'draw.firebase!https://aerosketch.firebaseio.com/',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
-],function(ko,Layer,Draw){
-	var l = new Layer();
-	Draw.layers([l]);
-	Draw.layer(l);
-
+],function(ko,Draw){
 	ko.applyBindings(Draw,document.body);
 
 	var prevent = function(e) { e.preventDefault(); };

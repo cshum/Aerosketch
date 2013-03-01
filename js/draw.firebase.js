@@ -1,39 +1,57 @@
 define([
    'underscore','draw','firebase','layer','shape/factory'
 ],function(_,Draw,Firebase,Layer,ShapeFactory){
-	var map = {};
 	return {
 		load: function(url, req, callback){
-			var drawRef = new Firebase(url),
+			var map = {},
+				drawRef = new Firebase(url),
 				layersRef = drawRef.child('layers'),
+
 				layerFromSnapshot = function(layerSnap){
-					//todo: layer from nowhere
-					var id = layerSnap.name(),
-						layerRef = layersRef.child(id)
-						shapesRef = layerRef.child('shapes');
-						shapeFromSnapshot = function(shapeSnap){
-							var id = shapeSnap.name(),
-								shapeRef = shapesRef.child(id);
+					_.defer(function(){
+						var id = layerSnap.name(),
+							layer = map[id] || new Layer(),
+							layerRef = layersRef.child(id),
+							shapesRef = layerRef.child('shapes'),
+							shapeFromSnapshot = function(shapeSnap){
+								_.defer(function(){
+									var id = shapeSnap.name(),
+										val = shapeSnap.val(),
+										shapeRef = shapesRef.child(id),
+										shape = map[id] || ShapeFactory(val.type,val);
+									map[id] = shape;
+									shapeRef.on('value',function(shapeSnap){
+										shape.set(shapeSnap.val());
+									});
+									shape.delta.subscribe(_(shapeRef.update).bind(shapeRef));
+									layer.shapes.push(shape);
+								});
+							};
 
-						},
-					shapesRef.on('child_added',shapeFromSnapshot);
-					shapesRef.once('value',function(shapesSnap){
-						shapesSnap.forEach(shapeFromSnapshot);
-					});
+						shapesRef.on('child_added',shapeFromSnapshot);
 
-					layer.newShape = function(type){
-						var Shape = Factory(type),
-							shape = new Shape(),
-							shapeRef = shapesRef.push({type:type});
+						layer.newShape = function(type){
+							var shape = ShapeFactory(type),
+								shapeRef = shapesRef.push({type:type});
 							map[shapeRef.name()] = shape;
 							return shape;
-					}
+						};
+						Draw.layers.push(layer);
+						map[id] = layer;
+						Draw.layer(layer);
+					});
 				};
 			layersRef.on('child_added',layerFromSnapshot);
-			layersRef.once('value',function(layersSnap){
-				layersSnap.forEach(layerFromSnapshot);
+
+			layersRef.child('default').transaction(function(data){
+				if(data===null){
+					return {
+						visible:true,
+						name:'Default Layer'
+					}
+				}
 			});
 			callback();
 		}
-	}
+	};
 });
