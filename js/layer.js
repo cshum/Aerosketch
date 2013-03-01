@@ -17,8 +17,7 @@ define([
 			});
 		},
 		newShape = function(type){
-			var Shape = Factory(type),
-				shape = new Shape();
+			var shape = Factory(type);
 			this.shapes.push(shape);
 			return shape;
 		},

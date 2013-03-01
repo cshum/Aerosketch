@@ -41,7 +41,7 @@ require([
 	'draw','draw.palette','draw.clipboard',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
-	'draw.firebase!sfasdfdsads',
+	//'draw.firebase!sfasdfdsads',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
