@@ -5,11 +5,14 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 			var record = _(arguments).toArray();
 			_(record).invoke('save');
 			undos.push(record);
-			/*
+
 			_(redos).each(function(record){
-				_(record).invoke('_destroy',true);
+				_(record).each(function(obj){
+					if('visible' in obj && '_destroy' in obj)
+						obj._destroy(!obj.visible());
+				});
 			});
-			*/
+
 			redos = [];
 		},
 		undo = function(){
