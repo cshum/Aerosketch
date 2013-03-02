@@ -57,6 +57,9 @@ html,body{
 	text-align:center; 
 	h1{ font-size:40px; margin-bottom:50px;}
 }
+.transforming{
+	.overlay, [class^="toolbar-"], [class*=" toolbar-"]{ display:none; }
+} 
 
 .main{
 	position:absolute;
@@ -158,9 +161,6 @@ html,body{
 	}
 	@toolbar-hpad:25px;
 	@toolbar-vpad:7px;
-	.transforming{
-		.overlay, [class^="toolbar-"], [class*=" toolbar-"]{ display:none; }
-	} 
 	.toolbar-bottom-left{
 		z-index:11;
 
