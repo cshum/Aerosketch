@@ -22,7 +22,9 @@ define([
 			if(!clipboard()) return;
 
 			var shapes = _(clipboard()).map(function(shape){
-				return shape.clone();
+				var clone = Draw.layer().newShape(shape.type);
+				clone.set(shape);
+				return clone;
 			});
 
 			Transform(shapes,{translate:{
@@ -30,7 +32,6 @@ define([
 				y:30/Draw.zoom()
 			}});
 
-			Draw.add.apply(null,shapes);
 			Draw.save.apply(null,shapes);
 			Draw.selection(shapes);
 		};
