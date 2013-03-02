@@ -31,23 +31,22 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 62
+		"bust=" +  (new Date()).getTime() : 633
 });
 
 
 require([
 	'knockout',
 
-	'draw','draw.palette','draw.clipboard','draw.firebase',
+	'draw','draw.palette','draw.clipboard',
+	'draw.firebase!https://aerosketch.firebaseio.com/',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
 ],function(ko,Draw){
-	Draw.firebase('https://aerosketch.firebaseio.com/',function(){
-		ko.applyBindings(Draw,document.body);
-	});
+	ko.applyBindings(Draw,document.body);
 
 	var prevent = function(e) { e.preventDefault(); };
 	document.ontouchstart = prevent;
