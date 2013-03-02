@@ -7,7 +7,9 @@ define([
 				changed = {},
 				triggered = false,
 				trigger = function(key,value){
-					changed[key] = ko.utils.unwrapObservable(value) || '';
+					var val = ko.utils.unwrapObservable(value);
+					if(!val) return;
+					changed[key] = val;
 					if(!triggered){
 						requestAnimationFrame(update);
 						triggered = true;

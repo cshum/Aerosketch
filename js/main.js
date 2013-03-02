@@ -31,7 +31,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 61
+		"bust=" +  (new Date()).getTime() : 62
 });
 
 
