@@ -24,6 +24,7 @@ define([
 			var shapes = _(clipboard()).map(function(shape){
 				var clone = Draw.layer().newShape(shape.type);
 				clone.set(shape);
+				console.log(clone);
 				return clone;
 			});
 

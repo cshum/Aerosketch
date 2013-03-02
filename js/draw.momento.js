@@ -3,17 +3,19 @@ define(['knockout','underscore','draw'],function(ko,_,Draw){
 		redos = [],
 		save = function(){
 			var record = _(arguments).toArray();
-			_(record).invoke('save');
-			undos.push(record);
+			_.defer(function(){
+				_(record).invoke('save');
+				undos.push(record);
 
-			_(redos).each(function(record){
-				_(record).each(function(obj){
-					if('visible' in obj && '_destroy' in obj)
-						obj._destroy(!obj.visible());
+				_(redos).each(function(record){
+					_(record).each(function(obj){
+						if('visible' in obj && '_destroy' in obj)
+							obj._destroy(!obj.visible());
+					});
 				});
-			});
 
-			redos = [];
+				redos = [];
+			});
 		},
 		undo = function(){
 			if(undos.length===0) return;
