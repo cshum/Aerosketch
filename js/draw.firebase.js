@@ -45,6 +45,8 @@ define([
 					map[id] = layer;
 					Draw.layer(layer);
 				};
+			drawRef.once('value',callback); //onready
+
 			layersRef.on('child_added',layerFromSnapshot);
 
 			layersRef.child('default').transaction(function(data){
@@ -55,7 +57,6 @@ define([
 					}
 				}
 			});
-			callback();
 		}
 	};
 });
