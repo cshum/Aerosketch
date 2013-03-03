@@ -16,17 +16,17 @@ define([
 								return;
 							}else buffer.shift()();
 
-						aniFrame(call);
+						_.defer(call);
 
 					};
 				return function(func){
 					buffer.push(func);
 					if(!triggered){
-						aniFrame(call);
+						_.defer(call);
 						triggered = true;
 					}
 				}
-			})(30);
+			})(15);
 
 		drawRef.once('value',callback); //onready
 
