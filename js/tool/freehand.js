@@ -42,7 +42,6 @@ define([
 						x: (point.x + prev.x)/2,
 						y: (point.y + prev.y)/2
 					});
-				else curr.lineTo(point);
 				prev = point;
 			}
 			if(following) aniFrame(follow);
