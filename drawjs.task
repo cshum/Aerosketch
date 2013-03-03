@@ -20,11 +20,17 @@ Todo:
 - Fix transform dissapear
 - Path optiimize 
 
+- Keyboard shortcuts
 - Layer
 - Pictures
 - Tagging
 - Selection hittest ignore
 	- Get surface dimension
+
+Menu:
+Fullscreen
+share/collaborate
+Export SVG/PNG (canvg)
 
 Features:
 ✓ zooming

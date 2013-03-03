@@ -24,7 +24,6 @@ define([
 			var shapes = _(clipboard()).map(function(shape){
 				var clone = Draw.layer().newShape(shape.type);
 				clone.set(shape);
-				console.log(clone);
 				return clone;
 			});
 
@@ -36,8 +35,6 @@ define([
 			Draw.save.apply(null,shapes);
 			Draw.selection(shapes);
 		};
-
-		//todo fixxxxxxxx it
 
 	_(Draw).extend({
 		clipboard:clipboard,

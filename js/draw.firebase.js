@@ -1,10 +1,32 @@
 define([
-   'underscore','draw','firebase','layer','shape/factory'
-],function(_,Draw,Firebase,Layer,ShapeFactory){
+   'underscore','draw','firebase','layer','shape/factory',
+   'util/requestanimationframe'
+],function(_,Draw,Firebase,Layer,ShapeFactory,aniFrame){
 	Draw.firebase = function(url,callback){
 		var map = {},
 			drawRef = new Firebase(url),
-			layersRef = drawRef.child('layers');
+			layersRef = drawRef.child('layers'),
+			bufferCall = (function(n){
+				var buffer = [], 
+					triggered = false,
+					call = function(){
+						for(var i=0;i<n;i++)
+							if(buffer.length==0){
+								triggered = false;
+								return;
+							}else buffer.shift()();
+
+						aniFrame(call);
+
+					};
+				return function(func){
+					buffer.push(func);
+					if(!triggered){
+						aniFrame(call);
+						triggered = true;
+					}
+				}
+			})(30);
 
 		drawRef.once('value',callback); //onready
 
@@ -15,7 +37,7 @@ define([
 				shapesRef = layerRef.child('shapes');
 
 			shapesRef.on('child_added',function(shapeSnap){
-				_.defer(function(){
+				bufferCall(function(){
 					var id = shapeSnap.name(),
 						val = shapeSnap.val(),
 						shapeRef = shapesRef.child(id),
@@ -33,7 +55,9 @@ define([
 			});
 
 			shapesRef.on('child_removed',function(shapeSnap){
-				map[shapeSnap.name()]._destroy(true);
+				var shape = map[shapeSnap.name()];
+				shape.visible(false);
+				shape._destroy(true);
 			});
 
 			layer.newShape = function(type){

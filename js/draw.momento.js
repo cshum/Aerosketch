@@ -1,9 +1,10 @@
-define(['knockout','underscore','draw'],function(ko,_,Draw){
+define(['knockout','underscore','draw','util/requestanimationframe'
+],function(ko,_,Draw,aniFrame){
 	var undos = [], 
 		redos = [],
 		save = function(){
 			var record = _(arguments).toArray();
-			_.defer(function(){
+			aniFrame(function(){
 				_(record).invoke('save');
 				undos.push(record);
 
