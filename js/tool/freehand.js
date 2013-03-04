@@ -24,15 +24,17 @@ define([
 		},
 		d = 0.5,
 		drag = function(e){
-			var cursor = Draw.fromView(e.position);
-			point = point || cursor;
+			var point = Draw.fromView(e.position);
+			prev = prev || point;
 
 			shape.back();
-			if(dist(cursor,point) >= Draw.options.strokeWidth()){
+			if(dist(prev,point) >= Draw.options.strokeWidth()){
+				/*
 				point = {
 					x: Draw.round(point.x*(1-d) + cursor.x*d),
 					y: Draw.round(point.y*(1-d) + cursor.y*d)
 				};
+				*/
 				if(prev)
 					shape.qCurveTo(prev,{
 						x: (point.x + prev.x)/2,
@@ -40,7 +42,7 @@ define([
 					});
 				prev = point;
 			}
-			shape.lineTo(cursor);
+			shape.lineTo(point);
 		},
 		release = function(){
 			Draw.save(shape);
