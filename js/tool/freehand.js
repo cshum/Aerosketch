@@ -32,7 +32,7 @@ define([
 		},
 		d = 0.5,
 		follow = function(){
-			if(dist(cursor,point) >= 5/Draw.zoom()){
+			if(dist(cursor,point) >= Draw.options.strokeWidth()){
 				point = {
 					x: Draw.round(point.x*(1-d) + cursor.x*d),
 					y: Draw.round(point.y*(1-d) + cursor.y*d)
