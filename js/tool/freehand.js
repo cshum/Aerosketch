@@ -1,5 +1,5 @@
 define([
-	'underscore','knockout','draw','util/requestAnimationFrame'
+	'underscore','knockout','draw','util/requestanimationframe'
 ],function(_,ko,Draw,aniFrame){
 	var angle, point, prev, shape, cursor, following,
 		dist = function(p1,p2){
