@@ -1,10 +1,7 @@
 define([
-	'underscore','knockout','draw',
-	'util/requestanimationframe','util/polysimplify'
-],function(_,ko,Draw,aniFrame,polySimplify){
-	//var points = [], 
-	var following = false,
-		interval, point, prev, cursor, curr,
+	'underscore','knockout','draw'
+],function(_,ko,Draw){
+	var angle, point, prev, shape,
 		dist = function(p1,p2){
 			var dx = p1.x - p2.x,
 				dy = p1.y - p2.y;
@@ -16,42 +13,37 @@ define([
 				Draw.options.stroke('black');
 
 			var s = Draw.fromView(e.start);
-			curr = Draw.layer().newShape('path');
-			curr.set(Draw.options);
-			curr.fill('none');
-			curr.moveTo(s);
-			following = true;
-			aniFrame(follow);
-			cursor = Draw.fromView(e.position);
-			point = cursor;
+			shape = Draw.layer().newShape('path');
+			shape.set(Draw.options);
+			shape.fill('none');
+			shape.moveTo(s);
+			shape.lineTo(s);
+			point = null;
 			prev = null;
-		},
-
-		drag = function(e){
-			cursor = Draw.fromView(e.position);
+			angle = null;
 		},
 		d = 0.5,
-		follow = function(){
+		drag = function(e){
+			var cursor = Draw.fromView(e.position);
+			point = point || cursor;
+
+			shape.back();
 			if(dist(cursor,point) >= Draw.options.strokeWidth()){
 				point = {
 					x: Draw.round(point.x*(1-d) + cursor.x*d),
 					y: Draw.round(point.y*(1-d) + cursor.y*d)
 				};
 				if(prev)
-					curr.qCurveTo(prev,{
+					shape.qCurveTo(prev,{
 						x: (point.x + prev.x)/2,
 						y: (point.y + prev.y)/2
 					});
 				prev = point;
 			}
-			if(following) aniFrame(follow);
-			else curr = null;
+			shape.lineTo(cursor);
 		},
 		release = function(){
-			//curr.path(smoothen(polySimplify(points,0.1/Draw.zoom())));
-			Draw.save(curr);
-			points = [];
-			following = false;
+			Draw.save(shape);
 		};
 
 	return {
