@@ -20,7 +20,7 @@ define([
 			shape.lineTo(s);
 			cursor = s;
 			point = s;
-			prev = null;
+			prev = s;
 			following = true;
 			follow();
 		},
@@ -30,19 +30,18 @@ define([
 		},
 		follow = function(){
 			shape.back();
-			if(dist(cursor,point) >= Draw.options.strokeWidth()){
-				point = {
-					x: Draw.round(point.x*(1-d) + cursor.x*d),
-					y: Draw.round(point.y*(1-d) + cursor.y*d)
-				};
-				if(prev)
-					shape.qCurveTo(prev,{
-						x: (point.x + prev.x)/2,
-						y: (point.y + prev.y)/2
-					});
+			point = {
+				x: Draw.round(point.x*(1-d) + cursor.x*d),
+				y: Draw.round(point.y*(1-d) + cursor.y*d)
+			};
+			if(dist(prev,point) >= Draw.options.strokeWidth()){
+				shape.qCurveTo(prev,{
+					x: (point.x + prev.x)/2,
+					y: (point.y + prev.y)/2
+				});
 				prev = point;
 			}
-			shape.lineTo(cursor);
+			shape.lineTo(point);
 
 			if(following)  aniFrame(follow);
 			else shape = null; 
