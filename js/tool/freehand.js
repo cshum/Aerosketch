@@ -1,7 +1,7 @@
 define([
-	'underscore','knockout','draw'
-],function(_,ko,Draw){
-	var angle, point, prev, shape,
+	'underscore','knockout','draw','util/requestAnimationFrame'
+],function(_,ko,Draw,aniFrame){
+	var angle, point, prev, shape, cursor, following,
 		dist = function(p1,p2){
 			var dx = p1.x - p2.x,
 				dy = p1.y - p2.y;
@@ -18,23 +18,23 @@ define([
 			shape.fill('none');
 			shape.moveTo(s);
 			shape.lineTo(s);
-			point = null;
+			cursor = s;
+			point = s;
 			prev = null;
-			angle = null;
+			following = true;
+			follow();
 		},
 		d = 0.5,
 		drag = function(e){
-			var point = Draw.fromView(e.position);
-			prev = prev || point;
-
+			cursor = Draw.fromView(e.position);
+		},
+		follow = function(){
 			shape.back();
-			if(dist(prev,point) >= Draw.options.strokeWidth()){
-				/*
+			if(dist(cursor,point) >= Draw.options.strokeWidth()){
 				point = {
 					x: Draw.round(point.x*(1-d) + cursor.x*d),
 					y: Draw.round(point.y*(1-d) + cursor.y*d)
 				};
-				*/
 				if(prev)
 					shape.qCurveTo(prev,{
 						x: (point.x + prev.x)/2,
@@ -42,9 +42,13 @@ define([
 					});
 				prev = point;
 			}
-			shape.lineTo(point);
+			shape.lineTo(cursor);
+
+			if(following)  aniFrame(follow);
+			else shape = null; 
 		},
 		release = function(){
+			following = false;
 			Draw.save(shape);
 		};
 
