@@ -49,11 +49,10 @@ define(['knockout','underscore'],function(ko,_){
 			},
 			set = function(options){
 				var self = this;
-				_(ko.toJS(options || {})).
-					each(function(val,key){
-						if(key in self.options && !_.isEqual(self[key](),val)) 
-							self[key](val);
-					});
+				_(ko.toJS(options || {})).each(function(val,key){
+					if(key in self.options && !_.isEqual(self[key](),val)) 
+						self[key](val);
+				});
 			},
 			get = function(){
 				var o = ko.toJS(this.options);
