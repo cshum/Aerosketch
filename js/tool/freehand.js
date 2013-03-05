@@ -28,9 +28,6 @@ define([
 			last = s;
 			center = null;
 
-			i=0;
-			j=0;
-
 			following = true;
 			follow();
 		},
@@ -50,13 +47,11 @@ define([
 					x: (point.x + last.x)/2,
 					y: (point.y + last.y)/2
 				};
-				i++;
 				shape.qCurveTo(last,center);
 				last = point;
 			}
 			shape.lineTo(point);
 			point = p;
-			j++;
 
 			if(following)  aniFrame(follow);
 		},
