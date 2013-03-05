@@ -56,8 +56,8 @@ define([
 			if(following)  aniFrame(follow);
 		},
 		release = function(){
+			if(shape) Draw.save(shape);
 			following = false;
-			Draw.save(shape);
 		};
 
 	return {
