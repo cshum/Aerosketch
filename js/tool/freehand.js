@@ -1,16 +1,14 @@
 define([
 	'underscore','knockout','draw',
-	'util/requestanimationframe',
-	'util/dist2segment'
-],function(_,ko,Draw,aniFrame,dist2Seg){
-	var point, last, center, i,j,
+	'util/requestanimationframe'
+],function(_,ko,Draw,aniFrame){
+	var point, last, w2,
 		shape, cursor, following,
-		dist = function(p1,p2){
+		dist2 = function(p1,p2){
 			var dx = p1.x - p2.x,
 				dy = p1.y - p2.y;
-			return Math.sqrt(dx*dx + dy*dy);
+			return (dx*dx + dy*dy);
 		},
-
 		start = function(e){
 			if(Draw.options.stroke()=='none')
 				Draw.options.stroke('black');
@@ -26,9 +24,9 @@ define([
 			cursor = p;
 			point = p;
 			last = s;
-			center = null;
 
 			following = true;
+			w2 = Math.pow(Draw.options.strokeWidth()/2,2);
 			follow();
 		},
 		drag = function(e){
@@ -37,12 +35,16 @@ define([
 		follow = function(){
 			if(!following) return;
 			shape.back();
-			var p = {
-				x: Draw.round(point.x*0.5 + cursor.x*0.5),
-				y: Draw.round(point.y*0.5 + cursor.y*0.5)
+			/*
+			point = {
+				x: Draw.round((point.x + cursor.x)/2),
+				y: Draw.round((point.y + cursor.y)/2)
 			};
-			if(dist(last,point) >= Draw.options.strokeWidth() && 
-			(!center || dist2Seg(last,center,p) >= 0.01/Draw.zoom())){
+			*/
+		   point = cursor;
+			
+			   //(!center || dist2Seg2(last,center,point) >= Math.pow(0.1/Draw.zoom(),2))){
+			if(dist2(last,point) >= w2){
 				center = {
 					x: (point.x + last.x)/2,
 					y: (point.y + last.y)/2
@@ -51,7 +53,6 @@ define([
 				last = point;
 			}
 			shape.lineTo(point);
-			point = p;
 
 			if(following)  aniFrame(follow);
 		},
