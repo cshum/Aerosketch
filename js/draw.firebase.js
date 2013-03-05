@@ -10,14 +10,13 @@ define([
 				var buffer = [], 
 					triggered = false,
 					call = function(){
-						for(var i=0;i<n;i++)
-							if(buffer.length==0){
+						for(var i=0;i<n;i++){
+							if(buffer.length===0){
 								triggered = false;
 								return;
 							}else buffer.shift()();
-
+						}
 						_.defer(call);
-
 					};
 				return function(func){
 					buffer.push(func);
@@ -25,7 +24,7 @@ define([
 						_.defer(call);
 						triggered = true;
 					}
-				}
+				};
 			})(15);
 
 		drawRef.once('value',callback); //onready
@@ -87,7 +86,7 @@ define([
 				return {
 					visible:true,
 					name:'Default Layer'
-				}
+				};
 			}
 		});
 	};
@@ -95,5 +94,5 @@ define([
 		load: function(params, require, callback){
 			Draw.firebase(params,callback);
 		}
-	}
+	};
 });
