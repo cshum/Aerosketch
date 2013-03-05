@@ -37,6 +37,8 @@ define([
 				shapesMap = {},
 				shapesRef = layerRef.child('shapes');
 
+			layersMap[id] = layer;
+
 			shapesRef.on('child_added',function(shapeSnap){
 				bufferCall(function(){
 					var id = shapeSnap.name(),
@@ -59,6 +61,7 @@ define([
 				var shape = shapesMap[shapeSnap.name()];
 				shape.visible(false);
 				shape._destroy(true);
+				delete shapesMap[shapeSnap.name()];
 			});
 
 			layer.newShape = function(type){
@@ -74,8 +77,9 @@ define([
 		});
 		layersRef.on('child_removed',function(layerSnap){
 			var layer = layersMap[layerSnap.name()];
-			shape.visible(false);
-			shape._destroy(true);
+			layer.visible(false);
+			layer._destroy(true);
+			delete layersMap[layerSnap.name()];
 		});
 
 		layersRef.child('default').transaction(function(data){
