@@ -7,15 +7,11 @@ require.config({
 				_.mixin(_s.exports());
 			}
 		},
-		//'hammer': {exports: 'Hammer'},
-		'jquery.scrollto': ['jquery'],
 		'bootstrap':['jquery'],
-		'sprite3d': {exports:'Sprite3D'},
 		'firebase': {exports:'Firebase'}
 	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-1.9.0',
-		'jquery.scrollto': 'lib/jquery/jquery.scrollTo.min',
 		'underscore': 'lib/underscore/underscore-min',
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
