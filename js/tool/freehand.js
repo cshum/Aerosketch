@@ -43,13 +43,11 @@ define([
 
 			var d = distance(center, point);
 			if(d >= Draw.options.strokeWidth()){
-				/*
 				shape.qCurveTo(center,{
 					x: (point.x + center.x)/2,
 					y: (point.y + center.y)/2
 				});
-				*/
-			   shape.lineTo(point);
+			   //shape.lineTo(point);
 				last = center;
 				center = point;
 			}
