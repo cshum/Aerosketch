@@ -1,13 +1,13 @@
 define(['knockout','draw','text!view/ratio.html'
 ],function(ko,Draw,toolbarView){
-	var curr, lock = ko.observable(false);
+	var shape, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);
-		curr = Draw.layer().newShape('rect');
-		curr.set(Draw.options);
-		curr.x(start.x);
-		curr.y(start.y);
-		Draw.layer().shapes.push(curr);
+		shape = Draw.layer().newShape('rect');
+		shape.set(Draw.options);
+		shape.x(start.x);
+		shape.y(start.y);
+		Draw.layer().shapes.push(shape);
 	}
 	function drag(e){
 		var dx = e.distanceX/Draw.zoom(),
@@ -15,21 +15,21 @@ define(['knockout','draw','text!view/ratio.html'
 			start = Draw.fromView(e.start);
 		if(lock()){
 			var d = Math.max(Math.abs(dx), Math.abs(dy));
-			curr.x(start.x + (dx > 0 ? 0:-d));
-			curr.y(start.y + (dy > 0 ? 0:-d));
-			curr.width(d);
-			curr.height(d);
+			shape.x(start.x + (dx > 0 ? 0:-d));
+			shape.y(start.y + (dy > 0 ? 0:-d));
+			shape.width(d);
+			shape.height(d);
 		}else{
-			curr.x(start.x+Math.min(dx,0));
-			curr.y(start.y+Math.min(dy,0));
-			curr.width(Math.abs(dx));
-			curr.height(Math.abs(dy));
+			shape.x(start.x+Math.min(dx,0));
+			shape.y(start.y+Math.min(dy,0));
+			shape.width(Math.abs(dx));
+			shape.height(Math.abs(dy));
 		}
 	}
 	function release(){
-		if(curr)
-			Draw.save(curr);
-		curr = null;
+		if(shape)
+			Draw.save(shape);
+		shape = null;
 	}
 	return {
 		name:'Rectangle',

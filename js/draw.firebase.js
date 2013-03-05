@@ -3,7 +3,7 @@ define([
    'util/requestanimationframe'
 ],function(_,Draw,Firebase,Layer,ShapeFactory,aniFrame){
 	Draw.firebase = function(url,callback){
-		var map = {},
+		var layersMap = {},
 			drawRef = new Firebase(url),
 			layersRef = drawRef.child('layers'),
 			bufferCall = (function(n){
@@ -32,8 +32,9 @@ define([
 
 		layersRef.on('child_added',function(layerSnap){
 			var id = layerSnap.name(),
-				layer = map[id] || new Layer(),
+				layer = layersMap[id] || new Layer(),
 				layerRef = layersRef.child(id),
+				shapesMap = {},
 				shapesRef = layerRef.child('shapes');
 
 			shapesRef.on('child_added',function(shapeSnap){
@@ -41,8 +42,8 @@ define([
 					var id = shapeSnap.name(),
 						val = shapeSnap.val(),
 						shapeRef = shapesRef.child(id),
-						shape = map[id] || ShapeFactory(val.type,val);
-					map[id] = shape;
+						shape = shapesMap[id] || ShapeFactory(val.type,val);
+					shapesMap[id] = shape;
 					shapeRef.on('value',function(shapeSnap){
 						shape.set(shapeSnap.val());
 					});
@@ -55,7 +56,7 @@ define([
 			});
 
 			shapesRef.on('child_removed',function(shapeSnap){
-				var shape = map[shapeSnap.name()];
+				var shape = shapesMap[shapeSnap.name()];
 				shape.visible(false);
 				shape._destroy(true);
 			});
@@ -63,13 +64,18 @@ define([
 			layer.newShape = function(type){
 				var shape = ShapeFactory(type),
 					shapeRef = shapesRef.push({type:type});
-				map[shapeRef.name()] = shape;
+				shapesMap[shapeRef.name()] = shape;
 				return shape;
 			};
 
 			Draw.layers.push(layer);
-			map[id] = layer;
-			Draw.layer(layer);
+			shapesMap[id] = layer;
+			Draw.layer(layer); //todo: only call at first run
+		});
+		layersRef.on('child_removed',function(layerSnap){
+			var layer = layersMap[layerSnap.name()];
+			shape.visible(false);
+			shape._destroy(true);
 		});
 
 		layersRef.child('default').transaction(function(data){

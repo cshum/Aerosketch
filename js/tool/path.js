@@ -2,7 +2,7 @@ define([
 	'knockout','draw',
 	'text!view/path.svg'
 ],function(ko,Draw,view){
-	var curr, c1, c2, touching, focus,
+	var shape, c1, c2, touching, focus,
 
 		selectors = ko.computed(function(){
 			if(Draw.tool() && Draw.tool()._path)
@@ -33,36 +33,36 @@ define([
 			focus = vm;
 			touching = true;
 			if(focus._center)
-				curr.back(); //finish. remove exceeded line
+				shape.back(); //finish. remove exceeded line
 			return vm._selector;
 		},
 		start = function(e){
-			if(focus._begin && curr) 
-				center(curr.getFirstPoint());
+			if(focus._begin && shape) 
+				center(shape.getFirstPoint());
 			else if(!focus._center) 
 				center(Draw.fromView(e.start));
 
-			if(!curr){
+			if(!shape){
 				c1 = null;
 				if(focus._selector){
-					curr = focus.shape;
-					center(curr.getLastPoint());
+					shape = focus.shape;
+					center(shape.getLastPoint());
 				}else{
-					curr = Draw.layer().newShape('path');
-					curr.set(Draw.options);
-					curr.moveTo(center());
+					shape = Draw.layer().newShape('path');
+					shape.set(Draw.options);
+					shape.moveTo(center());
 				}
-				begin(curr.getFirstPoint());
+				begin(shape.getFirstPoint());
 			}
 		},
 		drag = function(e){
-			if(curr && !focus._center){
+			if(shape && !focus._center){
 				var p = Draw.fromView(e.position),
 					c = center();
 				if(c1){
 					c2 = { x: 2*c.x-p.x, y: 2*c.y-p.y };
-					curr.back();
-					curr.curveTo(c1,c2,c);
+					shape.back();
+					shape.curveTo(c1,c2,c);
 					control2(c2);
 				}
 				control1(p);
@@ -70,10 +70,10 @@ define([
 		},
 		tap = function(e){
 			start(e);
-			if(curr && !focus._center){
+			if(shape && !focus._center){
 				if(c1){
-					curr.back();
-					curr.curveTo(c1,center(),center());
+					shape.back();
+					shape.curveTo(c1,center(),center());
 				}
 				control1(Draw.fromView(e.position));
 				control2(null);
@@ -83,28 +83,28 @@ define([
 		release = function(){
 			touching = false;
 			Draw.deselect();
-			if(curr){
+			if(shape){
 				if(focus._center){
-					Draw.select(curr);
+					Draw.select(shape);
 					finish(true);
 				}else if(focus._begin){
-					curr.close();
-					Draw.select(curr);
+					shape.close();
+					Draw.select(shape);
 					finish(true);
 				}else{
-					curr.lineTo(center());
+					shape.lineTo(center());
 					c1 = control1();
 				}
 			}
 		},
 
 		finish = function(ok){
-			if(!ok && curr){
+			if(!ok && shape){
 				Draw.deselect();
-				curr.visible(false);
+				shape.visible(false);
 			}
-			if(ok && curr) Draw.save(curr);
-			curr = null;
+			if(ok && shape) Draw.save(shape);
+			shape = null;
 			c1 = null;
 			control1(null);
 			control2(null);

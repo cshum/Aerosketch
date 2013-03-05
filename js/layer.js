@@ -10,6 +10,7 @@ define([
 			});
 			this.name = ko.observable(options.name);
 			this.visible = ko.observable(options.visible);
+			this._destroy = ko.observable(false);
 			this.shapes = ko.observableArray(options.shapes);
 
 			this.shapesTemplate = svgTemplate(this.shapes,function(shape){
