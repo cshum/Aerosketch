@@ -16,7 +16,7 @@ require.config({
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
-		'hammer':'lib/hammer/hammer-latest',
+		'hammer':'lib/hammer/hammer.min',
 
 		'bootstrap':'lib/bootstrap/bootstrap.min',
 
@@ -27,7 +27,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 84
+		"bust=" +  (new Date()).getTime() : 85
 });
 
 
