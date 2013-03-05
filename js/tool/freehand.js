@@ -57,7 +57,6 @@ define([
 		},
 		release = function(){
 			following = false;
-			console.log(i,j);
 			Draw.save(shape);
 		};
 
