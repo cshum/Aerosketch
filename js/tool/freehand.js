@@ -35,17 +35,13 @@ define([
 		follow = function(){
 			if(!following) return;
 			shape.back();
-			/*
 			point = {
 				x: Draw.round((point.x + cursor.x)/2),
 				y: Draw.round((point.y + cursor.y)/2)
 			};
-			*/
-		   point = cursor;
-			
 			   //(!center || dist2Seg2(last,center,point) >= Math.pow(0.1/Draw.zoom(),2))){
 			if(dist2(last,point) >= w2){
-				center = {
+				var center = {
 					x: (point.x + last.x)/2,
 					y: (point.y + last.y)/2
 				};
