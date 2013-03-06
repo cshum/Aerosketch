@@ -1,6 +1,6 @@
 define(['knockout','underscore','transform','draw',
 'util/kosvgtemplate', 'text!view/selected.svg','util/requestanimationframe'],
-function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
+function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
 			return shape.view || '<'+shape.type+' data-bind="aniattr:attr" />';
 		}),
@@ -25,18 +25,20 @@ function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
 
 		angle, scale, changed = false,
 		buffer = ko.observable({}),
-		visibles,
+		visibles, shapes,
 
 		start = function(){
 			if(changed) return;
 			scale = 1;
 			angle = null;
 			Draw.transforming(true);
-			visibles = _(Draw.selection()).map(function(shape){
+			shapes = _(Draw.selection()).clone();
+			visibles = _(shapes).map(function(shape){
 				var v = shape.visible();
 				shape.visible(false);
 				return v;
 			});
+			changed = true;
 		},
 
 		drag = function(e){
@@ -52,7 +54,6 @@ function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
 					x:e.distanceX/Draw.zoom(),
 					y:e.distanceY/Draw.zoom()
 				}});
-			changed = true;
 		},
 
 		transform = function(e){
@@ -65,7 +66,6 @@ function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
 					y:e.distanceY/Draw.zoom()
 				}
 			});
-			changed = true;
 		},
 
 		startPos,
@@ -74,7 +74,6 @@ function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
 				startPos = Draw.fromView(e.position);
 				start();
 			}
-			changed = true;
 			scale *= 1 +e.delta;
 			buffer({
 				origin:startPos,
@@ -83,10 +82,9 @@ function(ko,_,Transform,Draw,svgTemplate, view, requestAnimationFrame){
 		};
 
 	Draw.debounce.subscribe(function(debounce){
-		var shapes = Draw.selection();
 		if(!debounce && changed){
 			Transform(shapes,buffer());
-			requestAnimationFrame(function(){
+			aniFrame(function(){
 				Draw.transforming(false);
 				_(shapes).each(function(shape,i){
 					shape.visible(visibles[i]);
