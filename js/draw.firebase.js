@@ -45,6 +45,7 @@ define([
 					shape._destroy.subscribe(function(destroy){
 						if(destroy) shapeRef.remove();
 					});
+					shape.rotate.subscribe(console.log.bind(console));
 					if(!isReady && shape.visible())
 						_(points(shape)).each(function(p){
 							bound.x1 = Math.min(p.x, bound.x1 || p.x);

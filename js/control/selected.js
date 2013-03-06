@@ -81,7 +81,6 @@ function(ko,_,Transform,Draw,svgTemplate, view){
 
 	Draw.debounce.subscribe(function(debounce){
 		if(!debounce && Draw.transforming()){
-			console.log('transform',buffer());
 			Transform(shapes,buffer());
 			Draw.transforming(false);
 			_(shapes).each(function(shape,i){
