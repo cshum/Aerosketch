@@ -1,7 +1,7 @@
 define([
 	'knockout','underscore',
-	'lib/knockout/template',
-	'lib/knockout/svgtemplate','layer'
+	'util/kotemplate',
+	'util/kosvgtemplate','layer'
 ],function(ko,_,template,svgTemplate,Layer){
 	var layers = ko.observableArray(),
 		layer = ko.observable(),

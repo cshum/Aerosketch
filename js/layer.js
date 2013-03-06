@@ -1,5 +1,5 @@
 define([
-   'knockout','underscore','lib/knockout/svgtemplate',
+   'knockout','underscore','util/kosvgtemplate',
    'shape/factory'
 ],function(ko,_,svgTemplate,Factory){
 	var Layer = function(options){
