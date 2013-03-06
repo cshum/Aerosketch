@@ -7,7 +7,6 @@ require.config({
 				_.mixin(_s.exports());
 			}
 		},
-		'bootstrap':['jquery'],
 		'firebase': {exports:'Firebase'}
 	},
 	paths: {
@@ -18,16 +17,13 @@ require.config({
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer.min',
 
-		'bootstrap':'lib/bootstrap/bootstrap.min',
-
 		'text': 'lib/require/text',
-		'domready': 'lib/require/domready',
 
 		'firebase':'http://static.firebase.com/v0/firebase'
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 88
+		"bust=" +  (new Date()).getTime() : 89
 });
 
 

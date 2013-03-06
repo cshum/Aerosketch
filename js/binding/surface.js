@@ -4,8 +4,7 @@ define([
 
 function binding(el,value){
 	var drawTrigger = value(),
-		inCanvas, target, pos, start, 
-		dragging, transforming, 
+		pos, start, 
 		offset = _.throttle(function(){
 			return $(el).offset();
 		},500),
@@ -56,7 +55,6 @@ function binding(el,value){
 				target: e.target
 			});
 		};
-
 
 	Hammer(el,{
 		drag_min_distance:10,
