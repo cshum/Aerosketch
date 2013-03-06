@@ -10,13 +10,13 @@ define([
 				var buffer = [], 
 					triggered = false,
 					call = function(){
-						for(var i=0;i<n;i++){
-							if(buffer.length===0){
-								triggered = false;
-								return;
-							}else buffer.shift()();
+						var count = 0;
+						while(count<n && buffer.length>0){
+							buffer.shift()();
+							count++;
 						}
-						_.defer(call);
+						if(buffer.length>0) _.defer(call);
+						else triggered = false;
 					};
 				return function(func){
 					buffer.push(func);
@@ -39,7 +39,7 @@ define([
 			layersMap[id] = layer;
 
 			shapesRef.on('child_added',function(shapeSnap){
-				bufferCall(function(){
+				aniFrame(function(){
 					var id = shapeSnap.name(),
 						val = shapeSnap.val(),
 						shapeRef = shapesRef.child(id),
@@ -52,7 +52,7 @@ define([
 					shape._destroy.subscribe(function(destroy){
 						if(destroy) shapeRef.remove();
 					});
-					layer.shapes.push(shape);
+					bufferCall(_(layer.shapes.push).bind(layer.shapes,shape));
 				});
 			});
 
