@@ -4,9 +4,9 @@ define([
 ],function(ko,_,Transform,Draw){
 	var clipboard = ko.observableArray([]),
 		hide = function(){
-			var shapes = Draw.selection();
-			_(shapes).invoke('visible',false);
+			var shapes = Draw.selection().slice(0);
 			Draw.selection.removeAll();
+			_(shapes).invoke('visible',false);
 			Draw.save.apply(null,shapes);
 		},
 		copy = function(){
