@@ -1,4 +1,4 @@
-define(['knockout','underscore','draw','util/points'],function(ko,_,Draw,points){
+define(['knockout','underscore','draw','points'],function(ko,_,Draw,points){
 	var zoom, position, scale, changed = false;
 	function Transform(e){
 		e = _(e).defaults({

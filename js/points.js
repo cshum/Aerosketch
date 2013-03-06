@@ -1,11 +1,15 @@
-define(['underscore'],function(_){
+define(function(){
 	return function (shape){
 		var r = shape.rotate(),
 			rad = r * Math.PI/180,
 			sin = Math.sin(rad),
 			cos = Math.cos(rad),
 			b = shape.bbox(),
-			cx = b.x + b.width/2,
+			w = shape.stroke()!='none' ? 
+				shape.strokeWidth():0;
+			b.x -= w/2; b.y -= w/2;
+			b.width += w; b.height += w;
+			cx = b.x + b.width/2;
 			cy = b.y + b.height/2;
 		return _([
 			{x:b.x, y:b.y}, {x:b.x+b.width, y:b.y},
@@ -21,4 +25,3 @@ define(['underscore'],function(_){
 		});
 	};
 });
-
