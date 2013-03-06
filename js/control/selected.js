@@ -84,14 +84,12 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 		if(!debounce && changed){
 			Transform(shapes,buffer());
 			changed = false;
-			aniFrame(function(){
-				Draw.transforming(false);
-				_(shapes).each(function(shape,i){
-					shape.visible(visibles[i]);
-				});
-				Draw.save.apply(null,shapes);
-				buffer({});
+			Draw.transforming(false);
+			_(shapes).each(function(shape,i){
+				shape.visible(visibles[i]);
 			});
+			Draw.save.apply(null,shapes);
+			buffer({});
 		}
 	});
 
