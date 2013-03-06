@@ -2,7 +2,7 @@ define(['knockout','underscore','transform','draw',
 'util/kosvgtemplate', 'text!view/selected.svg','util/requestanimationframe'],
 function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
-			return shape.view || '<'+shape.type+' data-bind="aniattr:attr" />';
+			return shape.view || '<'+shape.type+' data-bind="attr:attr" />';
 		}),
 		selectedBBox = function(shape){
 			var b = shape.bbox(),

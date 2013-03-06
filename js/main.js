@@ -23,7 +23,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 105
+		"bust=" +  (new Date()).getTime() : 106
 });
 
 
@@ -37,7 +37,7 @@ require([
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
 	'binding/surface','binding/hammer',
-	'binding/palette','binding/aniattr'
+	'binding/palette'
 ],function(ko,$,Draw,bbox){
 	ko.applyBindings(Draw,document.body);
 
