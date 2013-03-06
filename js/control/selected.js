@@ -34,10 +34,9 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 			Draw.transforming(true);
 			shapes = _(Draw.selection()).clone();
 			visibles = _(shapes).map(function(shape){
-				var v = shape.visible();
-				shape.visible(false);
-				return v;
+				return shape.visible();
 			});
+			_(shapes).invoke('visible',false);
 			changed = true;
 		},
 
