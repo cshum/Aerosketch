@@ -23,7 +23,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 94
+		"bust=" +  (new Date()).getTime() : 95
 });
 
 
@@ -39,9 +39,21 @@ require([
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
 ],function(ko,$,Draw,bbox){
-	console.log(bbox);
 	ko.applyBindings(Draw,document.body);
 
+	//zoom to overview
+	if(bbox && bbox.width>0 && bbox.height>0){
+		var w = $('#surface').width(),
+			h = $('#surface').height();
+		console.log(bbox,w,h);
+		Draw.zoom(Math.min(w/bbox.width, h/bbox.height, 1));
+		Draw.position({
+			x:bbox.x*Draw.zoom(),
+			y:bbox.y*Draw.zoom()
+		});
+	}
+
+	//prevent defaults
 	var prevent = function(e) { e.preventDefault(); };
 	document.ontouchstart = prevent;
 	document.oncontextmenu = prevent;

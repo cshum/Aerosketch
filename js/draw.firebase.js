@@ -9,13 +9,16 @@ define([
 			defer = deferBuffer(),
 			pushDefer = deferBuffer(10),
 			bound = {},
+			isReady = false;
 			ready = _.once(function(){
-				callback({
-					x:bound.x1,
-					y:bound.y1,
-					width:bound.x2 - bound.x1,
-					height:bound.y2 - bound.y1
-				});
+				if('x1' in bound)
+					callback({
+						x:bound.x1,
+						y:bound.y1,
+						width:bound.x2 - bound.x1,
+						height:bound.y2 - bound.y1
+					});
+				else callback();
 			});
 
 		layersRef.on('child_added',function(layerSnap){
@@ -41,12 +44,13 @@ define([
 					shape._destroy.subscribe(function(destroy){
 						if(destroy) shapeRef.remove();
 					});
-					_(points(shape)).each(function(p){
-						bound.x1 = Math.min(p.x, bound.x1 || p.x);
-						bound.y1 = Math.min(p.y, bound.y1 || p.y);
-						bound.x2 = Math.max(p.x, bound.x2 || p.x);
-						bound.y2 = Math.max(p.y, bound.y2 || p.y);
-					});
+					if(!isReady && shape.visible())
+						_(points(shape)).each(function(p){
+							bound.x1 = Math.min(p.x, bound.x1 || p.x);
+							bound.y1 = Math.min(p.y, bound.y1 || p.y);
+							bound.x2 = Math.max(p.x, bound.x2 || p.x);
+							bound.y2 = Math.max(p.y, bound.y2 || p.y);
+						});
 					pushDefer(function(){
 						ready();
 						layer.shapes.push(shape);
@@ -71,6 +75,7 @@ define([
 			Draw.layers.push(layer);
 			shapesMap[id] = layer;
 			Draw.layer(layer); //todo: only call at first run
+			pushDefer(ready);
 		});
 		layersRef.on('child_removed',function(layerSnap){
 			var layer = layersMap[layerSnap.name()];
