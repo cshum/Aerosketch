@@ -1,31 +1,13 @@
 define([
    'underscore','draw','firebase','layer','shape/factory',
-   'util/requestanimationframe'
-],function(_,Draw,Firebase,Layer,ShapeFactory,aniFrame){
+   'util/requestanimationframe','util/deferbuffer'
+],function(_,Draw,Firebase,Layer,ShapeFactory,aniFrame,deferBuffer){
 	Draw.firebase = function(url,callback){
 		var layersMap = {},
 			drawRef = new Firebase(url),
 			layersRef = drawRef.child('layers'),
-			bufferCall = (function(n){
-				var buffer = [], 
-					triggered = false,
-					call = function(){
-						var count = 0;
-						while(count<n && buffer.length>0){
-							buffer.shift()();
-							count++;
-						}
-						if(buffer.length>0) _.defer(call);
-						else triggered = false;
-					};
-				return function(func){
-					buffer.push(func);
-					if(!triggered){
-						_.defer(call);
-						triggered = true;
-					}
-				};
-			})(15);
+			defer = deferBuffer(),
+			defer15 = deferBuffer(15);
 
 		drawRef.once('value',callback); //onready
 
@@ -39,7 +21,7 @@ define([
 			layersMap[id] = layer;
 
 			shapesRef.on('child_added',function(shapeSnap){
-				aniFrame(function(){
+				defer(function(){
 					var id = shapeSnap.name(),
 						val = shapeSnap.val(),
 						shapeRef = shapesRef.child(id),
@@ -52,7 +34,7 @@ define([
 					shape._destroy.subscribe(function(destroy){
 						if(destroy) shapeRef.remove();
 					});
-					bufferCall(_(layer.shapes.push).bind(layer.shapes,shape));
+					defer15(_(layer.shapes.push).bind(layer.shapes,shape));
 				});
 			});
 
