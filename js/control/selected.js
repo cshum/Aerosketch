@@ -83,13 +83,13 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 	Draw.debounce.subscribe(function(debounce){
 		if(!debounce && changed){
 			Transform(shapes,buffer());
+			changed = false;
 			aniFrame(function(){
 				Draw.transforming(false);
 				_(shapes).each(function(shape,i){
 					shape.visible(visibles[i]);
 				});
 				Draw.save.apply(null,shapes);
-				changed = false;
 				buffer({});
 			});
 		}
