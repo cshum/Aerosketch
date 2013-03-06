@@ -1,15 +1,22 @@
 define([
    'underscore','draw','firebase','layer','shape/factory',
-   'util/requestanimationframe','util/deferbuffer'
-],function(_,Draw,Firebase,Layer,ShapeFactory,aniFrame,deferBuffer){
-	Draw.firebase = function(url,callback){
+   'util/requestanimationframe','util/deferbuffer','util/points'
+],function(_,Draw,Firebase,Layer,ShapeFactory,aniFrame,deferBuffer,points){
+	Draw.firebase = _.once(function(url,callback){
 		var layersMap = {},
 			drawRef = new Firebase(url),
 			layersRef = drawRef.child('layers'),
 			defer = deferBuffer(),
-			defer15 = deferBuffer(15);
-
-		drawRef.once('value',callback); //onready
+			pushDefer = deferBuffer(10),
+			bound = {},
+			ready = _.once(function(){
+				callback({
+					x:bound.x1,
+					y:bound.y1,
+					width:bound.x2 - bound.x1,
+					height:bound.y2 - bound.y1
+				});
+			});
 
 		layersRef.on('child_added',function(layerSnap){
 			var id = layerSnap.name(),
@@ -34,7 +41,16 @@ define([
 					shape._destroy.subscribe(function(destroy){
 						if(destroy) shapeRef.remove();
 					});
-					defer15(_(layer.shapes.push).bind(layer.shapes,shape));
+					_(points(shape)).each(function(p){
+						bound.x1 = Math.min(p.x, bound.x1 || p.x);
+						bound.y1 = Math.min(p.y, bound.y1 || p.y);
+						bound.x2 = Math.max(p.x, bound.x2 || p.x);
+						bound.y2 = Math.max(p.y, bound.y2 || p.y);
+					});
+					pushDefer(function(){
+						ready();
+						layer.shapes.push(shape);
+					});
 				});
 			});
 
@@ -71,7 +87,7 @@ define([
 				};
 			}
 		});
-	};
+	});
 	return {
 		load: function(params, require, callback){
 			Draw.firebase(params,callback);

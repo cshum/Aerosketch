@@ -23,21 +23,23 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 93
+		"bust=" +  (new Date()).getTime() : 94
 });
 
 
 require([
-	'knockout',
+	'knockout','jquery',
 
-	'draw','draw.palette','draw.clipboard',
+	'draw',
 	'draw.firebase!https://aerosketch.firebaseio.com/',
+	'draw.palette','draw.clipboard',
 	'draw.controls!base|strokesize,selected',
 	'draw.tools!freehand|pointer,hand,freehand,path,ellipse,rect',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
-],function(ko,Draw){
+],function(ko,$,Draw,bbox){
+	console.log(bbox);
 	ko.applyBindings(Draw,document.body);
 
 	var prevent = function(e) { e.preventDefault(); };
