@@ -4,11 +4,7 @@ define(function(){
 			rad = r * Math.PI/180,
 			sin = Math.sin(rad),
 			cos = Math.cos(rad),
-			b = shape.bbox(),
-			w = shape.stroke()!='none' ? 
-				shape.strokeWidth():0;
-			b.x -= w/2; b.y -= w/2;
-			b.width += w; b.height += w;
+			b = shape.bbox();
 			cx = b.x + b.width/2;
 			cy = b.y + b.height/2;
 		return _([

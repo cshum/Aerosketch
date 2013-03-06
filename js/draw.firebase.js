@@ -45,13 +45,16 @@ define([
 					shape._destroy.subscribe(function(destroy){
 						if(destroy) shapeRef.remove();
 					});
-					if(!isReady && shape.visible())
+					if(!isReady && shape.visible()){
+						var w = (shape.stroke()!='none' ? 
+							shape.strokeWidth():0);
 						_(points(shape)).each(function(p){
-							bound.x1 = Math.min(p.x, bound.x1 || p.x);
-							bound.y1 = Math.min(p.y, bound.y1 || p.y);
-							bound.x2 = Math.max(p.x, bound.x2 || p.x);
-							bound.y2 = Math.max(p.y, bound.y2 || p.y);
+							bound.x1 = Math.min(p.x - w/2, bound.x1 || p.x - w/2);
+							bound.y1 = Math.min(p.y - w/2, bound.y1 || p.y - w/2);
+							bound.x2 = Math.max(p.x + w, bound.x2 || p.x + w);
+							bound.y2 = Math.max(p.y + w, bound.y2 || p.y + w);
 						});
+					}
 					pushDefer(function(){
 						layer.shapes.push(shape);
 						ready();
