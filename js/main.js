@@ -23,7 +23,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 96
+		"bust=" +  (new Date()).getTime() : 97
 });
 
 
@@ -48,8 +48,8 @@ require([
 		console.log(bbox,w,h);
 		Draw.zoom(Math.min(w/bbox.width, h/bbox.height, 1));
 		Draw.position({
-			x:bbox.x*Draw.zoom(),
-			y:bbox.y*Draw.zoom()
+			x:bbox.x*Draw.zoom() - (w - bbox.width*Draw.zoom())/2,
+			y:bbox.y*Draw.zoom() - (h - bbox.height*Draw.zoom())/2
 		});
 	}
 
