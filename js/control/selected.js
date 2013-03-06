@@ -1,6 +1,6 @@
 define(['knockout','underscore','transform','draw',
-'util/kosvgtemplate', 'text!view/selected.svg','util/requestanimationframe'],
-function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
+'util/kosvgtemplate', 'text!view/selected.svg'],
+function(ko,_,Transform,Draw,svgTemplate, view){
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
 			return shape.view || '<'+shape.type+' data-bind="attr:attr" />';
 		}),
@@ -23,21 +23,20 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 			return selected;
 		},
 
-		angle, scale, changed = false,
+		angle, scale, 
 		buffer = ko.observable({}),
 		visibles, shapes,
 
 		start = function(){
-			if(changed) return;
 			scale = 1;
 			angle = null;
+			if(Draw.transforming()) return;
 			Draw.transforming(true);
 			shapes = _(Draw.selection()).clone();
 			visibles = _(shapes).map(function(shape){
 				return shape.visible();
 			});
 			_(shapes).invoke('visible',false);
-			changed = true;
 		},
 
 		drag = function(e){
@@ -69,7 +68,7 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 
 		startPos,
 		wheel = function(e){
-			if(!changed){
+			if(!Draw.transforming()){
 				startPos = Draw.fromView(e.position);
 				start();
 			}
@@ -81,9 +80,9 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 		};
 
 	Draw.debounce.subscribe(function(debounce){
-		if(!debounce && changed){
+		if(!debounce && Draw.transforming()){
+			console.log('transform',buffer());
 			Transform(shapes,buffer());
-			changed = false;
 			Draw.transforming(false);
 			_(shapes).each(function(shape,i){
 				shape.visible(visibles[i]);
