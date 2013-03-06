@@ -9,11 +9,10 @@ define(['knockout','shape/template'],function(ko,Shape){
 			};
 		},
 		write: function(e){
-			_(e).defaults(this.bbox());
-			this.x(e.x);
-			this.y(e.y);
-			this.width(e.width);
-			this.height(e.height);
+			if(e.x) this.x(e.x);
+			if(e.y) this.y(e.y);
+			if(e.width) this.width(e.width);
+			if(e.height) this.height(e.height);
 		}
 	};
 	return Shape('rect',function(){

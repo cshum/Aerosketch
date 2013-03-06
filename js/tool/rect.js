@@ -7,7 +7,6 @@ define(['knockout','draw','text!view/ratio.html'
 		shape.set(Draw.options);
 		shape.x(start.x);
 		shape.y(start.y);
-		Draw.layer().shapes.push(shape);
 	}
 	function drag(e){
 		var dx = e.distanceX/Draw.zoom(),
