@@ -1,7 +1,7 @@
 define([
    'knockout','underscore','transform',
-   'draw','draw.momento'
-],function(ko,_,Transform,Draw){
+   'draw','util/requestanimationframe','draw.momento'
+],function(ko,_,Transform,Draw,aniFrame){
 	var clipboard = ko.observableArray([]),
 		hide = function(){
 			var shapes = Draw.selection().slice(0);
@@ -32,8 +32,10 @@ define([
 				y:30/Draw.zoom()
 			}});
 
-			Draw.save.apply(null,shapes);
-			Draw.selection(shapes);
+			aniFrame(function(){
+				Draw.selection(shapes);
+				Draw.save.apply(null,shapes);
+			});
 		};
 
 	_(Draw).extend({
