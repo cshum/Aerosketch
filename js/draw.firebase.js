@@ -21,6 +21,12 @@ define([
 				else callback();
 			});
 
+		drawRef.once('value',function(){
+			defer(function(){
+				pushDefer(ready);
+			});
+		});
+
 		layersRef.on('child_added',function(layerSnap){
 			var id = layerSnap.name(),
 				layer = layersMap[id] || new Layer(),
@@ -75,7 +81,6 @@ define([
 			Draw.layers.push(layer);
 			shapesMap[id] = layer;
 			Draw.layer(layer); //todo: only call at first run
-			pushDefer(ready);
 		});
 		layersRef.on('child_removed',function(layerSnap){
 			var layer = layersMap[layerSnap.name()];
