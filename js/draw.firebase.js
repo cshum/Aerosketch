@@ -11,6 +11,7 @@ define([
 			bound = {},
 			isReady = false;
 			ready = _.once(function(){
+				isReady = true;
 				if('x1' in bound)
 					callback({
 						x:bound.x1,
@@ -20,12 +21,6 @@ define([
 					});
 				else callback();
 			});
-
-		drawRef.once('value',function(){
-			defer(function(){
-				pushDefer(ready);
-			});
-		});
 
 		layersRef.on('child_added',function(layerSnap){
 			var id = layerSnap.name(),
@@ -58,8 +53,8 @@ define([
 							bound.y2 = Math.max(p.y, bound.y2 || p.y);
 						});
 					pushDefer(function(){
-						ready();
 						layer.shapes.push(shape);
+						ready();
 					});
 				});
 			});
@@ -89,14 +84,17 @@ define([
 			delete layersMap[layerSnap.name()];
 		});
 
-		layersRef.child('default').transaction(function(data){
-			if(data===null){
-				return {
-					visible:true,
-					name:'Default Layer'
-				};
-			}
-		});
+		/*
+				{
+					layers:{
+						default:{
+							visible:true,
+							name:'Default Layer',
+							shapes:[{type:'rect',visible:false}] //dummy
+						}
+					}
+				}
+		*/
 	});
 	return {
 		load: function(params, require, callback){

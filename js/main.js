@@ -23,7 +23,7 @@ require.config({
 	},
 	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : 97
+		"bust=" +  (new Date()).getTime() : 100
 });
 
 
@@ -45,7 +45,6 @@ require([
 	if(bbox && bbox.width>0 && bbox.height>0){
 		var w = $('#surface').width(),
 			h = $('#surface').height();
-		console.log(bbox,w,h);
 		Draw.zoom(Math.min(w/bbox.width, h/bbox.height, 1));
 		Draw.position({
 			x:bbox.x*Draw.zoom() - (w - bbox.width*Draw.zoom())/2,
