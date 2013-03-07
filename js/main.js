@@ -14,14 +14,14 @@ require.config({
 		'firebase':'http://static.firebase.com/v0/firebase'
 	},
 	urlArgs: location.hostname == 'localhost' ?
-		"bust=" +  (new Date()).getTime() : ''
+		"bust=" + (new Date()).getTime() : ''
 });
 
 
 require([
 	'knockout','jquery',
 
-	'control/base', 'control/selected', 'control/strokeSize',
+	'control/base', 'control/selected', 'control/strokesize',
 	'tool/pointer', 'tool/hand', 'tool/freehand',
 	'tool/path', 'tool/ellipse', 'tool/rect',
 
