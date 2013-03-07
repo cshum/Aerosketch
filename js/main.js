@@ -9,12 +9,10 @@ require.config({
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer.min',
-
 		'text': 'lib/require/text',
 
 		'firebase':'http://static.firebase.com/v0/firebase'
 	},
-	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
 		"bust=" +  (new Date()).getTime() : ''
 });
