@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+<body>
+<script type="text/javascript" src="lib/require/r.js"></script>
+<script type="text/javascript">
+	requirejs.optimize({
+		baseUrl:'.',
+		include:['main'],
+		mainConfigFile: 'main.js',
+		exclude:['jquery','firebase'],
+		out:function(text){
+			alert('diu');
+			console.log(text);
+		}
+	}, function (buildText) {
+		console.log(buildText);
+	});
+</script>
+	
+</body>
+</html>
