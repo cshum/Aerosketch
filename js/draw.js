@@ -3,6 +3,7 @@ define([
 	'util/kotemplate',
 	'util/kosvgtemplate','layer'
 ],function(ko,_,template,svgTemplate,Layer){
+	if(!ko) return;
 	var layers = ko.observableArray(),
 		layer = ko.observable(),
 

@@ -1,4 +1,5 @@
 define(['knockout','underscore'],function(ko,_){
+	if(!ko) return;
 	var svgEngine = _(new ko.templateEngine()).extend({
 		allowTemplateRewriting: false,
 		renderTemplateSource: function (templateSource, bindingContext, options) {

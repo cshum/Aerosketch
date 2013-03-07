@@ -2,6 +2,7 @@ define([
 	'underscore','knockout','draw',
 	'util/requestanimationframe'
 ],function(_,ko,Draw,aniFrame){
+	if(!ko) return;
 	var point, last, w2,
 		shape, cursor, following,
 		dist2 = function(p1,p2){

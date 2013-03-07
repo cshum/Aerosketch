@@ -2,6 +2,7 @@ define([
 	'knockout','draw',
 	'text!view/path.svg'
 ],function(ko,Draw,view){
+	if(!ko) return;
 	var shape, c1, c2, touching, focus,
 
 		selectors = ko.computed(function(){

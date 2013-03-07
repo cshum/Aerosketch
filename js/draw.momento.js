@@ -1,5 +1,6 @@
 define(['knockout','underscore','draw','util/requestanimationframe'
 ],function(ko,_,Draw,aniFrame){
+	if(!ko) return;
 	var undos = [], 
 		redos = [],
 		save = function(){

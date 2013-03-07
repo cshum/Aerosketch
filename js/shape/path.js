@@ -1,4 +1,5 @@
 define(['knockout','underscore','shape/template'],function(ko,_,Shape){
+	if(!ko) return;
 	var approxBezier = (function(){
 			var getPointAt = function(ps,t){
 				if(ps.length==1){

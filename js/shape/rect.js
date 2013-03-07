@@ -1,4 +1,5 @@
 define(['knockout','shape/template'],function(ko,Shape){
+	if(!ko) return;
 	var bbox = {
 		read: function(){
 			return {

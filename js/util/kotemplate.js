@@ -1,4 +1,5 @@
 define(['knockout','underscore'],function(ko,_){
+	if(!ko) return;
 	var engine = _(new ko.templateEngine()).extend({
 		allowTemplateRewriting: false,
 		renderTemplateSource: function (source) {

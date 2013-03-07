@@ -2,6 +2,7 @@ define([
    'knockout','underscore','transform',
    'draw','util/requestanimationframe','draw.momento'
 ],function(ko,_,Transform,Draw,aniFrame){
+	if(!ko) return;
 	var clipboard = ko.observableArray([]),
 		hide = function(){
 			var shapes = Draw.selection().slice(0);

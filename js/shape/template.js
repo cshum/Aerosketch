@@ -1,4 +1,5 @@
-define(['knockout','underscore'],function(ko,_){
+define(['knockout','underscore','underscore.string'],function(ko,_,_s){
+	if(!ko) return;
 	return function(type, func, config){
 		var attrKeys = [
 				'fill','stroke','strokeWidth','transform'
@@ -33,7 +34,7 @@ define(['knockout','underscore'],function(ko,_){
 				//set up attr
 				self.attr = {};
 				_(attrKeys).each(function(key){
-					self.attr[_(key).dasherize()] = self[key];
+					self.attr[_s.dasherize(key)] = self[key];
 				});
 				self.options = {};
 				_(optionsKeys).each(function(key){
