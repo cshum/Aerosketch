@@ -1,7 +1,4 @@
 require.config({
-	shim: {
-		'firebase': {exports:'Firebase'}
-	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-1.9.0',
 		'underscore': 'lib/underscore/underscore-amd-min',
@@ -9,9 +6,7 @@ require.config({
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer.min',
-		'text': 'lib/require/text',
-
-		'firebase':'http://static.firebase.com/v0/firebase'
+		'text': 'lib/require/text'
 	},
 	urlArgs: location.hostname == 'localhost' ?
 		"bust=" + (new Date()).getTime() : ''

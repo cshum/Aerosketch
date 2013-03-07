@@ -9,9 +9,7 @@
 		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer.min',
-		'text': 'lib/require/text',
-
-		'firebase':'http://static.firebase.com/v0/firebase'
+		'text': 'lib/require/text'
 	},
 	name:'main'
 })
