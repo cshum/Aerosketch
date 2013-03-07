@@ -2,14 +2,12 @@ define([
 	'knockout','text!view/strokesize.svg','draw','draw.options'
 ],function(ko,view,Draw){
 	var init, y, 
-		strokeWidth = Draw.options.strokeWidth, 
-		stroke = Draw.options.stroke,
 		strokeSize = ko.computed({
 			read: function(){
-				return Math.min(30,strokeWidth()*Draw.zoom()/2);
+				return Math.min(30,Draw.options.strokeWidth()*Draw.zoom()/2);
 			},
 			write: function(size){
-				strokeWidth(Math.min(30,Math.max(0.5,size))/Draw.zoom()*2);
+				Draw.options.strokeWidth(Math.min(30,Math.max(0.5,size))/Draw.zoom()*2);
 			}
 		}),
 
@@ -36,7 +34,6 @@ define([
 		_strokeSize:true,
 		view:view,
 		strokeSize:strokeSize,
-		stroke:stroke,
 
 		check:check,
 		dragstart:dragstart,

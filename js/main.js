@@ -34,7 +34,7 @@ require([
 ){
 
 	//init controls
-	Draw.controls([selectedCtrl, strokeCtrl]);
+	Draw.controls([strokeCtrl, selectedCtrl]);
 	Draw.baseControl(baseCtrl);
 
 	//init tools
