@@ -16,7 +16,7 @@
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
 			<rect data-bind="attr:{fill:background}" stroke="none" width="100%" height="100%" />
 			<g stroke-linecap="round">
-				<g data-bind="aniattr:{transform:transform},foreach:layers">
+				<g data-bind="attr:{transform:transform},foreach:layers">
 					<g data-bind="visible:visible,template:shapesTemplate" ></g>
 				</g>
 				<g data-bind="template:controlsTemplate" ></g>
