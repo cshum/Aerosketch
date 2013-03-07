@@ -24,14 +24,15 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 			return selected;
 		},
 
-		angle, scale, 
+		angle, scale, changed = false,
 		buffer = ko.observable({}),
 		visibles, shapes,
 
 		start = function(){
 			scale = 1;
 			angle = null;
-			if(Draw.transforming()) return;
+			if(changed) return;
+			changed = true;
 			Draw.transforming(true);
 			shapes = _(Draw.selection()).clone();
 			visibles = _(shapes).map(function(shape){
@@ -69,7 +70,7 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 
 		startPos,
 		wheel = function(e){
-			if(!Draw.transforming()){
+			if(!changed){
 				startPos = Draw.fromView(e.position);
 				start();
 			}
@@ -81,9 +82,10 @@ function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 		};
 
 	Draw.debounce.subscribe(function(debounce){
-		if(!debounce && Draw.transforming()){
+		if(!debounce && changed){
 			Transform(shapes,buffer());
 			aniFrame(function(){
+				changed = false;
 				Draw.transforming(false);
 				_(shapes).each(function(shape,i){
 					shape.visible(visibles[i]);
