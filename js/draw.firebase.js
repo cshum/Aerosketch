@@ -7,7 +7,6 @@ define([
 			drawRef = new Firebase(url),
 			layersRef = drawRef.child('layers'),
 			defer = deferBuffer(),
-			pushDefer = deferBuffer(10),
 			bound = {},
 			isReady = false;
 			ready = _.once(function(){
@@ -54,14 +53,9 @@ define([
 							bound.x2 = Math.max(p.x + w, bound.x2 || p.x + w);
 							bound.y2 = Math.max(p.y + w, bound.y2 || p.y + w);
 						});
-						pushDefer(function(){
-							layer.shapes.push(shape);
-							ready();
-						});
-					}else{
-						layer.shapes.push(shape);
-						if(!isReady) defer(ready);
 					}
+					layer.shapes.push(shape);
+					if(!isReady) aniFrame(ready);
 				});
 			});
 
