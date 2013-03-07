@@ -10,14 +10,12 @@ define([
 					var val = ko.utils.unwrapObservable(value);
 					if(!val) return;
 					changed[key] = val;
-					console.log(key,val);
 					if(!triggered){
 						aniFrame(update);
 						triggered = true;
 					}
 				},
 				update = function(){
-					console.log(changed);
 					$(el).attr(changed);
 					triggered = false;
 					changed = {};
