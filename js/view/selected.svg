@@ -1,5 +1,5 @@
-<g data-bind="if:$root.transforming, attr:{transform:$root.transform}" >
-	<g data-bind="template:selectedTemplate,attr:{transform:buffer}"></g>
+<g data-bind="if:$root.transforming, aniattr:{transform:$root.transform}" >
+	<g data-bind="template:selectedTemplate,aniattr:{transform:buffer}"></g>
 </g>
 <g data-bind="foreach:$root.selection,attr:{opacity:$root.debounce()?0:1}" fill="black" fill-opacity="0" 
 stroke="blue" opacity="1" stroke-width="1" 
