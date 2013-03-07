@@ -1,7 +1,7 @@
 define([
    'underscore','draw','layer','shape/factory',
    'util/requestanimationframe','util/deferbuffer','points',
-	'http://static.firebase.com/v0/firebase'
+	'http://static.firebase.com/v0/firebase.js'
 ],function(_,Draw,Layer,ShapeFactory,aniFrame,deferBuffer,points){
 	Draw.firebase = _.once(function(url,callback){
 		var layersMap = {},
