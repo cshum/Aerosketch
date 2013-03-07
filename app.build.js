@@ -7,12 +7,12 @@
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'hammer':'lib/hammer/hammer.min',
 		'jquery': 'empty:',
-		'knockout':'empty:',
+		'knockout':'lib/knockout/knockout-2.2.1',
 		'mousetrap':'empty:',
 		'firebase':'empty:',
 
 		'text': 'lib/require/text',
 
 	},
-	modules:[ {name:'main'} ]
+	name:'main'
 })

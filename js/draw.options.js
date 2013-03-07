@@ -2,7 +2,6 @@ define([
    'underscore','knockout',
    'draw','draw.momento'
 ],function(_,ko,Draw){
-	if(!ko) return;
 	var changed = false,
 		options = {
 			fill: ko.observable('red'),

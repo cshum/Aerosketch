@@ -1,7 +1,6 @@
 define([
    'knockout','underscore','jquery','util/requestanimationframe'
 ],function(ko,_,$,aniFrame){
-	if(!ko) return;
 	ko.bindingHandlers.aniattr = {
 		init: function(el,valueAccessor,all) {
 			var attr = valueAccessor(),

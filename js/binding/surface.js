@@ -1,7 +1,6 @@
 define([
 'knockout','underscore','jquery','hammer'
 ],function(ko,_,$,Hammer){
-if(!ko) return;
 
 function binding(el,value){
 	var drawTrigger = value(),

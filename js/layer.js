@@ -2,7 +2,6 @@ define([
    'knockout','underscore','util/kosvgtemplate',
    'shape/factory'
 ],function(ko,_,svgTemplate,Factory){
-	if(!ko) return;
 	var Layer = function(options){
 			options = _(options || {}).defaults({
 				name:'',

@@ -1,7 +1,6 @@
 define([
 	'knockout','text!view/strokesize.svg','draw','draw.options'
 ],function(ko,view,Draw){
-	if(!ko) return;
 	var init, y, 
 		strokeWidth = Draw.options.strokeWidth, 
 		stroke = Draw.options.stroke,

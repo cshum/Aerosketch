@@ -1,5 +1,4 @@
 define(['knockout','underscore','underscore.string'],function(ko,_,_s){
-	if(!ko) return;
 	return function(type, func, config){
 		var attrKeys = [
 				'fill','stroke','strokeWidth','transform'

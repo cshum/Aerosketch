@@ -1,6 +1,5 @@
 define(['knockout','draw','text!view/ratio.html'
 ],function(ko,Draw,toolbarView){
-	if(!ko) return;
 	var shape, lock = ko.observable(false);
 	function start(e){
 		var start = Draw.fromView(e.start);

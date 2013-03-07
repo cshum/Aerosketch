@@ -1,5 +1,4 @@
 define(['knockout','underscore','shape/template'],function(ko,_,Shape){
-	if(!ko) return;
 	var bbox = {
 			read: function(){
 				return {

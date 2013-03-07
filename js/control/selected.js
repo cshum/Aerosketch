@@ -2,7 +2,6 @@ define(['knockout','underscore','transform','draw',
 'util/kosvgtemplate', 'text!view/selected.svg',
 'util/requestanimationframe'],
 function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
-	if(!ko) return;
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
 			return shape.view || '<'+shape.type+' data-bind="aniattr:attr" />';
 		}),

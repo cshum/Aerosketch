@@ -1,5 +1,4 @@
 define(['knockout','hammer','underscore'],function(ko,Hammer,_){
-	if(!ko) return;
 	ko.bindingHandlers.hammer = {
 		init: function(el,value,all,vm) {
 			var hammer = Hammer(el,all().hammerOptions || {});

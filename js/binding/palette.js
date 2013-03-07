@@ -1,5 +1,4 @@
 define(['knockout','jquery','underscore'],function(ko,$,_){
-	if(!ko) return;
 	ko.bindingHandlers.palette = {
 		init: function(el,val,all,Draw) {
 			var call = val(), drag = false,

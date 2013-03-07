@@ -1,5 +1,4 @@
 define(['knockout','underscore','draw','draw.options'],function(ko,_,Draw){
-	if(!ko) return;
 	var colorMode = ko.observable('fill'),
 		toggleColorMode = function(){
 			colorMode(colorMode()=='fill'?'stroke':'fill');
