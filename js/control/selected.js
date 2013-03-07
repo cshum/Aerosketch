@@ -1,8 +1,9 @@
 define(['knockout','underscore','transform','draw',
-'util/kosvgtemplate', 'text!view/selected.svg'],
-function(ko,_,Transform,Draw,svgTemplate, view){
+'util/kosvgtemplate', 'text!view/selected.svg',
+'util/requestanimationframe'],
+function(ko,_,Transform,Draw,svgTemplate, view, aniFrame){
 	var selectedTemplate = svgTemplate(Draw.selection,function(shape){
-			return shape.view || '<'+shape.type+' data-bind="attr:attr" />';
+			return shape.view || '<'+shape.type+' data-bind="aniattr:attr" />';
 		}),
 		selectedBBox = function(shape){
 			var b = shape.bbox(),
@@ -82,12 +83,14 @@ function(ko,_,Transform,Draw,svgTemplate, view){
 	Draw.debounce.subscribe(function(debounce){
 		if(!debounce && Draw.transforming()){
 			Transform(shapes,buffer());
-			Draw.transforming(false);
-			_(shapes).each(function(shape,i){
-				shape.visible(visibles[i]);
+			aniFrame(function(){
+				Draw.transforming(false);
+				_(shapes).each(function(shape,i){
+					shape.visible(visibles[i]);
+				});
+				Draw.save.apply(null,shapes);
+				buffer({});
 			});
-			Draw.save.apply(null,shapes);
-			buffer({});
 		}
 	});
 

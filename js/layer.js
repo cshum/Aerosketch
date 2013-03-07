@@ -14,7 +14,7 @@ define([
 			this.shapes = ko.observableArray(options.shapes);
 
 			this.shapesTemplate = svgTemplate(this.shapes,function(shape){
-				return '<'+shape.type+' data-bind="visible:visible,attr:attr" />';
+				return '<'+shape.type+' data-bind="visible:visible,aniattr:attr" />';
 			});
 		},
 		newShape = function(type){
