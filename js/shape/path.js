@@ -71,8 +71,7 @@ define(['knockout','underscore','shape/template'],function(ko,_,Shape){
 						width: b.x2 - b.x1,
 						height: b.y2 - b.y1
 					};
-				}else
-					return {x:0,y:0,width:0,height:0};
+				}else return null;
 			},
 			write: function(e){
 				if(this.path().length > 0){

@@ -5,8 +5,11 @@ define(function(){
 			sin = Math.sin(rad),
 			cos = Math.cos(rad),
 			b = shape.bbox();
-			cx = b.x + b.width/2;
-			cy = b.y + b.height/2;
+
+		if(!(b && b.width>0 && b.height>0)) return [];
+		cx = b.x + b.width/2;
+		cy = b.y + b.height/2;
+
 		return _([
 			{x:b.x, y:b.y}, {x:b.x+b.width, y:b.y},
 			{x:b.x, y:b.y+b.height}, 
