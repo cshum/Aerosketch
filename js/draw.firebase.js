@@ -54,11 +54,14 @@ define([
 							bound.x2 = Math.max(p.x + w, bound.x2 || p.x + w);
 							bound.y2 = Math.max(p.y + w, bound.y2 || p.y + w);
 						});
-					}
-					pushDefer(function(){
+						pushDefer(function(){
+							layer.shapes.push(shape);
+							ready();
+						});
+					}else{
 						layer.shapes.push(shape);
-						ready();
-					});
+						if(!isReady) defer(ready);
+					}
 				});
 			});
 
