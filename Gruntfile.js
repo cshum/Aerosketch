@@ -3,8 +3,8 @@ module.exports = function(grunt) {
 		requirejs:{
 			build: {
 				options:{
-					appDir:'www',
-					dir:'www-built',
+					appDir:'src',
+					dir:'build',
 					baseUrl:'js',
 					paths: {
 						'jquery': 'lib/jquery/jquery-1.9.0',
@@ -21,8 +21,8 @@ module.exports = function(grunt) {
 		}
 	});
 	grunt.loadNpmTasks('grunt-requirejs');
-	grunt.registerTask('less','Build less files',function(){
-		require('lessless').optimizeProject('www-built');
+	grunt.registerTask('less','Optimize less files and markup',function(){
+		require('lessless').optimizeProject('build');
 	});
 	grunt.registerTask('build',['requirejs','less']);
 }
