@@ -31,8 +31,8 @@ define([
 				_(Draw.layers()).each(function(layer){
 					if(layer.visible())
 						_(layer.shapes()).each(function(shape){
-							if( _( points(shape) ).all(test) &&
-							shape.visible() )
+							var ps = points(shape);
+							if(shape.visible() && ps.length > 0 && _(ps).all(test))
 								selected.push(shape);
 						});
 				});

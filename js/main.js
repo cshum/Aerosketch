@@ -44,7 +44,6 @@ require([
 	]);
 	Draw.tool(freehandTool);
 
-	if(!ko) return;
 	Draw.firebase('https://aerosketch.firebaseio.com/',function(bbox){
 		ko.applyBindings(Draw,document.body);
 
