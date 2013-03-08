@@ -4,4 +4,6 @@
 .gist-cache
 .pygments-cache
 .swp
-public
+
+www-build
+node_modules

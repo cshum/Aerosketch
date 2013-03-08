@@ -1,0 +1,10 @@
+{
+  "author": "Adrian C Shum",
+  "name": "Aerosketch",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-requirejs": "~0.3.2",
+    "lessless": "~0.2.14"
+  }
+}
