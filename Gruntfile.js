@@ -26,8 +26,5 @@ module.exports = function(grunt) {
 	});
 	grunt.loadNpmTasks('grunt-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.registerTask('less','Optimize less files and markup',function(){
-		require('lessless').optimizeProject('build');
-	});
-	grunt.registerTask('build',['clean:before','requirejs:build','less','clean:after']);
+	grunt.registerTask('build',['clean:before','requirejs:build','clean:after']);
 }
