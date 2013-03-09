@@ -8,13 +8,14 @@ require.config({
 		'hammer':'lib/hammer/hammer.min',
 		'text': 'lib/require/text'
 	},
+	waitSeconds: 900,
 	urlArgs: location.hostname == 'localhost' ?
 		"bust=" + (new Date()).getTime() : ''
 });
 
 
 require([
-	'knockout','jquery',
+	'knockout','jquery','util/parseparams',
 
 	'control/base', 'control/selected', 'control/strokesize',
 	'tool/pointer', 'tool/hand', 'tool/freehand',
@@ -26,12 +27,11 @@ require([
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
 ],function(
-	ko,$,
+	ko,$,parseParams,
 	baseCtrl, selectedCtrl, strokeCtrl,
 	pointerTool, handTool, freehandTool, 
 	pathTool, ellipseTool, rectTool,
-	Draw
-){
+	Draw){
 
 	//init controls
 	Draw.controls([strokeCtrl, selectedCtrl]);
@@ -44,7 +44,17 @@ require([
 	]);
 	Draw.tool(freehandTool);
 
-	Draw.firebase('https://aerosketch.firebaseio.com/',function(bbox){
+	//Parse id
+	var params = parseParams(location.href), id;
+	if(params && params.s){
+		id = params.s;
+	}else{
+		id = Draw.create();
+		if(window.history.pushState)
+			window.history.pushState(null,null,'?s='+id);
+	}
+
+	Draw.load(id,function(bbox){
 		ko.applyBindings(Draw,document.body);
 
 		//zoom to overview

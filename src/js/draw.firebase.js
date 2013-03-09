@@ -3,9 +3,21 @@ define([
    'util/requestanimationframe','util/deferbuffer','points',
 	'http://static.firebase.com/v0/firebase.js'
 ],function(_,Draw,Layer,ShapeFactory,aniFrame,deferBuffer,points){
-	Draw.firebase = _.once(function(url,callback){
-		var layersMap = {},
-			drawRef = new Firebase(url),
+	var surfacesRef = new Firebase('https://aerosketch.firebaseio.com/surfaces');
+	Draw.create = function(){
+		return surfacesRef.push({
+			'layers':{
+				'default':{
+					visible:true,
+					name:'Default Layer',
+					shapes:[{type:'path',visible:false}] //dummy
+				}
+			}
+		}).name();
+	};
+	Draw.load = _.once(function(id,callback){
+		var drawRef = surfacesRef.child(id),
+			layersMap = {},
 			layersRef = drawRef.child('layers'),
 			defer = deferBuffer(),
 			bound = {},

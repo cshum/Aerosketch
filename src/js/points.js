@@ -6,7 +6,7 @@ define(function(){
 			cos = Math.cos(rad),
 			b = shape.bbox();
 
-		if(!(b && b.width>0 && b.height>0)) return [];
+		if(!(b && 'x' in b && 'y' in b)) return [];
 		cx = b.x + b.width/2;
 		cy = b.y + b.height/2;
 
