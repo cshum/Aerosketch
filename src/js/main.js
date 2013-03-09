@@ -50,9 +50,9 @@ require([
 		id = params.s;
 	}else{
 		id = Draw.create(), uri = '?s='+id;
-		if(window.history.pushState)
-			window.history.pushState(null,null,uri);
-		else 
+		//if(window.history.pushState)
+			//window.history.pushState(null,null,uri);
+		//else 
 			location.href = uri;
 	}
 
