@@ -36,122 +36,122 @@
 <g id="Layer_3">
 	<g>
 		<defs>
-			<rect id="SVGID_1_" x="46" y="120" width="32" height="192"/>
+			<rect id="SVGID_1_" x="46" y="100" width="32" height="249"/>
 		</defs>
 		<clipPath id="SVGID_2_">
 			<use xlink:href="#SVGID_1_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_2_)">
 			<defs>
-				<path id="SVGID_3_" d="M47.047,213.44l-31.084-23.38l-0.032-46.685l31.05-23.306l31.084,23.379l0.033,46.686L47.047,213.44z
-					 M78,312H16V191h62V312z"/>
+				<path id="SVGID_3_" d="M47.047,221.322l-31.084-30.394l-0.032-60.69l31.05-30.297l31.084,30.393l0.033,60.691L47.047,221.322z
+					 M78,349H16V192h62V349z"/>
 			</defs>
 			<clipPath id="SVGID_4_">
 				<use xlink:href="#SVGID_3_"  overflow="visible"/>
 			</clipPath>
-			<rect x="16" y="138" clip-path="url(#SVGID_4_)" fill="#009245" width="62" height="174"/>
-			<ellipse clip-path="url(#SVGID_4_)" fill="#C69C6D" cx="47.035" cy="119.792" rx="53.539" ry="29.126"/>
-			<ellipse clip-path="url(#SVGID_4_)" fill="#009245" cx="47.015" cy="119.647" rx="15.31" ry="8.33"/>
+			<rect x="16" y="123" clip-path="url(#SVGID_4_)" fill="#009245" width="62" height="226"/>
+			<ellipse clip-path="url(#SVGID_4_)" fill="#C69C6D" cx="47.035" cy="99.579" rx="53.539" ry="37.864"/>
+			<ellipse clip-path="url(#SVGID_4_)" fill="#009245" cx="47.015" cy="99.391" rx="15.31" ry="10.829"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_5_" x="16" y="120" width="30" height="192"/>
+			<rect id="SVGID_5_" x="16" y="100" width="30" height="249"/>
 		</defs>
 		<clipPath id="SVGID_6_">
 			<use xlink:href="#SVGID_5_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_6_)">
 			<defs>
-				<path id="SVGID_7_" d="M16.045,190.135l0.033-46.686l31.084-23.379l31.051,23.306l-0.033,46.685l-31.084,23.38L16.045,190.135z
-					 M16,191h62v121H16V191z"/>
+				<path id="SVGID_7_" d="M16.045,191.025l0.033-60.691l31.084-30.393l31.051,30.297l-0.033,60.69l-31.084,30.394L16.045,191.025z
+					 M16,192h62v157H16V192z"/>
 			</defs>
 			<clipPath id="SVGID_8_">
 				<use xlink:href="#SVGID_7_"  overflow="visible"/>
 			</clipPath>
-			<rect x="16" y="138" clip-path="url(#SVGID_8_)" fill="#0D723D" width="62" height="265"/>
-			<ellipse clip-path="url(#SVGID_8_)" fill="#A67C52" cx="47.108" cy="119.792" rx="53.539" ry="29.126"/>
-			<ellipse clip-path="url(#SVGID_8_)" fill="#0D723D" cx="47.128" cy="119.647" rx="15.31" ry="8.33"/>
+			<rect x="16" y="123" clip-path="url(#SVGID_8_)" fill="#0D723D" width="62" height="345"/>
+			<ellipse clip-path="url(#SVGID_8_)" fill="#A67C52" cx="47.108" cy="99.579" rx="53.539" ry="37.864"/>
+			<ellipse clip-path="url(#SVGID_8_)" fill="#0D723D" cx="47.128" cy="99.391" rx="15.31" ry="10.829"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_9_" x="123" y="84" width="37" height="233"/>
+			<rect id="SVGID_9_" x="123" y="53" width="37" height="303"/>
 		</defs>
 		<clipPath id="SVGID_10_">
 			<use xlink:href="#SVGID_9_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_10_)">
 			<defs>
-				<path id="SVGID_11_" d="M123.156,197.271l-37.644-28.314l-0.04-56.538l37.604-28.223l37.645,28.314l0.039,56.537
-					L123.156,197.271z M160,317H86V170h74V317z"/>
+				<path id="SVGID_11_" d="M123.156,200.302l-37.644-36.809l-0.04-73.499l37.604-36.69l37.645,36.809l0.039,73.497L123.156,200.302
+					z M160,356H86V165h74V356z"/>
 			</defs>
 			<clipPath id="SVGID_12_">
 				<use xlink:href="#SVGID_11_"  overflow="visible"/>
 			</clipPath>
-			<rect x="86" y="106" clip-path="url(#SVGID_12_)" fill="#5267BD" width="74" height="211"/>
-			<ellipse clip-path="url(#SVGID_12_)" fill="#C69C6D" cx="123.143" cy="83.857" rx="64.838" ry="35.275"/>
-			<ellipse clip-path="url(#SVGID_12_)" fill="#5267BD" cx="123.118" cy="83.683" rx="18.541" ry="10.087"/>
+			<rect x="86" y="82" clip-path="url(#SVGID_12_)" fill="#5267BD" width="74" height="274"/>
+			<ellipse clip-path="url(#SVGID_12_)" fill="#C69C6D" cx="123.143" cy="52.864" rx="64.838" ry="45.858"/>
+			<ellipse clip-path="url(#SVGID_12_)" fill="#5267BD" cx="123.118" cy="52.638" rx="18.541" ry="13.113"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_13_" x="86" y="84" width="37" height="233"/>
+			<rect id="SVGID_13_" x="86" y="53" width="37" height="303"/>
 		</defs>
 		<clipPath id="SVGID_14_">
 			<use xlink:href="#SVGID_13_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_14_)">
 			<defs>
-				<path id="SVGID_15_" d="M85.611,169.046l0.041-56.537l37.645-28.314l37.604,28.223l-0.041,56.538l-37.644,28.314L85.611,169.046
-					z M86,170h75v147H86V170z"/>
+				<path id="SVGID_15_" d="M85.611,163.609l0.041-73.497l37.645-36.809l37.604,36.69l-0.041,73.499l-37.644,36.809L85.611,163.609z
+					 M86,165h75v191H86V165z"/>
 			</defs>
 			<clipPath id="SVGID_16_">
 				<use xlink:href="#SVGID_15_"  overflow="visible"/>
 			</clipPath>
-			<rect x="86" y="106" clip-path="url(#SVGID_16_)" fill="#42538C" width="75" height="211"/>
-			<ellipse clip-path="url(#SVGID_16_)" fill="#A67C52" cx="123.23" cy="83.857" rx="64.838" ry="35.275"/>
-			<ellipse clip-path="url(#SVGID_16_)" fill="#42538C" cx="123.254" cy="83.683" rx="18.541" ry="10.087"/>
+			<rect x="86" y="82" clip-path="url(#SVGID_16_)" fill="#42538C" width="75" height="274"/>
+			<ellipse clip-path="url(#SVGID_16_)" fill="#A67C52" cx="123.23" cy="52.864" rx="64.838" ry="45.858"/>
+			<ellipse clip-path="url(#SVGID_16_)" fill="#42538C" cx="123.254" cy="52.638" rx="18.541" ry="13.113"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_17_" x="198" y="120" width="31" height="192"/>
+			<rect id="SVGID_17_" x="198" y="100" width="31" height="249"/>
 		</defs>
 		<clipPath id="SVGID_18_">
 			<use xlink:href="#SVGID_17_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_18_)">
 			<defs>
-				<path id="SVGID_19_" d="M198.32,213.405l-31.094-23.388l-0.033-46.702l31.061-23.313l31.096,23.389l0.033,46.701L198.32,213.405
-					z M229,312h-62V191h62V312z"/>
+				<path id="SVGID_19_" d="M198.32,221.276l-31.094-30.403l-0.033-60.713l31.061-30.308l31.096,30.405l0.033,60.711L198.32,221.276
+					z M229,349h-62V192h62V349z"/>
 			</defs>
 			<clipPath id="SVGID_20_">
 				<use xlink:href="#SVGID_19_"  overflow="visible"/>
 			</clipPath>
-			<rect x="167" y="138" clip-path="url(#SVGID_20_)" fill="#E74C3C" width="62" height="174"/>
-			<ellipse clip-path="url(#SVGID_20_)" fill="#C69C6D" cx="198.309" cy="119.724" rx="53.557" ry="29.137"/>
-			<ellipse clip-path="url(#SVGID_20_)" fill="#E74C3C" cx="198.289" cy="119.579" rx="15.315" ry="8.333"/>
+			<rect x="167" y="123" clip-path="url(#SVGID_20_)" fill="#E74C3C" width="62" height="226"/>
+			<ellipse clip-path="url(#SVGID_20_)" fill="#C69C6D" cx="198.309" cy="99.49" rx="53.557" ry="37.879"/>
+			<ellipse clip-path="url(#SVGID_20_)" fill="#E74C3C" cx="198.289" cy="99.302" rx="15.315" ry="10.833"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_21_" x="168" y="120" width="30" height="192"/>
+			<rect id="SVGID_21_" x="168" y="100" width="30" height="249"/>
 		</defs>
 		<clipPath id="SVGID_22_">
 			<use xlink:href="#SVGID_21_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_22_)">
 			<defs>
-				<path id="SVGID_23_" d="M167.308,190.092l0.033-46.701l31.095-23.389l31.062,23.313l-0.032,46.702l-31.096,23.388
-					L167.308,190.092z M168,191h62v121h-62V191z"/>
+				<path id="SVGID_23_" d="M167.308,190.969l0.033-60.711l31.095-30.405l31.062,30.308l-0.032,60.713l-31.096,30.403
+					L167.308,190.969z M168,192h62v157h-62V192z"/>
 			</defs>
 			<clipPath id="SVGID_24_">
 				<use xlink:href="#SVGID_23_"  overflow="visible"/>
 			</clipPath>
-			<rect x="168" y="138" clip-path="url(#SVGID_24_)" fill="#C0392B" width="62" height="174"/>
-			<ellipse clip-path="url(#SVGID_24_)" fill="#A67C52" cx="198.382" cy="119.724" rx="53.558" ry="29.137"/>
-			<ellipse clip-path="url(#SVGID_24_)" fill="#C0392B" cx="198.402" cy="119.579" rx="15.315" ry="8.333"/>
+			<rect x="168" y="123" clip-path="url(#SVGID_24_)" fill="#C0392B" width="62" height="226"/>
+			<ellipse clip-path="url(#SVGID_24_)" fill="#A67C52" cx="198.382" cy="99.49" rx="53.558" ry="37.879"/>
+			<ellipse clip-path="url(#SVGID_24_)" fill="#C0392B" cx="198.402" cy="99.302" rx="15.315" ry="10.833"/>
 		</g>
 	</g>
 </g>
