@@ -49,9 +49,11 @@ require([
 	if(params && params.s){
 		id = params.s;
 	}else{
-		id = Draw.create();
+		id = Draw.create(), uri = '?s='+id;
 		if(window.history.pushState)
-			window.history.pushState(null,null,'?s='+id);
+			window.history.pushState(null,null,uri);
+		else 
+			location.href = uri;
 	}
 
 	Draw.load(id,function(bbox){
