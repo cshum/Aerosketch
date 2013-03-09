@@ -5,6 +5,7 @@
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-requirejs": "~0.3.2",
-    "lessless": "~0.2.14"
+    "lessless": "~0.2.14",
+    "grunt-contrib-clean": "~0.4.0"
   }
 }

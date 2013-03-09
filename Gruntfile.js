@@ -17,12 +17,17 @@ module.exports = function(grunt) {
 					},
 					name:'main'
 				}
-			}
+			},
+		},
+		clean:{
+			before:["build"],
+			after:["build/build.txt"]
 		}
 	});
 	grunt.loadNpmTasks('grunt-requirejs');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.registerTask('less','Optimize less files and markup',function(){
 		require('lessless').optimizeProject('build');
 	});
-	grunt.registerTask('build',['requirejs','less']);
+	grunt.registerTask('build',['clean:before','requirejs:build','less','clean:after']);
 }
