@@ -20,11 +20,11 @@ module.exports = function(grunt) {
 			},
 		},
 		clean:{
-			before:["build"],
-			after:["build/build.txt"]
+			build:["build/build.txt",'build/img/*.ai']
 		}
 	});
 	grunt.loadNpmTasks('grunt-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.registerTask('build',['clean:before','requirejs:build','clean:after']);
+	grunt.loadNpmTasks('grunt-replace');
+	grunt.registerTask('build',['requirejs','clean']);
 }
