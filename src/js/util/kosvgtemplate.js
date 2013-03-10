@@ -6,7 +6,7 @@ define(['knockout','underscore'],function(ko,_){
 			var text = '<svg xmlns="http://www.w3.org/2000/svg">' 
 				+ templateSource + '</svg>';
 			div.innerHTML = text;
-			return ko.utils.arrayPushAll([], div.childNodes[0].childNodes);
+			return _.toArray(div.childNodes[0].childNodes);
 		},
 		makeTemplateSource:function(template){
 			return template;
