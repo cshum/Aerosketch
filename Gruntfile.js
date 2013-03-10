@@ -31,8 +31,7 @@ module.exports = function(grunt) {
 		},
 		clean:{
 			build:[
-				'build/build.txt','build/img/*.ai',
-				'build/js/*/','build/js/*.js','!build/js/main.js'
+				'build/build.txt','build/img/*.ai'
 			]
 		}
 	});
