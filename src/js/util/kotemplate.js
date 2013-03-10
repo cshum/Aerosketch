@@ -15,7 +15,7 @@ define(['knockout','underscore'],function(ko,_){
 			name: getTemplate,
 			templateEngine: engine 
 		};
-		if(_(ko.utils.unwrapObservable(data)).isArray())
+		if(_(data.peek()).isArray())
 			template.foreach = data;
 		else 
 			template.data = data;
