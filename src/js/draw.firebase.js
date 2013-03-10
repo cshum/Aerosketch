@@ -96,17 +96,5 @@ define([
 			layer._destroy(true);
 			delete layersMap[layerSnap.name()];
 		});
-
-		/*
-				{
-					layers:{
-						default:{
-							visible:true,
-							name:'Default Layer',
-							shapes:[{type:'rect',visible:false}] //dummy
-						}
-					}
-				}
-		*/
 	});
 });
