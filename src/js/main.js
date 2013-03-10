@@ -9,7 +9,8 @@ require.config({
 		'text': 'lib/require/text'
 	},
 	waitSeconds: 900,
-	baseUrl:'js'
+	baseUrl:'js',
+	urlArgs: location.hostname=='localhost' ? (new Date()).getTime() : null
 });
 
 
