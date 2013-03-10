@@ -1,11 +1,10 @@
 define(['knockout','underscore'],function(ko,_){
-	if(!ko) return;
+	var div = document.createElement('div');
 	var engine = _(new ko.templateEngine()).extend({
 		allowTemplateRewriting: false,
 		renderTemplateSource: function (source) {
-			var div = document.createElement('div');
 			div.innerHTML = source;
-			return ko.utils.arrayPushAll([], div.childNodes);
+			return _.toArray(div.childNodes);
 		},
 		makeTemplateSource:function(template){
 			return template;
@@ -21,5 +20,5 @@ define(['knockout','underscore'],function(ko,_){
 		else 
 			template.data = data;
 		return template;
-	}
+	};
 });

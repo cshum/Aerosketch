@@ -1,9 +1,8 @@
 define(['knockout','underscore'],function(ko,_){
-	if(!ko) return;
+	var div = document.createElement('div');
 	var svgEngine = _(new ko.templateEngine()).extend({
 		allowTemplateRewriting: false,
 		renderTemplateSource: function (templateSource, bindingContext, options) {
-			var div = document.createElement('div');
 			var text = '<svg xmlns="http://www.w3.org/2000/svg">' 
 				+ templateSource + '</svg>';
 			div.innerHTML = text;
@@ -23,5 +22,5 @@ define(['knockout','underscore'],function(ko,_){
 		else 
 			template.data = data;
 		return template;
-	}
+	};
 });
