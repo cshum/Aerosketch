@@ -17,14 +17,28 @@ module.exports = function(grunt) {
 					},
 					name:'main'
 				}
-			},
+			}
 		},
 		clean:{
 			build:["build/build.txt",'build/img/*.ai']
+		},
+		replace:{
+			build:{
+				options:{
+					variables:{'timestamp': '<%= new Date().getTime() %>'}
+				},
+				files:[
+					{src:['build/index.html'],dest:'build/index.html'}
+				]
+			}
 		}
 	});
 	grunt.loadNpmTasks('grunt-requirejs');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-replace');
-	grunt.registerTask('build',['requirejs','clean']);
+	grunt.registerTask('less','Optimize Less files',function(){
+		require('lessless').optimizeProject('build');
+	});
+
+	grunt.registerTask('build',['requirejs','less','replace','clean']);
 }
