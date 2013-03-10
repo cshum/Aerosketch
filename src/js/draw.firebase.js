@@ -82,6 +82,7 @@ define([
 			layer.newShape = function(type){
 				var shape = ShapeFactory(type),
 					shapeRef = shapesRef.push({type:type});
+				shape.layer = layer;
 				shapesMap[shapeRef.name()] = shape;
 				return shape;
 			};
