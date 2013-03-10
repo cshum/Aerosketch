@@ -19,9 +19,6 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-		clean:{
-			build:["build/build.txt",'build/img/*.ai']
-		},
 		replace:{
 			build:{
 				options:{
@@ -31,14 +28,20 @@ module.exports = function(grunt) {
 					{src:['build/index.html'],dest:'build/index.html'}
 				]
 			}
+		},
+		clean:{
+			build:[
+				'build/build.txt','build/img/*.ai',
+				'build/js/*/','build/js/*.js','!build/js/main.js'
+			]
 		}
 	});
 	grunt.loadNpmTasks('grunt-requirejs');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-replace');
 	grunt.registerTask('less','Optimize Less files',function(){
 		require('lessless').optimizeProject('build');
 	});
+	grunt.loadNpmTasks('grunt-replace');
+	grunt.loadNpmTasks('grunt-contrib-clean');
 
 	grunt.registerTask('build',['requirejs','less','replace','clean']);
 }
