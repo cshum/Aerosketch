@@ -25,7 +25,8 @@ module.exports = function(grunt) {
 					variables:{'timestamp': '<%= new Date().getTime() %>'}
 				},
 				files:[
-					{src:['build/index.html'],dest:'build/index.html'}
+					{src:['build/index.html'],dest:'build/index.html'},
+					{src:['build/draw.html'],dest:'build/draw.html'}
 				]
 			}
 		},
