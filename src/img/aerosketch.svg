@@ -1,157 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="240px"
-	 height="240px" viewBox="0 0 240 240" enable-background="new 0 0 240 240" xml:space="preserve">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
+	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
 <g id="Layer_2">
-	<rect fill="#B0E1FF" width="240" height="240"/>
+	<rect fill="#B0E1FF" width="128" height="128"/>
 </g>
 <g id="Layer_4">
-	<ellipse fill="#FFFFFF" cx="66.507" cy="23.468" rx="28.638" ry="23.454"/>
-	<ellipse fill="#FFFFFF" cx="31.944" cy="30.134" rx="26.17" ry="16.788"/>
-	<ellipse fill="#FFFFFF" cx="64.038" cy="48.65" rx="32.095" ry="15.06"/>
-	<ellipse fill="#FFFFFF" cx="99.96" cy="37.293" rx="22.837" ry="17.035"/>
-	<ellipse fill="#FFFFFF" cx="88.479" cy="20.389" rx="30.366" ry="13.461"/>
-	<ellipse fill="#FFFFFF" cx="218.25" cy="52.28" rx="28.639" ry="23.454"/>
-	<ellipse fill="#FFFFFF" cx="183.687" cy="58.946" rx="26.169" ry="16.788"/>
-	<ellipse fill="#FFFFFF" cx="215.782" cy="77.462" rx="32.095" ry="15.06"/>
-	<ellipse fill="#FFFFFF" cx="251.703" cy="66.105" rx="22.836" ry="17.035"/>
-	<ellipse fill="#FFFFFF" cx="240.223" cy="49.201" rx="30.367" ry="13.461"/>
-	<ellipse fill="#FFFFFF" cx="115.968" cy="115.667" rx="28.638" ry="23.454"/>
-	<ellipse fill="#FFFFFF" cx="81.404" cy="122.332" rx="26.169" ry="16.789"/>
-	<ellipse fill="#FFFFFF" cx="113.499" cy="140.849" rx="32.095" ry="15.06"/>
-	<ellipse fill="#FFFFFF" cx="149.42" cy="129.492" rx="22.836" ry="17.035"/>
-	<ellipse fill="#FFFFFF" cx="137.94" cy="112.587" rx="30.367" ry="13.462"/>
-	<ellipse fill="#FFFFFF" cx="215.369" cy="184.816" rx="28.639" ry="23.454"/>
-	<ellipse fill="#FFFFFF" cx="180.805" cy="191.481" rx="26.169" ry="16.788"/>
-	<ellipse fill="#FFFFFF" cx="212.899" cy="209.998" rx="32.095" ry="15.059"/>
-	<ellipse fill="#FFFFFF" cx="248.822" cy="198.641" rx="22.836" ry="17.035"/>
-	<ellipse fill="#FFFFFF" cx="237.341" cy="181.737" rx="30.367" ry="13.463"/>
-	<ellipse fill="#FFFFFF" cx="20.888" cy="186.736" rx="28.638" ry="23.454"/>
-	<ellipse fill="#FFFFFF" cx="-13.676" cy="193.401" rx="26.17" ry="16.788"/>
-	<ellipse fill="#FFFFFF" cx="18.419" cy="211.918" rx="32.095" ry="15.061"/>
-	<ellipse fill="#FFFFFF" cx="54.341" cy="200.562" rx="22.837" ry="17.034"/>
-	<ellipse fill="#FFFFFF" cx="42.86" cy="183.657" rx="30.366" ry="13.461"/>
+	<ellipse fill="#FFFFFF" cx="35.232" cy="12.583" rx="15.273" ry="12.509"/>
+	<ellipse fill="#FFFFFF" cx="16.799" cy="16.138" rx="13.957" ry="8.954"/>
+	<ellipse fill="#FFFFFF" cx="33.916" cy="26.013" rx="17.117" ry="8.032"/>
+	<ellipse fill="#FFFFFF" cx="53.074" cy="19.957" rx="12.18" ry="9.085"/>
+	<ellipse fill="#FFFFFF" cx="46.951" cy="10.94" rx="16.195" ry="7.179"/>
+	<ellipse fill="#FFFFFF" cx="116.162" cy="27.95" rx="15.274" ry="12.508"/>
+	<ellipse fill="#FFFFFF" cx="97.729" cy="31.504" rx="13.957" ry="8.954"/>
+	<ellipse fill="#FFFFFF" cx="114.846" cy="41.38" rx="17.117" ry="8.032"/>
+	<ellipse fill="#FFFFFF" cx="134.003" cy="35.323" rx="12.179" ry="9.085"/>
+	<ellipse fill="#FFFFFF" cx="127.881" cy="26.307" rx="16.195" ry="7.18"/>
+	<ellipse fill="#FFFFFF" cx="61.611" cy="61.755" rx="15.273" ry="12.509"/>
+	<ellipse fill="#FFFFFF" cx="43.178" cy="65.311" rx="13.957" ry="8.954"/>
+	<ellipse fill="#FFFFFF" cx="60.294" cy="75.186" rx="17.118" ry="8.032"/>
+	<ellipse fill="#FFFFFF" cx="79.453" cy="69.129" rx="12.179" ry="9.085"/>
+	<ellipse fill="#FFFFFF" cx="73.33" cy="60.113" rx="16.195" ry="7.18"/>
+	<ellipse fill="#FFFFFF" cx="114.625" cy="98.635" rx="15.274" ry="12.508"/>
+	<ellipse fill="#FFFFFF" cx="96.191" cy="102.19" rx="13.957" ry="8.954"/>
+	<ellipse fill="#FFFFFF" cx="113.309" cy="112.065" rx="17.117" ry="8.031"/>
+	<ellipse fill="#FFFFFF" cx="132.467" cy="106.008" rx="12.18" ry="9.085"/>
+	<ellipse fill="#FFFFFF" cx="126.344" cy="96.993" rx="16.195" ry="7.18"/>
+	<ellipse fill="#FFFFFF" cx="10.902" cy="99.659" rx="15.274" ry="12.509"/>
+	<ellipse fill="#FFFFFF" cx="-7.532" cy="103.214" rx="13.958" ry="8.954"/>
+	<ellipse fill="#FFFFFF" cx="9.585" cy="113.09" rx="17.117" ry="8.032"/>
+	<ellipse fill="#FFFFFF" cx="28.744" cy="107.033" rx="12.18" ry="9.085"/>
+	<ellipse fill="#FFFFFF" cx="22.621" cy="98.017" rx="16.195" ry="7.18"/>
 </g>
 <g id="Layer_3">
 	<g>
 		<defs>
-			<rect id="SVGID_1_" x="46" y="100" width="32" height="249"/>
+			<rect id="SVGID_1_" x="24" y="53" width="17" height="133"/>
 		</defs>
 		<clipPath id="SVGID_2_">
 			<use xlink:href="#SVGID_1_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_2_)">
 			<defs>
-				<path id="SVGID_3_" d="M47.047,221.322l-31.084-30.394l-0.032-60.69l31.05-30.297l31.084,30.393l0.033,60.691L47.047,221.322z
-					 M78,349H16V192h62V349z"/>
+				<path id="SVGID_3_" d="M24.854,118.105l-16.578-16.21L8.258,69.527l16.561-16.159l16.578,16.209l0.018,32.369L24.854,118.105z
+					 M41,186H8v-84h33V186z"/>
 			</defs>
 			<clipPath id="SVGID_4_">
 				<use xlink:href="#SVGID_3_"  overflow="visible"/>
 			</clipPath>
-			<rect x="16" y="123" clip-path="url(#SVGID_4_)" fill="#009245" width="62" height="226"/>
-			<ellipse clip-path="url(#SVGID_4_)" fill="#C69C6D" cx="47.035" cy="99.579" rx="53.539" ry="37.864"/>
-			<ellipse clip-path="url(#SVGID_4_)" fill="#009245" cx="47.015" cy="99.391" rx="15.31" ry="10.829"/>
+			<rect x="8" y="66" clip-path="url(#SVGID_4_)" fill="#009245" width="33" height="120"/>
+			<ellipse clip-path="url(#SVGID_4_)" fill="#C69C6D" cx="24.847" cy="53.176" rx="28.554" ry="20.194"/>
+			<ellipse clip-path="url(#SVGID_4_)" fill="#009245" cx="24.836" cy="53.075" rx="8.166" ry="5.775"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_5_" x="16" y="100" width="30" height="249"/>
+			<rect id="SVGID_5_" x="8" y="53" width="16" height="133"/>
 		</defs>
 		<clipPath id="SVGID_6_">
 			<use xlink:href="#SVGID_5_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_6_)">
 			<defs>
-				<path id="SVGID_7_" d="M16.045,191.025l0.033-60.691l31.084-30.393l31.051,30.297l-0.033,60.69l-31.084,30.394L16.045,191.025z
-					 M16,192h62v157H16V192z"/>
+				<path id="SVGID_7_" d="M8.318,101.947l0.019-32.369l16.578-16.209l16.56,16.159l-0.018,32.368l-16.578,16.21L8.318,101.947z
+					 M8,102h33v84H8V102z"/>
 			</defs>
 			<clipPath id="SVGID_8_">
 				<use xlink:href="#SVGID_7_"  overflow="visible"/>
 			</clipPath>
-			<rect x="16" y="123" clip-path="url(#SVGID_8_)" fill="#0D723D" width="62" height="345"/>
-			<ellipse clip-path="url(#SVGID_8_)" fill="#A67C52" cx="47.108" cy="99.579" rx="53.539" ry="37.864"/>
-			<ellipse clip-path="url(#SVGID_8_)" fill="#0D723D" cx="47.128" cy="99.391" rx="15.31" ry="10.829"/>
+			<rect x="8" y="66" clip-path="url(#SVGID_8_)" fill="#0D723D" width="33" height="184"/>
+			<ellipse clip-path="url(#SVGID_8_)" fill="#A67C52" cx="24.885" cy="53.176" rx="28.554" ry="20.194"/>
+			<ellipse clip-path="url(#SVGID_8_)" fill="#0D723D" cx="24.896" cy="53.075" rx="8.165" ry="5.775"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_9_" x="123" y="53" width="37" height="303"/>
+			<rect id="SVGID_9_" x="65" y="28" width="20" height="162"/>
 		</defs>
 		<clipPath id="SVGID_10_">
 			<use xlink:href="#SVGID_9_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_10_)">
 			<defs>
-				<path id="SVGID_11_" d="M123.156,200.302l-37.644-36.809l-0.04-73.499l37.604-36.69l37.645,36.809l0.039,73.497L123.156,200.302
-					z M160,356H86V165h74V356z"/>
+				<path id="SVGID_11_" d="M65.445,106.895L45.369,87.263l-0.021-39.2l20.055-19.568l20.077,19.631L85.5,87.325L65.445,106.895z
+					 M85,190H46V88h39V190z"/>
 			</defs>
 			<clipPath id="SVGID_12_">
 				<use xlink:href="#SVGID_11_"  overflow="visible"/>
 			</clipPath>
-			<rect x="86" y="82" clip-path="url(#SVGID_12_)" fill="#5267BD" width="74" height="274"/>
-			<ellipse clip-path="url(#SVGID_12_)" fill="#C69C6D" cx="123.143" cy="52.864" rx="64.838" ry="45.858"/>
-			<ellipse clip-path="url(#SVGID_12_)" fill="#5267BD" cx="123.118" cy="52.638" rx="18.541" ry="13.113"/>
+			<rect x="46" y="44" clip-path="url(#SVGID_12_)" fill="#5267BD" width="39" height="146"/>
+			<ellipse clip-path="url(#SVGID_12_)" fill="#C69C6D" cx="65.438" cy="28.261" rx="34.58" ry="24.458"/>
+			<ellipse clip-path="url(#SVGID_12_)" fill="#5267BD" cx="65.424" cy="28.14" rx="9.888" ry="6.994"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_13_" x="86" y="53" width="37" height="303"/>
+			<rect id="SVGID_13_" x="46" y="28" width="19" height="162"/>
 		</defs>
 		<clipPath id="SVGID_14_">
 			<use xlink:href="#SVGID_13_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_14_)">
 			<defs>
-				<path id="SVGID_15_" d="M85.611,163.609l0.041-73.497l37.645-36.809l37.604,36.69l-0.041,73.499l-37.644,36.809L85.611,163.609z
-					 M86,165h75v191H86V165z"/>
+				<path id="SVGID_15_" d="M45.421,87.325l0.022-39.199L65.52,28.495l20.056,19.568l-0.022,39.2l-20.076,19.631L45.421,87.325z
+					 M46,88h40v102H46V88z"/>
 			</defs>
 			<clipPath id="SVGID_16_">
 				<use xlink:href="#SVGID_15_"  overflow="visible"/>
 			</clipPath>
-			<rect x="86" y="82" clip-path="url(#SVGID_16_)" fill="#42538C" width="75" height="274"/>
-			<ellipse clip-path="url(#SVGID_16_)" fill="#A67C52" cx="123.23" cy="52.864" rx="64.838" ry="45.858"/>
-			<ellipse clip-path="url(#SVGID_16_)" fill="#42538C" cx="123.254" cy="52.638" rx="18.541" ry="13.113"/>
+			<rect x="46" y="44" clip-path="url(#SVGID_16_)" fill="#42538C" width="40" height="146"/>
+			<ellipse clip-path="url(#SVGID_16_)" fill="#A67C52" cx="65.484" cy="28.261" rx="34.58" ry="24.458"/>
+			<ellipse clip-path="url(#SVGID_16_)" fill="#42538C" cx="65.498" cy="28.14" rx="9.888" ry="6.994"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_17_" x="198" y="100" width="31" height="249"/>
+			<rect id="SVGID_17_" x="105" y="53" width="17" height="133"/>
 		</defs>
 		<clipPath id="SVGID_18_">
 			<use xlink:href="#SVGID_17_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_18_)">
 			<defs>
-				<path id="SVGID_19_" d="M198.32,221.276l-31.094-30.403l-0.033-60.713l31.061-30.308l31.096,30.405l0.033,60.711L198.32,221.276
-					z M229,349h-62V192h62V349z"/>
+				<path id="SVGID_19_" d="M105.533,118.081l-16.584-16.215l-0.018-32.38l16.565-16.164l16.585,16.216l0.018,32.379
+					L105.533,118.081z M122,186H89v-84h33V186z"/>
 			</defs>
 			<clipPath id="SVGID_20_">
 				<use xlink:href="#SVGID_19_"  overflow="visible"/>
 			</clipPath>
-			<rect x="167" y="123" clip-path="url(#SVGID_20_)" fill="#E74C3C" width="62" height="226"/>
-			<ellipse clip-path="url(#SVGID_20_)" fill="#C69C6D" cx="198.309" cy="99.49" rx="53.557" ry="37.879"/>
-			<ellipse clip-path="url(#SVGID_20_)" fill="#E74C3C" cx="198.289" cy="99.302" rx="15.315" ry="10.833"/>
+			<rect x="89" y="66" clip-path="url(#SVGID_20_)" fill="#E74C3C" width="33" height="120"/>
+			<ellipse clip-path="url(#SVGID_20_)" fill="#C69C6D" cx="105.526" cy="53.128" rx="28.563" ry="20.202"/>
+			<ellipse clip-path="url(#SVGID_20_)" fill="#E74C3C" cx="105.516" cy="53.028" rx="8.168" ry="5.777"/>
 		</g>
 	</g>
 	<g>
 		<defs>
-			<rect id="SVGID_21_" x="168" y="100" width="30" height="249"/>
+			<rect id="SVGID_21_" x="89" y="53" width="16" height="133"/>
 		</defs>
 		<clipPath id="SVGID_22_">
 			<use xlink:href="#SVGID_21_"  overflow="visible"/>
 		</clipPath>
 		<g clip-path="url(#SVGID_22_)">
 			<defs>
-				<path id="SVGID_23_" d="M167.308,190.969l0.033-60.711l31.095-30.405l31.062,30.308l-0.032,60.713l-31.096,30.403
-					L167.308,190.969z M168,192h62v157h-62V192z"/>
+				<path id="SVGID_23_" d="M88.992,101.917l0.018-32.379l16.584-16.216l16.566,16.164l-0.018,32.38l-16.584,16.215L88.992,101.917z
+					 M89,102h33v84H89V102z"/>
 			</defs>
 			<clipPath id="SVGID_24_">
 				<use xlink:href="#SVGID_23_"  overflow="visible"/>
 			</clipPath>
-			<rect x="168" y="123" clip-path="url(#SVGID_24_)" fill="#C0392B" width="62" height="226"/>
-			<ellipse clip-path="url(#SVGID_24_)" fill="#A67C52" cx="198.382" cy="99.49" rx="53.558" ry="37.879"/>
-			<ellipse clip-path="url(#SVGID_24_)" fill="#C0392B" cx="198.402" cy="99.302" rx="15.315" ry="10.833"/>
+			<rect x="89" y="66" clip-path="url(#SVGID_24_)" fill="#C0392B" width="33" height="120"/>
+			<ellipse clip-path="url(#SVGID_24_)" fill="#A67C52" cx="105.565" cy="53.128" rx="28.563" ry="20.202"/>
+			<ellipse clip-path="url(#SVGID_24_)" fill="#C0392B" cx="105.576" cy="53.028" rx="8.168" ry="5.777"/>
 		</g>
 	</g>
 </g>
