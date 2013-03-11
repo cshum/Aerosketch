@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 				},
 				files:[
 					{src:['build/index.html'],dest:'build/index.html'},
-					{src:['build/draw.html'],dest:'build/draw.html'}
+					{src:['build/app.html'],dest:'build/app.html'}
 				]
 			}
 		},
