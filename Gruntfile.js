@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 						'hammer':'lib/hammer/hammer.min',
 						'text': 'lib/require/text'
 					},
-					name:'main'
+					name:'app'
 				}
 			}
 		},
