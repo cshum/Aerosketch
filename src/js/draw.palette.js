@@ -24,7 +24,7 @@ define(['knockout','underscore','draw','draw.options'],function(ko,_,Draw){
 			o.stroke(fill);
 			Draw.debounce(false);
 		},
-		palette = [
+		palette = ko.observableArray([
 			"#000000", "#3f3f3f", "#7f7f7f", "#bfbfbf", 
 			"#ffffff", "#ff0000", "#ff7f00", "#ffff00", "#7fff00", 
 			"#00ff00", "#00ff7f", "#00ffff", "#007fff", "#0000ff", 
@@ -34,7 +34,7 @@ define(['knockout','underscore','draw','draw.options'],function(ko,_,Draw){
 			"#ffaaaa", "#ffd4aa", "#ffffaa", "#d4ffaa", "#aaffaa", 
 			"#aaffd4", "#aaffff", "#aad4ff", "#aaaaff", "#d4aaff", 
 			"#ffaaff", "#ffaad4"
-		];
+		]);
 
 	_(Draw).extend({
 		color: color,

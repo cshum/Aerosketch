@@ -46,7 +46,7 @@
 			<span class="draw-icon-cross"></span>
 		</div>
 		<ul class="palette" data-bind="palette:color,foreach:palette">
-			<li data-bind="style:{left:(100*$index()/$root.palette.length)+'%',background:$data}"></li>
+			<li data-bind="style:{left:(100*$index()/$root.palette().length)+'%',background:$data}"></li>
 		</ul>
 	</div>
 	<div class="color-toggle" 
