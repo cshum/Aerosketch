@@ -11,9 +11,7 @@ define([
 		},
 		copy = function(){
 			if(Draw.selection().length > 0)
-				clipboard( _(Draw.selection()).map(function(shape){
-					return shape.get();
-				}) );
+				clipboard(_(Draw.selection()).invoke('get'));
 		},
 		cut = function(){
 			copy();
