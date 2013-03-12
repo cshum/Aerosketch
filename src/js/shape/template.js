@@ -59,9 +59,6 @@ define(['knockout','underscore','underscore.string'],function(ko,_,_s){
 				o.type = type;
 				return o;
 			},
-			clone = function(){
-				return new Shape(this);
-			},
 			isKO = function(val){
 				return ko.isObservable(val) || ko.isComputed(val);
 			},
@@ -108,7 +105,6 @@ define(['knockout','underscore','underscore.string'],function(ko,_,_s){
 		_(Shape.prototype).extend({
 			set:set,
 			get:get,
-			clone:clone,
 			save:save,
 			undo:undo,
 			redo:redo

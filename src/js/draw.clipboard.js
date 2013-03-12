@@ -10,9 +10,10 @@ define([
 			Draw.save.apply(null,shapes);
 		},
 		copy = function(){
-			clipboard( _(Draw.selection()).map(function(shape){
-				return shape.clone();
-			}) );
+			if(Draw.selection().length > 0)
+				clipboard( _(Draw.selection()).map(function(shape){
+					return shape.get();
+				}) );
 		},
 		cut = function(){
 			copy();
@@ -21,10 +22,10 @@ define([
 		paste = function(){
 			if(!clipboard()) return;
 
-			var shapes = _(clipboard()).map(function(shape){
-				var clone = Draw.layer().newShape(shape.type);
-				clone.set(shape);
-				return clone;
+			var shapes = _(clipboard()).map(function(data){
+				var shape = Draw.layer().newShape(data.type);
+				shape.set(data);
+				return shape;
 			});
 
 			Transform(shapes,{translate:{
