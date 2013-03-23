@@ -1,38 +1,31 @@
-define(['knockout','jquery','underscore'],function(ko,$,_){
+define([
+'knockout','underscore','jquery','hammer'
+],function(ko,_,$,Hammer){
 	ko.bindingHandlers.palette = {
-		init: function(el,val,all,Draw) {
-			var call = val(), drag = false,
-				baseX = $(el).offset().left;
-			$(el)
-				.on('mousedown',function(e){
-					Draw.debounce(true);
-					drag = true;
-					var data = ko.dataFor(e.target);
-					if(data) call(data);
-				})
-				.on('mousemove',function(e){
-					var data = ko.dataFor(e.target);
-					if(drag && data) call(data);
-				})
-				.on('touchstart touchmove',function(e){
-					Draw.debounce(true);
-					var touch = e.originalEvent.touches[0],
-						x = touch.clientX - baseX,
-						r = x/$(el).width();
+		init: function(el,access,all,Draw) {
+      var 
+      call = access(),
+      hammer = Hammer(el,{
+        drag_min_distance:0,
+        prevent_default:true
+      }).on('touch drag release',function(e){
+        if(e.type=='touch')
+          Draw.debounce(true);
+        var 
+        g = e.gesture,
+        x = g.center.pageX - $(el).offset().left,
+        r = x/$(el).width();
 
-					if(r>=0 && r<=1) 
-						call(Draw.palette[Math.floor(
-							r*Draw.palette.length)]);
-				})
-				.on('touchend',function(e){
-					Draw.debounce(false);
-				});
-			$(window).mouseup(function(){
-				Draw.debounce(false);
-				drag = false;
-			});
+        if(r>=0 && r<=1){
+          call(Draw.palette()[Math.floor(
+            r*Draw.palette().length)]);
+        }
+
+        if(e.type=='release')
+          Draw.debounce(false);
+      });
 			ko.utils.domNodeDisposal.addDisposeCallback(el,function(){
-				$(el).off();
+				hammer.off('touch drag release');
 			});
 		}
 	};
