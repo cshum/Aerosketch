@@ -65,9 +65,10 @@ define(['knockout','underscore','underscore.string'],function(ko,_,_s){
 			transform = function(){
 				if(this.rotate() !== 0){
 					var bbox = this.bbox();
-					return 'rotate('+this.rotate()+' '+
-						(bbox.x+bbox.width/2)+','+
-						(bbox.y+bbox.height/2)+')';
+          if(bbox && 'x' in bbox && 'width' in bbox)
+            return 'rotate('+this.rotate()+' '+
+              (bbox.x+bbox.width/2)+','+
+              (bbox.y+bbox.height/2)+')';
 				}
 			},
 			save = function(){
