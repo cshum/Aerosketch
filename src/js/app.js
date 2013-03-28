@@ -15,7 +15,7 @@ require.config({
 
 
 require([
-	'knockout','jquery','util/parseparams',
+	'knockout','jquery','mousetrap','util/parseparams',
 
 	'control/base', 'control/selected', 'control/strokesize',
 	'tool/pointer', 'tool/hand', 'tool/freehand',
@@ -27,7 +27,7 @@ require([
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
 ],function(
-	ko,$,parseParams,
+	ko,$,Mousetrap,parseParams,
 	baseCtrl, selectedCtrl, strokeCtrl,
 	pointerTool, handTool, freehandTool, 
 	pathTool, ellipseTool, rectTool,
@@ -68,6 +68,14 @@ require([
 			});
 		}
 	});
+
+  //Keyboard shortcuts
+  Mousetrap.bind(['command+z', 'ctrl+z'], Draw.undo);
+  Mousetrap.bind(['command+shift+z','command+y', 'ctrl+y'], Draw.redo);
+  Mousetrap.bind(['command+x', 'ctrl+x'], Draw.cut);
+  Mousetrap.bind(['command+c', 'ctrl+c'], Draw.copy);
+  Mousetrap.bind(['command+v', 'ctrl+v'], Draw.paste);
+  
 
 	//prevent defaults
 	var prevent = function(e) { e.preventDefault(); };
