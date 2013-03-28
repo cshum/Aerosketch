@@ -70,8 +70,12 @@ require([
 	});
 
   //Keyboard shortcuts
-  Mousetrap.bind(['command+z', 'ctrl+z'], Draw.undo);
-  Mousetrap.bind(['command+shift+z','command+y', 'ctrl+y'], Draw.redo);
+  Mousetrap.bind(['command+z', 'ctrl+z'], function(e){
+    Draw.undo(); e.preventDefault();
+  });
+  Mousetrap.bind(['command+shift+z','command+y', 'ctrl+y'], function(e){
+    Draw.redo(); e.preventDefault();
+  });
   Mousetrap.bind(['command+x', 'ctrl+x'], Draw.cut);
   Mousetrap.bind(['command+c', 'ctrl+c'], Draw.copy);
   Mousetrap.bind(['command+v', 'ctrl+v'], Draw.paste);
