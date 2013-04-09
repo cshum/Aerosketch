@@ -54,6 +54,7 @@ function binding(el,value){
 				shiftKey:org.shiftKey,
 				target: e.target
 			});
+      e.preventDefault();
 		};
 
 	Hammer(el,{
