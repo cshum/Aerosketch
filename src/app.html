@@ -19,6 +19,7 @@
 </head>
 <body data-bind="css:{transforming:transforming}">
 
+	<!--
 <div id="user-modal" class="modal hide" tabindex="-1" data-width="600">
   <div class="modal-header" data-bind="with:user">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -31,6 +32,7 @@
 		<button type="button" class="btn" data-bind="hammer:{tap:logout}" data-dismiss="modal">Logout</button>
   </div>
 </div>
+-->
 
 <div id="share-modal" class="modal hide" tabindex="-1" data-width="600">
   <div class="modal-header">
@@ -130,23 +132,26 @@
 			<!-- /ko -->
 		</div>
 		<!-- ko ifnot:user -->
+		<!--
 		<div class="btn-group" >
 			<button data-bind="hammer:{tap:login}" class="btn btn-primary">
 				<i class="icon-facebook icon-large"></i> 
 				&nbsp; <b>Login</b>
 			</button>
 		</div>
+		-->
 		<!-- /ko -->
-		<!-- ko if:user -->
 		<div class="btn-group" >
 			<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
-				<i class="icon-share icon-large"></i>
-				&nbsp; Share
+				Share
 			</a>
 		</div>
+		<!-- ko if:user -->
+		<!--
 		<a href="#user-modal" data-toggle="modal" class="btn-group">
 			<img data-bind="attr:{src:'https://graph.facebook.com/'+user().id+'/picture'}" class="avatar"/>
 		</a>
+		-->
 		<!-- /ko -->
 	</div>
 </div>
