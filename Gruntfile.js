@@ -7,12 +7,14 @@ module.exports = function(grunt) {
 					dir:'build',
 					baseUrl:'js',
 					paths: {
-						'jquery': 'lib/jquery/jquery-1.9.0',
+						'jquery': 'lib/jquery/jquery-1.9.1.min',
 						'underscore': 'lib/underscore/underscore-amd-min',
 						'underscore.string': 'lib/underscore/underscore.string.min',
 						'knockout':'lib/knockout/knockout-2.2.1',
 						'mousetrap':'lib/mousetrap/mousetrap.min',
 						'hammer':'lib/hammer/hammer.min',
+						'bootstrap-modal':'lib/bootstrap-modal/bootstrap-modal',
+						'bootstrap-modalmanager':'lib/bootstrap-modal/bootstrap-modalmanager',
 						'text': 'lib/require/text'
 					},
 					preserveLicenseComments: false,

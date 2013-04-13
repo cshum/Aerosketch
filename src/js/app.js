@@ -1,9 +1,15 @@
 require.config({
+	shim:{
+		'bootstrap-modal':['jquery'],
+		'bootstrap-modalmanager':['jquery']
+	},
 	paths: {
-		'jquery': 'lib/jquery/jquery-1.9.0',
+		'jquery': 'lib/jquery/jquery-1.9.1.min',
 		'underscore': 'lib/underscore/underscore-amd-min',
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
+		'bootstrap-modal':'lib/bootstrap-modal/bootstrap-modal',
+		'bootstrap-modalmanager':'lib/bootstrap-modal/bootstrap-modalmanager',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer.min',
 		'text': 'lib/require/text'
@@ -23,6 +29,9 @@ require([
 
 	'draw','draw.palette','draw.clipboard',
 	'draw.momento','draw.options','draw.firebase',
+
+	'bootstrap-modal',
+	'bootstrap-modalmanager',
 
 	'binding/surface','binding/hammer',
 	'binding/palette','binding/aniattr'
@@ -45,16 +54,18 @@ require([
 	Draw.tool(freehandTool);
 
 	//Parse id
-	var params = parseParams(location.href), id;
-	if(params && params.s){
-		id = params.s;
-	}else{
-		id = Draw.create(), uri = '?s='+id;
+	Draw.id.subscribe(function(id){
 		if(window.history.pushState)
-			window.history.pushState(null,null,uri);
+			window.history.pushState(null,null,'?s='+id);
+	});
+	var params = parseParams(location.href);
+	if(params && params.s){
+		Draw.id(params.s);
+	}else{
+		Draw.create();
 	}
 
-	Draw.load(id,function(bbox){
+	Draw.load(function(bbox){
 		ko.applyBindings(Draw,document.body);
 
 		//zoom to overview

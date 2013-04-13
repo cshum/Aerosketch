@@ -1,11 +1,23 @@
 define([
-   'underscore','draw','layer','shape/factory',
+   'knockout','underscore','draw','layer','shape/factory',
    'util/requestanimationframe','util/deferbuffer','points',
-	'http://static.firebase.com/v0/firebase.js'
-],function(_,Draw,Layer,ShapeFactory,aniFrame,deferBuffer,points){
-	var surfacesRef = new Firebase('https://aerosketch.firebaseio.com/surfaces');
-	Draw.create = function(){
-		return surfacesRef.push({
+	'http://static.firebase.com/v0/firebase.js',
+	'https://cdn.firebase.com/v0/firebase-auth-client.js'
+],function(ko,_,Draw,Layer,ShapeFactory,aniFrame,deferBuffer,points){
+	var 
+	aeroRef = new Firebase('https://aerosketch.firebaseio.com/'),
+	surfacesRef = aeroRef.child('surfaces'),
+	user = ko.observable(),
+	id = ko.observable(),
+	auth = new FirebaseAuthClient(aeroRef,function(err,usr){
+		if(err){
+		}else if(usr){
+		}else{
+		}
+		user(usr);
+	}),
+	create = function(){
+		id(surfacesRef.push({
 			'layers':{
 				'default':{
 					visible:true,
@@ -13,26 +25,36 @@ define([
 					shapes:[{type:'path',visible:false}] //dummy
 				}
 			}
-		}).name();
+		}).name());
+	},
+	login = function(){
+		auth.login('facebook', {
+			rememberMe: true,
+			scope: 'email,user_likes'
+		});
+	},
+	logout = function(){
+		auth.logout();
 	};
-	Draw.load = _.once(function(id,callback){
-		var drawRef = surfacesRef.child(id),
-			layersMap = {},
-			layersRef = drawRef.child('layers'),
-			defer = deferBuffer(),
-			bound = {},
-			isReady = false;
-			ready = _.once(function(){
-				isReady = true;
-				if('x1' in bound)
-					callback({
-						x:bound.x1,
-						y:bound.y1,
-						width:bound.x2 - bound.x1,
-						height:bound.y2 - bound.y1
-					});
-				else callback();
-			});
+	load = _.once(function(callback){
+		var 
+		drawRef = surfacesRef.child(id()),
+		layersMap = {},
+		layersRef = drawRef.child('layers'),
+		defer = deferBuffer(),
+		bound = {},
+		isReady = false,
+		ready = _.once(function(){
+			isReady = true;
+			if('x1' in bound)
+				callback({
+					x:bound.x1,
+					y:bound.y1,
+					width:bound.x2 - bound.x1,
+					height:bound.y2 - bound.y1
+				});
+			else callback();
+		});
 
 		layersRef.on('child_added',function(layerSnap){
 			var id = layerSnap.name(),
@@ -97,5 +119,13 @@ define([
 			layer._destroy(true);
 			delete layersMap[layerSnap.name()];
 		});
+	});
+	_(Draw).extend({
+		id:id,
+		user:user,
+		load:load,
+		login:login,
+		logout:logout,
+		create:create
 	});
 });
