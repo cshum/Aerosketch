@@ -94,7 +94,7 @@ require([
 
 	//prevent defaults
 	var prevent = function(e) { e.preventDefault(); };
+	$('.surface').on('contextmenu',prevent);
 	document.ontouchstart = prevent;
-	document.oncontextmenu = prevent;
 	document.ontouchmove = prevent;
 });
