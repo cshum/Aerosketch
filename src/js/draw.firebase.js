@@ -5,18 +5,20 @@ define([
 	'https://cdn.firebase.com/v0/firebase-auth-client.js'
 ],function(ko,_,Draw,Layer,ShapeFactory,aniFrame,deferBuffer,points){
 	var 
-	aeroRef = new Firebase('https://aerosketch.firebaseio.com/'),
-	surfacesRef = aeroRef.child('surfaces'),
-	metaRef = aeroRef.child('surfacesMeta'),
+	rootRef = new Firebase('https://aerosketch.firebaseio.com/'),
+	surfacesRef = rootRef.child('surfaces'),
+	metaRef = rootRef.child('surfacesMeta'),
+	usersRef = rootRef.child('users'),
 	user = ko.observable(),
 	id = ko.observable(),
 	title = ko.observable(),
-	auth = new FirebaseAuthClient(aeroRef,function(err,usr){
+	auth = new FirebaseAuthClient(rootRef,function(err,val){
 		if(err){
-		}else if(usr){
+		}else if(val){
 		}else{
 		}
-		user(usr);
+		user(val);
+		if(val) usersRef.child(val.id).set(val);
 	}),
 	create = function(){
 		id(surfacesRef.push({
@@ -32,7 +34,7 @@ define([
 	login = function(){
 		auth.login('facebook', {
 			rememberMe: true,
-			scope: 'email,user_likes'
+			scope: 'email'
 		});
 	},
 	logout = function(){
