@@ -7,8 +7,10 @@ define([
 	var 
 	aeroRef = new Firebase('https://aerosketch.firebaseio.com/'),
 	surfacesRef = aeroRef.child('surfaces'),
+	detailsRef = aeroRef.child('details'),
 	user = ko.observable(),
 	id = ko.observable(),
+	title = ko.observable(),
 	auth = new FirebaseAuthClient(aeroRef,function(err,usr){
 		if(err){
 		}else if(usr){
@@ -38,9 +40,10 @@ define([
 	};
 	load = _.once(function(callback){
 		var 
-		drawRef = surfacesRef.child(id()),
+		titleRef = detailsRef.child(id()).child('title'),
+		surfaceRef = surfacesRef.child(id()),
 		layersMap = {},
-		layersRef = drawRef.child('layers'),
+		layersRef = surfaceRef.child('layers'),
 		defer = deferBuffer(),
 		bound = {},
 		isReady = false,
@@ -55,6 +58,11 @@ define([
 				});
 			else callback();
 		});
+
+		titleRef.on('value',function(titleSnap){
+			title(titleSnap.val());
+		});
+		title.subscribe(_(titleRef.set).bind(titleRef));
 
 		layersRef.on('child_added',function(layerSnap){
 			var id = layerSnap.name(),
@@ -124,6 +132,7 @@ define([
 		id:id,
 		user:user,
 		load:load,
+		title:title,
 		login:login,
 		logout:logout,
 		create:create

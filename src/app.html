@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <head>
-<title>Aerosketch</title>
+<title data-bind="text:(title() || 'Untitled Canvas')+' - Aerosketch'">
+	Loading Aerosketch…</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="description" content="HTML5 drawing web app for tablet and desktop. Infinite canvas to collaborate sketches in realtime.">
@@ -20,6 +21,20 @@
 </head>
 <body data-bind="css:{transforming:transforming}">
 
+<div id="title-modal" class="modal hide" tabindex="-1" data-width="500">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Rename Canvas</h3>
+  </div>
+  <div class="modal-body">
+		<input type="text" data-bind="value:title" class="input-block-level" placeholder="Add Title…" >
+  </div>
+	<!--
+  <div class="modal-footer">
+		<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+  </div>
+	-->
+</div>
 <div id="user-modal" class="modal hide" tabindex="-1" data-width="600">
   <div class="modal-header" data-bind="with:user">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -32,29 +47,6 @@
 		<button type="button" class="btn" data-bind="hammer:{tap:logout}" data-dismiss="modal">Logout</button>
   </div>
 </div>
-
-<div id="share-modal" class="modal hide" tabindex="-1" data-width="600">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>Share & Collaborate</h3>
-  </div>
-  <div class="modal-body">
-		<p>Share and Collaborate your canvas with the following link:</p>
-		<p data-bind="text:'http://aerosketch.com/app.html?s='+id()"></p>
-		<!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-<a class="addthis_button_facebook"></a>
-<a class="addthis_button_twitter"></a>
-<a class="addthis_button_email"></a>
-<a class="addthis_button_pinterest_share"></a>
-<a class="addthis_button_google_plusone_share"></a>
-</div>
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-516a1a1702a57b40"></script>
-<!-- AddThis Button END -->
-
-  </div>
-</div>
-
 
 <div class="loading" data-bind="if:false">
 	<p><img src="img/aerosketch.svg" alt="Aerosketch" /></p>
@@ -112,19 +104,11 @@
 			<span class="draw-icon-cross" ></span>
 		</div>
 	</div>
-	<div class="toolbar-top-left btn-toolbar" 
-	data-bind="template:toolbarTemplate"></div>
-	<div class="toolbar-top-right btn-toolbar">
-		<div class="btn-group">
-			<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{doubletap_interval:0}">
-				<i class="icon-undo icon-large"></i>
-			</button>
-			<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{doubletap_interval:0}">
-				<i class="icon-repeat icon-large"></i>
-			</button>
-		</div>
+	<div class="toolbar-bottom-left btn-toolbar" data-bind="template:toolbarTemplate"></div>
+	<div class="toolbar-top-left btn-toolbar" >
+		<a href="#title-modal" data-bind="text:title() || 'Untitled Canvas'" class="title" data-toggle="modal" ></a>
 	</div>
-	<div class="toolbar-bottom-right btn-toolbar">
+	<div class="toolbar-top-right btn-toolbar">
 		<div class="btn-group">
 			<!-- ko if:selection().length > 0 -->
 			<button class="btn" data-bind="hammer:{tap:hide}">
@@ -140,6 +124,16 @@
 			</button>
 			<!-- /ko -->
 		</div>
+		<div class="btn-group">
+			<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{doubletap_interval:0}">
+				<i class="icon-undo icon-large"></i>
+			</button>
+			<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{doubletap_interval:0}">
+				<i class="icon-repeat icon-large"></i>
+			</button>
+		</div>
+	</div>
+	<div class="toolbar-bottom-right btn-toolbar">
 		<!-- ko ifnot:user -->
 		<div class="btn-group" >
 			<button data-bind="click:login" class="btn btn-primary">
@@ -149,11 +143,13 @@
 		</div>
 		<!-- /ko -->
 		<!-- ko if:user -->
+		<!--
 		<div class="btn-group" >
 			<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
 				Share
 			</a>
 		</div>
+		-->
 		<a href="#user-modal" data-toggle="modal" class="btn-group">
 			<img data-bind="attr:{src:'https://graph.facebook.com/'+user().id+'/picture'}" class="avatar"/>
 		</a>

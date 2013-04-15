@@ -67,6 +67,7 @@ require([
 
 	Draw.load(function(bbox){
 		ko.applyBindings(Draw,document.body);
+		ko.applyBindings(Draw,document.head);
 
 		//zoom to overview
 		if(bbox && bbox.width>0 && bbox.height>0){
