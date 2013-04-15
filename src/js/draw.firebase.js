@@ -7,7 +7,7 @@ define([
 	var 
 	aeroRef = new Firebase('https://aerosketch.firebaseio.com/'),
 	surfacesRef = aeroRef.child('surfaces'),
-	detailsRef = aeroRef.child('details'),
+	metaRef = aeroRef.child('surfacesMeta'),
 	user = ko.observable(),
 	id = ko.observable(),
 	title = ko.observable(),
@@ -40,7 +40,7 @@ define([
 	};
 	load = _.once(function(callback){
 		var 
-		titleRef = detailsRef.child(id()).child('title'),
+		titleRef = metaRef.child(id()).child('title'),
 		surfaceRef = surfacesRef.child(id()),
 		layersMap = {},
 		layersRef = surfaceRef.child('layers'),
