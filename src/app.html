@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title data-bind="text:(title() || 'Untitled Canvas')+' - Aerosketch'">
+<title data-bind="text:(title() || 'Untitled Surface')+' - Aerosketch'">
 	Loading Aerosketch…</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -24,7 +24,7 @@
 <div id="title-modal" class="modal hide" tabindex="-1" data-width="500">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3>Rename Canvas</h3>
+    <h3>Rename Surface</h3>
   </div>
   <div class="modal-body">
 		<input type="text" data-bind="value:title" class="input-block-level" placeholder="Add Title…" >
@@ -106,7 +106,7 @@
 	</div>
 	<div class="toolbar-bottom-left btn-toolbar" data-bind="template:toolbarTemplate"></div>
 	<div class="toolbar-top-left btn-toolbar" >
-		<a href="#title-modal" data-bind="text:title() || 'Untitled Canvas'" class="title" data-toggle="modal" ></a>
+		<a href="#title-modal" data-bind="text:title() || 'Untitled Surface'" class="title" data-toggle="modal" ></a>
 	</div>
 	<div class="toolbar-top-right btn-toolbar">
 		<div class="btn-group">

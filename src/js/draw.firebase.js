@@ -1,6 +1,7 @@
 define([
-   'knockout','underscore','draw','layer','shape/factory',
-   'util/requestanimationframe','util/deferbuffer','points',
+	'knockout','underscore','draw','layer','shape/factory',
+	'util/requestanimationframe','util/deferbuffer','points',
+
 	'http://static.firebase.com/v0/firebase.js',
 	'https://cdn.firebase.com/v0/firebase-auth-client.js'
 ],function(ko,_,Draw,Layer,ShapeFactory,aniFrame,deferBuffer,points){
@@ -13,10 +14,6 @@ define([
 	id = ko.observable(),
 	title = ko.observable(),
 	auth = new FirebaseAuthClient(rootRef,function(err,val){
-		if(err){
-		}else if(val){
-		}else{
-		}
 		user(val);
 		if(val) usersRef.child(val.id).set(val);
 	}),
@@ -39,7 +36,7 @@ define([
 	},
 	logout = function(){
 		auth.logout();
-	};
+	},
 	load = _.once(function(callback){
 		var 
 		titleRef = metaRef.child(id()).child('title'),
@@ -133,10 +130,10 @@ define([
 	_(Draw).extend({
 		id:id,
 		user:user,
-		load:load,
 		title:title,
+		load:load,
+		create:create,
 		login:login,
-		logout:logout,
-		create:create
+		logout:logout
 	});
 });
