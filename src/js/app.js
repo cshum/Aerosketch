@@ -4,7 +4,7 @@ require.config({
 		'bootstrap-modalmanager':['jquery']
 	},
 	paths: {
-		'jquery': 'lib/jquery/jquery-1.9.1.min',
+		'jquery': 'lib/jquery/jquery-2.0.0.min',
 		'underscore': 'lib/underscore/underscore-amd-min',
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
