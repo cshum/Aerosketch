@@ -5,5 +5,5 @@
 .pygments-cache
 .swp
 
-www-built
+build
 node_modules
