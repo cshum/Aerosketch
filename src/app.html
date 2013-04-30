@@ -134,6 +134,7 @@
 		</div>
 	</div>
 	<div class="toolbar-bottom-right btn-toolbar">
+		<!--<div class="qrcode" data-bind="qrcode:'http://aerosketch.com/app.html?s='+id+'#fromqr'" ></div>-->
 		<!-- ko ifnot:user -->
 		<div class="btn-group" >
 			<button data-bind="click:login" class="btn btn-primary">
@@ -143,13 +144,11 @@
 		</div>
 		<!-- /ko -->
 		<!-- ko if:user -->
-		<!--
 		<div class="btn-group" >
 			<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
 				Share
 			</a>
 		</div>
-		-->
 		<a href="#user-modal" data-toggle="modal" class="btn-group">
 			<img data-bind="attr:{src:'https://graph.facebook.com/'+user().id+'/picture'}" class="avatar"/>
 		</a>

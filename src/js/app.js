@@ -1,10 +1,12 @@
 require.config({
 	shim:{
 		'bootstrap-modal':['jquery'],
-		'bootstrap-modalmanager':['jquery']
+		'bootstrap-modalmanager':['jquery'],
+		'jquery.qrcode':['jquery']
 	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-2.0.0.min',
+		'jquery.qrcode':'lib/jquery-qrcode/jquery.qrcode.min',
 		'underscore': 'lib/underscore/underscore-amd-min',
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
@@ -34,7 +36,8 @@ require([
 	'bootstrap-modalmanager',
 
 	'binding/surface','binding/hammer',
-	'binding/palette','binding/aniattr'
+	'binding/palette','binding/aniattr',
+	'binding/qrcode'
 ],function(
 	ko,$,Mousetrap,parseParams,
 	baseCtrl, selectedCtrl, strokeCtrl,
