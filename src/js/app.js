@@ -31,6 +31,7 @@ require([
 
 	'draw','draw.palette','draw.clipboard',
 	'draw.momento','draw.options','draw.firebase',
+	'draw.url',
 
 	'bootstrap-modal',
 	'bootstrap-modalmanager',
