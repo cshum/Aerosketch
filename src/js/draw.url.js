@@ -13,11 +13,12 @@ define([
 			});
 	};
 	
-	if(gapi && gapi.client && gapi.client.setApiKey)
+	if(gapi && gapi.client){
 		gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
 		gapi.client.load('urlshortener', 'v1',function(){
 			if(Draw.id()) update();
 			Draw.id.subscribe(update);
 		});
+	}
 	Draw.url = url;
 });
