@@ -10,14 +10,14 @@ define([
 				'resource': { 'longUrl': 'http://aerosketch.com/app.html?s='+Draw.id()}
 			}).execute(function(res){
 				if(res.id) url(res.id);
-				console.log(url());
 			});
 	};
 	
-	gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
-	gapi.client.load('urlshortener', 'v1',function(){
-		if(Draw.id()) update();
-		Draw.id.subscribe(update);
-	});
+	if(gapi)
+		gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
+		gapi.client.load('urlshortener', 'v1',function(){
+			if(Draw.id()) update();
+			Draw.id.subscribe(update);
+		});
 	Draw.url = url;
 });

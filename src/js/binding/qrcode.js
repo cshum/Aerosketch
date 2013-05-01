@@ -6,7 +6,7 @@ define([
 			$(el).qrcode({
 				width: $(el).width(),
 				height: $(el).height(),
-				text: access()
+				text: ko.utils.unwrapObservable(access())
 			});
 		}
 	};

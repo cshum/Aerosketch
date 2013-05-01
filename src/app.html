@@ -35,17 +35,19 @@
   </div>
 	-->
 </div>
-<div id="user-modal" class="modal hide" tabindex="-1" data-width="600">
-  <div class="modal-header" data-bind="with:user">
+<div id="share-modal" class="modal hide" tabindex="-1" data-width="400">
+  <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 data-bind="text:displayName"></h3>
+    <h3>Share &amp; Collaborate</h3>
   </div>
-  <div class="modal-body">
-		<p>More features are coming soon. Stay tuned!</p>
+  <div class="modal-body" >
+		<p class="qrcode" style="width:256px; height:256px;" data-bind="qrcode:url" ></p>
+		<p data-bind="text:url"></p>
   </div>
+	<!--
   <div class="modal-footer">
-		<button type="button" class="btn" data-bind="hammer:{tap:logout}" data-dismiss="modal">Logout</button>
   </div>
+	-->
 </div>
 
 <div class="loading" data-bind="if:false">
@@ -134,29 +136,10 @@
 		</div>
 	</div>
 	<div class="toolbar-bottom-right btn-toolbar">
-		<div class="qrcode" data-bind="qrcode:url" ></div>
-		<!-- ko ifnot:user -->
-		<!--
-		<div class="btn-group" >
-			<button data-bind="click:login" class="btn btn-primary">
-				<i class="icon-facebook icon-large"></i> 
-				&nbsp; <b>Login</b>
-			</button>
-		</div>
-		-->
-		<!-- /ko -->
-		<!-- ko if:user -->
-		<!--
-		<div class="btn-group" >
-			<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
-				Share
-			</a>
-		</div>
-		<a href="#user-modal" data-toggle="modal" class="btn-group">
-			<img data-bind="attr:{src:'https://graph.facebook.com/'+user().id+'/picture'}" class="avatar"/>
+		<!--<div class="qrcode" data-bind="qrcode:url" ></div>-->
+		<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
+			Share
 		</a>
-		-->
-		<!-- /ko -->
 	</div>
 </div>
 <script type="text/javascript" src="js/lib/require/require.js"></script>
