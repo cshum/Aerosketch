@@ -7,7 +7,7 @@ define([
 	update = function(){
 		if(Draw.id())
 			gapi.client.urlshortener.url.insert({
-				'resource': { 'longUrl': 'http://aerosketch.com/app.html?s='+Draw.id()}
+				'resource': { 'longUrl': 'http://aerosketch.com/app.html?s='+Draw.id()+'&from=qr'}
 			}).execute(function(res){
 				if(res.id) url(res.id);
 			});
