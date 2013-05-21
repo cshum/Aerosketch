@@ -11,11 +11,10 @@ define([
 				if(res.id) url(res.id);
 			});
 	};
-		console.log(gapi);
-		gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
-		gapi.client.load('urlshortener', 'v1',function(){
-			if(Draw.id()) update();
-			Draw.id.subscribe(update);
-		});
+	gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
+	gapi.client.load('urlshortener', 'v1',function(){
+		if(Draw.id()) update();
+		Draw.id.subscribe(update);
+	});
 	Draw.url = url;
 });
