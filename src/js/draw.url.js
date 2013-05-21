@@ -1,7 +1,6 @@
 define([
-	'knockout','draw','draw.firebase',
-	'https://apis.google.com/js/client.js'
-],function(ko,Draw){
+	'knockout','gapi','draw','draw.firebase'
+],function(ko,gapi,Draw){
 	var 
 	url = ko.observable(),
 	update = function(){
@@ -12,13 +11,11 @@ define([
 				if(res.id) url(res.id);
 			});
 	};
-	
-	if(gapi && gapi.client){
+		console.log(gapi);
 		gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
 		gapi.client.load('urlshortener', 'v1',function(){
 			if(Draw.id()) update();
 			Draw.id.subscribe(update);
 		});
-	}
 	Draw.url = url;
 });

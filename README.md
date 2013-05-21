@@ -8,6 +8,10 @@ http://aerosketch.com/
 
 To be documented...
 
+##Credits
+
+Aerosketch uses KnockoutJS data binding for SVG elements, to facilitate interactive drawing and touch navigations.
+
 ##License
 
 Copyright 2012-2013 Adrian C Shum
