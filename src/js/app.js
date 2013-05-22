@@ -2,8 +2,7 @@ require.config({
 	shim:{
 		'bootstrap-modal':['jquery'],
 		'bootstrap-modalmanager':['jquery'],
-		'jquery.qrcode':['jquery'],
-		'gapi':{exports:'gapi'}
+		'jquery.qrcode':['jquery']
 	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-2.0.0.min',
@@ -15,8 +14,7 @@ require.config({
 		'bootstrap-modalmanager':'lib/bootstrap-modal/bootstrap-modalmanager',
 		'mousetrap':'lib/mousetrap/mousetrap.min',
 		'hammer':'lib/hammer/hammer.min',
-		'text': 'lib/require/text',
-		'gapi':'https://apis.google.com/js/client'
+		'text': 'lib/require/text'
 	},
 	waitSeconds: 900,
 	baseUrl:'js',

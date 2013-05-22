@@ -1,6 +1,6 @@
 define([
-	'knockout','gapi','draw','draw.firebase'
-],function(ko,gapi,Draw){
+	'knockout','jquery','draw','draw.firebase'
+],function(ko,$,Draw){
 	var 
 	url = ko.observable(),
 	update = function(){
@@ -12,10 +12,12 @@ define([
 			});
 	};
 	Draw.url = url;
-	if(!(gapi && gapi.client)) return;
-	gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
-	gapi.client.load('urlshortener', 'v1',function(){
-		if(Draw.id()) update();
-		Draw.id.subscribe(update);
-	});
+	window.gapiClientOnload = function(){
+		gapi.client.setApiKey('AIzaSyAExt6CroSfxehdzSf47nMugcxeuPM54bg');
+		gapi.client.load('urlshortener', 'v1',function(){
+			if(Draw.id()) update();
+			Draw.id.subscribe(update);
+		});
+	};
+	require(['https://apis.google.com/js/client.js?onload=gapiClientOnload']);
 });

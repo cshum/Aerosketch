@@ -16,8 +16,7 @@ module.exports = function(grunt) {
 						'hammer':'lib/hammer/hammer.min',
 						'bootstrap-modal':'lib/bootstrap-modal/bootstrap-modal',
 						'bootstrap-modalmanager':'lib/bootstrap-modal/bootstrap-modalmanager',
-						'text': 'lib/require/text',
-						'gapi':'https://apis.google.com/js/client'
+						'text': 'lib/require/text'
 					},
 					preserveLicenseComments: false,
 					name:'app'
