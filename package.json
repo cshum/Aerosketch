@@ -1,12 +1,15 @@
 {
   "author": "Adrian C Shum",
-  "name": "Aerosketch",
+  "name": "aerosketch",
   "version": "0.1.0",
+  "scripts": {
+    "build": "grunt build"
+  },
   "devDependencies": {
-    "grunt": "~0.4.0",
-    "grunt-requirejs": "~0.3.2",
-    "grunt-contrib-clean": "~0.4.0",
-    "grunt-replace": "~0.4.0",
-    "lessless": "~0.2.14"
+    "grunt": "^1.6.1",
+    "grunt-contrib-requirejs": "^1.0.0",
+    "grunt-replace": "^2.0.2",
+    "grunt-contrib-clean": "^2.0.0",
+    "lessless": "^0.2.15"
   }
 }
