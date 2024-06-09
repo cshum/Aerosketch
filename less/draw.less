@@ -40,67 +40,68 @@
 html,body{
 	-ms-content-zooming: none;
 	-ms-touch-action:none;
-	overflow:hidden; 
-	width:100%; 
+	overflow:hidden;
+	width:100%;
 	height:100%;
-} 
+	background: @back;
+}
 .loading{
 	margin:70px auto;
-	text-align:center; 
+	text-align:center;
 	max-width:320px;
-	img{ width:240px; height:240px; .rounded(20px); } 
+	img{ width:240px; height:240px; .rounded(20px); }
 	p{ margin:40px 0; }
 }
 .transforming{
 	.overlay, [class^="toolbar-"], [class*=" toolbar-"]{ display:none; }
-} 
+}
 .modal{ box-shadow:none; }
 .modal-backdrop{ display:none; }
 
 .draw{
 	background:@back;
 	position:absolute;
-	top:0; bottom:0; left:0; right:0;
+	top:0; bottom:30px; left:0; right:0;
 	& > div{ position:absolute; }
 
 	.left {
 		z-index:2;
 
-		top:0; left:0; 
-		bottom:@palette-height; 
+		top:0; left:0;
+		bottom:@palette-height;
 
-		& > * { 
+		& > * {
 			float:left; height:100%;
-			position: relative; 
+			position: relative;
 		}
 
 		.nav{
 			width:@nav-width; overflow:hidden;
-			background: @back; 
+			background: @back;
 
 			ul{ margin:0 }
 			li:hover{ background:@back + #111; }
 			li:active{ background:@back + #222; }
 
 			.tools{
-				position: absolute; 
-				top:0; left:0; 
-				bottom:@color-mode-height - @palette-height; 
+				position: absolute;
+				top:0; left:0;
+				bottom:@color-mode-height - @palette-height;
 
-				li{ 
-					padding:(@icon-pad - 2) @icon-pad; 
-					cursor:pointer; 
+				li{
+					padding:(@icon-pad - 2) @icon-pad;
+					cursor:pointer;
 					line-height:1;
 				}
 				li.on{ background:@active; }
-			} 
+			}
 		}
 	}
 	.bottom{
 		z-index:3;
 
-		left:@nav-width + 3px; 
-		bottom:0; right:0; 
+		left:@nav-width + 3px;
+		bottom:0; right:0;
 		background: @back;
 		height:@palette-height;
 
@@ -128,14 +129,14 @@ html,body{
 	.color-toggle{
 		z-index:4;
 
-		left:0; bottom:0; 
-		width:@nav-width + 10px; 
+		left:0; bottom:0;
+		width:@nav-width + 10px;
 		height:@color-mode-height;
 		cursor:pointer;
 
 		.fill, .stroke{
-			position: absolute; 
-			width:@icon-size; 
+			position: absolute;
+			width:@icon-size;
 			height:@icon-size;
 			padding:3px;
 			border:2px white solid;
@@ -170,25 +171,25 @@ html,body{
 	.toolbar-bottom-left{
 		z-index:11;
 
-		left:@toolbar-hpad + @nav-width; 
+		left:@toolbar-hpad + @nav-width;
 		bottom:@toolbar-vpad + @palette-height;
 	}
 	.toolbar-bottom-right{
 		z-index:11;
 
-		right:@toolbar-hpad; 
+		right:@toolbar-hpad;
 		bottom:@toolbar-vpad + @palette-height;
 	}
 	.toolbar-top-right{
 		z-index:12;
 
-		right:@toolbar-hpad; 
+		right:@toolbar-hpad;
 		top:@toolbar-vpad;
 	}
 	.toolbar-top-left{
 		z-index:12;
 
-		left:@toolbar-hpad + @nav-width; 
+		left:@toolbar-hpad + @nav-width;
 		top:@toolbar-vpad;
 	}
 }
