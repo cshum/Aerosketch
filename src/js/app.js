@@ -6,7 +6,7 @@ require.config({
 	},
 	paths: {
 		'jquery': 'lib/jquery/jquery-2.0.0.min',
-		'jquery.qrcode':'lib/jquery-qrcode/jquery.qrcode.min',
+		// 'jquery.qrcode':'lib/jquery-qrcode/jquery.qrcode.min',
 		'underscore': 'lib/underscore/underscore-amd-min',
 		'underscore.string': 'lib/underscore/underscore.string.min',
 		'knockout':'lib/knockout/knockout-2.2.1',
@@ -30,19 +30,20 @@ require([
 	'tool/path', 'tool/ellipse', 'tool/rect',
 
 	'draw','draw.palette','draw.clipboard',
-	'draw.momento','draw.options','draw.firebase',
-	'draw.url',
+	'draw.momento','draw.options',
+	'draw.local',
+	// 'draw.url',
 
 	'bootstrap-modal',
 	'bootstrap-modalmanager',
 
+	// 'binding/qrcode',
 	'binding/surface','binding/hammer',
-	'binding/palette','binding/aniattr',
-	'binding/qrcode'
+	'binding/palette','binding/aniattr'
 ],function(
 	ko,$,Mousetrap,parseParams,
 	baseCtrl, selectedCtrl, strokeCtrl,
-	pointerTool, handTool, freehandTool, 
+	pointerTool, handTool, freehandTool,
 	pathTool, ellipseTool, rectTool,
 	Draw){
 
@@ -52,7 +53,7 @@ require([
 
 	//init tools
 	Draw.tools([
-	   pointerTool,handTool, freehandTool, 
+	   pointerTool,handTool, freehandTool,
 	   pathTool, ellipseTool, rectTool
 	]);
 	Draw.tool(freehandTool);
@@ -95,7 +96,7 @@ require([
   Mousetrap.bind(['command+x', 'ctrl+x'], Draw.cut);
   Mousetrap.bind(['command+c', 'ctrl+c'], Draw.copy);
   Mousetrap.bind(['command+v', 'ctrl+v'], Draw.paste);
-  
+
 
 	//prevent defaults
 	var prevent = function(e) { e.preventDefault(); };
