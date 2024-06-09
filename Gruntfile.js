@@ -4,7 +4,7 @@ module.exports = function(grunt) {
 			build: {
 				options: {
 					appDir: 'src',
-					dir: 'build',
+					dir: 'dist',
 					baseUrl: 'js',
 					paths: {
 						'jquery': 'lib/jquery/jquery-2.0.0.min',
@@ -29,23 +29,32 @@ module.exports = function(grunt) {
 					variables: {'timestamp': '<%= new Date().getTime() %>'}
 				},
 				files: [
-					{src: ['build/index.html'], dest: 'build/index.html'},
-					{src: ['build/app.html'], dest: 'build/app.html'}
+					{src: ['dist/index.html'], dest: 'dist/index.html'},
+					{src: ['dist/app.html'], dest: 'dist/app.html'}
 				]
 			}
 		},
 		clean: {
 			build: [
-				'build/build.txt', 'build/img/*.ai'
+				'dist/build.txt', 'dist/img/*.ai'
 			]
+		},
+		ghPages: {
+			options: {
+				base: 'dist'
+			},
+			src: ['**']
 		}
 	});
+
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.registerTask('less', 'Optimize Less files', function() {
-		require('lessless').optimizeProject('build');
+		require('lessless').optimizeProject('dist');
 	});
 	grunt.loadNpmTasks('grunt-replace');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-gh-pages');
 
 	grunt.registerTask('build', ['requirejs', 'less', 'replace', 'clean']);
+	grunt.registerTask('deploy', ['build', 'ghPages']);
 };

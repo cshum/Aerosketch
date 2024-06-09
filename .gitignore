@@ -6,5 +6,5 @@
 .pygments-cache
 .swp
 
-build
+dist
 node_modules
