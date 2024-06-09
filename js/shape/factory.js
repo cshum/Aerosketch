@@ -1,0 +1,1 @@
+define(["shape/rect","shape/ellipse","shape/circle","shape/path"],function(e,n,r,c){return function(t,s){switch(t){case"rect":return new e(s);case"ellipse":return new n(s);case"circle":return new r(s);case"path":return new c(s)}return null}});

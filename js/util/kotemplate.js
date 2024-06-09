@@ -1,0 +1,1 @@
+define(["knockout","underscore"],function(e,n){var r=document.createElement("div"),t=n(new e.templateEngine).extend({allowTemplateRewriting:!1,renderTemplateSource:function(e){return r.innerHTML=e,n.toArray(r.childNodes)},makeTemplateSource:function(e){return e}});return function(e,r){var a={name:r,templateEngine:t};return n(e.peek()).isArray()?a.foreach=e:a.data=e,a}});

@@ -1,0 +1,1 @@
+define(["draw"],function(n){function i(){a=n.position(),n.transforming(!0),r=!0}function o(i){n.position({x:n.round(a.x-i.distanceX),y:n.round(a.y-i.distanceY)})}var a,r;return n.debounce.subscribe(function(){r&&n.transforming(!1),r=!1}),{name:"Hand Tool",iconView:'<span class="draw-icon-hand"></span>',dragstart:i,drag:o}});

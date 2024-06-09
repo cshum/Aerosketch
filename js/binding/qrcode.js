@@ -1,0 +1,1 @@
+define(["knockout","underscore","jquery","jquery.qrcode"],function(e,n,r){e.bindingHandlers.qrcode={update:function(n,t){var d=e.utils.unwrapObservable(t());d&&r(n).qrcode({width:r(n).width(),height:r(n).height(),text:d})}}});

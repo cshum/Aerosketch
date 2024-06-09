@@ -1,0 +1,1 @@
+define(["knockout","underscore","jquery","util/requestanimationframe"],function(n,i,t,u){n.bindingHandlers.aniattr={init:function(e,a,r){var o=a(),c={},f=!1,d=function(i,t){var e=n.utils.unwrapObservable(t);e&&(c[i]=e,f||(u(l),f=!0))},l=function(){t(e).attr(c),f=!1,c={}};i(o).each(function(t,u){n.computed(i(d).bind(null,u,t))}),l()}}});

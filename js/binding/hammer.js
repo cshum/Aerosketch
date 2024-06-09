@@ -1,0 +1,1 @@
+define(["knockout","hammer","underscore"],function(n,i,o){n.bindingHandlers.hammer={init:function(e,a,c,d){var s=i(e,c().hammerOptions||{});o(a()).each(function(i,a){o.isFunction(i)&&(s.on(a,o(i).bind(null,d)),n.utils.domNodeDisposal.addDisposeCallback(e,function(){s.off(a)}))})}}});

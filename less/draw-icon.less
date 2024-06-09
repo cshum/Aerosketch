@@ -1,0 +1,21 @@
+@icon-size: 26px;
+.draw-icon (@no){
+	width:@icon-size; height:@icon-size; 
+	display:inline-block; 
+	background:url(../img/icons.svg); 
+	background-repeat:no-repeat; 
+	background-position: 0 (@icon-size * -@no);
+}
+.draw-icon-pointer { .draw-icon(0); }
+.draw-icon-hand { .draw-icon(1); }
+.draw-icon-node { .draw-icon(2); }
+.draw-icon-circle { .draw-icon(3); }
+.draw-icon-square { .draw-icon(4); }
+.draw-icon-freehand { .draw-icon(5); }
+.draw-icon-path { .draw-icon(6); }
+.draw-icon-text { .draw-icon(7); }
+.draw-icon-connector { .draw-icon(8); }
+.draw-icon-rubber { .draw-icon(9); }
+.draw-icon-cross { .draw-icon(10); }
+
+

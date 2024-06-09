@@ -1,0 +1,197 @@
+@import "elements";
+@import "draw-icon";
+
+/* bootstrap & font awesome tweaks */
+
+[class^="icon-"], [class*=" icon-"] {
+	background-image: none;
+}
+
+.dropdown-menu li > a{
+	padding:6px 15px;
+}
+.btn-group + .btn-group{
+	margin-left:10px;
+}
+.btn{
+	i{ color:#555; }
+	&.btn-primary i { color:white }
+
+	padding:8px 15px;
+
+	&:focus{
+		outline:none;
+	}
+	[class^="icon-"], [class*=" icon-"] {
+		vertical-align: bottom;
+	}
+}
+
+/* App Stuffs */
+
+@back: #222;
+@active: #0056aa;
+
+@color-mode-height:63px;
+@palette-height:38px;
+@icon-pad: 10px;
+@nav-width: @icon-size + @icon-pad*2;
+
+html,body{
+	-ms-content-zooming: none;
+	-ms-touch-action:none;
+	overflow:hidden; 
+	width:100%; 
+	height:100%;
+} 
+.loading{
+	margin:70px auto;
+	text-align:center; 
+	max-width:320px;
+	img{ width:240px; height:240px; .rounded(20px); } 
+	p{ margin:40px 0; }
+}
+.transforming{
+	.overlay, [class^="toolbar-"], [class*=" toolbar-"]{ display:none; }
+} 
+.modal{ box-shadow:none; }
+.modal-backdrop{ display:none; }
+
+.draw{
+	background:@back;
+	position:absolute;
+	top:0; bottom:0; left:0; right:0;
+	& > div{ position:absolute; }
+
+	.left {
+		z-index:2;
+
+		top:0; left:0; 
+		bottom:@palette-height; 
+
+		& > * { 
+			float:left; height:100%;
+			position: relative; 
+		}
+
+		.nav{
+			width:@nav-width; overflow:hidden;
+			background: @back; 
+
+			ul{ margin:0 }
+			li:hover{ background:@back + #111; }
+			li:active{ background:@back + #222; }
+
+			.tools{
+				position: absolute; 
+				top:0; left:0; 
+				bottom:@color-mode-height - @palette-height; 
+
+				li{ 
+					padding:(@icon-pad - 2) @icon-pad; 
+					cursor:pointer; 
+					line-height:1;
+				}
+				li.on{ background:@active; }
+			} 
+		}
+	}
+	.bottom{
+		z-index:3;
+
+		left:@nav-width + 3px; 
+		bottom:0; right:0; 
+		background: @back;
+		height:@palette-height;
+
+		.nocolor{
+			.opacity(0.3);
+			width:@icon-size;
+			padding:(@palette-height - @icon-size)/2;
+		}
+
+		.palette{
+			position:absolute;
+			left:41px; top:0; bottom:0; right:0;
+			padding:0; margin:0;
+			li{
+				position:absolute;
+				top:0; bottom:0; right:0;
+			}
+		}
+	}
+	.title{
+		font-size:20px; margin:9px 0; color:black; opacity:0.7;
+		outline:none; text-shadow:-1px -1px white; display:inline-block;
+	}
+	.qrcode{ border:2px solid white; }
+	.color-toggle{
+		z-index:4;
+
+		left:0; bottom:0; 
+		width:@nav-width + 10px; 
+		height:@color-mode-height;
+		cursor:pointer;
+
+		.fill, .stroke{
+			position: absolute; 
+			width:@icon-size; 
+			height:@icon-size;
+			padding:3px;
+			border:2px white solid;
+			background-color:@back;
+			.rounded(5px);
+			line-height:1;
+		}
+
+
+		@pad: 4px;
+		.fill{ padding:4px;  top:@pad; left:@pad; }
+		.stroke{ padding:0; bottom:@pad; right:@pad; }
+	}
+	.surface{
+		z-index:10;
+		left:@nav-width; right:0;
+		top:0; bottom:@palette-height;
+		overflow:hidden;
+		.border-radius(0,0,7px,0);
+
+		svg{
+			position:absolute;
+			.border-radius(0,0,7px,0);
+			width:100%; height:100%;
+		}
+	}
+	@toolbar-hpad:20px;
+	@toolbar-vpad:5px;
+	.avatar{
+		width:38px; height:38px; .rounded(5px);
+	}
+	.toolbar-bottom-left{
+		z-index:11;
+
+		left:@toolbar-hpad + @nav-width; 
+		bottom:@toolbar-vpad + @palette-height;
+	}
+	.toolbar-bottom-right{
+		z-index:11;
+
+		right:@toolbar-hpad; 
+		bottom:@toolbar-vpad + @palette-height;
+	}
+	.toolbar-top-right{
+		z-index:12;
+
+		right:@toolbar-hpad; 
+		top:@toolbar-vpad;
+	}
+	.toolbar-top-left{
+		z-index:12;
+
+		left:@toolbar-hpad + @nav-width; 
+		top:@toolbar-vpad;
+	}
+}
+.clean{
+}
+

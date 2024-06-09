@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<head>
+<title data-bind="text:(title() || 'Untitled Surface')+' - Aerosketch'">
+	Loading Aerosketch…</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="description" content="HTML5 Drawing Web App. Zoomable, unlimited surface to collaborate sketches in realtime.">
+
+<link rel="shortcut icon" href="img/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/icon144.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/icon114.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/icon72.png">
+<link rel="apple-touch-icon-precomposed" href="img/icon57.png">
+
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-modal.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="less/draw.css?1717953601632">
+
+</head>
+<body data-bind="css:{transforming:transforming}">
+
+<div id="title-modal" class="modal hide" tabindex="-1" data-width="500">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Rename Surface</h3>
+  </div>
+  <div class="modal-body">
+		<input type="text" data-bind="value:title" class="input-block-level" placeholder="Add Title…" >
+  </div>
+	<!--
+  <div class="modal-footer">
+		<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+  </div>
+	-->
+</div>
+<div id="share-modal" class="modal hide" tabindex="-1" data-width="400">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3>Share &amp; Collaborate</h3>
+  </div>
+  <div class="modal-body" >
+		<p class="qrcode" style="width:256px; height:256px;" data-bind="qrcode:url()" ></p>
+		<p data-bind="text:url"></p>
+  </div>
+	<!--
+  <div class="modal-footer">
+  </div>
+	-->
+</div>
+
+<div class="loading" data-bind="if:false">
+	<p><img src="img/aerosketch.svg" alt="Aerosketch" /></p>
+	<div class="progress progress-striped active">
+		<div class="bar" style="width:100%;"></div>
+	</div>
+</div>
+<div class="draw" style="display:none;" data-bind="visible:true">
+	<div id="surface" class="surface" data-bind="surface:trigger,style:{background:background}" style="cursor:default">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" >
+			<rect data-bind="attr:{fill:background}" stroke="none" width="100%" height="100%" />
+			<g stroke-linecap="round">
+				<g data-bind="attr:{transform:transform},foreach:layers">
+					<g data-bind="visible:visible,template:shapesTemplate" ></g>
+				</g>
+				<g data-bind="template:controlsTemplate" ></g>
+				<g data-bind="template:toolTemplate" ></g>
+			</g>
+		</svg>
+	</div>
+	<div class="left">
+		<div class="nav">
+			<ul data-bind="foreach:tools" class="tools">
+				<li data-bind="html:iconView, 
+				css:{on:$root.tool()==$data}, 
+				event:{
+					mousedown:$root.tool,
+					touchstart:$root.tool
+				}"></li>
+			</ul>
+		</div>
+	</div>
+	<div class="bottom" >
+		<div class="nocolor" data-bind="hammer:{tap:noColor}">
+			<span class="draw-icon-cross"></span>
+		</div>
+		<ul class="palette" data-bind="palette:color,foreach:palette">
+			<li data-bind="style:{left:(100*$index()/$root.palette().length)+'%',background:$data}"></li>
+		</ul>
+	</div>
+	<div class="color-toggle" 
+		data-bind="with:options, 
+		hammer:{tap:toggleColorMode,hold:swapColor},
+		hammerOptions:{doubletap_interval:0}">
+		<div class="fill" data-bind="
+			style:{background:fill()=='none'?'':fill(),
+			zIndex:$root.colorMode()=='fill'? 2:1},
+			if:fill()=='none'">
+			<span class="draw-icon-cross" ></span>
+		</div>
+		<div class="stroke" data-bind="
+			if:stroke()=='none',
+			style:{background:stroke()=='none'?'':stroke(),
+			zIndex:$root.colorMode()=='stroke'? 2:1}">
+			<span class="draw-icon-cross" ></span>
+		</div>
+	</div>
+	<div class="toolbar-bottom-left btn-toolbar" data-bind="template:toolbarTemplate"></div>
+	<div class="toolbar-top-left btn-toolbar" >
+		<a href="#title-modal" data-bind="text:title() || 'Untitled Surface'" class="title" data-toggle="modal" ></a>
+	</div>
+	<div class="toolbar-top-right btn-toolbar">
+		<div class="btn-group">
+			<!-- ko if:selection().length > 0 -->
+			<button class="btn" data-bind="hammer:{tap:hide}">
+				<i class="icon-remove-sign icon-large"></i>
+			</button>
+			<button class="btn" data-bind="hammer:{tap:copy}">
+				<i class="icon-copy icon-large"></i>
+			</button>
+			<!-- /ko -->
+			<!-- ko if:clipboard().length > 0 -->
+			<button class="btn" data-bind="hammer:{tap:paste}">
+				<i class="icon-paste icon-large"></i>
+			</button>
+			<!-- /ko -->
+		</div>
+		<div class="btn-group">
+			<button class="btn" data-bind="hammer:{tap:undo},hammerOptions:{doubletap_interval:0}">
+				<i class="icon-undo icon-large"></i>
+			</button>
+			<button class="btn" data-bind="hammer:{tap:redo},hammerOptions:{doubletap_interval:0}">
+				<i class="icon-repeat icon-large"></i>
+			</button>
+		</div>
+	</div>
+	<div class="toolbar-bottom-right btn-toolbar">
+		<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
+			Share
+		</a>
+	</div>
+</div>
+<script type="text/javascript" src="js/lib/require/require.js"></script>
+<script type="text/javascript" src="js/app.js?1717953601632"></script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-39217559-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+</body>
+</html>
+
