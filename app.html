@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="css/bootstrap-modal.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-<link rel="stylesheet" type="text/css" href="less/draw.css?1717954091696">
+<link rel="stylesheet" type="text/css" href="less/draw.css?1717955721399">
 
 </head>
 <body data-bind="css:{transforming:transforming}">
@@ -41,8 +41,8 @@
     <h3>Share &amp; Collaborate</h3>
   </div>
   <div class="modal-body" >
-		<p class="qrcode" style="width:256px; height:256px;" data-bind="qrcode:url()" ></p>
-		<p data-bind="text:url"></p>
+<!--<p class="qrcode" style="width:256px; height:256px;" data-bind="qrcode:url()" ></p>-->
+<!--<p data-bind="text:url"></p>-->
   </div>
 	<!--
   <div class="modal-footer">
@@ -72,8 +72,8 @@
 	<div class="left">
 		<div class="nav">
 			<ul data-bind="foreach:tools" class="tools">
-				<li data-bind="html:iconView, 
-				css:{on:$root.tool()==$data}, 
+				<li data-bind="html:iconView,
+				css:{on:$root.tool()==$data},
 				event:{
 					mousedown:$root.tool,
 					touchstart:$root.tool
@@ -89,8 +89,8 @@
 			<li data-bind="style:{left:(100*$index()/$root.palette().length)+'%',background:$data}"></li>
 		</ul>
 	</div>
-	<div class="color-toggle" 
-		data-bind="with:options, 
+	<div class="color-toggle"
+		data-bind="with:options,
 		hammer:{tap:toggleColorMode,hold:swapColor},
 		hammerOptions:{doubletap_interval:0}">
 		<div class="fill" data-bind="
@@ -136,13 +136,15 @@
 		</div>
 	</div>
 	<div class="toolbar-bottom-right btn-toolbar">
+		<!--
 		<a href="#share-modal" data-toggle="modal" class="btn btn-primary">
 			Share
 		</a>
+		-->
 	</div>
 </div>
 <script type="text/javascript" src="js/lib/require/require.js"></script>
-<script type="text/javascript" src="js/app.js?1717954091696"></script>
+<script type="text/javascript" src="js/app.js?1717955721399"></script>
 <script type="text/javascript">
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-39217559-1']);
